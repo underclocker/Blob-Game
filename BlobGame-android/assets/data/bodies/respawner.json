@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"Respawner","imagePath":"../gfx/respawner.png","origin":{"x":0.5,"y":0.125},"polygons":[[{"x":0,"y":0},{"x":1,"y":0},{"x":1,"y":0.25},{"x":0,"y":0.25}]],"circles":[],"shapes":[{"type":"POLYGON","vertices":[{"x":0,"y":0.25},{"x":1,"y":0.25},{"x":1,"y":0},{"x":0,"y":0}]}]}],"dynamicObjects":[]}

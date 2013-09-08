@@ -1,0 +1,732 @@
+{
+    "actors": [
+        {
+            "id": 643,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 643,
+                "Y": -3.1224473,
+                "X": 6.267421
+            }
+        },
+        {
+            "id": 642,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 642,
+                "Y": -3.9661973,
+                "X": 5.5080457
+            }
+        },
+        {
+            "id": 641,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 641,
+                "Y": -2.9818223,
+                "X": 5.2549205
+            }
+        },
+        {
+            "id": 640,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 640,
+                "Y": -2.0115097,
+                "X": 3.5814831
+            }
+        },
+        {
+            "id": 639,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 639,
+                "Y": -2.2224474,
+                "X": 4.5517955
+            }
+        },
+        {
+            "id": 638,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 638,
+                "Y": -2.0818224,
+                "X": 5.6767955
+            }
+        },
+        {
+            "id": 637,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 637,
+                "Y": -1.0130724,
+                "X": 5.6767955
+            }
+        },
+        {
+            "id": 636,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 636,
+                "Y": -1.252135,
+                "X": 4.270545
+            }
+        },
+        {
+            "id": 635,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 635,
+                "Y": -1.0411975,
+                "X": 3.1877327
+            }
+        },
+        {
+            "id": 292,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Wind Strength": "28",
+                "ID": 292
+            }
+        },
+        {
+            "id": 385,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "26",
+                "ID": 385,
+                "Y": -15.674008,
+                "X": 22.733047
+            }
+        },
+        {
+            "id": 384,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 384,
+                "Y": 0.9634907,
+                "X": 5.5205455
+            }
+        },
+        {
+            "id": 383,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 383,
+                "Y": 0.6259907,
+                "X": 4.5580463
+            }
+        },
+        {
+            "id": 382,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 382,
+                "Y": -0.049009085,
+                "X": 5.8955464
+            }
+        },
+        {
+            "id": 381,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 381,
+                "Y": 1.6009902,
+                "X": 4.208047
+            }
+        },
+        {
+            "id": 380,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 380,
+                "Y": 3.3509908,
+                "X": 3.0580459
+            }
+        },
+        {
+            "id": 379,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 379,
+                "Y": 1.9384909,
+                "X": 5.145546
+            }
+        },
+        {
+            "id": 378,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 378,
+                "Y": 1.7634906,
+                "X": 6.183045
+            }
+        },
+        {
+            "id": 377,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 377,
+                "Y": 2.76349,
+                "X": 5.8080444
+            }
+        },
+        {
+            "id": 376,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 376,
+                "Y": 2.938491,
+                "X": 4.7830453
+            }
+        },
+        {
+            "id": 375,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 375,
+                "Y": 2.67599,
+                "X": 3.8080454
+            }
+        },
+        {
+            "id": 374,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 374,
+                "Y": 3.7134907,
+                "X": 4.0205455
+            }
+        },
+        {
+            "id": 373,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 373,
+                "Y": 3.9884906,
+                "X": 5.058048
+            }
+        },
+        {
+            "id": 318,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "ID": 318,
+                "Y": -10.111506,
+                "X": 9.333051
+            }
+        },
+        {
+            "id": 264,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 264,
+                "Y": -15.797455,
+                "X": 8.438975
+            }
+        },
+        {
+            "id": 263,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 263,
+                "Y": -16.661068,
+                "X": 15.041431
+            }
+        },
+        {
+            "id": 262,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 262,
+                "Y": -15.066352,
+                "X": 16.161829
+            }
+        },
+        {
+            "id": 261,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 261,
+                "Y": -13.777717,
+                "X": 14.999643
+            }
+        },
+        {
+            "id": 260,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 260,
+                "Y": -13.916998,
+                "X": 12.408825
+            }
+        },
+        {
+            "id": 259,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 259,
+                "Y": -15.331698,
+                "X": 13.742335
+            }
+        },
+        {
+            "id": 258,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 258,
+                "Y": -16.683573,
+                "X": 12.663607
+            }
+        },
+        {
+            "id": 257,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 257,
+                "Y": -15.257058,
+                "X": 11.013053
+            }
+        },
+        {
+            "id": 256,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Angle": 180,
+                "ID": 256,
+                "Y": -13.867692,
+                "X": 17.291601
+            }
+        },
+        {
+            "id": 255,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "ID": 255,
+                "Y": -16.695585,
+                "X": 9.569243
+            }
+        },
+        {
+            "id": 254,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Angle": 90,
+                "ID": 254,
+                "Y": -16.149986,
+                "X": 17.894577
+            }
+        },
+        {
+            "id": 253,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Angle": 270,
+                "ID": 253,
+                "Y": -14.362017,
+                "X": 8.215419
+            }
+        },
+        {
+            "id": 252,
+            "class": "org.siggd.actor.Platform",
+            "props": {
+                "DirectionY": "-1",
+                "DirectionX": "0",
+                "Target Input": 318,
+                "ID": 252,
+                "Y": -11.518284,
+                "X": 9.535239
+            }
+        },
+        {
+            "id": 251,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "249",
+                "ID": 251,
+                "Y": -19.87691,
+                "X": 7.2494907
+            }
+        },
+        {
+            "id": 250,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "249",
+                "ID": 250,
+                "Y": -19.865269,
+                "X": 11.510089
+            }
+        },
+        {
+            "id": 249,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 4,
+                "Angle": 180,
+                "ID": 249,
+                "Y": 0.07291627,
+                "X": 19.591095
+            }
+        },
+        {
+            "id": 246,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "249",
+                "ID": 246,
+                "Y": -19.853628,
+                "X": 15.782328
+            }
+        },
+        {
+            "id": 216,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "ID": 216,
+                "Y": -2.4786632,
+                "X": 17.325243
+            }
+        },
+        {
+            "id": 151,
+            "class": "org.siggd.actor.HookForCan",
+            "props": {
+                "Layer": 2,
+                "ID": 151,
+                "HangingTarget": "0",
+                "Y": 9.47834,
+                "X": 12.708593
+            }
+        },
+        {
+            "id": 150,
+            "class": "org.siggd.actor.SwingingCan",
+            "props": {
+                "ID": 150,
+                "HangingTarget": "151",
+                "Y": 7.732861,
+                "X": 12.702358
+            }
+        },
+        {
+            "id": 149,
+            "class": "org.siggd.actor.SwingingCan",
+            "props": {
+                "ID": 149,
+                "HangingTarget": "148",
+                "Y": 7.7761946,
+                "X": 9.584969
+            }
+        },
+        {
+            "id": 148,
+            "class": "org.siggd.actor.HookForCan",
+            "props": {
+                "Layer": 2,
+                "ID": 148,
+                "HangingTarget": "0",
+                "Y": 9.51641,
+                "X": 9.590448
+            }
+        },
+        {
+            "id": 47,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 4,
+                "Angle": 180,
+                "Exit Velocity": "5",
+                "ID": 47,
+                "Blob Spawner": 1,
+                "Y": 16.038492,
+                "X": 2.6830459
+            }
+        },
+        {
+            "id": 0,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "Level3_0_0",
+                "Friction": 0.15,
+                "ID": 0
+            }
+        },
+        {
+            "id": 1,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "Level3_1_0",
+                "Friction": 0.15,
+                "ID": 1,
+                "X": 17.066
+            }
+        },
+        {
+            "id": 8,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "Level3_0_1",
+                "Friction": 0.15,
+                "ID": 8,
+                "Y": -17.066
+            }
+        },
+        {
+            "id": 9,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "Level3_1_1",
+                "Friction": 0.15,
+                "ID": 9,
+                "Y": -17.066,
+                "X": 17.066
+            }
+        },
+        {
+            "id": 36,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "Teleport_XPos": "2.5",
+                "Teleport_YPos": "19",
+                "ID": 36,
+                "Level": "level5_hard",
+                "Y": -9.685893,
+                "X": 36.846165
+            }
+        },
+        {
+            "id": 41,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "ID": 41,
+                "Scale": "4",
+                "Y": 16.499996,
+                "Scale Y": "1.0",
+                "X": -0.74999905,
+                "Scale X": ".5",
+                "Texture": "hell.png"
+            }
+        },
+        {
+            "id": 56,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Layer": 3,
+                "Active": 0,
+                "Player ID": "-1",
+                "Density": 0.35,
+                "ID": 56,
+                "Y": 15.141425,
+                "X": -0.78456795
+            }
+        },
+        {
+            "id": 182,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "Angle": 180,
+                "Target Input": 216,
+                "ID": 182,
+                "Open Safety": "0",
+                "Y": -3.4698808,
+                "X": 21.016243
+            }
+        },
+        {
+            "id": 212,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "ID": 212,
+                "Y": -3.466617,
+                "X": 18.186077
+            }
+        },
+        {
+            "id": 214,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "ID": 214,
+                "Y": -3.4255574,
+                "X": 22.173151
+            }
+        },
+        {
+            "id": 243,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 270,
+                "Wind Strength": "30",
+                "ID": 243,
+                "Y": -9.683566,
+                "X": 35.74043
+            }
+        },
+        {
+            "id": 244,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 270,
+                "Wind Strength": "30",
+                "ID": 244,
+                "Y": -9.683566,
+                "X": 34.702927
+            }
+        },
+        {
+            "id": 285,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 135,
+                "Body": "Outpipe colored",
+                "ID": 285,
+                "Y": -6.0990076,
+                "X": 29.220549
+            }
+        },
+        {
+            "id": 286,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 45,
+                "Wind Strength": "20",
+                "ID": 286,
+                "Y": -5.3740077,
+                "X": 28.445549
+            }
+        },
+        {
+            "id": 288,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 45,
+                "Body": "Outpipe colored",
+                "ID": 288,
+                "Y": -3.4115078,
+                "X": 23.520548
+            }
+        },
+        {
+            "id": 290,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "20",
+                "ID": 290,
+                "Y": -2.6615071,
+                "X": 24.270548
+            }
+        },
+        {
+            "id": 291,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 45,
+                "Body": "Outpipe colored",
+                "ID": 291,
+                "Y": -16.449005,
+                "X": 21.995546
+            }
+        },
+        {
+            "id": 293,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "22",
+                "ID": 293,
+                "Y": -14.911509,
+                "X": 23.495548
+            }
+        },
+        {
+            "id": 296,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 135,
+                "Body": "Outpipe colored",
+                "ID": 296,
+                "Y": -16.149008,
+                "X": 32.99555
+            }
+        },
+        {
+            "id": 297,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 45,
+                "Wind Strength": "20",
+                "ID": 297,
+                "Y": -15.39901,
+                "X": 32.245552
+            }
+        },
+        {
+            "id": 298,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 45,
+                "Wind Strength": "16",
+                "ID": 298,
+                "Y": -14.63651,
+                "X": 31.495552
+            }
+        },
+        {
+            "id": 388,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 388,
+                "Y": 1.7759905,
+                "X": 3.1955452
+            }
+        },
+        {
+            "id": 389,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 389,
+                "Y": 0.7259903,
+                "X": 3.4955459
+            }
+        },
+        {
+            "id": 390,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 390,
+                "Y": -0.36150956,
+                "X": 4.8955455
+            }
+        },
+        {
+            "id": 391,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 391,
+                "Y": -0.25369754,
+                "X": 3.9049203
+            }
+        }
+    ],
+    "props": {
+        "Ambient Light": 0.3,
+        "Min Camera Y": -17.066,
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": "1",
+        "Max Camera Y": 17.066,
+        "Parallax": "",
+        "Min Camera X": 0,
+        "Max Camera X": 34.132,
+        "SongName": "wob.ogg",
+        "Use Light": 1,
+        "Solidity Enabled": "1"
+    }
+}

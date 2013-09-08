@@ -1,0 +1,239 @@
+{
+	"Linux": {
+		"Generic X-Box pad": {
+			"Buttons": {
+				"BUTTON_A": 0,
+				"BUTTON_B": 1,
+				"BUTTON_X": 2,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 6,
+				"BUTTON_START": 7,
+				"BUTTON_LS": 9,
+				"BUTTON_RS": 10,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 1,
+				"AXIS_LEFT_LR": 0,
+				"AXIS_RIGHT_UD": 4,
+				"AXIS_RIGHT_LR": 3,
+				"AXIS_TRIGGER": 5 ,
+			}
+		},
+		"Twin USB Joystick": {
+			"Buttons": {
+				"BUTTON_A": 2,
+				"BUTTON_B": 1,
+				"BUTTON_X": 3,
+				"BUTTON_Y": 0,
+				"BUTTON_LB": 6,
+				"BUTTON_RB": 7,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 1,
+				"AXIS_LEFT_LR": 0,
+				"AXIS_RIGHT_UD": 3,
+				"AXIS_RIGHT_LR": 2,
+				"AXIS_TRIGGER": -1,
+			}
+		}
+	},
+	
+
+	"Windows 7": {
+		"Twin USB Joystick": {
+			"Buttons": {
+				"BUTTON_A": 2,
+				"BUTTON_B": 1,
+				"BUTTON_X": 3,
+				"BUTTON_Y": 0,
+				"BUTTON_LB": 6,
+				"BUTTON_RB": 7,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 1,
+				"AXIS_LEFT_LR": 0,
+				"AXIS_RIGHT_UD": 3,
+				"AXIS_RIGHT_LR": 2,
+				"AXIS_TRIGGER": -1,
+			}
+		},
+		"Logitech Cordless RumblePad 2": {
+			"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_X": 0,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+				"AXIS_RIGHT_UD": 0,
+				"AXIS_RIGHT_LR": 1,
+				"AXIS_TRIGGER": -1,
+			}
+		},
+		"Logitech RumblePad 2 USB": {
+			"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_X": 0,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+				"AXIS_RIGHT_UD": 0,
+				"AXIS_RIGHT_LR": 1,
+				"AXIS_TRIGGER": -1,
+			}
+		},
+		"Controller (Wireless Gamepad F710)": {
+			"Buttons": {
+				"BUTTON_A": 0,
+				"BUTTON_B": 1,
+				"BUTTON_X": 2,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 6,
+				"BUTTON_START": 7,
+				"BUTTON_LS": 8,
+				"BUTTON_RS": 9,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 0,
+				"AXIS_LEFT_LR": 1,
+				"AXIS_RIGHT_UD": 2,
+				"AXIS_RIGHT_LR": 3,
+				"AXIS_TRIGGER": 4,
+			}
+		},
+		"Controller (Rumble Gamepad F510)": {
+			"Buttons": {
+				"BUTTON_A": 0,
+				"BUTTON_B": 1,
+				"BUTTON_X": 2,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 6,
+				"BUTTON_START": 7,
+				"BUTTON_LS": 8,
+				"BUTTON_RS": 9,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 0,
+				"AXIS_LEFT_LR": 1,
+				"AXIS_RIGHT_UD": 2,
+				"AXIS_RIGHT_LR": 3,
+				"AXIS_TRIGGER": 4,
+			}
+		},
+		"Controller (Gamepad F310)": {
+			"Buttons": {
+				"BUTTON_A": 0,
+				"BUTTON_B": 1,
+				"BUTTON_X": 2,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 6,
+				"BUTTON_START": 7,
+				"BUTTON_LS": 8,
+				"BUTTON_RS": 9,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 0,
+				"AXIS_LEFT_LR": 1,
+				"AXIS_RIGHT_UD": 2,
+				"AXIS_RIGHT_LR": 3,
+				"AXIS_TRIGGER": 4,
+			}
+		},
+		"Logitech Dual Action USB": {
+			"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_X": 0,
+				"BUTTON_Y": 3,
+				"BUTTON_LB": 4,
+				"BUTTON_RB": 5,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+				"AXIS_RIGHT_UD": 0,
+				"AXIS_RIGHT_LR": 1,
+				"AXIS_TRIGGER": -1,
+			}
+		}, "Pro Ex mini for PS3":{
+		"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_X": 3,
+				"BUTTON_Y": 0,
+				"BUTTON_LB": 6,
+				"BUTTON_RB": 7,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+				"AXIS_RIGHT_UD": 0,
+				"AXIS_RIGHT_LR": 2,
+				"AXIS_TRIGGER": 1,
+			}
+		}, "Wired Tournament Controller for PS3":{
+		"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_X": 3,
+				"BUTTON_Y": 0,
+				"BUTTON_LB": 6,
+				"BUTTON_RB": 7,
+				"BUTTON_SELECT": 8,
+				"BUTTON_START": 9,
+				"BUTTON_LS": 10,
+				"BUTTON_RS": 11,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+				"AXIS_RIGHT_UD": 0,
+				"AXIS_RIGHT_LR": 2,
+				"AXIS_TRIGGER": 1,
+			}
+		}
+	}
+
+	
+}

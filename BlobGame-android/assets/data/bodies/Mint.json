@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"Mint","imagePath":"../gfx/mint.png","origin":{"x":0.5,"y":0.5},"polygons":[],"circles":[{"cx":0,"cy":0,"r":0.38050132989883423}],"shapes":[{"type":"CIRCLE","vertices":[{"x":0,"y":0},{"x":0.18499994277954102,"y":-0.33250004053115845}]}]}],"dynamicObjects":[]}

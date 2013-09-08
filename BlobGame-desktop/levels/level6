@@ -1,0 +1,125 @@
+{
+    "actors": [
+        {
+            "id": 0,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Level6-0-0",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 0
+            }
+        },
+        {
+            "id": 1,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Level6-0-1",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 1,
+                "X": 17.066
+            }
+        },
+        {
+            "id": 2,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Level6-1-0",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 2,
+                "Y": -17.066
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Level6-1-1",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 3,
+                "Y": -17.066,
+                "X": 17.066
+            }
+        },
+        {
+            "id": 4,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Angle": 90,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 4,
+                "Blob Spawner": "1",
+                "Y": -12.213781,
+                "X": 9.204977
+            }
+        },
+        {
+            "id": 5,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "Angle": 180,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 5,
+                "Y": 4.2870407,
+                "X": 26.623331
+            }
+        },
+        {
+            "id": 6,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "BodyType": 1,
+                "Angle": 90,
+                "Target Input": "5",
+                "Density": 0.1,
+                "ID": 6,
+                "Y": 7.926354,
+                "X": 32.22596
+            }
+        },
+        {
+            "id": 7,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "BarrelTopView",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 7,
+                "Y": 3.1022248,
+                "X": 22.771648
+            }
+        },
+        {
+            "id": 8,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "BodyType": 2,
+                "Active": 0,
+                "Friction": 0.2,
+                "Density": 0.35,
+                "ID": 8,
+                "Y": -14.315639,
+                "X": -2.3834248,
+                "Restitution": 0
+            }
+        }
+    ],
+    "props": {
+        "Min Camera Y": -2.14748365E9,
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": 1,
+        "Max Camera Y": 2.14748365E9,
+        "Parallax": "",
+        "Min Camera X": -2.14748365E9,
+        "Max Camera X": 2.14748365E9,
+        "SongName": "",
+        "Solidity Enabled": 1
+    }
+}

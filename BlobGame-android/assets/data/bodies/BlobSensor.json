@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"BlobSensor","imagePath":"../gfx/BlobSensor.png","origin":{"x":0.5,"y":0.5},"polygons":[[{"x":0,"y":0},{"x":1,"y":0},{"x":1,"y":1},{"x":0,"y":1}]],"circles":[],"shapes":[{"type":"POLYGON","vertices":[{"x":0,"y":0},{"x":1,"y":0},{"x":1,"y":1},{"x":0,"y":1}]}]}],"dynamicObjects":[]}

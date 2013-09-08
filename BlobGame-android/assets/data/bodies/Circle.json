@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"Circle","imagePath":"../gfx/circle.png","origin":{"x":0.5,"y":0.5},"polygons":[],"circles":[{"cx":0,"cy":0,"r":0.4185763895511627}],"shapes":[{"type":"CIRCLE","vertices":[{"x":0,"y":0},{"x":0.3299999237060547,"y":-0.2574999928474426}]}]}],"dynamicObjects":[]}

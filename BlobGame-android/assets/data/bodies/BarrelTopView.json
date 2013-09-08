@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"BarrelTopView","imagePath":"../gfx/barreltopview.png","origin":{"x":0.5,"y":0.5},"polygons":[],"circles":[{"cx":0,"cy":0,"r":0.5}],"shapes":[{"type":"CIRCLE","vertices":[{"x":0,"y":0},{"x":0,"y":-0.5}]}]}],"dynamicObjects":[]}

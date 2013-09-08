@@ -1,0 +1,15 @@
+{
+    "actors": [],
+    "props": {
+        "Min Camera Y": -2.14748365E9,
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": 1,
+        "Max Camera Y": 2.14748365E9,
+        "Parallax": "",
+        "Min Camera X": -2.14748365E9,
+        "Max Camera X": 2.14748365E9,
+        "SongName": "",
+        "Solidity Enabled": 1
+    }
+}
