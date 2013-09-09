@@ -576,7 +576,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	private Vector2 mEyeOffset = new Vector2(.15f, .05f);
 	private boolean mLastKnownDir = true;
 	private int mDirection = 0;
-	private Timer mSoundTimer;
+	Timer mSoundTimer;
 	private final float mDensityDivisor = 5f; // /< Since blob is pretending
 	// to have a larger area than
 	// its bodies
@@ -1297,6 +1297,12 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				b.setLinearVelocity(xVel, Convert.getFloat(val));
 			}
 			return;
+		}
+		if (name.equals("X")) {
+			mAccAprox = 0.0f;
+		}
+		if (name.equals("Y")) {
+			mAccAprox = 0.0f;
 		}
 		if (name.equals("Density")) {
 			return;
