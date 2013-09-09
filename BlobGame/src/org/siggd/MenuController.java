@@ -91,18 +91,22 @@ public class MenuController {
 			if (mFilter != 0) {
 				mFilter = (mFilter + 1) % FILTER_AMOUNT;
 			} else {
-				if (mController != null && mController.getButton(ControllerFilterAPI.getButtonFromFilteredId(mController,
-						ControllerFilterAPI.BUTTON_A))) {
+				if (mController != null
+						&& mController.getButton(ControllerFilterAPI
+								.getButtonFromFilteredId(mController,
+										ControllerFilterAPI.BUTTON_A))) {
 					enterDown = true;
 					if (!mEnterDown) {
-						((Actor) getCell(x, y).getWidget()).fire(new ChangeEvent());
+						((Actor) getCell(x, y).getWidget())
+								.fire(new ChangeEvent());
 						mFilter = 0;
 					}
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 					enterDown = true;
 					if (!mEnterDown) {
-						((Actor) getCell(x, y).getWidget()).fire(new ChangeEvent());
+						((Actor) getCell(x, y).getWidget())
+								.fire(new ChangeEvent());
 						mFilter = 0;
 					}
 				}
@@ -114,18 +118,20 @@ public class MenuController {
 				int deltaX = 0;
 
 				if (mController != null) {
-					leftRight = mController.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(
-							mController, ControllerFilterAPI.AXIS_LEFT_LR));
-					upDown = mController.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(
-							mController, ControllerFilterAPI.AXIS_LEFT_UD));
+					leftRight = mController.getAxis(ControllerFilterAPI
+							.getAxisFromFilteredAxis(mController,
+									ControllerFilterAPI.AXIS_LEFT_LR));
+					upDown = mController.getAxis(ControllerFilterAPI
+							.getAxisFromFilteredAxis(mController,
+									ControllerFilterAPI.AXIS_LEFT_UD));
 				}
 
 				boolean up = Gdx.input.isKeyPressed(Input.Keys.UP)
-						|| Gdx.input.isKeyPressed(Input.Keys.W) || mController != null ? upDown < -0.5
-						: false;
+						|| Gdx.input.isKeyPressed(Input.Keys.W)
+						|| mController != null ? upDown < -0.5 : false;
 				boolean down = Gdx.input.isKeyPressed(Input.Keys.DOWN)
-						|| Gdx.input.isKeyPressed(Input.Keys.S) || mController != null ? upDown > 0.5
-						: false;
+						|| Gdx.input.isKeyPressed(Input.Keys.S)
+						|| mController != null ? upDown > 0.5 : false;
 				boolean r = Gdx.input.isKeyPressed(Input.Keys.RIGHT)
 						|| Gdx.input.isKeyPressed(Input.Keys.D)
 						|| (mController != null ? leftRight > 0.5 : false);
@@ -144,8 +150,9 @@ public class MenuController {
 			}
 
 			if (mController != null
-					&& mController.getButton(ControllerFilterAPI.getButtonFromFilteredId(
-							mController, ControllerFilterAPI.BUTTON_START))) {
+					&& mController.getButton(ControllerFilterAPI
+							.getButtonFromFilteredId(mController,
+									ControllerFilterAPI.BUTTON_START))) {
 				escDown = true;
 				if (!mEscDown && Game.get().getPaused()) {
 					if (!"earth".equals(Game.get().getLevel().getAssetKey())) {
@@ -157,20 +164,23 @@ public class MenuController {
 				escDown = true;
 				if (!mEscDown) {
 					if (Game.get().getPaused()
-							&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
+							&& !"earth".equals(Game.get().getLevel()
+									.getAssetKey())) {
 						Game.get().setState(Game.PLAY);
+						mFilter = 0;
 					}
-					if ("Levels".equals(Game.get().getMenuView().getCurrentMenu())) {
+					if ("Levels".equals(Game.get().getMenuView()
+							.getCurrentMenu())) {
 						Game.get().getMenuView().setMenu("Main");
 					}
 				}
 			}
 
-		}
-		if (Game.get().getState() == Game.PLAY) {
+		} else if (Game.get().getState() == Game.PLAY) {
 			if (mController != null
-					&& mController.getButton(ControllerFilterAPI.getButtonFromFilteredId(
-							mController, ControllerFilterAPI.BUTTON_START))) {
+					&& mController.getButton(ControllerFilterAPI
+							.getButtonFromFilteredId(mController,
+									ControllerFilterAPI.BUTTON_START))) {
 				escDown = true;
 				if (!mEscDown) {
 					Game.get().setPaused(true);
@@ -206,8 +216,8 @@ public class MenuController {
 				shapeRender.setColor(Color.GREEN);
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
-				shapeRender.box(c.getWidgetX(), c.getWidgetY(), 0, c.getWidgetWidth(),
-						c.getWidgetHeight(), 0);
+				shapeRender.box(c.getWidgetX(), c.getWidgetY(), 0,
+						c.getWidgetWidth(), c.getWidgetHeight(), 0);
 				gl.glLineWidth(sLineWidth);
 				shapeRender.end();
 				gl.glLineWidth(1);
@@ -228,17 +238,25 @@ public class MenuController {
 		if (mTable != null) {
 			for (Cell c : mTable.getCells()) {
 				if (c.getColumn() == x && c.getRow() == y) {
-					return c;
+					Actor cellActor = (Actor) (c.getWidget());
+					if (cellActor instanceof ImageButton
+							&& ((ImageButton) cellActor).isDisabled()) {
+						return null;
+					} else {
+						return c;
+					}
 				}
 			}
 		}
-		System.out.println("CELL " + x + "," + y + " not found");
+		// System.out.println("CELL " + x + "," + y + " not found");
 		return null;
 	}
 
 	private final InputListener hoverListener = new InputListener() {
-		public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-			if (fromActor instanceof ImageButton && ((ImageButton) fromActor).isDisabled()) {
+		public void enter(InputEvent event, float x, float y, int pointer,
+				Actor fromActor) {
+			if (fromActor instanceof ImageButton
+					&& ((ImageButton) fromActor).isDisabled()) {
 				return;
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
