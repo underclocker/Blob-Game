@@ -48,7 +48,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 
 	public final String mStartingLevel = "level1";
 	// The game's current state
@@ -159,9 +159,9 @@ public class Game implements ApplicationListener {
 		mMenuView = new MenuView();
 
 		// Load physics bodies
-		if (RELEASE) {
-			mBodyLoader = new BodyEditorLoader(
-					Gdx.files.internal("data/bodies.json"));
+
+		if (RELEASE && false) {
+			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
 		}
