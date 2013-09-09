@@ -1350,7 +1350,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	}
 
 	public void transform() {
-		if (!mActive)
+		if (!mActive || Game.get().getState() != Game.PLAY)
 			return;
 		AssetManager man = Game.get().getAssetManager();
 		Sound sound;
