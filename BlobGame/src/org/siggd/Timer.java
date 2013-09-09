@@ -13,7 +13,7 @@ public class Timer {
 	// Current time of the timer (beginning at 0)
 	public int mCurTime;
 	// Time to trigger
-	private int mTrigTime;
+	public int mTrigTime;
 	// Event to trigger
 	private Trigger mTrig;
 	// True if the timer is paused
