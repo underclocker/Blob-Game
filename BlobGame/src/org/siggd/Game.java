@@ -537,6 +537,7 @@ public class Game implements ApplicationListener {
 		}
 		return null;
 	}
+	
 
 	/**
 	 * Used to get Arrows or WASD player
@@ -554,6 +555,12 @@ public class Game implements ApplicationListener {
 			}
 		}
 		return null;
+	}
+	
+	public void deactivatePlayers(){
+		for(int i = 0; i<mPlayers.size(); i++){
+			mPlayers.get(i).active = false;
+		}
 	}
 
 	public void setNextLevel(String nextLevel) {

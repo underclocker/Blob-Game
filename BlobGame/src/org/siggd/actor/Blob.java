@@ -936,7 +936,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			boolean up = false;
 			int playerID = Convert.getInt(getProp("Player ID"));
 			Player p = Game.get().getPlayer(playerID);
-			if (p != null && p.controltype == ControlType.Controller) {
+			if (p != null && p.active && p.controltype == ControlType.Controller) {
 				// FIX THE AXES LATER
 				Controller c = p.controller;
 				right = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c, 1)) > 0.5;
@@ -952,7 +952,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				up |= c.getPov(0) == PovDirection.north;
 				up |= c.getPov(0) == PovDirection.northEast;
 				up |= c.getPov(0) == PovDirection.northWest;
-			} else if (p != null) {
+			} else if (p != null && p.active) {
 				if (p.controltype == ControlType.Arrows) {
 					right = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 					left = Gdx.input.isKeyPressed(Input.Keys.LEFT);

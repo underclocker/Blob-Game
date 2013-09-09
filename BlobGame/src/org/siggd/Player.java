@@ -13,9 +13,12 @@ public class Player {
 	public ControlType controltype;
 	public Controller controller;
 	public boolean mLeader;
+	public boolean active;
 
 	public Player(int i) {
 		id = i;
 		mLeader = false;
+		//Players start active
+		active = true;
 	}
 }

@@ -31,7 +31,8 @@ public class Spawner extends Actor {
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 256, BodyType.StaticBody, origin, false);
-		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, origin, mTex));
+		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody,
+				origin, mTex));
 		maxBlobs = Game.get().getNumberOfPlayers();
 
 		mSpawnTimer = new Timer();
@@ -65,7 +66,7 @@ public class Spawner extends Actor {
 
 	@Override
 	public void postLoad() {
-		if ("earth".equals(Game.get().getLevel().getAssetKey())){
+		if ("earth".equals(Game.get().getLevel().getAssetKey())) {
 			maxBlobs = 8;
 		}
 		// find all actors that are pointing to this spawner
@@ -86,18 +87,22 @@ public class Spawner extends Actor {
 		if (Convert.getInt(this.getProp("Blob Spawner")) == 1) {
 			for (int i = 0; i < maxBlobs; i++) {
 				// construct blob
-				Blob blob = new Blob(this.getLevel(), this.getLevel().getId());
-				blob.setProp("Player ID", i);
-				// assign blob to player
 				Player player = Game.get().getPlayer(i);
-				if (player != null) {
+				if (player != null && player.active) {
+					Blob blob = new Blob(this.getLevel(), this.getLevel()
+							.getId());
+					blob.setProp("Player ID", i);
+					// assign blob to player
 					player.mActor = blob;
+					blob.setActive(false);
+					// set the layer to the layer of the placeholder blob
+					int layer = Convert.getInt(mLevel.getBlobs(false).get(0)
+							.getProp("Layer"));
+					blob.setProp("Layer", (Integer) layer);
+					mSpawnees.add(
+							(int) Math.floor(Math.random() * mSpawnees.size()),
+							blob);
 				}
-				blob.setActive(false);
-				// set the layer to the layer of the placeholder blob
-				int layer = Convert.getInt(mLevel.getBlobs(false).get(0).getProp("Layer"));
-				blob.setProp("Layer", (Integer) layer);
-				mSpawnees.add((int) Math.floor(Math.random() * mSpawnees.size()), blob);
 			}
 			if (mSpawnees.size() > 0 && mSpawnees.get(0) instanceof Blob) {
 				spawnActor();
@@ -106,7 +111,8 @@ public class Spawner extends Actor {
 
 		LevelView lv = Game.get().getLevelView();
 
-		if (mLevel.getAssetKey() != null && Convert.getInt(this.getProp("Blob Spawner")) == 1) {
+		if (mLevel.getAssetKey() != null
+				&& Convert.getInt(this.getProp("Blob Spawner")) == 1) {
 			lv.setCameraPosition(mBody.getPosition());
 			if (Game.get().getState() != Game.MENU) {
 				lv.positionCamera(false);
