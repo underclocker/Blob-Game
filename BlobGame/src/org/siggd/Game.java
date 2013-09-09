@@ -114,37 +114,40 @@ public class Game implements ApplicationListener {
 
 		// Create the asset manager
 		mAssetManager = new AssetManager();
-		mAssetManager.setLoader(Level.class, new LevelLoader(new InternalFileHandleResolver()));
+		mAssetManager.setLoader(Level.class, new LevelLoader(
+				new InternalFileHandleResolver()));
 		mAssetManager.setLoader(Texture.class, new TextureLoaderWrapper(
 				new InternalFileHandleResolver()));
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
 		DebugOutput.enable();
-		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
+		DebugOutput.info(this, "Controllers: "
+				+ Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
-		/*
-		Enable this if you don't want to do player joining
-		int i = 0;
-		for (Controller controller : Controllers.getControllers()) {
-			Player p = new Player(mPlayers.size());
-			p.controller = controller;
-			p.controltype = ControlType.Controller;
-			mPlayers.add(p);
-			DebugOutput.info(this, "Controller #" + i++ + ": " + controller.getName());
+		if (!RELEASE) {
+			// Create players the old way if not in release mode
+			int i = 0;
+			for (Controller controller : Controllers.getControllers()) {
+				Player p = new Player(mPlayers.size());
+				p.controller = controller;
+				p.controltype = ControlType.Controller;
+				mPlayers.add(p);
+				DebugOutput.info(this,
+						"Controller #" + i++ + ": " + controller.getName());
+			}
+			if (Controllers.getControllers().size == 0) {
+				DebugOutput.info(this, "No controllers attached");
+				Player p = new Player(mPlayers.size());
+				p.controltype = ControlType.Arrows;
+				mPlayers.add(p);
+			}
 		}
-		if (Controllers.getControllers().size == 0){
-			DebugOutput.info(this, "No controllers attached");
-			Player p = new Player(mPlayers.size());
-			p.controltype = ControlType.Arrows;
-			mPlayers.add(p);
-		}
-		*/
 
 		// setup the listener that prints events to the console
 		mPlayerListener = new PlayerListener();
@@ -157,7 +160,8 @@ public class Game implements ApplicationListener {
 
 		// Load physics bodies
 		if (RELEASE) {
-			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
+			mBodyLoader = new BodyEditorLoader(
+					Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
 		}
@@ -217,7 +221,7 @@ public class Game implements ApplicationListener {
 		}
 		sbOut.delete(sbOut.length() - 1, sbOut.length());
 		sbOut.append("],\"dynamicObjects\":[]}");
-		//System.out.println(sbOut.toString());
+		// System.out.println(sbOut.toString());
 		return sbOut.toString();
 	}
 
@@ -507,11 +511,11 @@ public class Game implements ApplicationListener {
 	public int getNumberOfPlayers() {
 		return mPlayers.size();
 	}
-	
-	public ArrayList<Player> getPlayers(){
+
+	public ArrayList<Player> getPlayers() {
 		return mPlayers;
 	}
-	
+
 	public void addPlayer(Player p) {
 		mPlayers.add(p);
 	}
