@@ -143,7 +143,10 @@ public class Spawner extends Actor {
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
-		((Blob) spawnee).mSoundTimer.mTrigTime += 3;
+		if(spawnee instanceof Blob)
+		{
+			((Blob) spawnee).mSoundTimer.mTrigTime += 3;
+		}
 		// actor is now spawned
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
