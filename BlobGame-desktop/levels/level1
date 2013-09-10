@@ -1,6 +1,21 @@
 {
     "actors": [
         {
+            "id": 691,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 0,
+                "Rotation Speed": 0,
+                "Distance": "1",
+                "ID": 691,
+                "Scale": "4",
+                "CollisionSound": "",
+                "Y": 14.265114,
+                "Rotation": 180,
+                "X": -0.8271801
+            }
+        },
+        {
             "id": 599,
             "class": "org.siggd.actor.SpotLight",
             "props": {
@@ -27,7 +42,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 417,
                 "CollisionSound": "",
                 "Y": 2.49682,
@@ -39,7 +53,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 416,
                 "CollisionSound": "",
                 "Y": 2.4900565,
@@ -51,7 +64,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 415,
                 "CollisionSound": "",
                 "Y": 2.4922385,
@@ -63,7 +75,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 414,
                 "CollisionSound": "",
                 "Y": 7.9968777,
@@ -75,7 +86,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 413,
                 "CollisionSound": "",
                 "Y": 7.9968777,
@@ -87,7 +97,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 412,
                 "CollisionSound": "",
                 "Y": 8.532694,
@@ -99,7 +108,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 411,
                 "CollisionSound": "",
                 "Y": 8.532694,
@@ -111,7 +119,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 409,
                 "CollisionSound": "",
                 "Y": 13.066635,
@@ -123,7 +130,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 408,
                 "CollisionSound": "",
                 "Y": 13.065644,
@@ -135,7 +141,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 407,
                 "CollisionSound": "",
                 "Y": 13.067532,
@@ -147,7 +152,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 406,
                 "CollisionSound": "",
                 "Y": 13.080031,
@@ -159,7 +163,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 405,
                 "CollisionSound": "",
                 "Y": 13.092531,
@@ -171,7 +174,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 404,
                 "CollisionSound": "",
                 "Y": 13.100266,
@@ -183,7 +185,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 403,
                 "CollisionSound": "",
                 "Y": 10.637767,
@@ -195,7 +196,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 402,
                 "CollisionSound": "",
                 "Y": 10.636082,
@@ -207,7 +207,6 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "Layer": 3,
-                "Active": 0,
                 "ID": 401,
                 "CollisionSound": "",
                 "Y": 9.812765,
@@ -366,6 +365,7 @@
                 "Body": "Level1_0_0",
                 "Friction": 0.15,
                 "Collision Group": -2,
+                "ID": 0,
                 "CollisionSound": ""
             }
         },
@@ -447,7 +447,6 @@
             "props": {
                 "Angle": 90,
                 "Body": "Outpipe colored",
-                "ID": 8,
                 "CollisionSound": "",
                 "Y": 5.6874943,
                 "X": 27.675003
@@ -575,6 +574,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Wind Strength": "14",
+                "ID": 20,
                 "CollisionSound": "",
                 "Y": 9.149997,
                 "X": 10.800001
@@ -596,7 +596,6 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Wind Strength": "9",
-                "ID": 22,
                 "CollisionSound": "",
                 "Y": 11.262495,
                 "X": 10.8
@@ -1048,12 +1047,13 @@
             "props": {
                 "Layer": 0,
                 "Rotation Speed": 0,
-                "Distance": 3,
+                "Distance": "3",
                 "ID": 109,
                 "Scale": "4",
                 "CollisionSound": "",
                 "Y": 15.417905,
-                "X": -0.75250125
+                "Rotation": 180,
+                "X": -0.7899938
             }
         },
         {

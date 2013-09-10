@@ -7,8 +7,10 @@ import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 import org.siggd.view.LevelView;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -41,6 +43,9 @@ public class Parallax extends Actor {
 
 		@Override
 		public void drawSprite(SpriteBatch batch) {
+
+		GLCommon gl10 = Gdx.graphics.getGLCommon();
+
 			if (batch == null)
 				return;
 			AssetManager assMan = Game.get().getAssetManager();
@@ -61,7 +66,8 @@ public class Parallax extends Actor {
 			scale *= Convert.getFloat(getProp("Scale"));
 			float halfwidth = tex.getWidth() / 2f / lv.getVScale() * scale;
 			float halfheight = tex.getHeight() / 2f / lv.getVScale() * scale;
-			mRotation += Convert.getFloat(getProp("Rotation Speed"));
+			setProp("Rotation",Convert.getFloat(getProp("Rotation Speed"))+Convert.getFloat(getProp("Rotation")));
+			mRotation = Convert.getFloat(getProp("Rotation"));
 			batch.draw(tex, pos.x - halfwidth + offset.x + Convert.getFloat(getProp("X Offset"))*scale, pos.y - halfheight + offset.y + Convert.getFloat(getProp("Y Offset"))*scale, halfwidth,halfheight,
 					halfwidth * 2, halfheight * 2,1f,1f,mRotation,0,0,tex.getWidth(),tex.getHeight(),false,false);
 		}
@@ -86,6 +92,7 @@ public class Parallax extends Actor {
 		setProp("Distance", (Float) 3f);
 		setProp("Scale", (Float) 4f);
 		setProp("Rotation Speed", (Float) 0f);
+		setProp("Rotation", (Float) 0f);
 		setProp("Layer", -1);
 		setProp("X Offset", 0);
 		setProp("Y Offset", 0);
