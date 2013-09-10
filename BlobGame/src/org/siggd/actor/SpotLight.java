@@ -120,7 +120,7 @@ public class SpotLight extends Actor implements IObserver {
 
 	public boolean inputActive() {
 		if (mInputSrc == null) {
-			return false;
+			return true;
 		}
 
 		Object input = mInputSrc.observe();
