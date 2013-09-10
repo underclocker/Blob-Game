@@ -136,6 +136,7 @@ public class Game implements ApplicationListener {
 			for (Controller controller : Controllers.getControllers()) {
 				Player p = new Player(mPlayers.size());
 				p.controller = controller;
+				p.active = true;
 				p.controltype = ControlType.Controller;
 				mPlayers.add(p);
 				DebugOutput.info(this,
@@ -144,6 +145,7 @@ public class Game implements ApplicationListener {
 			if (Controllers.getControllers().size == 0) {
 				DebugOutput.info(this, "No controllers attached");
 				Player p = new Player(mPlayers.size());
+				p.active = true;
 				p.controltype = ControlType.Arrows;
 				mPlayers.add(p);
 			}

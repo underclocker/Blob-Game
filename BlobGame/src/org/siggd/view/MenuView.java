@@ -314,7 +314,7 @@ public class MenuView {
 							p.controller = c;
 							p.controltype = org.siggd.Player.ControlType.Controller;
 						} else if (!inactivePlayer.active) {
-								activatePlayer(inactivePlayer);
+							activatePlayer(inactivePlayer);
 						}
 						break;
 					}
@@ -489,7 +489,9 @@ public class MenuView {
 		if ("Main".equals(menu)) {
 			mStage.addActor(mMainTable);
 			mMenuController.setTable(mMainTable);
-			Game.get().deactivatePlayers();
+			if (Game.RELEASE) {
+				Game.get().deactivatePlayers();
+			}
 		} else if ("Pause".equals(menu)) {
 			mStage.addActor(mTint);
 			mStage.addActor(mPauseTable);
