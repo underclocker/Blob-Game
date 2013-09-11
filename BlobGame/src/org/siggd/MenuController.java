@@ -70,6 +70,7 @@ public class MenuController {
 				target = c;
 				break;
 			}
+			j++;
 		}
 		if (target != null) {
 			x = target.getColumn();
