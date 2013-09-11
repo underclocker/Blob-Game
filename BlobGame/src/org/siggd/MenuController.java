@@ -23,7 +23,7 @@ public class MenuController {
 	private Table mTable;
 	private int mPlayerId;
 	private Controller mController;
-	private int x, y;
+	private int mX, mY;
 	private int mFilter;
 	private boolean mEscDown = false;
 	private boolean mEnterDown = false;
@@ -56,8 +56,8 @@ public class MenuController {
 			mController = null;
 		}
 		;
-		x = 0;
-		y = 0;
+		mX = 0;
+		mY = 0;
 		mFilter = 0;
 		mTable = null;
 	}
@@ -73,13 +73,21 @@ public class MenuController {
 			j++;
 		}
 		if (target != null) {
-			x = target.getColumn();
-			y = target.getRow();
+			mX = target.getColumn();
+			mY = target.getRow();
 		}
 	}
 
 	public void setTable(Table t) {
 		mTable = t;
+		if(t!=null){
+			for(Cell c : t.getCells()){
+				Actor a = (Actor)c.getWidget();
+				if(a!=null){
+					a.addListener(hoverListener);
+				}
+			}
+		}
 	}
 
 	/**
@@ -98,7 +106,7 @@ public class MenuController {
 										ControllerFilterAPI.BUTTON_A))) {
 					enterDown = true;
 					if (!mEnterDown) {
-						((Actor) getCell(x, y).getWidget())
+						((Actor) getCell(mX, mY).getWidget())
 								.fire(new ChangeEvent());
 						mFilter = 0;
 					}
@@ -106,7 +114,7 @@ public class MenuController {
 				if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 					enterDown = true;
 					if (!mEnterDown) {
-						((Actor) getCell(x, y).getWidget())
+						((Actor) getCell(mX, mY).getWidget())
 								.fire(new ChangeEvent());
 						mFilter = 0;
 					}
@@ -143,9 +151,9 @@ public class MenuController {
 				deltaX = (l ? -1 : 0) + (r ? 1 : 0);
 				deltaY = (up ? -1 : 0) + (down ? 1 : 0);
 
-				if (getCell(x + deltaX, y + deltaY) != null) {
-					x = x + deltaX;
-					y = y + deltaY;
+				if (getCell(mX + deltaX, mY + deltaY) != null) {
+					mX = mX + deltaX;
+					mY = mY + deltaY;
 					mFilter++;
 				}
 			}
@@ -211,14 +219,14 @@ public class MenuController {
 	 */
 	public void draw(ShapeRenderer shapeRender) {
 		if (mTable != null) {
-			Cell c = getCell(x, y);
+			Cell c = getCell(mX, mY);
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
 				shapeRender.setColor(Color.GREEN);
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
-				shapeRender.box(c.getWidgetX(), c.getWidgetY(), 0,
-						c.getWidgetWidth(), c.getWidgetHeight(), 0);
+				shapeRender.box(mTable.getX()+selected.getX(), mTable.getY()+selected.getY(), 0,
+						selected.getWidth(), selected.getHeight(), 0);
 				gl.glLineWidth(sLineWidth);
 				shapeRender.end();
 				gl.glLineWidth(1);
@@ -262,8 +270,8 @@ public class MenuController {
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
 			if (selected != null) {
-				x = selected.getColumn();
-				y = selected.getRow();
+				mX = selected.getColumn();
+				mY = selected.getRow();
 			}
 		};
 	};
