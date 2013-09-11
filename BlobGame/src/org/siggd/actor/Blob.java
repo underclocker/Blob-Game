@@ -293,7 +293,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 								        "    vec4 color = texture(u_fb, v_texCoord); \n" +
 								        "    //gl_FragColor = (color != vec4(0,0,0,0)) ? vec4(1,0,0,1) : vec4(0,0,0,1); \n" +
 								        "    //gl_FragColor = color; \n" +
-								        "    gl_FragColor = boxblur(v_texCoord, 0.1, 0.005); \n" +
+								        "    gl_FragColor = boxblur(v_texCoord, 0.025, 0.005); \n" +
 								        "    //gl_FragColor = (color.a == 0) ? vec4(1,0,0,1) : vec4(0,0,0,0); \n" +
 								        "} \n";
 				mBlobShader = new ShaderProgram(vertexShader, fragmentShader);
