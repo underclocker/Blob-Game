@@ -277,7 +277,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			float deltaAlpha = (mDestColor.a - mCurrentColor.a) * mColorTransSpeed;
 			mCurrentColor.add(deltaRed, deltaGreen, deltaBlue, deltaAlpha);
 
-			vertices = getBezierVertices(vertices, 3);
+			vertices = getBezierVertices(vertices, 5);
 
 			List<PolygonPoint> points = new ArrayList<PolygonPoint>();
 			int bezierSize = vertices.size(); // size of the bezier point
@@ -341,16 +341,16 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 			// set black outline for blobs
 			shapeRender.begin(ShapeType.Line);
-			shapeRender.setColor(mCurrentColor.cpy().mul(.7f, .7f, .7f, 1));
+			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
 			float lineWidth = 3 * Game.get().getLevelView().getScale()
 					/ Game.get().getLevelView().getVScale();
 
 			for (int i = 0; i < vertices.size(); i++) {
 				Vector2 v1;
 				Vector2 v2;
-				v1 = vertices.get(i);
-				v2 = vertices.get((i + 1) % vertices.size());
-				Vector2 offset = v1.cpy().sub(v2).scl(.1f);
+				v1 = vertices.get(i).cpy();
+				v2 = vertices.get((i + 1) % vertices.size()).cpy();
+				Vector2 offset = v1.cpy().sub(v2).scl(.03f);
 				v1.add(offset);
 				v2.sub(offset);
 				shapeRender.line(v1.x, v1.y, v2.x, v2.y);
