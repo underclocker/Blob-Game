@@ -146,8 +146,5 @@ public class HitscanSensor extends Actor implements RayCastCallback, IObservable
 		mState = state;
 	}
 
-	
-	// This value MUST only be modified through
-	// setState, or the lights won't work.
 	private boolean mState = false; 
 }

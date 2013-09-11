@@ -898,14 +898,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 		mLightColor.set(mBlobDrawable.mSquishColor);
 		if (mExtraGlow > 0) {
-			mExtraGlow -= 2f;
+			mExtraGlow-= .75f;
 		} else {
 			mPointCombo = 0;
 		}
 		float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
 		mLightColor.mul(brightness, brightness, brightness, 1f);
 		mLight.setColor(mLightColor);
-		mLight.setDistance(6 + 5f * brightness);
+		mLight.setDistance(6 + 10f * brightness);
 
 		Vector2 center;
 		float rotation;
@@ -1123,7 +1123,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	}
 
 	public void eatDot() {
-		mExtraGlow += 100;
+		mExtraGlow += 50f;
 		mPoints++;
 
 		AssetManager man = Game.get().getAssetManager();

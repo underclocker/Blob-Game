@@ -1,7 +1,5 @@
 package org.siggd.actor;
 
-import java.util.Random;
-
 import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
@@ -30,12 +28,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  * @author mysterymath
  * 
  */
-public class Wind extends Actor implements IObserver{
+public class Wind extends Actor implements IObserver, IObservable{
 	private String mTex;
 	private float mWaveyness = 100f;
 	private float mInverseWaveyness = 1f / mWaveyness;
 	private Animation mAnimation;
 	private Drawable frame;
+	private int mInputDelay = 2;
+	private int mDelay = 0;
+	private boolean mState = false; 
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -95,6 +96,12 @@ public class Wind extends Actor implements IObserver{
 	@Override
 	public void update() {
 		if(inputActive() || Convert.getInt(getProp("Target Input")) == -1) {
+			
+			if (mDelay < mInputDelay){
+				mDelay++;
+			} else {
+				setState(true);
+			}
 			setProp("Visible", 1);
 			mAnimation.update();
 			((CompositeDrawable) mDrawable).mDrawables.remove(frame);
@@ -149,6 +156,11 @@ public class Wind extends Actor implements IObserver{
 			}
 		}
 		else {
+			if (mDelay > 0){
+				mDelay--;
+			} else {
+				setState(false);
+			}
 			setProp("Visible", 0);
 		}
 	}
@@ -186,4 +198,19 @@ public class Wind extends Actor implements IObserver{
 	public void inputSrc(Actor inputSrc) {
 		mInputSrc =(inputSrc instanceof IObservable) ? (IObservable)inputSrc : null;
 	}
+	
+	
+	@Override
+	public Object observe() {
+		return getState();
+	}
+
+	public boolean getState() {
+		return mState;
+	}
+
+	private void setState(boolean state) {
+		mState = state;
+	}
+
 }
