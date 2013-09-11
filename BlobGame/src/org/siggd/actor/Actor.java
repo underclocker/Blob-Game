@@ -61,7 +61,7 @@ public abstract class Actor {
 	public boolean isActive() {
 		return mActive;
 	}
-
+	
 	public void setActive(boolean active) {
 		this.mActive = active;
 		mBody.setActive(active);
@@ -643,7 +643,7 @@ public abstract class Actor {
 	}
 
 	@Prop(name = "Collision Sound")
-	public void setActive(String sound) {
+	public void setCollisionSound(String sound) {
 		mCollisionSound = sound;
 	}
 	
