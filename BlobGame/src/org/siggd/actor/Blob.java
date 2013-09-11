@@ -28,7 +28,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -36,15 +35,19 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -82,6 +85,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		private Vector2 mTopNormal;
 		private boolean mDrawTop = false;
 
+		private FrameBuffer mFrameBuf;
+		private Mesh        mFrameMesh;
+		private ShaderProgram mBlobShader;
+
 		public final String mCrown = "data/gfx/crown.png";
 		public final String mHandlebarMustache = "data/gfx/handlebarmustache.png";
 		public final String mMouth = "data/gfx/mouth.png";
@@ -100,6 +107,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		public void dispose() {
 			if (mMesh != null && mMesh.getNumIndices() > 0) {
 				mMesh.dispose();
+			}
+			
+			if (mFrameMesh != null) {
+				mFrameMesh.dispose();
+			}
+			
+			if (mFrameBuf != null) {
+				mFrameBuf.dispose();
 			}
 		}
 
@@ -236,9 +251,76 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 			return verts;
 		}
+		
+		private void drawSetup() {
+			if (!Gdx.graphics.isGL20Available()) {
+				return;
+			}
+
+			if (mFrameBuf == null) {
+				mFrameBuf = new FrameBuffer(Pixmap.Format.RGBA8888, 256, 256, false);
+			}
+
+			if (mBlobShader == null) {
+				String vertexShader = "attribute vec4 a_position; \n" +
+						              "uniform mat4 u_worldView; \n" +
+									  "varying vec2 v_texCoord; \n" +
+						              "void main() { \n" +
+								      "    v_texCoord = (a_position.xy + vec2(1,1))/2; \n" +
+					                  "    gl_Position = u_worldView * a_position; \n" +
+								      "} \n";
+				String fragmentShader = "#ifdef GL_ES\n" +
+								        "precision mediump float; \n" +
+								        "#endif \n" +
+								        "uniform sampler2D u_fb; \n" +
+								        "varying vec2 v_texCoord; \n" +
+								        "vec4 boxblur(vec2 texCoord, float rad, float step) { \n" +
+								        "    vec4 ret = vec4(0,0,0,0); \n" +
+								        "    float x, y; \n" +
+								        "    float numPix = 0; \n" +
+										"    for (x = texCoord.x-rad; x <= texCoord.x+rad; x += step) { \n" +
+								        "        for (y = texCoord.y-rad; y <= texCoord.y+rad; y += step) { \n" +
+										"            ret += texture(u_fb, vec2(x,y)); \n" +
+										"            numPix++; \n" +
+										"        } \n" +
+										"    } \n" +
+										"\n" +
+										"    return ret / numPix; \n" +
+										"} \n" +
+										"\n" +
+								        "void main() \n" +
+								        "{ \n" +
+								        "    vec4 color = texture(u_fb, v_texCoord); \n" +
+								        "    //gl_FragColor = (color != vec4(0,0,0,0)) ? vec4(1,0,0,1) : vec4(0,0,0,1); \n" +
+								        "    //gl_FragColor = color; \n" +
+								        "    gl_FragColor = boxblur(v_texCoord, 0.1, 0.005); \n" +
+								        "    //gl_FragColor = (color.a == 0) ? vec4(1,0,0,1) : vec4(0,0,0,0); \n" +
+								        "} \n";
+				mBlobShader = new ShaderProgram(vertexShader, fragmentShader);
+				if (!mBlobShader.isCompiled())
+					throw new IllegalStateException(mBlobShader.getLog());
+			}
+			
+			if (mFrameMesh == null) {
+				mFrameMesh = new Mesh(true, 6, 0, new VertexAttribute(Usage.Position, 2, "a_position"));
+				mFrameMesh.setVertices(new float[] {
+					-1, -1, -1, 1, 1, 1,
+					-1, -1, 1, 1, 1, -1,
+				});
+				mFrameMesh.bind(mBlobShader);
+			}
+
+
+			// Setup alpha
+			Gdx.gl20.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+			Gdx.gl20.glEnable(GL10.GL_BLEND);
+		}
 
 		@Override
 		public void drawElse(ShapeRenderer shapeRender) {
+			
+			drawSetup();
+
 			ArrayList<Vector2> vertices = new ArrayList<Vector2>();
 			Vector2 pos;
 			if (mState == SQUISH_STATE) {
@@ -324,14 +406,49 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			// openGL settings
 			mMesh.setVertices(verts);// set the mesh vertices to the vertices
 			if (Gdx.graphics.isGL20Available()) {
+				// First round for drawing
+				mFrameBuf.begin();
+				Gdx.gl20.glClearColor(0,0,0,0);
+				Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+				
+				// Determine bounding box
+				BoundingBox bbox = new BoundingBox();
+				mMesh.calculateBoundingBox(bbox);
+				Vector3 dims = bbox.getDimensions();
+				float sqSize = Math.max(dims.x, dims.y) + .1f;  // Buffer for bezier curve
+
 				ShaderProgram shader = Game.get().getLevelView().getDefaultShaderProgram();
 				shader.begin();
 				mMesh.bind(shader);
-				shader.setUniformMatrix("u_worldView",
-						Game.get().getLevelView().getCamera().combined);
+
+				// Convert to frame buffer coordinates (which are just translated screen coordinates)
+				Matrix4 fbMatrix = new Matrix4();
+				fbMatrix.idt().scl(2/sqSize).translate(-pos.x, -pos.y, 0);
+				shader.setUniformMatrix("u_worldView", fbMatrix);
+
 				mMesh.render(shader, GL20.GL_TRIANGLES);
+
 				shader.end();
 				mMesh.unbind(shader);
+
+				mFrameBuf.end();
+				
+				
+				
+				// Second round of drawing, with postprocess
+				mBlobShader.begin();
+
+				String name = "Can";
+				String tex = "data/" + Game.get().getBodyEditorLoader().getImagePath(name);
+				mFrameBuf.getColorBufferTexture().bind();
+				//Game.get().getAssetManager().get(tex, Texture.class).bind(0);
+				// Move from framebuffer coords to screen coords
+				fbMatrix = Game.get().getLevelView().getCamera().combined.cpy().translate(pos.x, pos.y, 0).scl(sqSize/2);
+				mBlobShader.setUniformMatrix("u_worldView",fbMatrix);
+				mBlobShader.setUniformi("u_fb", 0);
+				mFrameMesh.render(mBlobShader, GL20.GL_TRIANGLES);
+
+				mBlobShader.end();
 			} else {
 				GLCommon gl10 = Gdx.graphics.getGLCommon();
 				gl10.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -340,6 +457,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 
 			// set black outline for blobs
+			/*
 			shapeRender.begin(ShapeType.Line);
 			shapeRender.setColor(mCurrentColor.cpy().mul(.7f, .7f, .7f, 1));
 			float lineWidth = 3 * Game.get().getLevelView().getScale()
@@ -369,6 +487,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 
 			gl10.glDisable(GL10.GL_BLEND);
+			*/
 			if (mBatch == null)
 				return;
 			mBatch.begin();
