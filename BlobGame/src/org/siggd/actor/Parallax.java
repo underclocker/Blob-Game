@@ -44,8 +44,6 @@ public class Parallax extends Actor {
 		@Override
 		public void drawSprite(SpriteBatch batch) {
 
-		GLCommon gl10 = Gdx.graphics.getGLCommon();
-
 			if (batch == null)
 				return;
 			AssetManager assMan = Game.get().getAssetManager();
@@ -68,6 +66,10 @@ public class Parallax extends Actor {
 			float halfheight = tex.getHeight() / 2f / lv.getVScale() * scale;
 			setProp("Rotation",Convert.getFloat(getProp("Rotation Speed"))+Convert.getFloat(getProp("Rotation")));
 			mRotation = Convert.getFloat(getProp("Rotation"));
+			setProp("X Wave Angle", Convert.getFloat(getProp("X Wave Angle"))+ Convert.getFloat(getProp("X Wave Speed")));
+			pos.x += Math.sin(Convert.getFloat(getProp("X Wave Angle")))* Convert.getFloat(getProp("X Wave Amplitude"));
+			setProp("Y Wave Angle", Convert.getFloat(getProp("Y Wave Angle"))+ Convert.getFloat(getProp("Y Wave Speed")));
+			pos.y += Math.sin(Convert.getFloat(getProp("Y Wave Angle")))* Convert.getFloat(getProp("Y Wave Amplitude"));
 			batch.draw(tex, pos.x - halfwidth + offset.x + Convert.getFloat(getProp("X Offset"))*scale, pos.y - halfheight + offset.y + Convert.getFloat(getProp("Y Offset"))*scale, halfwidth,halfheight,
 					halfwidth * 2, halfheight * 2,1f,1f,mRotation,0,0,tex.getWidth(),tex.getHeight(),false,false);
 		}
@@ -96,6 +98,12 @@ public class Parallax extends Actor {
 		setProp("Layer", -1);
 		setProp("X Offset", 0);
 		setProp("Y Offset", 0);
+		setProp("X Wave Amplitude", 0);
+		setProp("X Wave Angle", 0);
+		setProp("X Wave Speed", 0);
+		setProp("Y Wave Amplitude", 0);
+		setProp("Y Wave Angle", 0);
+		setProp("Y Wave Speed", 0);
 	}
 
 	/**

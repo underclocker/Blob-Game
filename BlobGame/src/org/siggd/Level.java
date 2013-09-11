@@ -412,6 +412,9 @@ public class Level implements Iterable<Actor> {
 			if (a instanceof Blob && templateBlob != null && !a.equals(templateBlob)) {
 				continue;
 			}
+			if (a instanceof Dot){
+				a.setProp("Active", 1);
+			}
 			JSONObject jsonActor = new JSONObject();
 			// Save Actor class
 			jsonActor.put("class", a.getClass().getName());

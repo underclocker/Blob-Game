@@ -26,7 +26,7 @@ public class SpotLight extends Actor implements IObserver {
 		mBody = makeBody(mName, 32, BodyType.StaticBody, origin, true);
 		mDrawable.mDrawables.add(new BodySprite(mBody, origin, mTex));
 		setProp("Visible", (Integer) 0);
-		mLight = new ConeLight(Game.get().getLevelView().getRayHandler(), 32, new Color(.1f, .1f,
+		mLight = new ConeLight(Game.get().getLevelView().getRayHandler(), 128, new Color(.1f, .1f,
 				.1f, 1), 5f, mBody.getPosition().x, mBody.getPosition().y, mBody.getAngle(), 30f);
 		mLight.attachToBody(mBody, 0f, 0f);
 		mLight.setSoft(true);
@@ -48,11 +48,11 @@ public class SpotLight extends Actor implements IObserver {
 
 	@Override
 	public void setProp(String name, Object val) {
-		if (name == "Distance") {
+		if (name.equals("Distance")) {
 			mLight.setDistance((Float) Convert.getFloat(val));
-		} else if (name == "Cone Angle") {
+		} else if (name.equals("Cone Angle")) {
 			mLight.setConeDegree((Float) Convert.getFloat(val));
-		} else if (name == "Softness") {
+		} else if (name.equals("Softness")) {
 			float value = (Float) Convert.getFloat(val);
 			if (value > 0) {
 				mLight.setSoft(true);
@@ -60,7 +60,7 @@ public class SpotLight extends Actor implements IObserver {
 			} else {
 				mLight.setSoft(false);
 			}
-		} else if (name == "Static") {
+		} else if (name.equals("Static")) {
 			float value = (Float) Convert.getFloat(val);
 			if (value == 1) {
 				mLight.setStaticLight(true);
@@ -69,23 +69,23 @@ public class SpotLight extends Actor implements IObserver {
 			} else {
 				val = mProps.get("Static");
 			}
-		} else if (name == "Red") {
+		} else if (name.equals("Red")) {
 			Color color = mLight.getColor();
 			color.r = (Float) Convert.getFloat(val);
 			mLight.setColor(color);
-		} else if (name == "Green") {
+		} else if (name.equals("Green")) {
 			Color color = mLight.getColor();
 			color.g = (Float) Convert.getFloat(val);
 			mLight.setColor(color);
-		} else if (name == "Blue") {
+		} else if (name.equals("Blue")) {
 			Color color = mLight.getColor();
 			color.b = (Float) Convert.getFloat(val);
 			mLight.setColor(color);
-		} else if (name == "Alpha") {
+		} else if (name.equals("Alpha")) {
 			Color color = mLight.getColor();
 			color.a = (Float) Convert.getFloat(val);
 			mLight.setColor(color);
-		} else if (name == "Active") {
+		} else if (name.equals("Active")) {
 			mLight.setActive((Float) Convert.getFloat(val) == 1);
 		}
 		super.setProp(name, val);
