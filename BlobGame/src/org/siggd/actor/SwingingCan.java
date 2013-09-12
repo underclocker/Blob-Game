@@ -1,8 +1,11 @@
 package org.siggd.actor;
 
+import java.util.ArrayList;
+
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
+import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
 
@@ -22,7 +25,7 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
  * @author mysterymath
  * 
  */
-public class SwingingCan extends Actor {
+public class SwingingCan extends Actor implements IObservable{
 	private String mTex;
 	private Body mAnchor;
 	private Joint mJoint;
@@ -115,5 +118,20 @@ public class SwingingCan extends Actor {
 			mJoint = getLevel().getWorld().createJoint(rjd);
 		}
 
+	}
+
+	@Override
+	public Object observe() {
+		// Sweet Lord...  This is gona be expensive...
+		ArrayList<Blob> blobs = Game.get().getLevel().getBlobs(true);
+		for (Blob blob : blobs){
+			ArrayList<Joint> joints = blob.getJoints();
+			for (Joint joint : joints){
+				if (joint.getBodyA().getUserData().equals(this) || joint.getBodyB().getUserData().equals(this)){
+					return true;
+				};
+			}
+		}
+		return false;
 	}
 }

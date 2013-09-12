@@ -28,6 +28,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Platform extends Actor implements IObserver {
 	private String mTex;
 	public int mHold;
+	public Redirector mRedirector;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -47,18 +48,20 @@ public class Platform extends Actor implements IObserver {
 		mBody = makeBody(mName, 256, BodyType.KinematicBody, origin, false);
 		mBody.setFixedRotation(true);
 		mDrawable.mDrawables.add(new BodySprite(mBody, origin, mTex));
-		mDrawable.mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED, Color.GREEN));
+		mDrawable.mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED,
+				Color.GREEN));
 		setProp("Friction", (Float) .4f);
 		setProp("DirectionX", (Float) 1f);
 		setProp("DirectionY", (Float) 0f);
 		setProp("Safety", (Integer) (1));
 		setProp("Grabbable", (Integer) 0);
 		setProp("Hold Time", (Integer) (0));
+		setProp("Return Target", (Integer) (-1));
 	}
 
 	public boolean inputActive() {
 		Object val = mInputSrc.observe();
-		return (val instanceof Boolean) && (Boolean)val;
+		return (val instanceof Boolean) && (Boolean) val;
 	}
 
 	/**
@@ -80,15 +83,30 @@ public class Platform extends Actor implements IObserver {
 	@Override
 	public void update() {
 		// if there is input, poll it for permission to update
-		if ((mInputSrc == null || inputActive())
-				&& mHold >= Convert.getInt(getProp("Hold Time"))) {
+		if ((mInputSrc == null || inputActive()) && mHold >= Convert.getInt(getProp("Hold Time"))) {
 			super.update();
-			float xDir = Convert.getFloat(getProp("DirectionX"));
-			float yDir = Convert.getFloat(getProp("DirectionY"));
+			float xDir;
+			float yDir;
+			yDir = Convert.getFloat(getProp("DirectionY"));
+			xDir = Convert.getFloat(getProp("DirectionX"));
 			mBody.setLinearVelocity(new Vector2(xDir, yDir));
 		} else {
 			mHold++;
-			mBody.setLinearVelocity(new Vector2(0, 0));
+			float xDir = 0f;
+			float yDir = 0f;
+			if (mInputSrc != null && mInputSrc instanceof SwingingCan) {
+				if (mRedirector != null
+						&& mRedirector.equals(Game.get().getLevel()
+								.getActorById(Convert.getInt(getProp("Return Target"))))) {
+					if (!inputActive()) {
+						mHold--;
+					}
+				} else if (mHold >= Convert.getInt(getProp("Hold Time"))){
+					yDir = Convert.getFloat(getProp("DirectionY"));
+					xDir = Convert.getFloat(getProp("DirectionX"));
+				}
+			}
+			mBody.setLinearVelocity(new Vector2(xDir, yDir));
 		}
 
 		// If we could potentially crush something, stop
@@ -100,14 +118,15 @@ public class Platform extends Actor implements IObserver {
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		Iterable<Actor> actors = ContactHandler.getActors(contacts);
-		boolean foundRedirector = false;
+		Redirector mOldRedir = mRedirector;
+		mRedirector = null;
 		for (Actor a : actors) {
 			if (a instanceof Redirector) {
-				foundRedirector = true;
+				mRedirector = (Redirector) a;
 				break;
 			}
 		}
-		if (!foundRedirector) {
+		if (mRedirector != null && mRedirector != mOldRedir) {
 			mHold = 0;
 			setProp("Hold Time", (Integer) 0);
 		}
@@ -119,27 +138,28 @@ public class Platform extends Actor implements IObserver {
 	@Override
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
-		if(man.containsAsset(mTex)) {
+		if (man.containsAsset(mTex)) {
 			man.unload(mTex);
 		}
 	}
 
-	////////////////
+	// //////////////
 	// Properties
-	////////////////
+	// //////////////
 
 	@Override
 	public void postLoad() {
 	}
 
 	IObservable mInputSrc;
+
 	@Override
 	public Actor inputSrc() {
-		return (Actor)mInputSrc;
+		return (Actor) mInputSrc;
 	}
 
 	@Override
 	public void inputSrc(Actor inputSrc) {
-		mInputSrc = (inputSrc instanceof IObservable) ? (IObservable)inputSrc : null;
+		mInputSrc = (inputSrc instanceof IObservable) ? (IObservable) inputSrc : null;
 	}
 }

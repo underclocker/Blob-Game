@@ -1582,6 +1582,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	public void giveJoint(Joint j) {
 		mJoints.add(j);
 	}
+	
+	public ArrayList<Joint> getJoints(){
+		return mJoints;
+	}
 
 	/*
 	 * Makes the blob's body
