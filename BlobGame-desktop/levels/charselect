@@ -3,24 +3,7 @@
         "id": 0,
         "class": "org.siggd.actor.Background",
         "props": {
-            "BodyType": 0,
             "Body": "charSelect",
-            "Visible": 1,
-            "Density": 0.1,
-            "colPitch": 1,
-            "Collision Group": 0,
-            "Spawner": -1,
-            "Velocity Y": 0,
-            "Velocity X": 0,
-            "Restitution": 0.3,
-            "Collision Sound": "",
-            "Layer": 1,
-            "Active": 1,
-            "Angle": 0,
-            "Friction": 1,
-            "Momentum Y": 0,
-            "Momentum X": 0,
-            "Grabbable": 0,
             "ID": 0,
             "Y": -8.533,
             "X": -8.533
@@ -36,7 +19,7 @@
         "Parallax": "",
         "Min Camera X": "-8",
         "Max Camera X": "8",
-        "SongName": "",
+        "SongName": "pop.ogg",
         "Use Light": "0",
         "Solidity Enabled": 1
     }

@@ -159,7 +159,7 @@ public class LevelView {
 			positionCamera(true);
 		}
 		// Clear the screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(.2f,.2f,.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		// Draw sprites
 		mBatch.setProjectionMatrix(mCamera.combined);
