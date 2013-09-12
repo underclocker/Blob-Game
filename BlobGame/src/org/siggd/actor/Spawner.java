@@ -87,21 +87,13 @@ public class Spawner extends Actor {
 		if (Convert.getInt(this.getProp("Blob Spawner")) == 1) {
 			for (int i = 0; i < maxBlobs; i++) {
 				// construct blob
-				Player player = Game.get().getPlayer(i);
-				if (player != null && player.active) {
-					Blob blob = new Blob(this.getLevel(), this.getLevel()
-							.getId());
-					blob.setProp("Player ID", i);
-					// assign blob to player
-					player.mActor = blob;
-					blob.setActive(false);
-					// set the layer to the layer of the placeholder blob
-					int layer = Convert.getInt(mLevel.getBlobs(false).get(0)
-							.getProp("Layer"));
-					blob.setProp("Layer", (Integer) layer);
-					mSpawnees.add(
-							(int) Math.floor(Math.random() * mSpawnees.size()),
-							blob);
+				if ("earth".equals(Game.get().getLevel().getAssetKey())) {
+					spawnBlob(i);
+				} else {
+					Player player = Game.get().getPlayer(i);
+					if (player != null && player.active) {
+						player.mActor = spawnBlob(i);
+					}
 				}
 			}
 			if (mSpawnees.size() > 0 && mSpawnees.get(0) instanceof Blob) {
@@ -118,6 +110,21 @@ public class Spawner extends Actor {
 				lv.positionCamera(false);
 			}
 		}
+	}
+	private Blob spawnBlob(int id){
+		Blob blob = new Blob(this.getLevel(), this.getLevel()
+				.getId());
+		blob.setProp("Player ID", id);
+		// assign blob to player
+		blob.setActive(false);
+		// set the layer to the layer of the placeholder blob
+		int layer = Convert.getInt(mLevel.getBlobs(false)
+				.get(0).getProp("Layer"));
+		blob.setProp("Layer", (Integer) layer);
+		mSpawnees.add(
+				(int) Math.floor(Math.random()
+						* mSpawnees.size()), blob);
+		return blob;
 	}
 
 	public void addToSpawn(Actor a) {
@@ -143,8 +150,7 @@ public class Spawner extends Actor {
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
-		if(spawnee instanceof Blob)
-		{
+		if (spawnee instanceof Blob) {
 			((Blob) spawnee).mSoundTimer.mTrigTime += 3;
 		}
 		// actor is now spawned
@@ -157,9 +163,8 @@ public class Spawner extends Actor {
 		if (spawnee instanceof Blob) {
 			if (((Blob) spawnee).isSolid()) {
 				((Blob) spawnee).transform();
-			} 
-			
-			
+			}
+
 		}
 		mSpawnees.remove(spawnee);
 	}
