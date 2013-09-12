@@ -1,13 +1,12 @@
 package org.siggd;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +55,7 @@ public class Level implements Iterable<Actor> {
 	private float mAmbientLight;
 	private JSONObject mLevelSave;
 	private final String mSaveFileName = ".BlobGame/BlobSave.json";
+	private static final Logger mLog = Logger.getLogger(Level.class.getName());
 
 	/**
 	 * Constructor
@@ -106,7 +106,6 @@ public class Level implements Iterable<Actor> {
 		mContactHandler = new ContactHandler();
 		mWorld.setContactListener(mContactHandler);
 		mContactHandler.addListener(new BlobDetangler());
-
 	}
 
 	public void startMusic() {
@@ -173,7 +172,11 @@ public class Level implements Iterable<Actor> {
 		for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
 			a = actor.next();
 			if (a.isActive()) {
-				a.update();
+				try {
+					a.update();
+				} catch (Exception e) {
+					mLog.severe("Exception when updating actor no " + a.getId() + ": " + e.toString());
+				}
 			}
 		}
 		flushActorQueue();

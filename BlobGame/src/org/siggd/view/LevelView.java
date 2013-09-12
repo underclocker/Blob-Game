@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import org.box2dLight.RayHandler;
 import org.siggd.Convert;
@@ -85,6 +86,7 @@ public class LevelView {
 	private float mMinX = Float.MAX_VALUE, mMaxX = -Float.MAX_VALUE, mMinY = Float.MAX_VALUE,
 			mMaxY = -Float.MAX_VALUE;
 
+	private static final Logger mLog = Logger.getLogger(LevelView.class.getName());
 	/**
 	 * Constructor
 	 */
@@ -215,7 +217,11 @@ public class LevelView {
 					if (draw != null
 							&& (Convert.getInt(a.getProp("Visible")) == 1 || state == Game.EDIT)) {
 						// Draw the sprite component of the actor
-						draw.drawSprite(mBatch);
+						try {
+							draw.drawSprite(mBatch);
+						} catch (Exception e) {
+							mLog.severe("Exception drawing sprite for actor " + a.getId() + ": " + e);
+						}
 					}
 				}
 
@@ -249,7 +255,11 @@ public class LevelView {
 				Drawable draw = a.getDrawable();
 				if (draw != null && (a.isActive() || state == Game.EDIT)) {
 					// Draw the non-sprite component of the actor
-					draw.drawElse(mShapeRenderer);
+					try {
+						draw.drawElse(mShapeRenderer);
+					} catch (Exception e) {
+						mLog.severe("Exception drawing custom graphics for actor " + a.getId() + ": " + e);
+					}
 				}
 			}
 			// End layer of non-sprites
@@ -303,7 +313,11 @@ public class LevelView {
 				Drawable draw = a.getDrawable();
 				if (draw != null) {
 					// Draw the debug component of the actor
-					draw.drawDebug(mCamera);
+					try {
+						draw.drawDebug(mCamera);
+					} catch (Exception e) {
+						mLog.severe("Exception drawing debug information for actor " + a.getId() + ": " + e);
+					}
 				}
 			}
 		}
