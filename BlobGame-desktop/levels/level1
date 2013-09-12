@@ -5,18 +5,17 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 133.35648,
-                "Distance": "-.25",
-                "X Wave Angle": 35.230904,
-                "Y Wave Speed": ".0051",
-                "Layer": 7,
                 "Rotation Speed": 0,
+                "Distance": ".25",
+                "Y Wave Angle": 162.18192,
+                "X Wave Angle": 46.53669,
                 "ID": 784,
                 "CollisionSound": "",
-                "Scale": "4",
                 "X Wave Amplitude": ".5",
+                "Scale": "4",
                 "Y": 12.980404,
                 "Y Wave Amplitude": "1.7",
+                "Y Wave Speed": ".0051",
                 "X": -0.8524938
             }
         },
@@ -25,9 +24,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".003",
-                "Y Wave Angle": 32.823914,
+                "Y Wave Angle": 40.181305,
                 "Distance": "1",
-                "X Wave Angle": 78.34534,
+                "X Wave Angle": 95.304016,
                 "Y Wave Speed": ".0013",
                 "Layer": 0,
                 "Rotation Speed": 0,
@@ -333,8 +332,8 @@
                 "Wind Strength": "0.5",
                 "ID": 184,
                 "CollisionSound": "",
-                "Y": 0.89766383,
-                "X": 43.52582
+                "Y": 0.90195906,
+                "X": 44.03694
             }
         },
         {
@@ -345,8 +344,8 @@
                 "Wind Strength": "1",
                 "ID": 183,
                 "CollisionSound": "",
-                "Y": 0.89766383,
-                "X": 42.463604
+                "Y": 0.90195894,
+                "X": 42.97043
             }
         },
         {
@@ -357,8 +356,8 @@
                 "Wind Strength": "1.5",
                 "ID": 182,
                 "CollisionSound": "",
-                "Y": 0.89766383,
-                "X": 41.401382
+                "Y": 0.90195906,
+                "X": 41.908207
             }
         },
         {
@@ -369,8 +368,8 @@
                 "Wind Strength": "2",
                 "ID": 181,
                 "CollisionSound": "",
-                "Y": 0.89766383,
-                "X": 40.339165
+                "Y": 0.8890737,
+                "X": 40.84169
             }
         },
         {
@@ -490,8 +489,8 @@
                 "Body": "Outpipe colored",
                 "ID": 10,
                 "CollisionSound": "",
-                "Y": 0.84999347,
-                "X": 39.23751
+                "Y": 0.87576413,
+                "X": 39.765812
             }
         },
         {
@@ -1078,9 +1077,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".001",
-                "Y Wave Angle": 2.5155027,
+                "Y Wave Angle": 15.7513685,
                 "Distance": "3",
-                "X Wave Angle": 2.0120366,
+                "X Wave Angle": 7.667627,
                 "Y Wave Speed": ".00234",
                 "Layer": 0,
                 "Rotation Speed": 0,
@@ -1131,7 +1130,7 @@
                 "Angle": 310,
                 "Blue": "0.2",
                 "Red": "0.2",
-                "Distance": "14.0",
+                "Distance": "20.0",
                 "Green": "0.2",
                 "ID": 787,
                 "Y": 17.269686,
