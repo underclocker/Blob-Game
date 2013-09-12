@@ -12,6 +12,7 @@ import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -23,6 +24,9 @@ public class BouncePlate extends Actor {
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private int mTimer = 0;
+	private int mRate = 5;
+	private String mBouncePlateFile = "data/sfx/bounceplate.wav";
+
 	public BouncePlate(Level level, long id) {
 		super(level, id);
 
@@ -49,6 +53,7 @@ public class BouncePlate extends Actor {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
 		man.load(mActiveTex, Texture.class);
+		man.load(mBouncePlateFile, Sound.class);
 	}
 
 	/**
@@ -65,20 +70,32 @@ public class BouncePlate extends Actor {
 		ArrayList<Body> bodies = (ArrayList<Body>) ContactHandler.getBodies(contacts);
 		mBody.setLinearVelocity(Vector2.Zero);
 		float stroke = Convert.getFloat(getProp("Stroke Length"));
-		mTimer--;
-		if (bodies.size() > 0 && Convert.getInt(getProp("Output")) == 0) {
+		int output = Convert.getInt(getProp("Output")) * 2 - 1;
+		mTimer += output;
+		if (bodies.size() > 0 && output == -1 && mTimer <= -mRate) {
 			setProp("Output", (Integer) 1);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mDefaultDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mActiveDrawable);
 			mBody.setLinearVelocity(new Vector2(0, stroke).rotate(Convert.getDegrees(mBody
 					.getAngle())));
-			mTimer = 5;
-		} else if (mTimer <= 0 && Convert.getInt(getProp("Output")) == 1) {
+			mTimer = -mRate;
+			AssetManager man = Game.get().getAssetManager();
+			Sound sound;
+			long soundID;
+			if (man.isLoaded(mBouncePlateFile)) {
+				sound = man.get(mBouncePlateFile, Sound.class);
+				soundID = sound.play();
+				sound.setPitch(soundID, 1.25f);
+				sound.setVolume(soundID, .35f);
+
+			}
+		} else if (mTimer >= mRate && output == 1) {
 			setProp("Output", (Integer) 0);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mActiveDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mDefaultDrawable);
 			mBody.setLinearVelocity(new Vector2(0, -stroke).rotate(Convert.getDegrees(mBody
 					.getAngle())));
+			mTimer = mRate;
 		}
 	}
 
