@@ -15,6 +15,7 @@ import org.siggd.actor.Blob;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
@@ -476,7 +477,10 @@ public class MenuView {
 	};
 
 	public void giveFocus() {
-		Gdx.input.setInputProcessor(mStage);
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(mStage);
+		multiplexer.addProcessor(mMenuController);
+		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 	public void setMenu(String menu) {
