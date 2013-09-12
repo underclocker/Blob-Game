@@ -570,7 +570,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	private String mSquishEye = "data/gfx/EYE.png";
 	private String mSolidEye = "data/gfx/EYE2.png";
 	private String mBlobGradient = "data/gfx/blobgradient.png";
-
+	public boolean mSpawning = false;
 	private Body mLeftEye;
 	private Body mRightEye;
 	private Vector2 mEyeOffset = new Vector2(.15f, .05f);
@@ -1078,13 +1078,18 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 						sound.setPitch(soundID, .5f + velLength * .002f);
 						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
 					} else {
+						if(!mSpawning)
+						{
 						soundID = sound.play();
 						sound.setPitch(soundID, 1f + velLength * .005f);
 						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
+						}
 					}
 				}
+				
 				mSoundTimer.reset();
 			}
+			mSpawning = false;
 		}
 		if (mState == SQUISH_STATE) {
 			mOldVCenter = new Vector2(mVCenter);

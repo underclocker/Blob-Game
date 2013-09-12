@@ -17,7 +17,7 @@ public class Main {
 		cfg.depth = 0;
 		cfg.vSyncEnabled = true;
 		// May be related to harrison's computer speedups.
-		// cfg.useCPUSynch = true;
+		 cfg.useCPUSynch = true;
 		if (Game.RELEASE) {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			cfg.width = (int) screenSize.getWidth();

@@ -151,7 +151,7 @@ public class Spawner extends Actor {
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
 		if (spawnee instanceof Blob) {
-			((Blob) spawnee).mSoundTimer.mTrigTime += 3;
+			((Blob) spawnee).mSpawning = true;
 		}
 		// actor is now spawned
 		spawnee.setActive(true);
