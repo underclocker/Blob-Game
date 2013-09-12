@@ -64,6 +64,7 @@ public class Dot extends Actor {
 		mPointLight.attachToBody(mBody, 0, 0);
 		mPointLight.setActive(false);
 		setProp("Active", 1);
+		setProp("Layer", 3);
 		// TODO: set light active based on if actor is dummy or not
 		setProp("X", -10000);
 
