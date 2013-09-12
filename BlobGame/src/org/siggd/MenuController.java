@@ -285,6 +285,9 @@ public class MenuController implements InputProcessor {
 			if (fromActor instanceof ImageButton
 					&& ((ImageButton) fromActor).isDisabled()) {
 				return;
+			} else if (event.getListenerActor() instanceof ImageButton
+					&& ((ImageButton) event.getListenerActor()).isDisabled()) {
+				return;
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
 			if (selected != null) {
@@ -334,8 +337,8 @@ public class MenuController implements InputProcessor {
 			}
 		}
 		mFilteredKey = keycode;
-		if(NAV_KEYS.contains(keycode)){
-			//ignore key once again
+		if (NAV_KEYS.contains(keycode)) {
+			// ignore key once again
 			mFilteredKey = -255;
 		}
 		return false;
