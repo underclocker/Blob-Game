@@ -633,8 +633,10 @@ public class Level implements Iterable<Actor> {
 	public void dispose() {
 		saveProgress();
 		Game.get().getLevelView().getRayHandler().removeAll();
-		Game.get().getInput().clear();
 		for (Actor a : mActors) {
+			if(a instanceof Blob){
+				Game.get().getInput().removeProcessor((Blob)a);
+			}
 			a.dispose();
 		}
 		if (Game.get().getState() == Game.EDIT) {

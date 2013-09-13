@@ -33,7 +33,7 @@ public class Spawner extends Actor {
 		mBody = makeBody(mName, 256, BodyType.StaticBody, origin, false);
 		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody,
 				origin, mTex));
-		maxBlobs = Game.get().activePlayers();
+		maxBlobs = Game.get().getNumberOfPlayers();
 
 		mSpawnTimer = new Timer();
 		mSpawnTimer.setTimer(Convert.getInt(this.getProp("Rate")));

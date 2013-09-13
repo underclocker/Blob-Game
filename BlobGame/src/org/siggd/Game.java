@@ -152,19 +152,22 @@ public class Game implements ApplicationListener {
 			}
 		}
 
-		// setup the listener that prints events to the console
-		mPlayerListener = new PlayerListener();
-		Controllers.addListener(mPlayerListener);
-
 		// Create the level view
 		mLevelView = new LevelView();
 
 		mMenuView = new MenuView();
+		mInput.addProcessor(mMenuView.getMenuController());
+
+		// setup the listener that prints events to the console
+		mPlayerListener = new PlayerListener();
+		Controllers.addListener(mPlayerListener);
+		Controllers.addListener(mMenuView.getMenuController());
 
 		// Load physics bodies
 
 		if (RELEASE && false) {
-			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
+			mBodyLoader = new BodyEditorLoader(
+					Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
 		}
@@ -316,7 +319,8 @@ public class Game implements ApplicationListener {
 	}
 
 	/**
-	 * Sets the current state
+	 * Sets the current state. When setting state to MENU, must explicitly pause
+	 * game too
 	 * 
 	 * @param state
 	 *            The new state
@@ -328,7 +332,6 @@ public class Game implements ApplicationListener {
 			mMenuView.giveFocus();
 		} else if (state == EDIT) {
 			Gdx.input.setCursorCatched(false);
-
 			Gdx.input.setInputProcessor(mInput);
 			if (!mInput.getProcessors().contains(mEditor, true)) {
 				mInput.addProcessor(mEditor);
@@ -514,7 +517,11 @@ public class Game implements ApplicationListener {
 	public int getNumberOfPlayers() {
 		return mPlayers.size();
 	}
-
+	
+	public boolean playerExists(Player p){
+		return mPlayers.contains(p);
+	}
+	
 	public ArrayList<Player> getPlayers() {
 		return mPlayers;
 	}
@@ -540,7 +547,6 @@ public class Game implements ApplicationListener {
 		}
 		return null;
 	}
-	
 
 	/**
 	 * Used to get Arrows or WASD player
@@ -559,22 +565,22 @@ public class Game implements ApplicationListener {
 		}
 		return null;
 	}
-	
-	public void deactivatePlayers(){
-		for(int i = 0; i<mPlayers.size(); i++){
+
+	public void deactivatePlayers() {
+		for (int i = 0; i < mPlayers.size(); i++) {
 			mPlayers.get(i).active = false;
 		}
 	}
-	
-	public int activePlayers(){
+
+	public int activePlayers() {
 		int i = 0;
-		for(Player p : mPlayers){
-			if(p.active)
+		for (Player p : mPlayers) {
+			if (p.active)
 				i++;
 		}
 		return i;
 	}
-	
+
 	public void setNextLevel(String nextLevel) {
 		mNextLevel = nextLevel;
 	}

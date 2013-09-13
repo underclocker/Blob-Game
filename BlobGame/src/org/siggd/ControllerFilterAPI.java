@@ -9,24 +9,24 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class ControllerFilterAPI {
 
-	public static int BUTTON_A = 0;
-	public static int BUTTON_B = 1;
-	public static int BUTTON_X = 2;
-	public static int BUTTON_Y = 3;
-	public static int BUTTON_LB = 4;
-	public static int BUTTON_RB = 5;
-	public static int BUTTON_SELECT = 6;
-	public static int BUTTON_START = 7;
-	public static int BUTTON_LS = 8;
-	public static int BUTTON_RS = 9;
-	public static int NOBUTTON = -1;
+	public final static int BUTTON_A = 0;
+	public final static int BUTTON_B = 1;
+	public final static int BUTTON_X = 2;
+	public final static int BUTTON_Y = 3;
+	public final static int BUTTON_LB = 4;
+	public final static int BUTTON_RB = 5;
+	public final static int BUTTON_SELECT = 6;
+	public final static int BUTTON_START = 7;
+	public final static int BUTTON_LS = 8;
+	public final static int BUTTON_RS = 9;
+	public final static int NOBUTTON = -1;
 
-	public static int AXIS_LEFT_UD = 0;
-	public static int AXIS_RIGHT_LR = 3;
-	public static int AXIS_RIGHT_UD = 2;
-	public static int AXIS_LEFT_LR = 1;
-	public static int AXIS_TRIGGER = 4;
-	public static int AXIS_NO = -1;
+	public final static int AXIS_LEFT_UD = 0;
+	public final static int AXIS_RIGHT_LR = 3;
+	public final static int AXIS_RIGHT_UD = 2;
+	public final static int AXIS_LEFT_LR = 1;
+	public final static int AXIS_TRIGGER = 4;
+	public final static int AXIS_NO = -1;
 
 	private static JSONObject json;
 

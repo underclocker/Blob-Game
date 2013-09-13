@@ -4,15 +4,22 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.siggd.actor.Blob;
+import org.siggd.view.MenuView;
+import org.siggd.ControllerFilterAPI;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -21,18 +28,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.esotericsoftware.tablelayout.Cell;
 
-public class MenuController implements InputProcessor {
+public class MenuController implements InputProcessor, ControllerListener {
 	private static int FILTER_AMOUNT = 7;
 	private static int KEY_FILTER_AMOUNT = 1;
-	private static final boolean ROLLOVER = false;
 	private static final Set<Integer> NAV_KEYS = new HashSet<Integer>(
 			Arrays.asList(new Integer[] { Input.Keys.A, Input.Keys.LEFT,
 					Input.Keys.D, Input.Keys.RIGHT, Input.Keys.W,
 					Input.Keys.UP, Input.Keys.S, Input.Keys.DOWN }));
 
 	private Table mTable;
-	private int mPlayerId;
 	private Controller mController;
+	private int mPlayerId;
 	private int mX, mY;
 	private int mControllerFilter;
 	private int mKeyFilter;
@@ -47,8 +53,8 @@ public class MenuController implements InputProcessor {
 	 * @param id
 	 *            controller number
 	 */
-	public MenuController(int id) {
-		this(id, 0);
+	public MenuController() {
+		this(0);
 	}
 
 	/**
@@ -60,16 +66,11 @@ public class MenuController implements InputProcessor {
 	 * @param index
 	 *            element index that starts selected
 	 */
-	public MenuController(int id, int index) {
-		mPlayerId = id;
-		if (id < Controllers.getControllers().size) {
-			mController = Controllers.getControllers().get(id);
-		} else {
-			mController = null;
-		}
-		;
+	public MenuController(int index) {
 		mX = 0;
 		mY = 0;
+		mPlayerId = 0;
+		mController = Controllers.getControllers().get(0);
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
@@ -102,12 +103,16 @@ public class MenuController implements InputProcessor {
 			}
 		}
 	}
-
+	public void setController(Controller c){
+		mController = c;
+	}
+	public void setPlayerId(int id){
+		mPlayerId = id;
+	}
 	/**
 	 * Polls the controller to update selection or fire change event
 	 */
 	public void update() {
-		boolean escDown = false;
 		boolean enterDown = false;
 		if (Game.get().getState() == Game.MENU && mTable != null) {
 			if (mControllerFilter != 0) {
@@ -174,59 +179,8 @@ public class MenuController implements InputProcessor {
 					mControllerFilter++;
 				}
 			}
-
-			if (mController != null
-					&& mController.getButton(ControllerFilterAPI
-							.getButtonFromFilteredId(mController,
-									ControllerFilterAPI.BUTTON_START))) {
-				escDown = true;
-				if (!mEscDown && Game.get().getPaused()) {
-					if (!"earth".equals(Game.get().getLevel().getAssetKey())) {
-						Game.get().setState(Game.PLAY);
-					}
-				}
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-				escDown = true;
-				if (!mEscDown) {
-					if (Game.get().getPaused()
-							&& !"earth".equals(Game.get().getLevel()
-									.getAssetKey())) {
-						Game.get().setState(Game.PLAY);
-						mControllerFilter = 0;
-					}
-					if ("Levels".equals(Game.get().getMenuView()
-							.getCurrentMenu())) {
-						Game.get().getMenuView().setMenu("Main");
-					}
-				}
-			}
-
-		} else if (Game.get().getState() == Game.PLAY) {
-			if (mController != null
-					&& mController.getButton(ControllerFilterAPI
-							.getButtonFromFilteredId(mController,
-									ControllerFilterAPI.BUTTON_START))) {
-				escDown = true;
-				if (!mEscDown) {
-					Game.get().setPaused(true);
-					Game.get().setState(Game.MENU);
-					Game.get().getMenuView().setMenu("Pause");
-					mControllerFilter = 0;
-				}
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-				escDown = true;
-				if (!mEscDown) {
-					Game.get().setPaused(true);
-					Game.get().setState(Game.MENU);
-					Game.get().getMenuView().setMenu("Pause");
-					mControllerFilter = 0;
-				}
-			}
 		}
 		mEnterDown = enterDown;
-		mEscDown = escDown;
 	}
 
 	/**
@@ -239,7 +193,7 @@ public class MenuController implements InputProcessor {
 			Cell c = getCell(mX, mY);
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
-				shapeRender.setColor(Color.GREEN);
+				shapeRender.setColor(Blob.COLORS[mPlayerId]);
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
 				shapeRender.box(mTable.getX() + selected.getX(), mTable.getY()
@@ -250,15 +204,6 @@ public class MenuController implements InputProcessor {
 				gl.glLineWidth(1);
 			}
 		}
-	}
-
-	public int getPlayerId() {
-		return mPlayerId;
-	}
-
-	public void setPlayerId(int Id) {
-		mPlayerId = Id;
-		mController = Controllers.getControllers().get(Id);
 	}
 
 	private Cell getCell(int x, int y) {
@@ -297,6 +242,62 @@ public class MenuController implements InputProcessor {
 		};
 	};
 
+	private void handleEscape() {
+		if (Game.get().getState() == Game.PLAY) {
+			Game.get().setPaused(true);
+			Game.get().setState(Game.MENU);
+			Game.get().getMenuView().setMenu(MenuView.PAUSE);
+			mControllerFilter = 0;
+		} else if (Game.get().getState() == Game.MENU) {
+			if (MenuView.PAUSE
+					.equals(Game.get().getMenuView().getCurrentMenu())) {
+				Game.get().setState(Game.PLAY);
+			} else if (MenuView.LEVELS.equals(Game.get().getMenuView()
+					.getCurrentMenu())) {
+				//Game.get().getMenuView().setMenu(MenuView.MAIN);
+				mControllerFilter = 0;
+			} else if (MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
+					.getCurrentMenu())) {
+				// Customize Menu
+				// deactivate any players that may have joined
+				Game.get().deactivatePlayers();
+				Game.get().setLevel("earth");
+				Game.get().getMenuView().setMenu(MenuView.LEVELS);
+				mControllerFilter = 0;
+			}
+		}
+
+	}
+
+	private void fakePause(Controller c) {
+		if (Game.get().getState() == Game.PLAY) {
+			Game.get().setPaused(true);
+			Game.get().setState(Game.MENU);
+			Game.get().getMenuView().setMenu(MenuView.FAKE_PAUSE);
+			Game.get().getMenuView().setFakePauseController(c);
+		} else if (Game.get().getState() == Game.MENU
+				&& MenuView.FAKE_PAUSE.equals(Game.get().getMenuView()
+						.getCurrentMenu())) {
+			Game.get().setState(Game.PLAY);
+		}
+	}
+
+	private boolean controllerPermission(Controller c, int button) {
+		int gameState = Game.get().getState();
+		MenuView menuView = Game.get().getMenuView();
+		if (button == ControllerFilterAPI.BUTTON_START) {
+			if (gameState == Game.PLAY
+					|| (gameState == Game.MENU && MenuView.PAUSE.equals(menuView.getCurrentMenu()))) {
+				return true;
+			}else if(gameState == Game.MENU && MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu()) && c == menuView.getFakePauseController()){
+				return true;
+			}
+		} else if (c == mController) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
@@ -320,6 +321,18 @@ public class MenuController implements InputProcessor {
 			if (getCell(mX, mY + 1) != null)
 				mY++;
 			break;
+		case Input.Keys.ENTER:
+		case Input.Keys.SPACE:
+			if (mTable != null) {
+				Actor a = (Actor) getCell(mX, mY).getWidget();
+				if (a != null) {
+					a.fire(new ChangeEvent());
+				}
+			}
+			break;
+		case Input.Keys.ESCAPE:
+			handleEscape();
+			break;
 		}
 		mFilteredKey = keycode;
 		mKeyFilter = 0;
@@ -328,17 +341,6 @@ public class MenuController implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if (mTable == null)
-			return false;
-		if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-			Actor a = (Actor) getCell(mX, mY).getWidget();
-			if (a != null) {
-				a.fire(new ChangeEvent());
-			}
-		}
-		if (!NAV_KEYS.contains(keycode)) {
-			mFilteredKey = keycode;
-		}
 		return false;
 	}
 
@@ -349,31 +351,87 @@ public class MenuController implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean accelerometerMoved(Controller arg0, int arg1, Vector3 arg2) {
+		return false;
+	}
+
+	@Override
+	public boolean axisMoved(Controller c, int arg1, float arg2) {
+		return false;
+	}
+
+	@Override
+	public boolean buttonDown(Controller c, int button) {
+		int realButton = ControllerFilterAPI.getButtonFromFilteredId(c, button);
+		if (controllerPermission(c, realButton)) {
+			switch (realButton) {
+			case ControllerFilterAPI.BUTTON_B:
+				handleEscape();
+				break;
+			case ControllerFilterAPI.BUTTON_START:
+				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
+						.getCurrentMenu())
+						&& c == mController) {
+					handleEscape();
+				} else if (c != mController) {
+					fakePause(c);
+				}
+				break;
+
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean buttonUp(Controller c, int arg1) {
+		return false;
+	}
+
+	@Override
+	public void connected(Controller c) {
+	}
+
+	@Override
+	public void disconnected(Controller c) {
+	}
+
+	@Override
+	public boolean povMoved(Controller c, int arg1, PovDirection arg2) {
+		return false;
+	}
+
+	@Override
+	public boolean xSliderMoved(Controller c, int arg1, boolean arg2) {
+		return false;
+	}
+
+	@Override
+	public boolean ySliderMoved(Controller c, int arg1, boolean arg2) {
 		return false;
 	}
 }
