@@ -905,7 +905,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
 		mLightColor.mul(brightness, brightness, brightness, 1f);
 		mLight.setColor(mLightColor);
-		mLight.setDistance(6 + 10f * brightness);
+		mLight.setDistance(3f + 10f * brightness);
 
 		Vector2 center;
 		float rotation;
