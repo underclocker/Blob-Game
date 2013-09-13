@@ -565,7 +565,16 @@ public class Game implements ApplicationListener {
 			mPlayers.get(i).active = false;
 		}
 	}
-
+	
+	public int activePlayers(){
+		int i = 0;
+		for(Player p : mPlayers){
+			if(p.active)
+				i++;
+		}
+		return i;
+	}
+	
 	public void setNextLevel(String nextLevel) {
 		mNextLevel = nextLevel;
 	}
