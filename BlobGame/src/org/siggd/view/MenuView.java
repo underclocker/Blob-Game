@@ -313,6 +313,7 @@ public class MenuView {
 							&& pl.controller != null) {
 						mMenuController.setController(pl.controller);
 						mMenuController.setPlayerId(pl.id);
+						break;
 					}
 				}
 				setMenu("NULL");

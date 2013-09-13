@@ -101,14 +101,18 @@ public class MenuController implements InputProcessor, ControllerListener {
 					a.addListener(hoverListener);
 				}
 			}
+			setIndex(0);
 		}
 	}
-	public void setController(Controller c){
+
+	public void setController(Controller c) {
 		mController = c;
 	}
-	public void setPlayerId(int id){
+
+	public void setPlayerId(int id) {
 		mPlayerId = id;
 	}
+
 	/**
 	 * Polls the controller to update selection or fire change event
 	 */
@@ -123,16 +127,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 				boolean r = false;
 				boolean l = false;
 				if (mController != null) {
-					if (mController.getButton(ControllerFilterAPI
-							.getButtonFromFilteredId(mController,
-									ControllerFilterAPI.BUTTON_A))) {
-						enterDown = true;
-						if (!mEnterDown) {
-							((Actor) getCell(mX, mY).getWidget())
-									.fire(new ChangeEvent());
-							mControllerFilter = 0;
-						}
-					}
+					/*
+					 * if (mController.getButton(ControllerFilterAPI
+					 * .getButtonFromFilteredId(mController,
+					 * ControllerFilterAPI.BUTTON_A))) { enterDown = true; if
+					 * (!mEnterDown) { ((Actor) getCell(mX, mY).getWidget())
+					 * .fire(new ChangeEvent()); mControllerFilter = 0; } }
+					 */
 
 					float leftRight = mController.getAxis(ControllerFilterAPI
 							.getAxisFromFilteredAxis(mController,
@@ -254,7 +255,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 				Game.get().setState(Game.PLAY);
 			} else if (MenuView.LEVELS.equals(Game.get().getMenuView()
 					.getCurrentMenu())) {
-				//Game.get().getMenuView().setMenu(MenuView.MAIN);
+				Game.get().getMenuView().setMenu(MenuView.MAIN);
 				mControllerFilter = 0;
 			} else if (MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
 					.getCurrentMenu())) {
@@ -287,9 +288,12 @@ public class MenuController implements InputProcessor, ControllerListener {
 		MenuView menuView = Game.get().getMenuView();
 		if (button == ControllerFilterAPI.BUTTON_START) {
 			if (gameState == Game.PLAY
-					|| (gameState == Game.MENU && MenuView.PAUSE.equals(menuView.getCurrentMenu()))) {
+					|| (gameState == Game.MENU && MenuView.PAUSE
+							.equals(menuView.getCurrentMenu()))) {
 				return true;
-			}else if(gameState == Game.MENU && MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu()) && c == menuView.getFakePauseController()){
+			} else if (gameState == Game.MENU
+					&& MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
+					&& c == menuView.getFakePauseController()) {
 				return true;
 			}
 		} else if (c == mController) {
@@ -390,7 +394,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 		if (controllerPermission(c, realButton)) {
 			switch (realButton) {
 			case ControllerFilterAPI.BUTTON_B:
-				handleEscape();
+				if (Game.get().getState() != Game.PLAY) {
+					handleEscape();
+				}
 				break;
 			case ControllerFilterAPI.BUTTON_START:
 				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
@@ -401,7 +407,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 					fakePause(c);
 				}
 				break;
-
+			case ControllerFilterAPI.BUTTON_A:
+				Cell cell = getCell(mX, mY);
+				if (cell != null && cell.getWidget() != null) {
+					((Actor) cell.getWidget()).fire(new ChangeEvent());
+					mControllerFilter = 0;
+				}
+				break;
 			}
 		}
 		return false;
