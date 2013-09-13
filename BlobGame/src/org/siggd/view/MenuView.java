@@ -242,7 +242,7 @@ public class MenuView {
 				mShapeRenderer.end();
 			}
 		} else if ("Customize".equals(mCurrentMenu)) {
-			if (Game.get().getNumberOfPlayers() > 0) {
+			if (Game.get().activePlayers() > 0) {
 				// TODO: Press button to start graphic
 			}
 		}

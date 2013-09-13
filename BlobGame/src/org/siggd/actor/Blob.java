@@ -1141,7 +1141,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		}
 		mPointCombo++;
 
-		if (Game.get().getNumberOfPlayers() > 1) {
+		if (Game.get().activePlayers() > 1) {
 			ArrayList<Blob> blobs = Game.get().getLevel().getBlobs(false);
 			for (Blob blob : blobs) {
 				if (!blob.equals(this)) {

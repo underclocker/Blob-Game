@@ -336,10 +336,8 @@ public class MenuController implements InputProcessor {
 				a.fire(new ChangeEvent());
 			}
 		}
-		mFilteredKey = keycode;
-		if (NAV_KEYS.contains(keycode)) {
-			// ignore key once again
-			mFilteredKey = -255;
+		if (!NAV_KEYS.contains(keycode)) {
+			mFilteredKey = keycode;
 		}
 		return false;
 	}
