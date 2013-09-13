@@ -394,7 +394,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 		if (controllerPermission(c, realButton)) {
 			switch (realButton) {
 			case ControllerFilterAPI.BUTTON_B:
-				if (Game.get().getState() != Game.PLAY) {
+				if (Game.get().getState() == Game.MENU) {
 					handleEscape();
 				}
 				break;
@@ -408,10 +408,12 @@ public class MenuController implements InputProcessor, ControllerListener {
 				}
 				break;
 			case ControllerFilterAPI.BUTTON_A:
-				Cell cell = getCell(mX, mY);
-				if (cell != null && cell.getWidget() != null) {
-					((Actor) cell.getWidget()).fire(new ChangeEvent());
-					mControllerFilter = 0;
+				if (Game.get().getState() == Game.MENU) {
+					Cell cell = getCell(mX, mY);
+					if (cell != null && cell.getWidget() != null) {
+						((Actor) cell.getWidget()).fire(new ChangeEvent());
+						mControllerFilter = 0;
+					}
 				}
 				break;
 			}
