@@ -241,8 +241,8 @@
                 "ID": 1110,
                 "CollisionSound": "",
                 "HangingTarget": "1109",
-                "Y": -3.8918908,
-                "X": 5.143864
+                "Y": -1.1215267,
+                "X": 5.165064
             }
         },
         {
@@ -253,8 +253,8 @@
                 "ID": 1109,
                 "CollisionSound": "",
                 "HangingTarget": "703",
-                "Y": -2.170824,
-                "X": 5.142565
+                "Y": 0.598832,
+                "X": 5.171816
             }
         },
         {
@@ -325,17 +325,6 @@
                 "CollisionSound": "",
                 "Y": -19.336906,
                 "X": 1.1715078
-            }
-        },
-        {
-            "id": 760,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 269,
-                "ID": 760,
-                "CollisionSound": "",
-                "Y": 7.534871,
-                "X": 6.5566072
             }
         },
         {
@@ -459,8 +448,8 @@
                 "ID": 550,
                 "CollisionSound": "",
                 "HangingTarget": "549",
-                "Y": -11.589475,
-                "X": 13.812153
+                "Y": -11.638739,
+                "X": 13.691431
             }
         },
         {
@@ -472,8 +461,8 @@
                 "ID": 549,
                 "CollisionSound": "",
                 "HangingTarget": "328",
-                "Y": -9.84315,
-                "X": 13.811343
+                "Y": -9.891707,
+                "X": 13.689194
             }
         },
         {
@@ -496,8 +485,8 @@
                 "Angle": 135,
                 "ID": 385,
                 "CollisionSound": "",
-                "Y": -10.269239,
-                "X": 15.093648
+                "Y": -9.928026,
+                "X": 14.403944
             }
         },
         {
@@ -505,15 +494,16 @@
             "class": "org.siggd.actor.Platform",
             "props": {
                 "DirectionY": "1",
+                "Angle": 45,
                 "DirectionX": "-1",
                 "Target Input": 550,
                 "Collision Group": -3,
                 "ID": 328,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": -9.699621,
+                "Y": -9.39397,
                 "Return Target": "385",
-                "X": 14.621675
+                "X": 14.166289
             }
         },
         {
@@ -560,14 +550,15 @@
             "id": 29,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.3,
                 "ID": 29,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": 15.23413,
-                "X": 12.60822
+                "Y": 15.162194,
+                "X": 12.596711
             }
         },
         {
@@ -689,14 +680,15 @@
             "id": 54,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.3,
                 "ID": 54,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": 8.524749,
-                "X": 25.189856
+                "Y": 8.440975,
+                "X": 25.120262
             }
         },
         {
@@ -752,8 +744,8 @@
                 "Angle": 315,
                 "ID": 377,
                 "CollisionSound": "",
-                "Y": -2.393382,
-                "X": 7.239472
+                "Y": -2.5515904,
+                "X": 7.5558915
             }
         },
         {
@@ -778,9 +770,9 @@
                 "Target Input": 1110,
                 "ID": 703,
                 "CollisionSound": "",
-                "Y": -1.9042355,
+                "Y": 0.63772213,
                 "Return Target": "704",
-                "X": 5.181789
+                "X": 5.839481
             }
         },
         {
@@ -791,29 +783,20 @@
                 "Angle": 90,
                 "ID": 704,
                 "CollisionSound": "",
-                "Y": -2.5163555,
-                "X": 4.8320823
+                "Y": -1.9821297,
+                "X": 6.2454176
             }
         },
         {
             "id": 705,
             "class": "org.siggd.actor.Redirector",
             "props": {
-                "Angle": 181.00002,
+                "Hold Time": "120",
+                "Angle": 270,
                 "ID": 705,
                 "CollisionSound": "",
                 "Y": 8.1669445,
                 "X": 5.50757
-            }
-        },
-        {
-            "id": 706,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "ID": 706,
-                "CollisionSound": "",
-                "Y": 7.553553,
-                "X": 0.4863367
             }
         },
         {

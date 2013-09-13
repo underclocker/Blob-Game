@@ -16,8 +16,8 @@ public class Main {
 		cfg.useGL20 = true;
 		cfg.depth = 0;
 		cfg.vSyncEnabled = true;
-		// May be related to harrison's computer speedups.
-		 cfg.useCPUSynch = true;
+		// Related to harrison's computer speedups.  Don't commit this enabled.
+		// cfg.useCPUSynch = true;
 		if (Game.RELEASE) {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			cfg.width = (int) screenSize.getWidth();

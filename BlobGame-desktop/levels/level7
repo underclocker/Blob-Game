@@ -158,13 +158,14 @@
             "class": "org.siggd.actor.Platform",
             "props": {
                 "DirectionY": 0,
+                "Angle": 90,
                 "DirectionX": "2.0",
                 "Target Input": 178,
                 "ID": 176,
                 "CollisionSound": "",
-                "Y": 8.319299,
+                "Y": 8.6442995,
                 "Return Target": "218",
-                "X": 51.80083
+                "X": 51.763332
             }
         },
         {
@@ -273,6 +274,7 @@
             "id": 17,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.3,
@@ -293,8 +295,8 @@
                 "Density": 0.35,
                 "ID": 9,
                 "CollisionSound": "",
-                "Y": 16.304327,
-                "X": -0.7961332
+                "Y": 4.871074,
+                "X": -0.6188862
             }
         },
         {
@@ -767,8 +769,8 @@
                 "Angle": 180,
                 "ID": 217,
                 "CollisionSound": "",
-                "Y": 8.64931,
-                "X": 66.885796
+                "Y": 8.675718,
+                "X": 66.172775
             }
         },
         {
@@ -778,8 +780,8 @@
                 "Hold Time": "30",
                 "ID": 218,
                 "CollisionSound": "",
-                "Y": 8.649311,
-                "X": 50.223057
+                "Y": 8.641983,
+                "X": 51.21224
             }
         },
         {
@@ -821,6 +823,7 @@
             "id": 474,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.15,
@@ -828,8 +831,8 @@
                 "ID": 474,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": 10.414513,
-                "X": 33.33313
+                "Y": 10.308187,
+                "X": 33.294712
             }
         },
         {
