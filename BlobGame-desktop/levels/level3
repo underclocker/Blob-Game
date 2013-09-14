@@ -1,6 +1,18 @@
 {
     "actors": [
         {
+            "id": 828,
+            "class": "org.siggd.actor.Gear",
+            "props": {
+                "Angle": 10,
+                "Rotation Speed": "-0.5",
+                "ID": 828,
+                "CollisionSound": "",
+                "Y": 15.363495,
+                "X": 11.008042
+            }
+        },
+        {
             "id": 727,
             "class": "org.siggd.actor.Gear",
             "props": {
@@ -18,8 +30,8 @@
                 "Rotation Speed": 0.5,
                 "ID": 726,
                 "CollisionSound": "",
-                "Y": 9.5134945,
-                "X": 10.820543
+                "Y": 10.063494,
+                "X": 10.970544
             }
         },
         {
@@ -633,6 +645,7 @@
             "id": 5,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 356.9141,
                 "Body": "BarrelTopView",
@@ -641,8 +654,8 @@
                 "ID": 5,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": 5.918429,
-                "X": 30.06332
+                "Y": 5.922042,
+                "X": 29.970924
             }
         },
         {
@@ -674,6 +687,7 @@
             "id": 31,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 0.3545647,
                 "Body": "BigBarrelTopView",
@@ -682,8 +696,8 @@
                 "ID": 31,
                 "Grabbable": 1,
                 "CollisionSound": "",
-                "Y": 10.491718,
-                "X": 20.026514
+                "Y": 10.493064,
+                "X": 19.981783
             }
         },
         {

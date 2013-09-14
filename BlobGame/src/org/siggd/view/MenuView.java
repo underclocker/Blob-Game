@@ -138,7 +138,8 @@ public class MenuView {
 		// Levels Menu
 		mLevelsTable = new Table(mSkin);
 		mLevelsTable.setFillParent(true);
-		ImageButton imageButton = new SiggdImageButton(
+		ImageButton imageButton;
+		imageButton= new SiggdImageButton(
 				"data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
 		imageButton.addListener(mMainMenu);
@@ -195,6 +196,8 @@ public class MenuView {
 		mLevelsTable.add(button.getButton()).space(mSpacing);
 		button.getButton().addListener(mStartLevel);
 
+		mLevelsTable.row();
+
 		// Hard Menu
 		mHardLevelsTable = new Table(mSkin);
 		mHardLevelsTable.setFillParent(true);
@@ -218,19 +221,19 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level2_hard"));
 
 		button = mHardLevel1.get("level1_hard");
-		mHardLevelsTable.add(button.getButton()).space(mSpacing);
+		mLevelsTable.add(button.getButton()).space(mSpacing,mSpacing,mSpacing,mSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mHardLevel1.get("level3_hard");
-		mHardLevelsTable.add(button.getButton()).space(mSpacing);
+		mLevelsTable.add(button.getButton()).space(mSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mHardLevel1.get("level5_hard");
-		mHardLevelsTable.add(button.getButton()).space(mSpacing);
+		mLevelsTable.add(button.getButton()).space(mSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mHardLevel1.get("level2_hard");
-		mHardLevelsTable.add(button.getButton()).space(mSpacing);
+		mLevelsTable.add(button.getButton()).space(mSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		// Set the starting menu
