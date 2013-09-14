@@ -48,7 +48,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = true;
+	public final static boolean RELEASE = false;
 
 	public final String mStartingLevel = "level1";
 
@@ -413,7 +413,8 @@ public class Game implements ApplicationListener {
 		if (mLevel != null) {
 			mLevel.stopMusic();
 			mLevel.dispose();
-			if (!Game.RELEASE) {
+			if (!Game.RELEASE
+					&& !mInput.getProcessors().contains(mEditor, true)) {
 				Game.get().getInput().addProcessor(Game.get().getEditor());
 			}
 			music = mLevel.mMusic;
@@ -517,11 +518,11 @@ public class Game implements ApplicationListener {
 	public int getNumberOfPlayers() {
 		return mPlayers.size();
 	}
-	
-	public boolean playerExists(Player p){
+
+	public boolean playerExists(Player p) {
 		return mPlayers.contains(p);
 	}
-	
+
 	public ArrayList<Player> getPlayers() {
 		return mPlayers;
 	}
