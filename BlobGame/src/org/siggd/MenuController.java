@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 
 public class MenuController implements InputProcessor, ControllerListener {
@@ -70,7 +71,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 		mX = 0;
 		mY = 0;
 		mPlayerId = 0;
-		mController = Controllers.getControllers().get(0);
+		Array<Controller> controllers = Controllers.getControllers();
+		mController = controllers.size>0?controllers.get(0):null;
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
