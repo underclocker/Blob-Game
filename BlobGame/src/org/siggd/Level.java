@@ -639,6 +639,7 @@ public class Level implements Iterable<Actor> {
 			}
 			a.dispose();
 		}
+		Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}

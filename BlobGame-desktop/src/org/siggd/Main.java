@@ -18,12 +18,12 @@ public class Main {
 		cfg.vSyncEnabled = true;
 		// Related to harrison's computer speedups.  Don't commit this enabled.
 		// cfg.useCPUSynch = true;
-		if (Game.RELEASE) {
+		/*if (Game.RELEASE) {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			cfg.width = (int) screenSize.getWidth();
 			cfg.height = (int) screenSize.getHeight();
 			cfg.fullscreen = true;
-		}
+		}*/
 		cfg.addIcon("data/gfx/icon16.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon32.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon128.png", FileType.Internal);
