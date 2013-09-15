@@ -508,8 +508,12 @@ public class MenuView {
 	public void giveFocus() {
 
 		InputMultiplexer multiplexer = Game.get().getInput();
-		multiplexer.addProcessor(mStage);
-		multiplexer.addProcessor(mMenuController);
+		if (!multiplexer.getProcessors().contains(mStage, true)) {
+			multiplexer.addProcessor(mStage);
+		}
+		if (!multiplexer.getProcessors().contains(mMenuController, true)) {
+			multiplexer.addProcessor(mMenuController);
+		}
 		Gdx.input.setInputProcessor(multiplexer);
 	}
 
