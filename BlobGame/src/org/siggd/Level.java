@@ -375,6 +375,43 @@ public class Level implements Iterable<Actor> {
 		Game.get().getLevelView().setWorld(mWorld);
 	}
 
+	
+	public void loadFromLevelSave()
+	{
+		try
+		{
+			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
+			FileHandle handle;
+			if (!f.exists()) {
+	
+				mLevelSave = new JSONObject();
+				handle = new FileHandle(f);
+			} else {
+				handle = Gdx.files.external(mSaveFileName);
+				String json = handle.readString();
+				if ("".equals(json))
+					json = "{}";
+				mLevelSave = new JSONObject(json);
+			}
+			if (!mLevelSave.has("HASH")) {
+				saveToLevelSave("HASH", "NT4R33LH45H");
+				saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
+				// TODO: unhackify this Harrison
+				saveToLevelSave("level1_hard" + "Unlocked", 1);
+			}
+			if (mLevelSave.has(getAssetKey())) {
+				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
+				for (int i = 0; i < dots.length(); i++) {
+					Actor actor = getActorById(dots.getInt(i));
+					if (actor instanceof Dot) {
+						Dot d = (Dot) actor;
+						getActorById(d.getId()).setProp("Active", 0);
+					}
+				}
+			}
+		}catch(Exception e){}
+	}
+	
 	public void saveToLevelSave(String key, Object value) {
 		try {
 			mLevelSave.put(key, value);

@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.ControllerFilterAPI;
 import org.siggd.Convert;
+import org.siggd.DebugOutput;
 import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.MenuController;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -107,6 +109,10 @@ public class MenuView {
 		mMainTable.add(slamButton);
 		slamButton.addListener(mStartSlam);
 
+		final TextButton clearButton = new TextButton(" Clear Save ", mSkin);
+		mMainTable.add(clearButton);
+		clearButton.addListener(mClear);
+		
 		final TextButton exitButton = new TextButton(" Exit ", mSkin);
 		mMainTable.add(exitButton);
 		exitButton.addListener(mExit);
@@ -496,6 +502,19 @@ public class MenuView {
 			setMenu(MAIN);
 		}
 	};
+	
+	private final ChangeListener mClear = new ChangeListener() {
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			try{
+			FileHandle handleSt = Gdx.files.external(".BlobGame/BlobSave.json");
+			
+			handleSt.writeString("", false);
+			}catch(Exception e){DebugOutput.info(this, e.getStackTrace().toString());}
+			Game.get().getLevel().loadFromLevelSave();
+		}
+	};
+	
 	private final ChangeListener mExit = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
