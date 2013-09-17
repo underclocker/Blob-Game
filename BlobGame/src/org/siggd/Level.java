@@ -175,7 +175,8 @@ public class Level implements Iterable<Actor> {
 				try {
 					a.update();
 				} catch (Exception e) {
-					mLog.severe("Exception when updating actor no " + a.getId() + ": " + e.toString());
+					mLog.severe("Exception when updating actor no " + a.getId() + ": "
+							+ e.toString());
 				}
 			}
 		}
@@ -359,8 +360,6 @@ public class Level implements Iterable<Actor> {
 		if (!mLevelSave.has("HASH")) {
 			saveToLevelSave("HASH", "NT4R33LH45H");
 			saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
-			// TODO: unhackify this Harrison
-			saveToLevelSave("level1_hard" + "Unlocked", 1);
 		}
 		if (mLevelSave.has(getAssetKey())) {
 			JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
@@ -375,15 +374,12 @@ public class Level implements Iterable<Actor> {
 		Game.get().getLevelView().setWorld(mWorld);
 	}
 
-	
-	public void loadFromLevelSave()
-	{
-		try
-		{
+	public void loadFromLevelSave() {
+		try {
 			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
 			FileHandle handle;
 			if (!f.exists()) {
-	
+
 				mLevelSave = new JSONObject();
 				handle = new FileHandle(f);
 			} else {
@@ -396,8 +392,6 @@ public class Level implements Iterable<Actor> {
 			if (!mLevelSave.has("HASH")) {
 				saveToLevelSave("HASH", "NT4R33LH45H");
 				saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
-				// TODO: unhackify this Harrison
-				saveToLevelSave("level1_hard" + "Unlocked", 1);
 			}
 			if (mLevelSave.has(getAssetKey())) {
 				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
@@ -409,9 +403,11 @@ public class Level implements Iterable<Actor> {
 					}
 				}
 			}
-		}catch(Exception e){}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
-	
+
 	public void saveToLevelSave(String key, Object value) {
 		try {
 			mLevelSave.put(key, value);
@@ -452,7 +448,7 @@ public class Level implements Iterable<Actor> {
 			if (a instanceof Blob && templateBlob != null && !a.equals(templateBlob)) {
 				continue;
 			}
-			if (a instanceof Dot){
+			if (a instanceof Dot) {
 				a.setProp("Active", 1);
 			}
 			JSONObject jsonActor = new JSONObject();
@@ -671,8 +667,8 @@ public class Level implements Iterable<Actor> {
 		saveProgress();
 		Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
-			if(a instanceof Blob){
-				Game.get().getInput().removeProcessor((Blob)a);
+			if (a instanceof Blob) {
+				Game.get().getInput().removeProcessor((Blob) a);
 			}
 			a.dispose();
 		}

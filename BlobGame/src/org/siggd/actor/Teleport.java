@@ -54,6 +54,7 @@ public class Teleport extends Actor {
 		setProp("Teleport_XPos", (Float) 0f);
 		setProp("Teleport_YPos", (Float) 0f);
 		setProp("Level", "");
+		setProp("Extra Level", "");
 	}
 
 	/**
@@ -115,7 +116,11 @@ public class Teleport extends Actor {
 			return;
 		}
 		String nextLevel = (String) this.getProp("Level");
-		Game.get().getLevel().saveToLevelSave(nextLevel + "Unlocked", 1);
+		String extraLevel = (String) this.getProp("Extra Level");
+		if (nextLevel != null && !"".equals(nextLevel))
+			Game.get().getLevel().saveToLevelSave(nextLevel + "Unlocked", 1);
+		if (extraLevel != null && !"".equals(extraLevel))
+			Game.get().getLevel().saveToLevelSave(extraLevel + "Unlocked", 1);
 		Game.get().setNextLevel(nextLevel);
 	}
 
