@@ -9,8 +9,10 @@ import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.Player;
 import org.siggd.Timer;
+import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
+import org.siggd.view.Drawable;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -18,35 +20,49 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Spawner extends Actor {
+public class Spawner extends Actor implements IObservable {
 	private ArrayList<Actor> mSpawnees;
 	private String mTex;
+	private String offTex;
+	private Drawable mDefaultDrawable;
+	private Drawable mOffDrawable;
 	private Timer mSpawnTimer;
+	private Timer mTexTimer;
 	private int maxBlobs;
+	private int texChangeTime = 60;
 
 	public Spawner(Level level, long id) {
 		super(level, id);
 		mSpawnees = new ArrayList<Actor>();
 		mName = "Spawner";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
+		offTex = mTex.substring(0, mTex.length() - 6) + "off.png";
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 512, BodyType.StaticBody, origin, false);
-		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody,
-				origin, mTex));
+		mDefaultDrawable = (new BodySprite(mBody, origin, mTex));
+		mOffDrawable = (new BodySprite(mBody, origin, offTex));
+		mDrawable.mDrawables.add(mOffDrawable);
 		maxBlobs = Game.get().getNumberOfPlayers();
-
+		
 		mSpawnTimer = new Timer();
-		mSpawnTimer.setTimer(Convert.getInt(this.getProp("Rate")));
 		mSpawnTimer.unpause();
+		
+		mTexTimer = new Timer();
+		mTexTimer.setTimer(texChangeTime);
+		mTexTimer.unpause();
+
 		this.setProp("Blob Spawner", 0);
-		this.setProp("Rate", 30);
+		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
+
+		setState(false);
 	}
 
 	@Override
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load(offTex, Texture.class);
 
 	}
 
@@ -54,10 +70,17 @@ public class Spawner extends Actor {
 	public void update() {
 		super.update();
 		mSpawnTimer.update();
-		if (mSpawnees.size() > 0 && mSpawnTimer.isTriggered()) {
-			spawnActor();
-			mSpawnTimer.reset();
+		mTexTimer.update();
+		if (mSpawnees.size() > 0){
+			setState(true);
+			if (mSpawnTimer.isTriggered()) {
+				spawnActor();
+				mSpawnTimer.reset();
+				mTexTimer.reset();
+			}
 		}
+		if (mSpawnees.size() == 0 && mTexTimer.isTriggered())
+			setState(false);
 	}
 
 	@Override
@@ -111,19 +134,17 @@ public class Spawner extends Actor {
 			}
 		}
 	}
-	private Blob spawnBlob(int id){
-		Blob blob = new Blob(this.getLevel(), this.getLevel()
-				.getId());
+
+	private Blob spawnBlob(int id) {
+		Blob blob = new Blob(this.getLevel(), this.getLevel().getId());
 		blob.setProp("Player ID", id);
 		// assign blob to player
 		blob.setActive(false);
 		// set the layer to the layer of the placeholder blob
-		int layer = Convert.getInt(mLevel.getBlobs(false)
-				.get(0).getProp("Layer"));
+		int layer = Convert.getInt(mLevel.getBlobs(false).get(0)
+				.getProp("Layer"));
 		blob.setProp("Layer", (Integer) layer);
-		mSpawnees.add(
-				(int) Math.floor(Math.random()
-						* mSpawnees.size()), blob);
+		mSpawnees.add((int) Math.floor(Math.random() * mSpawnees.size()), blob);
 		return blob;
 	}
 
@@ -178,6 +199,30 @@ public class Spawner extends Actor {
 		}
 		return count;
 	}
+
+	public Object observe() {
+		return getState();
+	}
+
+	public boolean getState() {
+		return mState;
+	}
+
+	private void setState(boolean state) {
+		if (state == mState)
+			return;
+		if (state) {
+			mDrawable.mDrawables.remove(mOffDrawable);
+			mDrawable.mDrawables.add(mDefaultDrawable);
+		} else {
+			mDrawable.mDrawables.remove(mDefaultDrawable);
+			mDrawable.mDrawables.add(mOffDrawable);
+		}
+		mState = state;
+	}
+
+	// LOOK I DIDNT COPY PASTERINIO MACORONI DONGERINI
+	private boolean mState = false;
 
 	@Override
 	public void setProp(String name, Object val) {
