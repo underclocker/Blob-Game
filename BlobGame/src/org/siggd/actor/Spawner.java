@@ -30,7 +30,7 @@ public class Spawner extends Actor {
 		mName = "Spawner";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
-		mBody = makeBody(mName, 256, BodyType.StaticBody, origin, false);
+		mBody = makeBody(mName, 512, BodyType.StaticBody, origin, false);
 		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody,
 				origin, mTex));
 		maxBlobs = Game.get().getNumberOfPlayers();
