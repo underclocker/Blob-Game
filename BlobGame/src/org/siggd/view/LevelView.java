@@ -161,7 +161,7 @@ public class LevelView {
 			positionCamera(true);
 		}
 		// Clear the screen
-		Gdx.gl.glClearColor(.2f, .2f, .2f, 1);
+		Gdx.gl.glClearColor(.0f, .0f, .0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		// Draw sprites
 		mBatch.setProjectionMatrix(mCamera.combined);
@@ -335,16 +335,36 @@ public class LevelView {
 	}
 
 	private void smoothCam() {
-		mCamera.position.x = mOldCamera.position.x + (mCamera.position.x - mOldCamera.position.x)
-				* CAM_SMOOTH;
-		mCamera.position.y = mOldCamera.position.y + (mCamera.position.y - mOldCamera.position.y)
-				* CAM_SMOOTH;
-		mCamera.viewportHeight = mOldCamera.viewportHeight
-				+ (mCamera.viewportHeight - mOldCamera.viewportHeight) * CAM_SMOOTH;
-		mCamera.viewportWidth = mOldCamera.viewportWidth
-				+ (mCamera.viewportWidth - mOldCamera.viewportWidth) * CAM_SMOOTH;
-		mScale = mOldScale + (mScale - mOldScale); // * CAM_SMOOTH;
+
+		float delta, scale;
+
+		delta = (mCamera.position.x - mOldCamera.position.x);
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.position.x = mOldCamera.position.x + delta;
+
+		delta = (mCamera.position.y - mOldCamera.position.y);
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.position.y = mOldCamera.position.y + delta;
+
+		delta = (mCamera.viewportHeight - mOldCamera.viewportHeight);
+
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.viewportHeight = mOldCamera.viewportHeight + delta;
+
+		delta = (mCamera.viewportWidth - mOldCamera.viewportWidth);
+		delta *= scale;
+
+		mCamera.viewportWidth = mOldCamera.viewportWidth + delta;
+
+		mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
 		mOldScale = mScale;
+
 	}
 
 	public void setWorld(World world) {
