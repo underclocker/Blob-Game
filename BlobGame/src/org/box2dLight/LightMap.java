@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
-class LightMap {
+public class LightMap {
 	private ShaderProgram shadowShader;
 	FrameBuffer frameBuffer;
 	private Mesh lightMapMesh;
@@ -26,6 +26,8 @@ class LightMap {
 	private ShaderProgram withoutShadowShader;
 	private ShaderProgram blurShader;
 	private ShaderProgram diffuseShader;
+	public int mWidth;
+	public int mHeight;
 
 	boolean lightMapDrawingDisabled;
 
@@ -53,17 +55,16 @@ class LightMap {
 			} else {
 				shader.begin();
 				Gdx.gl20.glBlendFunc(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
-				shader.setUniformf("ambient", c.r * c.a, c.g * c.a,
-						c.b * c.a, 1f - c.a);
+				shader.setUniformf("ambient", c.r * c.a, c.g * c.a, c.b * c.a, 1f - c.a);
 			}
-		//	shader.setUniformi("u_texture", 0);
+			// shader.setUniformi("u_texture", 0);
 			lightMapMesh.render(shader, GL20.GL_TRIANGLE_FAN);
 			shader.end();
 		} else if (needed) {
 
 			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 			withoutShadowShader.begin();
-		//	withoutShadowShader.setUniformi("u_texture", 0);
+			// withoutShadowShader.setUniformi("u_texture", 0);
 			lightMapMesh.render(withoutShadowShader, GL20.GL_TRIANGLE_FAN);
 			withoutShadowShader.end();
 		}
@@ -80,7 +81,7 @@ class LightMap {
 			pingPongBuffer.begin();
 			{
 				blurShader.begin();
-		//		blurShader.setUniformi("u_texture", 0);
+				// blurShader.setUniformi("u_texture", 0);
 				blurShader.setUniformf("dir", 1f, 0f);
 				lightMapMesh.render(blurShader, GL20.GL_TRIANGLE_FAN, 0, 4);
 				blurShader.end();
@@ -92,7 +93,7 @@ class LightMap {
 			frameBuffer.begin();
 			{
 				blurShader.begin();
-			//	blurShader.setUniformi("u_texture", 0);
+				// blurShader.setUniformi("u_texture", 0);
 				blurShader.setUniformf("dir", 0f, 1f);
 				lightMapMesh.render(blurShader, GL20.GL_TRIANGLE_FAN, 0, 4);
 				blurShader.end();
@@ -107,16 +108,7 @@ class LightMap {
 
 	public LightMap(RayHandler rayHandler, int fboWidth, int fboHeight) {
 		this.rayHandler = rayHandler;
-
-		if (fboWidth <= 0)
-			fboWidth = 1;
-		if (fboHeight <= 0)
-			fboHeight = 1;
-		frameBuffer = new FrameBuffer(Format.RGBA8888, fboWidth,
-				fboHeight, false);
-		pingPongBuffer = new FrameBuffer(Format.RGBA8888, fboWidth,
-				fboHeight, false);
-
+	
 		lightMapMesh = createLightMapMesh();
 
 		shadowShader = ShadowShader.createShadowShader();
@@ -124,7 +116,20 @@ class LightMap {
 
 		withoutShadowShader = WithoutShadowShader.createShadowShader();
 
+		constructLightMap( fboWidth, fboHeight);
+	}
+
+	public void constructLightMap(int fboWidth, int fboHeight) {
+		if (fboWidth <= 0)
+			fboWidth = 1;
+		if (fboHeight <= 0)
+			fboHeight = 1;
+		frameBuffer = new FrameBuffer(Format.RGBA8888, fboWidth, fboHeight, false);
+		pingPongBuffer = new FrameBuffer(Format.RGBA8888, fboWidth, fboHeight, false);
 		blurShader = Gaussian.createBlurShader(fboWidth, fboHeight);
+
+		mWidth = fboWidth;
+		mHeight = fboHeight; 
 
 	}
 
@@ -165,9 +170,8 @@ class LightMap {
 		verts[U4] = 0f;
 		verts[V4] = 1f;
 
-		Mesh tmpMesh = new Mesh(true, 4, 0, new VertexAttribute(
-				Usage.Position, 2, "a_position"), new VertexAttribute(
-				Usage.TextureCoordinates, 2, "a_texCoord"));
+		Mesh tmpMesh = new Mesh(true, 4, 0, new VertexAttribute(Usage.Position, 2, "a_position"),
+				new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoord"));
 
 		tmpMesh.setVertices(verts);
 		return tmpMesh;
