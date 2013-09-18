@@ -91,12 +91,15 @@ public class Door extends Actor implements IObserver {
 				mBody.setLinearVelocity(Vector2.Zero);
 			}
 		}
-		if (mBody.getLinearVelocity().len2() > 0) {
-			mCamDelay = mCamDelayMax;
+		if (mBody.getLinearVelocity().len2() > 0 && active) {
+			if (mCamDelay < 0)
+				mCamDelay = 0;
+			if (mCamDelay < mCamDelayMax)
+				mCamDelay++;
 		} else {
 			mCamDelay--;
 		}
-		if (mCamDelay > 0) {
+		if (mCamDelay > 5) {
 			Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
 	}
