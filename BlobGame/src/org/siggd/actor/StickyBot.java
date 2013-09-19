@@ -101,7 +101,7 @@ public class StickyBot extends Actor {
 				offset.sub(blobPos);
 				offset.nor();
 				offset.scl(-5);
-				mBody.applyForceToCenter(offset, true);
+				mBody.applyForceToCenter(offset);
 			}
 		}
 		if (!enemySeen) {
@@ -109,7 +109,7 @@ public class StickyBot extends Actor {
 			offset.sub(mStartPosition);
 			offset.scl(-1);
 			offset.nor();
-			mBody.applyForceToCenter(offset, true);
+			mBody.applyForceToCenter(offset);
 		}
 	}
 

@@ -1,7 +1,7 @@
 package org.siggd.actor.props.test;
 import org.siggd.Level;
 import org.siggd.actor.Actor;
-import org.siggd.actor.props.Prop;
+import org.siggd.actor.meta.Prop;
 
 
 public class FakeActor extends Actor implements IFake {

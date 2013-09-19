@@ -108,13 +108,13 @@ public class CrackButterfly extends Actor {
 		if(--mYFlyTimer <= 0)
 		{
 			mYFlyTimer = YFLYTIME;
-			this.mBody.applyForceToCenter(0, YFLYFORCE, true);
+			this.mBody.applyForceToCenter(0, YFLYFORCE);
 		}
 		
 		if(--mXFlyTimer <= 0)
 		{
 			mXFlyTimer = XFLYTIME;
-			this.mBody.applyForceToCenter(XFLYFORCE, 0, true);
+			this.mBody.applyForceToCenter(XFLYFORCE, 0);
 		}
 		
 		

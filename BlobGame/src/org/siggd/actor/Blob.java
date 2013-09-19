@@ -866,8 +866,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			forceDir.scl(diff);
 
 			// Apply spring forces
-			a.applyForceToCenter(forceDir.x, forceDir.y, true);
-			b.applyForceToCenter(-forceDir.x, -forceDir.y, true);
+			a.applyForceToCenter(forceDir.x, forceDir.y);
+			b.applyForceToCenter(-forceDir.x, -forceDir.y);
 
 			// Determine coefficient of critical damping (from Wikipedia)
 			float damp = 2 * DAMPENING_COEFF * (float) Math.sqrt(a.getMass() * k);
@@ -884,8 +884,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 			dampForce.scl(damp * dampForce.dot(vel));
 
-			a.applyForceToCenter(dampForce, true);
-			b.applyForceToCenter(new Vector2(-dampForce.x, -dampForce.y), true);
+			a.applyForceToCenter(dampForce);
+			b.applyForceToCenter(new Vector2(-dampForce.x, -dampForce.y));
 		}
 
 		Vector2 eyeDelta = new Vector2(mLeftEyeDest);
@@ -1001,7 +1001,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 							v = new Vector2(0, 0);
 						}
 						v.add(new Vector2(1, 0).scl(LATERAL_FORCE));
-						curB.applyForceToCenter(v, true);
+						curB.applyForceToCenter(v);
 						mLastKnownDir = true;
 					}
 				}
@@ -1023,7 +1023,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 							v = new Vector2(0, 0);
 						}
 						v.add(new Vector2(-1, 0).scl(LATERAL_FORCE));
-						mParticles.get(i).applyForceToCenter(v, true);
+						mParticles.get(i).applyForceToCenter(v);
 						mLastKnownDir = false;
 					}
 				}
@@ -1031,14 +1031,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				float mult = mGrabbing ? ROTATION_MULT_IF_GRABBING : 1;
 				if (right) {
 					mBody.applyAngularImpulse(-.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
-							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
+							/ (1 + Math.abs(mBody.getAngularVelocity())));
 					mBody.applyForceToCenter(
 							new Vector2(10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = true;
 				}
 				if (left) {
 					mBody.applyAngularImpulse(.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
-							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
+							/ (1 + Math.abs(mBody.getAngularVelocity())));
 					mBody.applyForceToCenter(
 							new Vector2(-10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = false;
@@ -1182,11 +1182,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 	public void applyForce(Vector2 force) {
 		if (mState == SOLID_STATE) {
-			mBody.applyForceToCenter(force, true);
+			mBody.applyForceToCenter(force);
 		} else {
 			force.scl(1f / mSubBodies.size());
 			for (Body b : mSubBodies) {
-				b.applyForceToCenter(force, true);
+				b.applyForceToCenter(force);
 			}
 		}
 	}
@@ -1469,7 +1469,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				contactHandler.destroyContacts(b);
 				b.setActive(false);
 			}
-			mBody.applyAngularImpulse(.01f, true);
+			mBody.applyAngularImpulse(.01f);
 
 			setCollisionGroup((Integer) getProp("Collision Group")); // Since we
 			// create

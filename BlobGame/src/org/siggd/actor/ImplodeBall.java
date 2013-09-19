@@ -198,7 +198,7 @@ public class ImplodeBall extends Actor{
 					
 					force.rotate(desiredAngle);
 					for(Body b : blobSubs) {
-						b.applyForceToCenter(force, true);
+						b.applyForceToCenter(force);
 					}
 				}
 				else if(a.getMainBody().getType() == BodyType.DynamicBody && !(a instanceof VacBotBoundry) && !(a instanceof Redirector)  && !(a instanceof RecyclingCenter)) {
@@ -216,7 +216,7 @@ public class ImplodeBall extends Actor{
 						desiredAngle+=360;
 					}
 					force.rotate((float)desiredAngle);
-					a.getMainBody().applyForceToCenter(force, true);
+					a.getMainBody().applyForceToCenter(force);
 				}
 				else {
 					continue;

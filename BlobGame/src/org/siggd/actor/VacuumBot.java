@@ -214,7 +214,7 @@ public class VacuumBot extends Actor {
 								blob.transform();
 							}			
 							for(Body b : blobSubs) {
-								b.applyForceToCenter(force, true);
+								b.applyForceToCenter(force);
 							}
 							/*
 							if(mBody.getPosition().x >= rcPos.x-0.5 || mBody.getPosition().x <= rcPos.x+0.5) {
@@ -316,7 +316,7 @@ public class VacuumBot extends Actor {
 									blob.transform();
 								}
 								for(Body b : blobSubs) {
-									b.applyForceToCenter(force, true);
+									b.applyForceToCenter(force);
 								}					
 								
 								/*
@@ -445,7 +445,7 @@ public class VacuumBot extends Actor {
 									blob.transform();
 								}
 								for(Body b : blobSubs) {
-									b.applyForceToCenter(force, true);
+									b.applyForceToCenter(force);
 								}	
 								
 								/*
