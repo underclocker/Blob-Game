@@ -424,7 +424,7 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 			lv.unproject(camPos);
 			camPos.sub(lv.getCameraPosition());
 			float zoom = amount / 8f;
-			camPos.scl(-zoom);
+			camPos.mul(-zoom);
 			lv.zoom(zoom);
 			lv.setCameraPosition(camPos.add(lv.getCameraPosition()));
 		}

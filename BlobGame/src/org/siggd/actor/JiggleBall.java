@@ -70,11 +70,11 @@ public class JiggleBall extends Actor {
 	public void update(){	
 		Vector2 offset = mBody.getPosition().cpy();
 		offset.sub(mStartPosition);
-		offset.scl(-30);
+		offset.mul(-30);
 		if (offset.len() > 15){
-			offset.nor().scl(15);
+			offset.nor().mul(15);
 		}
-		mBody.applyForceToCenter(offset, true);
+		mBody.applyForceToCenter(offset);
 	}
 	
 	@Override

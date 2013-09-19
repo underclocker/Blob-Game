@@ -75,7 +75,7 @@ public class Crown extends Actor {
 			Vector2 delta = mBody.getPosition().cpy();
 			delta.sub(new Vector2(kingBlob.getX(), kingBlob.getY()));
 			delta.add(new Vector2(0f, -.55f));
-			delta.scl(-20f);
+			delta.mul(-20f);
 			Vector2 vel = new Vector2(Convert.getFloat(kingBlob.getProp("Velocity X")),
 					Convert.getFloat(kingBlob.getProp("Velocity Y")));
 			delta.add(vel);

@@ -75,7 +75,7 @@ public class Redirector extends Actor {
 				}
 				Vector2 v = new Vector2(1, 0);
 				v.rotate(Convert.getFloat(getProp("Angle")));
-				v.scl(new Vector2(Convert.getFloat(actor.getProp("DirectionX")), Convert
+				v.mul(new Vector2(Convert.getFloat(actor.getProp("DirectionX")), Convert
 						.getFloat(actor.getProp("DirectionY"))).len());
 				Vector2 oldDir = new Vector2(Convert.getFloat(actor.getProp("DirectionX")),
 						Convert.getFloat(actor.getProp("DirectionY")));

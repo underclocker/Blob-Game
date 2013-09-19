@@ -275,7 +275,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			float deltaGreen = (mDestColor.g - mCurrentColor.g) * mColorTransSpeed;
 			float deltaBlue = (mDestColor.b - mCurrentColor.b) * mColorTransSpeed;
 			float deltaAlpha = (mDestColor.a - mCurrentColor.a) * mColorTransSpeed;
-			mCurrentColor.add(deltaRed, deltaGreen, deltaBlue, deltaAlpha);
+			mCurrentColor.add(new Color(deltaRed, deltaGreen, deltaBlue, deltaAlpha));
 
 			vertices = getBezierVertices(vertices, 5);
 
@@ -341,7 +341,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 			// set black outline for blobs
 			shapeRender.begin(ShapeType.Line);
-			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
+			shapeRender.setColor(mCurrentColor.cpy().mul(new Color(.6f, .6f, .6f, 1)));
 			float lineWidth = 3 * Game.get().getLevelView().getScale()
 					/ Game.get().getLevelView().getVScale();
 
@@ -350,7 +350,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				Vector2 v2;
 				v1 = vertices.get(i).cpy();
 				v2 = vertices.get((i + 1) % vertices.size()).cpy();
-				Vector2 offset = v1.cpy().sub(v2).scl(.03f);
+				Vector2 offset = v1.cpy().sub(v2).mul(.03f);
 				v1.add(offset);
 				v2.sub(offset);
 				shapeRender.line(v1.x, v1.y, v2.x, v2.y);
@@ -417,7 +417,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 			if (mBottom != null) {
 				mAccessoryMouth.mPosition = eyeGap.cpy().sub(perpendicular.cpy().div(26))
-						.add(parallel.scl(mLastKnownDir ? .02f : -.02f));
+						.add(parallel.mul(mLastKnownDir ? .02f : -.02f));
 				if (mState == SQUISH_STATE) {
 					mBottomNormal.y /= 5;
 					mAccessoryMouth.mAngle = mBottomNormal.angle() + 180f;
@@ -442,7 +442,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			// u = (q - p) × r / (r × s)
 			float u = cross(qSubP, r) / rCrossS;
 			if (u >= 0 && t >= 0 && u <= 1 && t <= 1) {
-				Vector2 solution = q.add(s.scl(u));
+				Vector2 solution = q.add(s.mul(u));
 				return new Vector3(solution.x, solution.y, u);
 			}
 			return null;
@@ -469,12 +469,12 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				if (mState == SQUISH_STATE) {
 					tex = man.get(mSquishEye, Texture.class);
 					center = new Vector2(mCenterOfMass);
-					center.add(mVCenter.scl(.055f));
+					center.add(mVCenter.mul(.055f));
 					rotation = mRightEye.getPosition().cpy().sub(mLeftEye.getPosition()).angle();
 				} else {
 					tex = man.get(mSolidEye, Texture.class);
 					center = new Vector2(mBody.getPosition());
-					center.add(mBody.getLinearVelocity().scl(.055f));
+					center.add(mBody.getLinearVelocity().mul(.055f));
 					rotation = (float) (mBody.getAngle() * 180.0f / Math.PI);
 				}
 				Vector2 trueCenter = new Vector2(center);
@@ -624,7 +624,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		if (getLevel().getAssetKey() != null) {
 			Color squishColor = new Color(0f, .9f, 0f, 1f);
 			Color solidColor = new Color(squishColor);
-			solidColor.mul(.7f, .7f, .7f, 1f);
+			solidColor.mul(new Color(.7f, .7f, .7f, 1f));
 			mBlobDrawable = new BlobDrawable(squishColor, solidColor);
 			((CompositeDrawable) mDrawable).mDrawables.add(mBlobDrawable);
 		}
@@ -828,8 +828,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			mVCenter.add(b.getLinearVelocity());
 			mCenterOfMass.add(b.getPosition());
 		}
-		mVCenter.scl(1f / mParticles.size());
-		mCenterOfMass.scl(1.0f / NUM_PARTICLES);
+		mVCenter.mul(1f / mParticles.size());
+		mCenterOfMass.mul(1.0f / NUM_PARTICLES);
 	}
 
 	/**
@@ -863,7 +863,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			// Apply Hooke's law
 			float diff = (len - s.restLength) * k;
 
-			forceDir.scl(diff);
+			forceDir.mul(diff);
 
 			// Apply spring forces
 			a.applyForceToCenter(forceDir.x, forceDir.y);
@@ -882,7 +882,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			Vector2 vel = b.getLinearVelocity().cpy();
 			vel.sub(a.getLinearVelocity());
 
-			dampForce.scl(damp * dampForce.dot(vel));
+			dampForce.mul(damp * dampForce.dot(vel));
 
 			a.applyForceToCenter(dampForce);
 			b.applyForceToCenter(new Vector2(-dampForce.x, -dampForce.y));
@@ -890,11 +890,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 		Vector2 eyeDelta = new Vector2(mLeftEyeDest);
 		eyeDelta.sub(mLeftEye.getPosition());
-		mLeftEye.applyForceToCenter(eyeDelta.scl(20f), true);
+		mLeftEye.applyForceToCenter(eyeDelta.mul(20f));
 
 		eyeDelta = new Vector2(mRightEyeDest);
 		eyeDelta.sub(mRightEye.getPosition());
-		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
+		mRightEye.applyForceToCenter(eyeDelta.mul(20f));
 
 		mLightColor.set(mBlobDrawable.mSquishColor);
 		if (mExtraGlow > 0) {
@@ -903,7 +903,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			mPointCombo = 0;
 		}
 		float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
-		mLightColor.mul(brightness, brightness, brightness, 1f);
+		mLightColor.mul(new Color(brightness, brightness, brightness, 1f));
 		mLight.setColor(mLightColor);
 		mLight.setDistance(3f + 10f * brightness);
 
@@ -911,11 +911,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		float rotation;
 		if (mState == SQUISH_STATE) {
 			center = new Vector2(mCenterOfMass);
-			center.add(mVCenter.scl(.04f));
+			center.add(mVCenter.mul(.04f));
 			rotation = 0;
 		} else {
 			center = new Vector2(mBody.getPosition());
-			center.add(mBody.getLinearVelocity().scl(.04f));
+			center.add(mBody.getLinearVelocity().mul(.04f));
 			rotation = (float) (mBody.getAngle() * 180.0f / Math.PI);
 		}
 
@@ -996,11 +996,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 						v.nor();
 						// Directional Vector * Rotate Force constant + Right
 						// Directional Force * Magical Force constant
-						v = v.scl(ROTATION_FORCE);
+						v = v.mul(ROTATION_FORCE);
 						if (curB.getLinearVelocity().len() > 3) {
 							v = new Vector2(0, 0);
 						}
-						v.add(new Vector2(1, 0).scl(LATERAL_FORCE));
+						v.add(new Vector2(1, 0).mul(LATERAL_FORCE));
 						curB.applyForceToCenter(v);
 						mLastKnownDir = true;
 					}
@@ -1018,11 +1018,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 						v.nor();
 						// Directional Vector * Rotate Force constant + Right
 						// Directional Force * Magical Force constant
-						v = v.scl(ROTATION_FORCE);
+						v = v.mul(ROTATION_FORCE);
 						if (curB.getLinearVelocity().len() > 3) {
 							v = new Vector2(0, 0);
 						}
-						v.add(new Vector2(-1, 0).scl(LATERAL_FORCE));
+						v.add(new Vector2(-1, 0).mul(LATERAL_FORCE));
 						mParticles.get(i).applyForceToCenter(v);
 						mLastKnownDir = false;
 					}
@@ -1033,14 +1033,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					mBody.applyAngularImpulse(-.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
 							/ (1 + Math.abs(mBody.getAngularVelocity())));
 					mBody.applyForceToCenter(
-							new Vector2(10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
+							new Vector2(10 * SOLID_MASS_MULT, 0).mul(LATERAL_FORCE));
 					mLastKnownDir = true;
 				}
 				if (left) {
 					mBody.applyAngularImpulse(.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
 							/ (1 + Math.abs(mBody.getAngularVelocity())));
 					mBody.applyForceToCenter(
-							new Vector2(-10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
+							new Vector2(-10 * SOLID_MASS_MULT, 0).mul(LATERAL_FORCE));
 					mLastKnownDir = false;
 				}
 			}
@@ -1060,7 +1060,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				vel = new Vector2(mVCenter);
 			} else {
 				vel = new Vector2(mBody.getLinearVelocity());
-				vel.scl(1 / 20f);
+				vel.mul(1 / 20f);
 				threshold = .2f;
 			}
 			vel.sub(mOldVCenter);
@@ -1094,7 +1094,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		if (mState == SQUISH_STATE) {
 			mOldVCenter = new Vector2(mVCenter);
 		} else {
-			mOldVCenter = new Vector2(mBody.getLinearVelocity()).scl(1 / 20f);
+			mOldVCenter = new Vector2(mBody.getLinearVelocity()).mul(1 / 20f);
 		}
 		inOtherBlobs();
 		mSoundTimer.update();
@@ -1184,7 +1184,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		if (mState == SOLID_STATE) {
 			mBody.applyForceToCenter(force);
 		} else {
-			force.scl(1f / mSubBodies.size());
+			force.mul(1f / mSubBodies.size());
 			for (Body b : mSubBodies) {
 				b.applyForceToCenter(force);
 			}
@@ -1255,11 +1255,11 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			mLightColor = new Color();
 
 			mLightColor.set(squishColor);
-			mLightColor.mul(.1f, .1f, .1f, 1f);
+			mLightColor.mul(new Color(.1f, .1f, .1f, 1f));
 			mLight.setColor(mLightColor);
 
 			Color solidColor = new Color(squishColor);
-			solidColor.mul(.65f, .65f, .65f, 1f);
+			solidColor.mul(new Color(.65f, .65f, .65f, 1f));
 			Drawable bd = null;
 			for (Drawable d : ((CompositeDrawable) mDrawable).mDrawables) {
 				if (d instanceof BlobDrawable) {
@@ -1399,7 +1399,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				r.sub(mCenterOfMass);
 				momInertia += b.getMass() * r.len2();
 				Vector2 linMom = b.getLinearVelocity().cpy(); // Linear momentum
-				linMom.scl(b.getMass());
+				linMom.mul(b.getMass());
 				angMom += r.crs(linMom); // Definition of angular momentum
 			}
 			float angVel = angMom / momInertia; // Def'n of angular velocity
@@ -1535,7 +1535,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				// angular momentums
 				// the total angular momentum
 				angPortion.nor();
-				angPortion.scl(angMom / r.len() / b.getMass() / SOLID_MASS_MULT);
+				angPortion.mul(angMom / r.len() / b.getMass() / SOLID_MASS_MULT);
 				partVel.add(angPortion);
 				// Set total velocity for particle
 				b.setLinearVelocity(partVel);
@@ -1661,7 +1661,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			Vector2 jointOffset = new Vector2(x, y);
 			jointOffset.nor();
 			jointOffset.rotate(90);
-			jointOffset.scl(halfSideLength);
+			jointOffset.mul(halfSideLength);
 			jointOffset.add(new Vector2(x, y));
 			rjd.initialize(mParticles.get((i + 1) % NUM_PARTICLES), mParticles.get(i), jointOffset);
 			rjd.collideConnected = false;

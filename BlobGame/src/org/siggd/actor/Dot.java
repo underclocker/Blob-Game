@@ -103,9 +103,9 @@ public class Dot extends Actor {
 		} else {
 			Vector2 offset = new Vector2(mTargetBlob.getX(), mTargetBlob.getY());
 			offset.sub(mBody.getPosition());
-			offset.scl(5);
+			offset.mul(5);
 			mBody.applyForceToCenter(offset);
-			mTargetBlob.applyForce(offset.scl(-1));
+			mTargetBlob.applyForce(offset.mul(-1));
 			mEatTimer--;
 			if (mEatTimer < 0) {
 				mBody.getFixtureList().get(0).setSensor(true);

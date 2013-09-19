@@ -127,9 +127,9 @@ public class ConveyorBelt extends Actor {
 			deltaPos = mBody.getPosition();
 			deltaPos.sub(body.getPosition());
 			if (deltaPos.crs(rot) < 0) {
-				tempRot.scl(-1 * mult * speed);
+				tempRot.mul(-1 * mult * speed);
 			} else {
-				tempRot.scl(mult * speed);
+				tempRot.mul(mult * speed);
 			}
 			body.applyForceToCenter(tempRot);
 		}
@@ -146,7 +146,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.sub(body.getPosition());
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
-			deltaPos.scl(speed);
+			deltaPos.mul(speed);
 			body.applyForceToCenter(deltaPos);
 		}
 
@@ -162,7 +162,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.sub(body.getPosition());
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
-			deltaPos.scl(speed);
+			deltaPos.mul(speed);
 			body.applyForceToCenter(deltaPos);
 		}
 	}
