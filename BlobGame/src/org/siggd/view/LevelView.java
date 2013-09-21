@@ -495,7 +495,7 @@ public class LevelView {
 			LightMap lightMap = mRayHandler.getLightMap();
 			width /= 8;
 			height /= 8;
-			if (!(lightMap.mWidth == width && lightMap.mHeight == height)) {
+			if (lightMap != null && !(lightMap.mWidth == width && lightMap.mHeight == height)) {
 				lightMap.constructLightMap(width, height);
 			}
 		}
