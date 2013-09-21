@@ -29,7 +29,7 @@ public class Main {
 			mPrefs = new JSONObject();
 			handle = new FileHandle(f);
 
-			// Set Default Prefs
+			// Set Default Prefs ? º??º ?? º??º ?? º??º ?? º??º ?
 			saveToPref("width", (Integer) 1280);
 			saveToPref("height", (Integer) 720);
 			saveToPref("fullscreen", (Integer) 1);
