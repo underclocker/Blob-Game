@@ -131,6 +131,17 @@ public class Game implements ApplicationListener {
 			e.printStackTrace();
 		}
 
+		// Create the level view
+		mLevelView = new LevelView();
+		mMenuView = new MenuView();
+		// Input
+		if (mMenuView.getMenuController() != null) {
+			mInput.addProcessor(mMenuView.getMenuController());
+		}
+		if (mMenuView.getStage() != null) {
+			mInput.addProcessor(mMenuView.getStage());
+		}
+		
 		if (!RELEASE) {
 			// Create players the old way if not in release mode
 			int i = 0;
@@ -150,19 +161,7 @@ public class Game implements ApplicationListener {
 				p.controltype = ControlType.Arrows;
 				mPlayers.add(p);
 			}
-
 		}
-
-		// Create the level view
-		mLevelView = new LevelView();
-		mMenuView = new MenuView();
-		//Input
-		if (!RELEASE) {
-			mInput.addProcessor(mEditor);
-		}
-		mInput.addProcessor(mMenuView.getMenuController());
-		mInput.addProcessor(mMenuView.getStage());
-		Gdx.input.setInputProcessor(mInput);
 
 		// setup the listener that prints events to the console
 		mPlayerListener = new PlayerListener();
@@ -333,7 +332,11 @@ public class Game implements ApplicationListener {
 	 */
 	public void setState(int state) {
 		mState = state;
+		if (Gdx.input.getInputProcessor() == null && mInput != null) {
+			Gdx.input.setInputProcessor(mInput);
+		}
 		if (state == MENU) {
+			mMenuView.giveFocus();
 			Gdx.input.setCursorCatched(false);
 		} else if (state == EDIT) {
 			Gdx.input.setCursorCatched(false);
