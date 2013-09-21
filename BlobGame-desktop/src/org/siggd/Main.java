@@ -65,7 +65,6 @@ public class Main {
 			e.printStackTrace();
 		}
 		cfg.depth = 0;
-
 		if (Game.RELEASE && cfg.fullscreen) {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			cfg.width = (int) screenSize.getWidth();

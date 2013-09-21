@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -52,6 +53,9 @@ public class MenuView {
 	private Controller mFakePauseController;
 	private Table mLevelsTable;
 	private Table mTint;
+	private Table mCustomizeTable;
+	private Image mJoinImage;
+	private int mDelay;
 	private MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
 	private HashMap<String, SiggdImageButton> mLevel1;
@@ -65,6 +69,7 @@ public class MenuView {
 		mSkin = new Skin();
 		mMenuController = new MenuController();
 		mShapeRenderer = new ShapeRenderer();
+		mDelay = 0;
 
 		// Generate a 1x1 white texture and store it in the skin named "white".
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
@@ -230,6 +235,11 @@ public class MenuView {
 				.getButton();
 		imageButton.addListener(mMainMenu);
 		mLevelsTable.add(imageButton);
+		// Customize menu
+		mCustomizeTable = new Table(mSkin);
+		mCustomizeTable.setFillParent(true);
+		mJoinImage = new Image(new Texture(
+				Gdx.files.internal("data/gfx/circle.png")));
 
 		// Set the starting menu
 		setMenu(MAIN);
@@ -268,7 +278,7 @@ public class MenuView {
 			}
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
 			if (Game.get().activePlayers() > 0) {
-				// TODO: Press button to start graphic
+				mJoinImage.remove();
 			}
 		}
 		mMenuController.draw(mShapeRenderer);
@@ -276,8 +286,14 @@ public class MenuView {
 
 	public void update() {
 		mMenuController.update();
-		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
-			Player p = testForNewPlayer();
+		if (CUSTOMIZE.equals(mCurrentMenu)
+				&& Game.get().getState() != Game.PLAY) {
+			Player p = null;
+			if (mDelay > 10) {
+				p = testForNewPlayer();
+			} else {
+				mDelay++;
+			}
 			if (p != null) {
 				if (!Game.get().playerExists(p)) {
 					System.out.println("Adding player of type: " + p.controltype);
@@ -292,8 +308,9 @@ public class MenuView {
 				if (pl.controltype == ControlType.Controller && pl.controller != null) {
 					Controller c = pl.controller;
 					start = start
-							|| c.getButton(ControllerFilterAPI.getFilteredId(c,
-									ControllerFilterAPI.BUTTON_START));
+							|| c.getButton(ControllerFilterAPI
+									.getButtonFromFilteredId(c,
+											ControllerFilterAPI.BUTTON_START));
 				} else if (pl.controltype == ControlType.WASD
 						|| pl.controltype == ControlType.Arrows) {
 					start = start || Gdx.input.isKeyPressed(Input.Keys.SPACE)
@@ -473,6 +490,7 @@ public class MenuView {
 				Game.get().setPaused(false);
 				Game.get().getLevelView().resetCamera();
 			}
+			Game.get().deactivatePlayers();
 			setMenu(MAIN);
 		}
 	};
@@ -509,15 +527,16 @@ public class MenuView {
 		if (!multiplexer.getProcessors().contains(mMenuController, true)) {
 			multiplexer.addProcessor(mMenuController);
 		}
-		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 	public void setMenu(String menu) {
 		mCurrentMenu = menu;
+		mDelay = 0;
 		mMainTable.remove();
 		mPauseTable.remove();
 		mFakePauseTable.remove();
 		mLevelsTable.remove();
+		mCustomizeTable.remove();
 		mTint.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
@@ -548,6 +567,10 @@ public class MenuView {
 			mMenuController.setTable(mLevelsTable);
 			mMenuController.setIndex(1);
 		} else if (CUSTOMIZE.equals(menu)) {
+			if (!mCustomizeTable.getChildren().contains(mJoinImage, false)) {
+				mCustomizeTable.add(mJoinImage);
+			}
+			mStage.addActor(mCustomizeTable);
 			mMenuController.setTable(null);
 			Game.get().setLevel("charselect");
 			for (Player p : Game.get().getPlayers()) {
@@ -565,7 +588,6 @@ public class MenuView {
 					b.setProp("Player ID", p.id);
 				}
 			}
-			// TODO: Draw suggested button presses
 		}
 	}
 
@@ -583,6 +605,10 @@ public class MenuView {
 
 	public String getCurrentMenu() {
 		return mCurrentMenu;
+	}
+
+	public Stage getStage() {
+		return mStage;
 	}
 
 	public void onResize(int width, int height) {

@@ -118,7 +118,9 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 															// on startup
 
 		// Setup click listener on Level View
-		Game.get().getInput().addProcessor(this);
+		if (!Game.get().getInput().getProcessors().contains(this, true)) {
+			Game.get().getInput().addProcessor(this);
+		}
 		// nullify
 		mLastAdded = null;
 
@@ -156,7 +158,8 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 				mActorPanel.setCurrentAction(ActorPanel.Action.SELECTMOVE);
 			} else if (keycode == Input.Keys.F4) {
 				mActorPanel.setCurrentAction(ActorPanel.Action.REMOVE);
-			} else if (keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.CONTROL_RIGHT) {
+			} else if (keycode == Input.Keys.CONTROL_LEFT
+					|| keycode == Input.Keys.CONTROL_RIGHT) {
 				ctrlIsPressed = true;
 			}
 
@@ -182,7 +185,8 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 	@Override
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
-		if (keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.CONTROL_RIGHT) {
+		if (keycode == Input.Keys.CONTROL_LEFT
+				|| keycode == Input.Keys.CONTROL_RIGHT) {
 			ctrlIsPressed = false;
 		}
 		return false;
@@ -223,43 +227,47 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 						} else if (selectMove == null) { // An Actor is not in
 															// the process of
 															// being moved
-							selectMove = new SelectMoveCommand(mSelected, new Vector2(
-									mSelected.getX(), mSelected.getY())); // Create
-																			// command
-																			// for
-																			// the
-																			// currently
-																			// selected
-																			// actor
+							selectMove = new SelectMoveCommand(mSelected,
+									new Vector2(mSelected.getX(),
+											mSelected.getY())); // Create
+																// command
+																// for
+																// the
+																// currently
+																// selected
+																// actor
 						} else { // An Actor is in the process of being moved
-							if (mSelected.getId() != selectMove.getVictim().getId()) { // Currently
-																						// selected
-																						// Actor
-																						// does
-																						// not
-																						// match
-																						// the
-																						// victim
-																						// of
-																						// the
-																						// command
+							if (mSelected.getId() != selectMove.getVictim()
+									.getId()) { // Currently
+												// selected
+												// Actor
+												// does
+												// not
+												// match
+												// the
+												// victim
+												// of
+												// the
+												// command
 								finish(selectMove); // finish the command
-								selectMove = new SelectMoveCommand(mSelected, new Vector2(
-										mSelected.getX(), mSelected.getY())); // Create
-																				// command
-																				// for
-																				// the
-																				// newly
-																				// selected
-																				// actor
+								selectMove = new SelectMoveCommand(mSelected,
+										new Vector2(mSelected.getX(),
+												mSelected.getY())); // Create
+																	// command
+																	// for
+																	// the
+																	// newly
+																	// selected
+																	// actor
 							} else {
 								// Currently selected actor is still the one
 								// that is under the command
 							}
 						}
-						lastDiff = new Vector3(pos.x - mSelected.getX(), pos.y - mSelected.getY(),
-								0); // difference between click loc and actor
-									// pos
+						lastDiff = new Vector3(pos.x - mSelected.getX(), pos.y
+								- mSelected.getY(), 0); // difference between
+														// click loc and actor
+														// pos
 					} else { // Nothing selected, a command may have finished
 						if (selectMove != null) { // There is an unfinished
 													// command.
@@ -316,7 +324,8 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 			if (getActorEditState() == ActorPanel.Action.ADD) {
 				Class actorClass = mActorPanel.getCurrentActor();
 				if (actorClass != null) {
-					AddCommand leCommand = new AddCommand(actorClass, pos.x, pos.y);
+					AddCommand leCommand = new AddCommand(actorClass, pos.x,
+							pos.y);
 					performEdit(leCommand);
 					if (mBody != null) {
 						Actor a = leCommand.getActor();
@@ -360,14 +369,15 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 																				// mode
 																				// active?
 						if (selectMove == null) {
-							selectMove = new SelectMoveCommand(mSelected, new Vector2(
-									mSelected.getX(), mSelected.getY())); // Create
-																			// command
-																			// for
-																			// the
-																			// currently
-																			// selected
-																			// actor
+							selectMove = new SelectMoveCommand(mSelected,
+									new Vector2(mSelected.getX(),
+											mSelected.getY())); // Create
+																// command
+																// for
+																// the
+																// currently
+																// selected
+																// actor
 						}
 						mSelected.setProp("X", (pos.x - lastDiff.x));
 						mSelected.setProp("Y", (pos.y - lastDiff.y));
@@ -394,10 +404,12 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 			mSelected = isActorUnder(pos.x, pos.y);
 		}
 		if (getActorEditState() == ActorPanel.Action.ADD) {
-			Actor a = Game.get().getActorEnum().getActor(mActorPanel.getCurrentActor());
+			Actor a = Game.get().getActorEnum()
+					.getActor(mActorPanel.getCurrentActor());
 			if (a != null) {
 				// Handle adding bodies
-				if (mActorPanel.getCurrentActor() == Background.class && mBody != null) {
+				if (mActorPanel.getCurrentActor() == Background.class
+						&& mBody != null) {
 					Background b = (Background) a;
 					b.setInEditor();
 					b.setProp("Body", mBody);
@@ -577,12 +589,13 @@ public class Editor extends JFrame implements InputProcessor, ChangeListener {
 	public boolean finish(Command c) {
 		if (c instanceof SelectMoveCommand) {
 			SelectMoveCommand smc = (SelectMoveCommand) c;
-			Actor a = Game.get().getLevel().getActorById(smc.getVictim().getId()); // get
-																					// the
-																					// victim
-																					// of
-																					// the
-																					// command
+			Actor a = Game.get().getLevel()
+					.getActorById(smc.getVictim().getId()); // get
+															// the
+															// victim
+															// of
+															// the
+															// command
 			smc.setEnd(new Vector2(a.getX(), a.getY())); // Set the end of the
 															// move
 			mUndo.push(smc);

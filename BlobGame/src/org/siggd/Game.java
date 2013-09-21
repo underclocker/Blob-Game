@@ -48,7 +48,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 
 	public final String mStartingLevel = "level1";
 
@@ -131,6 +131,17 @@ public class Game implements ApplicationListener {
 			e.printStackTrace();
 		}
 
+		// Create the level view
+		mLevelView = new LevelView();
+		mMenuView = new MenuView();
+		// Input
+		if (mMenuView.getMenuController() != null) {
+			mInput.addProcessor(mMenuView.getMenuController());
+		}
+		if (mMenuView.getStage() != null) {
+			mInput.addProcessor(mMenuView.getStage());
+		}
+		
 		if (!RELEASE) {
 			// Create players the old way if not in release mode
 			int i = 0;
@@ -151,12 +162,6 @@ public class Game implements ApplicationListener {
 				mPlayers.add(p);
 			}
 		}
-
-		// Create the level view
-		mLevelView = new LevelView();
-
-		mMenuView = new MenuView();
-		mInput.addProcessor(mMenuView.getMenuController());
 
 		// setup the listener that prints events to the console
 		mPlayerListener = new PlayerListener();
@@ -327,22 +332,18 @@ public class Game implements ApplicationListener {
 	 */
 	public void setState(int state) {
 		mState = state;
+		if (Gdx.input.getInputProcessor() == null && mInput != null) {
+			Gdx.input.setInputProcessor(mInput);
+		}
 		if (state == MENU) {
-			Gdx.input.setCursorCatched(false);
 			mMenuView.giveFocus();
+			Gdx.input.setCursorCatched(false);
 		} else if (state == EDIT) {
 			Gdx.input.setCursorCatched(false);
-			Gdx.input.setInputProcessor(mInput);
-			if (!mInput.getProcessors().contains(mEditor, true)) {
-				mInput.addProcessor(mEditor);
-			}
 		} else if (state == PLAY) {
 			setPaused(false);
-			Gdx.input.setInputProcessor(mInput);
 			if (RELEASE) {
 				Gdx.input.setCursorCatched(true);
-			} else if (!mInput.getProcessors().contains(mEditor, true)) {
-				mInput.addProcessor(mEditor);
 			}
 		}
 	}
@@ -413,10 +414,6 @@ public class Game implements ApplicationListener {
 		if (mLevel != null) {
 			mLevel.stopMusic();
 			mLevel.dispose();
-			if (!Game.RELEASE
-					&& !mInput.getProcessors().contains(mEditor, true)) {
-				Game.get().getInput().addProcessor(Game.get().getEditor());
-			}
 			music = mLevel.mMusic;
 			song = (String) mLevel.mProps.get("SongName");
 
