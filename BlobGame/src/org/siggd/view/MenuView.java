@@ -238,8 +238,7 @@ public class MenuView {
 		// Customize menu
 		mCustomizeTable = new Table(mSkin);
 		mCustomizeTable.setFillParent(true);
-		mJoinImage = new Image(new Texture(
-				Gdx.files.internal("data/gfx/circle.png")));
+		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/circle.png")));
 
 		// Set the starting menu
 		setMenu(MAIN);
@@ -286,8 +285,7 @@ public class MenuView {
 
 	public void update() {
 		mMenuController.update();
-		if (CUSTOMIZE.equals(mCurrentMenu)
-				&& Game.get().getState() != Game.PLAY) {
+		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
 			Player p = null;
 			if (mDelay > 10) {
 				p = testForNewPlayer();
@@ -308,9 +306,8 @@ public class MenuView {
 				if (pl.controltype == ControlType.Controller && pl.controller != null) {
 					Controller c = pl.controller;
 					start = start
-							|| c.getButton(ControllerFilterAPI
-									.getButtonFromFilteredId(c,
-											ControllerFilterAPI.BUTTON_START));
+							|| c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
+									ControllerFilterAPI.BUTTON_START));
 				} else if (pl.controltype == ControlType.WASD
 						|| pl.controltype == ControlType.Arrows) {
 					start = start || Gdx.input.isKeyPressed(Input.Keys.SPACE)
@@ -350,6 +347,20 @@ public class MenuView {
 				for (int i = 0; i < 10; i++) {
 					if (c.getButton(i)) {
 						// unassigned controller button pressed
+						Player inactivePlayer = Game.get().getPlayer(c);
+						if (inactivePlayer == null) {
+							p = new Player(Game.get().getNumberOfPlayers());
+							p.controller = c;
+							p.controltype = org.siggd.Player.ControlType.Controller;
+						} else if (!inactivePlayer.active) {
+							p = inactivePlayer;
+						}
+						break;
+					}
+				}
+				for (int i = 0; i < 4; i++) {
+					if (Math.abs(c.getAxis(i)) > 0.25f) {
+						// unassigned controller stick wiggled
 						Player inactivePlayer = Game.get().getPlayer(c);
 						if (inactivePlayer == null) {
 							p = new Player(Game.get().getNumberOfPlayers());

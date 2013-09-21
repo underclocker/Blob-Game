@@ -18,12 +18,14 @@ import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class represents a game world, or map.
@@ -667,12 +669,9 @@ public class Level implements Iterable<Actor> {
 		saveProgress();
 		Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
-			if (a instanceof Blob) {
-				Game.get().getInput().removeProcessor((Blob) a);
-			}
 			a.dispose();
 		}
-		Gdx.input.setInputProcessor(Game.get().getInput());
+	Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}

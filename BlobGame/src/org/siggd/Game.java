@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.Player.ControlType;
+import org.siggd.actor.Blob;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.actor.meta.PropScanner;
 import org.siggd.editor.Editor;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
@@ -115,16 +118,14 @@ public class Game implements ApplicationListener {
 
 		// Create the asset manager
 		mAssetManager = new AssetManager();
-		mAssetManager.setLoader(Level.class, new LevelLoader(
-				new InternalFileHandleResolver()));
+		mAssetManager.setLoader(Level.class, new LevelLoader(new InternalFileHandleResolver()));
 		mAssetManager.setLoader(Texture.class, new TextureLoaderWrapper(
 				new InternalFileHandleResolver()));
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
 		DebugOutput.enable();
-		DebugOutput.info(this, "Controllers: "
-				+ Controllers.getControllers().size);
+		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
@@ -141,7 +142,7 @@ public class Game implements ApplicationListener {
 		if (mMenuView.getStage() != null) {
 			mInput.addProcessor(mMenuView.getStage());
 		}
-		
+
 		if (!RELEASE) {
 			// Create players the old way if not in release mode
 			int i = 0;
@@ -151,8 +152,7 @@ public class Game implements ApplicationListener {
 				p.active = true;
 				p.controltype = ControlType.Controller;
 				mPlayers.add(p);
-				DebugOutput.info(this,
-						"Controller #" + i++ + ": " + controller.getName());
+				DebugOutput.info(this, "Controller #" + i++ + ": " + controller.getName());
 			}
 			if (Controllers.getControllers().size == 0) {
 				DebugOutput.info(this, "No controllers attached");
@@ -171,8 +171,7 @@ public class Game implements ApplicationListener {
 		// Load physics bodies
 
 		if (RELEASE && false) {
-			mBodyLoader = new BodyEditorLoader(
-					Gdx.files.internal("data/bodies.json"));
+			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
 		}
@@ -287,6 +286,23 @@ public class Game implements ApplicationListener {
 		}
 		if (mState == MENU) {
 			mMenuView.render();
+		}
+		// TODO: clean up when we have new libGDX by putting null check in
+		// inputmultiplexer.
+		// Hack to remove relic blobs
+		Blob b;
+		Array<InputProcessor> ips = Game.get().getInput().getProcessors();
+		int processorLength = Game.get().getInput().getProcessors().size;
+		for (int i = 0; i < processorLength; i++) {
+			InputProcessor ip = ips.get(i);
+			if (ip instanceof Blob) {
+				b = (Blob) ip;
+				if (!getLevel().equals(b.getLevel())) {
+					Game.get().getInput().getProcessors().removeIndex(i);
+					i--;
+					processorLength--;
+				}
+			}
 		}
 	}
 
