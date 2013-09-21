@@ -58,6 +58,7 @@ public class Door extends Actor implements IObserver {
 		this.setProp("Friction", (Float) .4f);
 		this.setProp("Close Safety", (Integer) (1));
 		this.setProp("Open Safety", (Integer) (1));
+		this.setProp("Camera Tracked", (Integer) (0));
 	}
 
 	/**
@@ -86,8 +87,8 @@ public class Door extends Actor implements IObserver {
 				if (dir.dot(pos) < 0f) {
 					mBody.setLinearVelocity(Vector2.Zero);
 				}
-			} else if (active && Convert.getInt(getProp("Open Safety")) == 1 || !active
-					&& Convert.getInt(getProp("Close Safety")) == 1) {
+			} else if (active && Convert.getInt(getProp("Open Safety")) != 0 || !active
+					&& Convert.getInt(getProp("Close Safety")) != 0) {
 				mBody.setLinearVelocity(Vector2.Zero);
 			}
 		}
@@ -99,7 +100,7 @@ public class Door extends Actor implements IObserver {
 		} else {
 			mCamDelay--;
 		}
-		if (mCamDelay > 5) {
+		if (mCamDelay > 5 && Convert.getInt(getProp("Camera Tracked")) != 0) {
 			Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
 	}

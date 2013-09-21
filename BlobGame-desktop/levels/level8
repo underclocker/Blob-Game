@@ -27,6 +27,7 @@
                 "Angle": 180,
                 "Target Input": 186,
                 "ID": 722,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 28.151396,
                 "X": 26.595236
@@ -726,6 +727,7 @@
             "id": 185,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
@@ -1600,13 +1602,14 @@
             "id": 140,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
                 "ID": 140,
                 "Grabbable": 1,
-                "Y": 23.35689,
+                "Y": 23.336866,
                 "X": 28.025036
             }
         },
@@ -1617,6 +1620,7 @@
                 "Angle": 180,
                 "Target Input": 191,
                 "ID": 226,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 32.204308,
                 "X": 31.622202
@@ -1698,6 +1702,7 @@
                 "Angle": 270,
                 "Target Input": 186,
                 "ID": 417,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 23.463758,
                 "X": 12.632274
