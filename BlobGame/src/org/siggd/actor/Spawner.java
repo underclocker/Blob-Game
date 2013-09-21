@@ -58,9 +58,9 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Exit Velocity", 2);
 		
 		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
-		mPointLight.setDistance(10f);
+		mPointLight.setDistance(1.5f);
 		mPointLight.attachToBody(mBody, 0, 0);
-		mPointLight.setSoftnessLenght(3f);
+		mPointLight.setSoftnessLenght(1f);
 		mPointLight.setXray(true);
 		
 		setState(true);

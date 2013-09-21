@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 
 public class MenuController implements InputProcessor, ControllerListener {
-	private static int FILTER_AMOUNT = 7;
+	private static int FILTER_AMOUNT = 10;
 	private static int KEY_FILTER_AMOUNT = 1;
 	private static final Set<Integer> NAV_KEYS = new HashSet<Integer>(
 			Arrays.asList(new Integer[] { Input.Keys.A, Input.Keys.LEFT,

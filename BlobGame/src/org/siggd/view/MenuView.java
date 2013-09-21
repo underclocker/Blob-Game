@@ -565,7 +565,7 @@ public class MenuView {
 				}
 			}
 			mMenuController.setTable(mLevelsTable);
-			mMenuController.setIndex(1);
+			mMenuController.setIndex(0);
 		} else if (CUSTOMIZE.equals(menu)) {
 			if (!mCustomizeTable.getChildren().contains(mJoinImage, false)) {
 				mCustomizeTable.add(mJoinImage);
