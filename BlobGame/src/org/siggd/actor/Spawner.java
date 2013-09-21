@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.box2dLight.PointLight;
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
@@ -30,6 +31,7 @@ public class Spawner extends Actor implements IObservable {
 	private Timer mTexTimer;
 	private int maxBlobs;
 	private int texChangeTime = 60;
+	private PointLight mPointLight;
 
 	public Spawner(Level level, long id) {
 		super(level, id);
@@ -54,8 +56,14 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Blob Spawner", 0);
 		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
-
-		setState(false);
+		
+		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
+		mPointLight.setDistance(10f);
+		mPointLight.attachToBody(mBody, 0, 0);
+		mPointLight.setSoftnessLenght(3f);
+		mPointLight.setXray(true);
+		
+		setState(true);
 	}
 
 	@Override
@@ -209,6 +217,7 @@ public class Spawner extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
+		mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, 0.8f);
 		if (state == mState)
 			return;
 		if (state) {
