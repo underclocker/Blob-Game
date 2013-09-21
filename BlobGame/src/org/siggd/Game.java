@@ -51,7 +51,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = true;
+	public final static boolean RELEASE = false;
 
 	public final String mStartingLevel = "level1";
 
@@ -586,13 +586,22 @@ public class Game implements ApplicationListener {
 		}
 	}
 
-	public int activePlayers() {
+	public int activePlayersNum() {
 		int i = 0;
 		for (Player p : mPlayers) {
 			if (p.active)
 				i++;
 		}
 		return i;
+	}
+
+	public ArrayList<Player> activePlayers() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		for (Player p : mPlayers) {
+			if (p.active)
+				players.add(p);
+		}
+		return players;
 	}
 
 	public void setNextLevel(String nextLevel) {

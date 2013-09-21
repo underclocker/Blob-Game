@@ -24,7 +24,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 
-public class HitscanSensor extends Actor implements RayCastCallback, IObservable{
+public class HitscanSensor extends Actor implements RayCastCallback, IObservable {
 
 	private class HitScanDrawable implements Drawable {
 
@@ -40,10 +40,9 @@ public class HitscanSensor extends Actor implements RayCastCallback, IObservable
 				return;
 			else {
 				shapeRender.begin(ShapeType.Line);
-				if(mState == true) {
+				if (mState == true) {
 					shapeRender.setColor(0, 1, 0, 1);
-				}
-				else {
+				} else {
 					shapeRender.setColor(1, 0, 0, 1);
 				}
 				shapeRender.line(getX(), getY(), mLaserEnd.x, mLaserEnd.y);
@@ -82,9 +81,7 @@ public class HitscanSensor extends Actor implements RayCastCallback, IObservable
 		Actor intersect = (Actor) fixture.getBody().getUserData();
 		if (intersect != null) {
 			// ignore things like wind/redirectors
-			if (intersect.mBody.getFixtureList().get(0).isSensor()
-					|| intersect instanceof VacuumBot || intersect instanceof ExplodeBall
-					|| intersect instanceof ImplodeBall) {
+			if (intersect.mBody.getFixtureList().get(0).isSensor()) {
 				return -1;
 			}
 			if (intersect instanceof Blob) {
@@ -137,14 +134,16 @@ public class HitscanSensor extends Actor implements RayCastCallback, IObservable
 	public Object observe() {
 		return getState();
 	}
+
 	public boolean getState() {
 		return mState;
 	}
+
 	private void setState(boolean state) {
 		if (state == mState)
 			return;
 		mState = state;
 	}
 
-	private boolean mState = false; 
+	private boolean mState = false;
 }

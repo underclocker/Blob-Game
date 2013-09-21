@@ -100,15 +100,13 @@ public class MenuView {
 		final TextButton campaignButton = new TextButton(" Campaign ", mSkin);
 		mMainTable.add(campaignButton);
 		campaignButton.addListener(mStartCampaign);
-
-		final TextButton battleButton = new TextButton(" Battle ", mSkin);
-		mMainTable.add(battleButton);
-		battleButton.addListener(mStartBattle);
-
-		final TextButton slamButton = new TextButton(" Slam ", mSkin);
-		mMainTable.add(slamButton);
-		slamButton.addListener(mStartSlam);
-
+		/*
+		 * final TextButton battleButton = new TextButton(" Battle ", mSkin);
+		 * mMainTable.add(battleButton); battleButton.addListener(mStartBattle);
+		 * 
+		 * final TextButton slamButton = new TextButton(" Slam ", mSkin);
+		 * mMainTable.add(slamButton); slamButton.addListener(mStartSlam);
+		 */
 		final TextButton clearButton = new TextButton(" Clear Save ", mSkin);
 		mMainTable.add(clearButton);
 		clearButton.addListener(mClear);
@@ -276,7 +274,7 @@ public class MenuView {
 				mShapeRenderer.end();
 			}
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
-			if (Game.get().activePlayers() > 0) {
+			if (Game.get().activePlayersNum() > 0) {
 				mJoinImage.remove();
 			}
 		}
