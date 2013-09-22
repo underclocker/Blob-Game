@@ -543,8 +543,8 @@
                 "Exit Velocity": "15",
                 "ID": 826,
                 "CollisionSound": "",
-                "Y": -5.497944,
-                "X": 16.301144,
+                "Y": -5.397944,
+                "X": 16.138643,
                 "Rate": "10"
             }
         },
@@ -665,8 +665,8 @@
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.3,
-                "ID": 54,
                 "Grabbable": 1,
+                "ID": 54,
                 "CollisionSound": "",
                 "Y": 8.440975,
                 "X": 25.120262
@@ -678,6 +678,7 @@
             "props": {
                 "Angle": 29.999998,
                 "Wind Strength": "12",
+                "ID": 38,
                 "CollisionSound": "",
                 "Y": 13.164907,
                 "X": 19.516424
@@ -767,8 +768,8 @@
                 "Density": 0.35,
                 "ID": 8,
                 "CollisionSound": "",
-                "Y": 15.1640005,
-                "X": -0.9437955
+                "Y": 13.064,
+                "X": -0.89379567
             }
         },
         {
@@ -781,8 +782,8 @@
                 "ID": 9,
                 "CollisionSound": "",
                 "Blob Spawner": "1",
-                "Y": 14.834701,
-                "X": 1.248645,
+                "Y": 15.32958,
+                "X": 0.69254506,
                 "Rate": "10"
             }
         },
@@ -794,8 +795,8 @@
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.3,
-                "ID": 29,
                 "Grabbable": 1,
+                "ID": 29,
                 "CollisionSound": "",
                 "Y": 15.162194,
                 "X": 12.596711
@@ -813,8 +814,8 @@
                 "ID": 47,
                 "Scale": 4,
                 "CollisionSound": "",
-                "Y": 13.771565,
-                "X": -0.8614192
+                "Y": 11.8340645,
+                "X": -0.9614191
             }
         },
         {
