@@ -57,7 +57,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 
-public class Blob extends Actor implements InputProcessor, Controllable {
+public class Blob extends Actor implements Controllable {
 	private class Spring {
 		public int a; // First body
 		public int b; // Second body
@@ -92,10 +92,9 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			mCurrentColor = new Color(mSquishColor);
 			mDestColor = new Color(mSquishColor);
 			float scale = Game.get().getLevelView().getVScale();
-			mAccessoryHat = new Sprite(new Vector2(), new Vector2(16 / scale,
-					6 / scale), mCrown);
-			mAccessoryMouth = new Sprite(new Vector2(), new Vector2(16 / scale,
-					16 / scale), mHandlebarMustache);
+			mAccessoryHat = new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown);
+			mAccessoryMouth = new Sprite(new Vector2(), new Vector2(16 / scale, 16 / scale),
+					mHandlebarMustache);
 		}
 
 		public void dispose() {
@@ -113,8 +112,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		 *            number of vertices per original vertex
 		 * @return ArrayList of Vector2's to replace previous vertices
 		 */
-		private ArrayList<Vector2> getBezierVertices(
-				ArrayList<Vector2> vertices, int granularity) {
+		private ArrayList<Vector2> getBezierVertices(ArrayList<Vector2> vertices, int granularity) {
 			ArrayList<Vector2> bezierVertices = new ArrayList<Vector2>();
 			int numVertices = vertices.size();
 			// bezier: B(t)=(1-t)^2 P0 + 2(1-t)t P1 + t^2 P2
@@ -124,31 +122,28 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			for (int j = 0; j < vertices.size(); j++) {
 				Vector2 P1 = vertices.get(j); // current vertex, also the
 				// control point
-				Vector2 previous = vertices.get((j + numVertices - 1)
-						% numVertices); // previous
-										// vertex,
-										// used
-										// to
-										// calculate
+				Vector2 previous = vertices.get((j + numVertices - 1) % numVertices); // previous
+																						// vertex,
+																						// used
+																						// to
+																						// calculate
 				// preceding midpoint,P0
-				Vector2 next = vertices
-						.get((j + numVertices + 1) % numVertices); // next
+				Vector2 next = vertices.get((j + numVertices + 1) % numVertices); // next
 				// vertex,
 				// used to
 				// calculate
 				// following
 				// midpoint,P2
-				Vector2 P0 = new Vector2((P1.x - previous.x) / 2 + previous.x,
-						(P1.y - previous.y) / 2 + previous.y);
-				Vector2 P2 = new Vector2((next.x - P1.x) / 2 + P1.x,
-						(next.y - P1.y) / 2 + P1.y);
+				Vector2 P0 = new Vector2((P1.x - previous.x) / 2 + previous.x, (P1.y - previous.y)
+						/ 2 + previous.y);
+				Vector2 P2 = new Vector2((next.x - P1.x) / 2 + P1.x, (next.y - P1.y) / 2 + P1.y);
 				for (int i = 0; i < granularity; i++) {
 					float t = ((float) i) / granularity;
 					// bezier: B(t)=(1-t)^2 P0 + 2(1-t)t P1 + t^2 P2
-					double x = Math.pow(1 - t, 2) * P0.x + (2.0 * (1 - t) * t)
-							* P1.x + Math.pow(t, 2) * P2.x; // x
-					double y = Math.pow(1 - t, 2) * P0.y + (2.0 * (1 - t) * t)
-							* P1.y + Math.pow(t, 2) * P2.y; // y
+					double x = Math.pow(1 - t, 2) * P0.x + (2.0 * (1 - t) * t) * P1.x
+							+ Math.pow(t, 2) * P2.x; // x
+					double y = Math.pow(1 - t, 2) * P0.y + (2.0 * (1 - t) * t) * P1.y
+							+ Math.pow(t, 2) * P2.y; // y
 					bezierVertices.add(new Vector2((float) x, (float) y));
 				}
 			}
@@ -182,24 +177,18 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			// (x,y,color)
 			for (int i = 0; i < polygon.getTriangles().size(); i++) {
 				// start of the triangle
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[0]
-						.getXf();
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[0]
-						.getYf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[0].getXf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[0].getYf();
 				verts[vertexIndex++] = mCurrentColor.toFloatBits();
 
 				// next particle, 2nd point in the triangle
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[1]
-						.getXf();
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[1]
-						.getYf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[1].getXf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[1].getYf();
 				verts[vertexIndex++] = mCurrentColor.toFloatBits();
 
 				// next particle, 3rd point in the triangle
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[2]
-						.getXf();
-				verts[vertexIndex++] = polygon.getTriangles().get(i).points[2]
-						.getYf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[2].getXf();
+				verts[vertexIndex++] = polygon.getTriangles().get(i).points[2].getYf();
 				verts[vertexIndex++] = mCurrentColor.toFloatBits();
 			}
 			return verts;
@@ -233,8 +222,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				verts[vertexIndex++] = mCurrentColor.toFloatBits();
 				// modulo magic to get next vertex even if the next index is out
 				// of bounds
-				Vector2 end = vertices.get((i + vertices.size() + 1)
-						% vertices.size());
+				Vector2 end = vertices.get((i + vertices.size() + 1) % vertices.size());
 
 				verts[vertexIndex++] = end.x;
 				verts[vertexIndex++] = end.y; // next particle, 2nd point in the
@@ -258,8 +246,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				calcCenters();
 				for (Body b : mParticles) {
 					Vector2 tempPos = b.getPosition();
-					tempPos.add(new Vector2(0, -mExtraRadius).rotate(b
-							.getAngle() * 180f / (float) Math.PI));
+					tempPos.add(new Vector2(0, -mExtraRadius).rotate(b.getAngle() * 180f
+							/ (float) Math.PI));
 					vertices.add(tempPos);
 				}
 				pos = mCenterOfMass; // pos is used as the center of the blob
@@ -272,8 +260,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					// the relative vector from center to the particle
 					tempPos.sub(mCenterOfMass);
 					float angle = mBody.getAngle();
-					tempPos.add(new Vector2(0, -mExtraRadius).rotate(mParticles
-							.get(i).getAngle() * 180f / (float) Math.PI));
+					tempPos.add(new Vector2(0, -mExtraRadius).rotate(mParticles.get(i).getAngle()
+							* 180f / (float) Math.PI));
 					// rotate it based on mBody's rotation
 					tempPos.rotate((float) (angle * 180 / Math.PI));
 					// add the center of blob to the relative vector
@@ -283,14 +271,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 
 			// Color Transitioning between states
-			float deltaRed = (mDestColor.r - mCurrentColor.r)
-					* mColorTransSpeed;
-			float deltaGreen = (mDestColor.g - mCurrentColor.g)
-					* mColorTransSpeed;
-			float deltaBlue = (mDestColor.b - mCurrentColor.b)
-					* mColorTransSpeed;
-			float deltaAlpha = (mDestColor.a - mCurrentColor.a)
-					* mColorTransSpeed;
+			float deltaRed = (mDestColor.r - mCurrentColor.r) * mColorTransSpeed;
+			float deltaGreen = (mDestColor.g - mCurrentColor.g) * mColorTransSpeed;
+			float deltaBlue = (mDestColor.b - mCurrentColor.b) * mColorTransSpeed;
+			float deltaAlpha = (mDestColor.a - mCurrentColor.a) * mColorTransSpeed;
 			mCurrentColor.add(deltaRed, deltaGreen, deltaBlue, deltaAlpha);
 
 			vertices = getBezierVertices(vertices, 5);
@@ -298,8 +282,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			List<PolygonPoint> points = new ArrayList<PolygonPoint>();
 			int bezierSize = vertices.size(); // size of the bezier point
 			for (int i = 0; i < vertices.size(); i++) {
-				PolygonPoint p = new PolygonPoint(vertices.get(i).x,
-						vertices.get(i).y);
+				PolygonPoint p = new PolygonPoint(vertices.get(i).x, vertices.get(i).y);
 				points.add(p);
 			}
 
@@ -323,9 +306,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 			// Make sure we have a mesh that can fit the vertices
 			if (mMesh == null) {
-				mMesh = new Mesh(false, numVertices, 0, new VertexAttribute(
-						Usage.Position, 2, "a_position"), new VertexAttribute(
-						Usage.ColorPacked, 4, "a_color"));
+				mMesh = new Mesh(false, numVertices, 0, new VertexAttribute(Usage.Position, 2,
+						"a_position"), new VertexAttribute(Usage.ColorPacked, 4, "a_color"));
 			} else if (numVertices > mMesh.getMaxVertices()) {
 				int newNumVertices = mMesh.getMaxVertices();
 
@@ -335,20 +317,18 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				while (newNumVertices < numVertices)
 					newNumVertices *= 2;
 
-				mMesh = new Mesh(false, newNumVertices, 0, new VertexAttribute(
-						Usage.Position, 2, "a_position"), new VertexAttribute(
-						Usage.ColorPacked, 4, "a_color"));
+				mMesh = new Mesh(false, newNumVertices, 0, new VertexAttribute(Usage.Position, 2,
+						"a_position"), new VertexAttribute(Usage.ColorPacked, 4, "a_color"));
 			}
 
 			// openGL settings
 			mMesh.setVertices(verts);// set the mesh vertices to the vertices
 			if (Gdx.graphics.isGL20Available()) {
-				ShaderProgram shader = Game.get().getLevelView()
-						.getDefaultShaderProgram();
+				ShaderProgram shader = Game.get().getLevelView().getDefaultShaderProgram();
 				shader.begin();
 				mMesh.bind(shader);
-				shader.setUniformMatrix("u_worldView", Game.get()
-						.getLevelView().getCamera().combined);
+				shader.setUniformMatrix("u_worldView",
+						Game.get().getLevelView().getCamera().combined);
 				mMesh.render(shader, GL20.GL_TRIANGLES);
 				shader.end();
 				mMesh.unbind(shader);
@@ -398,10 +378,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		}
 
 		private void drawAccessories(ArrayList<Vector2> vertices) {
-			Vector2 eyeGap = mLeftEye.getPosition().cpy()
-					.add(mRightEye.getPosition()).div(2f);
-			float rotation = mRightEye.getPosition().cpy()
-					.sub(mLeftEye.getPosition()).angle();
+			Vector2 eyeGap = mLeftEye.getPosition().cpy().add(mRightEye.getPosition()).div(2f);
+			float rotation = mRightEye.getPosition().cpy().sub(mLeftEye.getPosition()).angle();
 			Vector2 perpendicular = new Vector2(0, 3).rotate(rotation);
 			Vector2 parallel = new Vector2(1, 0).rotate(rotation);
 			Vector2 projection = eyeGap.cpy().add(perpendicular);
@@ -416,8 +394,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				Vector2 v2;
 				v1 = vertices.get(i);
 				v2 = vertices.get((i + 1) % vertices.size());
-				Vector3 intersect = segmentIntersection(v1.cpy(), v2.cpy(),
-						projection2.cpy(), projection.cpy());
+				Vector3 intersect = segmentIntersection(v1.cpy(), v2.cpy(), projection2.cpy(),
+						projection.cpy());
 				if (intersect != null) {
 					if (biggestintersect.z < intersect.z) {
 						biggestintersect = intersect;
@@ -438,8 +416,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				mAccessoryHat.drawSprite(mBatch);
 			}
 			if (mBottom != null) {
-				mAccessoryMouth.mPosition = eyeGap.cpy()
-						.sub(perpendicular.cpy().div(26))
+				mAccessoryMouth.mPosition = eyeGap.cpy().sub(perpendicular.cpy().div(26))
 						.add(parallel.scl(mLastKnownDir ? .02f : -.02f));
 				if (mState == SQUISH_STATE) {
 					mBottomNormal.y /= 5;
@@ -451,8 +428,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			}
 		}
 
-		public Vector3 segmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3,
-				Vector2 p4) {
+		public Vector3 segmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
 			Vector2 p = p1;
 			Vector2 r = p2.sub(p1);
 			Vector2 q = p3;
@@ -494,8 +470,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					tex = man.get(mSquishEye, Texture.class);
 					center = new Vector2(mCenterOfMass);
 					center.add(mVCenter.scl(.055f));
-					rotation = mRightEye.getPosition().cpy()
-							.sub(mLeftEye.getPosition()).angle();
+					rotation = mRightEye.getPosition().cpy().sub(mLeftEye.getPosition()).angle();
 				} else {
 					tex = man.get(mSolidEye, Texture.class);
 					center = new Vector2(mBody.getPosition());
@@ -504,38 +479,30 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				}
 				Vector2 trueCenter = new Vector2(center);
 				Vector2 texSize = new Vector2(tex.getWidth(), tex.getHeight());
-				Vector2 texOffset = new Vector2(texSize.x / 2 / scale,
-						texSize.y / 2 / scale);
-				Vector2 origin = new Vector2(DEFAULT_RADIUS / 2f,
-						DEFAULT_RADIUS / 2f);
+				Vector2 texOffset = new Vector2(texSize.x / 2 / scale, texSize.y / 2 / scale);
+				Vector2 origin = new Vector2(DEFAULT_RADIUS / 2f, DEFAULT_RADIUS / 2f);
 
 				center = mRightEye.getPosition();
 				Vector2 deltaPosition = new Vector2(center);
 				deltaPosition.sub(trueCenter);
-				float eyescale = ((float) Math.max(
-						1.2 - deltaPosition.len() * .25, 1f));
+				float eyescale = ((float) Math.max(1.2 - deltaPosition.len() * .25, 1f));
 				eyescale *= .45;
 				if (mState == SQUISH_STATE)
 					eyescale += mAccAprox * .2;
-				mBatch.draw(tex, center.x - texOffset.x,
-						center.y - texOffset.y, origin.x, origin.y, texSize.x
-								/ scale, texSize.y / scale, eyescale, eyescale,
-						rotation, 0, 0, (int) texSize.x, (int) texSize.y,
-						mLastKnownDir, false);
+				mBatch.draw(tex, center.x - texOffset.x, center.y - texOffset.y, origin.x,
+						origin.y, texSize.x / scale, texSize.y / scale, eyescale, eyescale,
+						rotation, 0, 0, (int) texSize.x, (int) texSize.y, mLastKnownDir, false);
 
 				center = mLeftEye.getPosition();
 				deltaPosition = new Vector2(center);
 				deltaPosition.sub(trueCenter);
-				eyescale = ((float) Math.max(1.2 - deltaPosition.len() * .25,
-						1f));
+				eyescale = ((float) Math.max(1.2 - deltaPosition.len() * .25, 1f));
 				eyescale *= .45;
 				if (mState == SQUISH_STATE)
 					eyescale += mAccAprox * .2;
-				mBatch.draw(tex, center.x - texOffset.x,
-						center.y - texOffset.y, origin.x, origin.y, texSize.x
-								/ scale, texSize.y / scale, eyescale, eyescale,
-						rotation, 0, 0, (int) texSize.x, (int) texSize.y,
-						mLastKnownDir, false);
+				mBatch.draw(tex, center.x - texOffset.x, center.y - texOffset.y, origin.x,
+						origin.y, texSize.x / scale, texSize.y / scale, eyescale, eyescale,
+						rotation, 0, 0, (int) texSize.x, (int) texSize.y, mLastKnownDir, false);
 
 			}
 		}
@@ -547,11 +514,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	}
 
 	public static final Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
-			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f),
-			new Color(1f, .5f, 0f, 1f), new Color(1f, 1f, .0f, 1f),
-			new Color(.8f, 0f, .9f, 1f), new Color(.21f, .71f, .9f, 1f),
-			new Color(0f, .4f, 0f, 1f), new Color(1f, .5f, .9f, 1f),
-			new Color(0f, 0f, 0f, 1f), new Color(1f, 1f, 1f, 1f),
+			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f), new Color(1f, .5f, 0f, 1f),
+			new Color(1f, 1f, .0f, 1f), new Color(.8f, 0f, .9f, 1f),
+			new Color(.21f, .71f, .9f, 1f), new Color(0f, .4f, 0f, 1f),
+			new Color(1f, .5f, .9f, 1f), new Color(0f, 0f, 0f, 1f), new Color(1f, 1f, 1f, 1f),
 			new Color(.5f, .5f, .5f, 1f), new Color(.6f, 0f, 0f, 1f) };
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
 	// use
@@ -616,6 +582,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;
 	private int mPoints = 0;
+	private boolean mWasDown;
+	private boolean mWasUp;
 
 	private boolean mGettingPulled = false;
 
@@ -641,8 +609,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		mOldVCenter = new Vector2();
 		mLeftEyeDest = new Vector2(0, 0);
 		mRightEyeDest = new Vector2(0, 0);
-		mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256,
-				new Color(.1f, .1f, .1f, 1f), 7, -10000, -10000);
+		mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(.1f, .1f,
+				.1f, 1f), 7, -10000, -10000);
 		mLight.setSoft(true);
 		mLight.setSoftnessLenght(.5f);
 		mPoof = 1;
@@ -657,9 +625,6 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		makeBlobBody();
 		mLight.setActive(false);
 		mLight.attachToBody(mLeftEye, 0f, 0f);
-		if (Game.get().getLevel() != null && Game.get().getLevel().getAssetKey() != null && !"earth".equals(Game.get().getLevel().getAssetKey())) {
-			Game.get().getInput().addProcessor(this);
-		}
 		mSoundTimer = new Timer();
 		mSoundTimer.setTimer(12);
 		mSoundTimer.unpause();
@@ -759,8 +724,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					// mBody's
 					// rotation
 					tempPos.add(pos);
-					Vector2 buffer = new Vector2(0, -.05f).rotate(mParticles
-							.get(i).getAngle() * 180f / (float) Math.PI);
+					Vector2 buffer = new Vector2(0, -.05f).rotate(mParticles.get(i).getAngle()
+							* 180f / (float) Math.PI);
 					tempPos2.add(buffer);
 					tempPos2.rotate((float) (angle * 180 / Math.PI));
 					tempPos2.add(pos);
@@ -777,8 +742,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					Vector2 tempPos = mParticles.get(i).getPosition();
 					Vector2 tempPos2 = tempPos.cpy();
 					Vector2 tempPos3 = tempPos.cpy();
-					Vector2 buffer = new Vector2(0, -.05f).rotate(mParticles
-							.get(i).getAngle() * 180f / (float) Math.PI);
+					Vector2 buffer = new Vector2(0, -.05f).rotate(mParticles.get(i).getAngle()
+							* 180f / (float) Math.PI);
 					tempPos2.add(buffer);
 					tempPos3.sub(buffer);
 					mCachedEdge.add(tempPos);
@@ -801,8 +766,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			vi = edges.get(i);
 			vj = edges.get(j);
 			if ((vi.y > point.y) != (vj.y > point.y)
-					&& (point.x < (vj.x - vi.x) * (point.y - vi.y)
-							/ (vj.y - vi.y) + vi.x)) {
+					&& (point.x < (vj.x - vi.x) * (point.y - vi.y) / (vj.y - vi.y) + vi.x)) {
 				result = !result;
 			}
 		}
@@ -871,8 +835,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		mCachedOuterEdge = null;
 		calcCenters();
 
-		Iterable<StableContact> contacts = Game.get().getLevel()
-				.getContactHandler().getContacts(this);
+		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
+				.getContacts(this);
 		Iterable<Actor> actors = ContactHandler.getActors(contacts);
 		// Do all string constraints
 		for (Spring s : mSprings) {
@@ -887,8 +851,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			forceDir.nor();
 
 			// Determine the effective spring constant
-			float k = Math.min(4, s.elasticity * (mVCenter.len() * .5f + 1)
-					* mPoof);
+			float k = Math.min(4, s.elasticity * (mVCenter.len() * .5f + 1) * mPoof);
 
 			// Apply Hooke's law
 			float diff = (len - s.restLength) * k;
@@ -900,8 +863,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			b.applyForceToCenter(-forceDir.x, -forceDir.y, true);
 
 			// Determine coefficient of critical damping (from Wikipedia)
-			float damp = 2 * DAMPENING_COEFF
-					* (float) Math.sqrt(a.getMass() * k);
+			float damp = 2 * DAMPENING_COEFF * (float) Math.sqrt(a.getMass() * k);
 
 			// Project velocity vectors onto force dir (formula from Wikipedia:
 			// Vector Projection)
@@ -960,25 +922,22 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		mLeftEyeDest.x = center.x + eyeOffset.x;
 		mLeftEyeDest.y = center.y + eyeOffset.y;
 
-		if (Game.get().getState() == Game.PLAY
-				|| Game.get().getState() == Game.MENU) {
+		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			// Key Bindings
 			boolean right = false;
 			boolean left = false;
 			boolean up = false;
+			boolean down = false;
 			int playerID = Convert.getInt(getProp("Player ID"));
 			Player p = Game.get().getPlayer(playerID);
-			if (p != null && p.active
-					&& p.controltype == ControlType.Controller) {
+			if (p != null && p.active && p.controltype == ControlType.Controller) {
 				// FIX THE AXES LATER
 				Controller c = p.controller;
-				right = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(
-						c, 1)) > 0.5;
+				right = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c, 1)) > 0.5;
 				right |= c.getPov(0) == PovDirection.east;
 				right |= c.getPov(0) == PovDirection.northEast;
 				right |= c.getPov(0) == PovDirection.southEast;
-				left = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c,
-						1)) < -0.5;
+				left = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c, 1)) < -0.5;
 				left |= c.getPov(0) == PovDirection.west;
 				left |= c.getPov(0) == PovDirection.northWest;
 				left |= c.getPov(0) == PovDirection.southWest;
@@ -987,21 +946,29 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				up |= c.getPov(0) == PovDirection.north;
 				up |= c.getPov(0) == PovDirection.northEast;
 				up |= c.getPov(0) == PovDirection.northWest;
+				down = c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
+						ControllerFilterAPI.BUTTON_B));
+				down |= c.getPov(0) == PovDirection.south;
+				down |= c.getPov(0) == PovDirection.southEast;
+				down |= c.getPov(0) == PovDirection.southWest;
 			} else if (p != null && p.active) {
 				if (p.controltype == ControlType.Arrows) {
 					right = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 					left = Gdx.input.isKeyPressed(Input.Keys.LEFT);
 					up = Gdx.input.isKeyPressed(Input.Keys.UP);
+					down = Gdx.input.isKeyPressed(Input.Keys.DOWN);
 				} else if (p.controltype == ControlType.WASD) {
 					right = Gdx.input.isKeyPressed(Input.Keys.D);
 					left = Gdx.input.isKeyPressed(Input.Keys.A);
 					up = Gdx.input.isKeyPressed(Input.Keys.W);
+					down = Gdx.input.isKeyPressed(Input.Keys.S);
 				}
 			}
 			if ("earth".equals(Game.get().getLevel().getAssetKey())) {
 				right = true;
 				left = false;
 				up = false;
+				down = false;
 			}
 			if (right && !left) {
 				mDirection = 1;
@@ -1010,6 +977,15 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			} else {
 				mDirection = 0;
 			}
+			if (!mWasDown && down) {
+				transform();
+			}
+			if (!mWasUp && up && mState == SOLID_STATE) {
+				transform();
+			}
+			mWasDown = down;
+			mWasUp = up;
+
 			if (up) {
 				mAccAprox += .05f;
 			}
@@ -1022,11 +998,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					for (int i = 0; i < NUM_PARTICLES; i++) {
 						Body curB = mParticles.get(i); // Current Body Position
 						// vector
-						Body nextB = mParticles.get((i + NUM_PARTICLES - 1)
-								% NUM_PARTICLES); // Next
-													// Body
-													// Position
-													// vector
+						Body nextB = mParticles.get((i + NUM_PARTICLES - 1) % NUM_PARTICLES); // Next
+																								// Body
+																								// Position
+																								// vector
 						Vector2 v = new Vector2(nextB.getPosition());
 						v.sub(curB.getPosition());
 						v.nor();
@@ -1066,27 +1041,17 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			} else {
 				float mult = mGrabbing ? ROTATION_MULT_IF_GRABBING : 1;
 				if (right) {
-					mBody.applyAngularImpulse(
-							-.2f
-									* SOLID_MASS_MULT
-									* mult
-									* ROTATION_FORCE
-									/ (1 + Math.abs(mBody.getAngularVelocity())),
-							true);
-					mBody.applyForceToCenter(new Vector2(10 * SOLID_MASS_MULT,
-							0).scl(LATERAL_FORCE), true);
+					mBody.applyAngularImpulse(-.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
+							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
+					mBody.applyForceToCenter(
+							new Vector2(10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = true;
 				}
 				if (left) {
-					mBody.applyAngularImpulse(
-							.2f
-									* SOLID_MASS_MULT
-									* mult
-									* ROTATION_FORCE
-									/ (1 + Math.abs(mBody.getAngularVelocity())),
-							true);
-					mBody.applyForceToCenter(new Vector2(-10 * SOLID_MASS_MULT,
-							0).scl(LATERAL_FORCE), true);
+					mBody.applyAngularImpulse(.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
+							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
+					mBody.applyForceToCenter(
+							new Vector2(-10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = false;
 				}
 			}
@@ -1096,23 +1061,23 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			} else {
 				mPoof = 1;
 			}
+
 			setPulling(false);
 		}
 
-		if (Game.get().getState() == Game.PLAY
-				|| Game.get().getState() == Game.MENU) {
+		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			Vector2 vel;
 			float threshold = .12f;
 			if (mState == SQUISH_STATE) {
+				calcCenters();
 				vel = new Vector2(mVCenter);
 			} else {
 				vel = new Vector2(mBody.getLinearVelocity());
-				vel.scl(1 / 20f);
 				threshold = .2f;
 			}
 			vel.sub(mOldVCenter);
 			float velLength = vel.len();
-			mAccAprox += velLength;
+			mAccAprox += velLength/10f;
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()) {
 				AssetManager man = Game.get().getAssetManager();
@@ -1123,14 +1088,12 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					if (mState == SOLID_STATE) {
 						soundID = sound.play();
 						sound.setPitch(soundID, .5f + velLength * .002f);
-						sound.setVolume(soundID,
-								Math.min(1f, .7f + velLength * .002f));
+						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
 					} else {
 						if (!mSpawning) {
 							soundID = sound.play();
 							sound.setPitch(soundID, 1f + velLength * .005f);
-							sound.setVolume(soundID,
-									Math.min(1f, .7f + velLength * .005f));
+							sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
 						}
 					}
 				}
@@ -1142,7 +1105,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		if (mState == SQUISH_STATE) {
 			mOldVCenter = new Vector2(mVCenter);
 		} else {
-			mOldVCenter = new Vector2(mBody.getLinearVelocity()).scl(1 / 20f);
+			mOldVCenter = new Vector2(mBody.getLinearVelocity());
 		}
 		inOtherBlobs();
 		mSoundTimer.update();
@@ -1245,8 +1208,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			if (mState == SOLID_STATE) {
 				return (T) (Float) (mBody.getFixtureList().get(0).getDensity() / mDensityDivisor);
 			} else {
-				return (T) (Float) (mParticles.get(0).getFixtureList().get(0)
-						.getDensity() / mDensityDivisor);
+				return (T) (Float) (mParticles.get(0).getFixtureList().get(0).getDensity() / mDensityDivisor);
 			}
 		}
 		if (name.equals("Velocity X")) {
@@ -1288,8 +1250,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				f = b.getFixtureList().get(0);
 				f.setFilterData(filter);
 			}
-			mLight.setContactFilter((short) (2 << (int) value), (short) 0,
-					filter.maskBits);
+			mLight.setContactFilter((short) (2 << (int) value), (short) 0, filter.maskBits);
 			filter = new Filter();
 			filter.categoryBits = (short) (2 << (int) value);
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
@@ -1386,15 +1347,13 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		fd.density = 1.75f;
 		fd.friction = 1f;
 		fd.filter.maskBits = (short) (0x7FFF - (2 << getmPlayerID()));
-		mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0,
-				fd.filter.maskBits);
+		mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0, fd.filter.maskBits);
 		return fd;
 	}
 
 	private PolygonShape makeTriangle() {
 		PolygonShape ps = new PolygonShape();
-		float boxlength = DEFAULT_RADIUS
-				* (float) Math.tan(Math.PI / NUM_PARTICLES);
+		float boxlength = DEFAULT_RADIUS * (float) Math.tan(Math.PI / NUM_PARTICLES);
 		float verts[] = new float[6];
 		verts[0] = -boxlength;
 		verts[1] = 0f;
@@ -1414,8 +1373,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		long soundID;
 		if (mState == SQUISH_STATE) {
 
-			Iterable<StableContact> contacts = Game.get().getLevel()
-					.getContactHandler().getContacts(this);
+			Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
+					.getContacts(this);
 			Iterable<Body> bodies = ContactHandler.getBodies(contacts);
 
 			// Already in squish state, transform to solid state.
@@ -1500,18 +1459,15 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					Actor otherActor = (Actor) other.getUserData();
 					if (Convert.getInt(otherActor.getProp("Grabbable")) == 1) {
 						WeldJointDef wjd = new WeldJointDef();
-						wjd.initialize(tempBody, otherActor.mBody,
-								otherActor.mBody.getPosition());
+						wjd.initialize(tempBody, otherActor.mBody, otherActor.mBody.getPosition());
 						Joint j = getLevel().getWorld().createJoint(wjd);
 						mJoints.add(j);
 						if (otherActor instanceof Blob) {
 							((Blob) otherActor).giveJoint(j);
 						}
 						if (otherActor instanceof BattleBall) {
-							((BattleBall) otherActor).setProp("Grabbers",
-									(Integer) (Convert
-											.getInt(((BattleBall) otherActor)
-													.getProp("Grabbers")) + 1));
+							((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
+									.getInt(((BattleBall) otherActor).getProp("Grabbers")) + 1));
 						}
 						mGrabbing = true;
 					}
@@ -1590,8 +1546,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				// angular momentums
 				// the total angular momentum
 				angPortion.nor();
-				angPortion
-						.scl(angMom / r.len() / b.getMass() / SOLID_MASS_MULT);
+				angPortion.scl(angMom / r.len() / b.getMass() / SOLID_MASS_MULT);
 				partVel.add(angPortion);
 				// Set total velocity for particle
 				b.setLinearVelocity(partVel);
@@ -1600,18 +1555,15 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			Actor otherActor;
 			Body body;
 			for (Joint j : mJoints) {
-				body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j
-						.getBodyA());
+				body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
 				if (j.getBodyA() != null && j.getBodyB() != null) {
 					otherActor = (Actor) body.getUserData();
 					if (otherActor instanceof Blob) {
 						((Blob) otherActor).removeJoint(j);
 					}
 					if (otherActor instanceof BattleBall) {
-						((BattleBall) otherActor).setProp("Grabbers",
-								(Integer) (Convert
-										.getInt(((BattleBall) otherActor)
-												.getProp("Grabbers")) - 1));
+						((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
+								.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
 					}
 					getLevel().getWorld().destroyJoint(j);
 				}
@@ -1673,8 +1625,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		mLeftEye = getLevel().getWorld().createBody(eyebd);
 		mRightEye = getLevel().getWorld().createBody(eyebd);
 
-		float halfSideLength = DEFAULT_RADIUS
-				* (float) Math.tan(Math.PI / NUM_PARTICLES);
+		float halfSideLength = DEFAULT_RADIUS * (float) Math.tan(Math.PI / NUM_PARTICLES);
 		FixtureDef fdside = makeTriFixtureDef(makeTriangle());
 
 		CircleShape cs = new CircleShape();
@@ -1723,8 +1674,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			jointOffset.rotate(90);
 			jointOffset.scl(halfSideLength);
 			jointOffset.add(new Vector2(x, y));
-			rjd.initialize(mParticles.get((i + 1) % NUM_PARTICLES),
-					mParticles.get(i), jointOffset);
+			rjd.initialize(mParticles.get((i + 1) % NUM_PARTICLES), mParticles.get(i), jointOffset);
 			rjd.collideConnected = false;
 			if (getLevel() != null) {
 				getLevel().getWorld().createJoint(rjd);
@@ -1757,81 +1707,6 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 		// Give Body a reference to its Actor
 		mBody.setUserData(this);
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY) {
-				int playerID = Convert.getInt(getProp("Player ID"));
-				boolean down = false;
-				boolean up = false;
-				Player p = Game.get().getPlayer(playerID);
-				if (p != null) {
-					if (p.controltype == ControlType.Arrows) {
-						down = keycode == Input.Keys.DOWN;
-						up = keycode == Input.Keys.UP;
-					} else if (p.controltype == ControlType.WASD) {
-						down = keycode == Input.Keys.S;
-						up = keycode == Input.Keys.W;
-					}
-				}
-
-				// Check to make sure keys are enabled
-				up &= Convert.getInt(getLevel().getProp("Puff Enabled")) == 1;
-				down &= Convert.getInt(getLevel().getProp("Solidity Enabled")) == 1;
-
-				if (down) {
-					transform();
-				}
-				if (up && mState == SOLID_STATE) {
-					transform();
-				}
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int x, int y, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int x, int y, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int x, int y, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -1870,16 +1745,12 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 	@Override
 	public void downAction(int id) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY
-					|| Game.get().getState() == Game.MENU) {
-				if (id == ControllerFilterAPI.BUTTON_A && mState == SOLID_STATE) {
-					transform();
-				} else if (id == ControllerFilterAPI.BUTTON_B) {
-					transform();
-				}
-			}
-		}
+		/*
+		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
+		 * Game.PLAY || Game.get().getState() == Game.MENU) { if (id ==
+		 * ControllerFilterAPI.BUTTON_A && mState == SOLID_STATE) { transform();
+		 * } else if (id == ControllerFilterAPI.BUTTON_B) { transform(); } } }
+		 */
 	}
 
 	@Override
@@ -1889,18 +1760,13 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 	@Override
 	public void dpad(int id, PovDirection dir) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY
-					|| Game.get().getState() == Game.MENU) {
-				boolean up = dir == PovDirection.north;
-				boolean down = dir == PovDirection.south;
-				if (up && mState == SOLID_STATE) {
-					transform();
-				} else if (down) {
-					transform();
-				}
-			}
-		}
+		/*
+		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
+		 * Game.PLAY || Game.get().getState() == Game.MENU) { boolean up = dir
+		 * == PovDirection.north; boolean down = dir == PovDirection.south; if
+		 * (up && mState == SOLID_STATE) { transform(); } else if (down) {
+		 * transform(); } } }
+		 */
 	}
 
 	@Override
@@ -1933,9 +1799,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 					((Blob) otherActor).removeJoint(j);
 				}
 				if (otherActor instanceof BattleBall) {
-					((BattleBall) otherActor).setProp("Grabbers",
-							(Integer) (Convert.getInt(((BattleBall) otherActor)
-									.getProp("Grabbers")) - 1));
+					((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
+							.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
 				}
 				getLevel().getWorld().destroyJoint(j);
 
@@ -1970,17 +1835,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		mBody.setTransform(x, mBody.getPosition().y, mBody.getAngle());
 		mBody.setLinearVelocity(0, 0);
 
-		mLeftEye.setTransform(x - mEyeOffset.x, mBody.getPosition().y
-				+ mEyeOffset.y, 0);
-		mRightEye.setTransform(x + mEyeOffset.x, mBody.getPosition().y
-				+ mEyeOffset.y, 0);
+		mLeftEye.setTransform(x - mEyeOffset.x, mBody.getPosition().y + mEyeOffset.y, 0);
+		mRightEye.setTransform(x + mEyeOffset.x, mBody.getPosition().y + mEyeOffset.y, 0);
 		mLeftEyeDest = mLeftEye.getPosition().cpy();
 		mRightEyeDest = mRightEye.getPosition().cpy();
 
 		// Shift all the particles by the same amount
 		for (Body b : mParticles) {
-			b.setTransform(b.getPosition().x + offset, b.getPosition().y,
-					b.getAngle());
+			b.setTransform(b.getPosition().x + offset, b.getPosition().y, b.getAngle());
 		}
 		calcCenters();
 		return;
@@ -2007,16 +1869,13 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		float offset = y - ypos; // How much the main body was shifted
 		mBody.setTransform(mBody.getPosition().x, y, mBody.getAngle());
 		mBody.setLinearVelocity(0, 0);
-		mLeftEye.setTransform(mBody.getPosition().x - mEyeOffset.x, y
-				+ mEyeOffset.y, 0);
-		mRightEye.setTransform(mBody.getPosition().x + mEyeOffset.x, y
-				+ mEyeOffset.y, 0);
+		mLeftEye.setTransform(mBody.getPosition().x - mEyeOffset.x, y + mEyeOffset.y, 0);
+		mRightEye.setTransform(mBody.getPosition().x + mEyeOffset.x, y + mEyeOffset.y, 0);
 		mLeftEyeDest = mLeftEye.getPosition().cpy();
 		mRightEyeDest = mRightEye.getPosition().cpy();
 		// Shift all the particles by the same amount
 		for (Body b : mParticles) {
-			b.setTransform(b.getPosition().x, b.getPosition().y + offset,
-					b.getAngle());
+			b.setTransform(b.getPosition().x, b.getPosition().y + offset, b.getAngle());
 		}
 		calcCenters();
 		return;

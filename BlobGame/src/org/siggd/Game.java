@@ -51,7 +51,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 
 	public final String mStartingLevel = "level1";
 
@@ -286,23 +286,6 @@ public class Game implements ApplicationListener {
 		}
 		if (mState == MENU) {
 			mMenuView.render();
-		}
-		// TODO: clean up when we have new libGDX by putting null check in
-		// inputmultiplexer.
-		// Hack to remove relic blobs
-		Blob b;
-		Array<InputProcessor> ips = Game.get().getInput().getProcessors();
-		int processorLength = Game.get().getInput().getProcessors().size;
-		for (int i = 0; i < processorLength; i++) {
-			InputProcessor ip = ips.get(i);
-			if (ip instanceof Blob) {
-				b = (Blob) ip;
-				if (!getLevel().equals(b.getLevel())) {
-					Game.get().getInput().getProcessors().removeIndex(i);
-					i--;
-					processorLength--;
-				}
-			}
 		}
 	}
 
