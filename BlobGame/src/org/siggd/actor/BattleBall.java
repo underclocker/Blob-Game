@@ -99,11 +99,11 @@ public class BattleBall extends Actor {
 					if (offset.len() < .3) {
 						piloted = true;
 						if (mBody.getAngularVelocity() < 3 && b.getDirection() == -1) {
-							mBody.applyAngularImpulse(1f);
+							mBody.applyAngularImpulse(1f, true);
 						} else if (mBody.getAngularVelocity() > -3 && b.getDirection() == 1) {
-							mBody.applyAngularImpulse(-1f);
+							mBody.applyAngularImpulse(-1f, true);
 						}
-						mBody.applyForceToCenter(new Vector2(b.getDirection() * 20f, 0));
+						mBody.applyForceToCenter(new Vector2(b.getDirection() * 20f, 0), true);
 					}
 				}
 			}

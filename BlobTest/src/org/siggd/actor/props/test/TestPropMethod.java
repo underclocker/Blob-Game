@@ -1,17 +1,14 @@
 package org.siggd.actor.props.test;
-import static org.hamcrest.Matchers.lessThan;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.longThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.siggd.Level;
-import org.siggd.actor.meta.PropScanner;
+import org.siggd.actor.props.PropScanner;
 
 public class TestPropMethod {
 	private FakeActor mActor;

@@ -131,7 +131,7 @@ public class ConveyorBelt extends Actor {
 			} else {
 				tempRot.scl(mult * speed);
 			}
-			body.applyForceToCenter(tempRot);
+			body.applyForceToCenter(tempRot, true);
 		}
 
 		contacts = Game.get().getLevel().getContactHandler().getContacts(mLeftCircle);
@@ -147,7 +147,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
 			deltaPos.scl(speed);
-			body.applyForceToCenter(deltaPos);
+			body.applyForceToCenter(deltaPos, true);
 		}
 
 		contacts = Game.get().getLevel().getContactHandler().getContacts(mRightCircle);
@@ -163,7 +163,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
 			deltaPos.scl(speed);
-			body.applyForceToCenter(deltaPos);
+			body.applyForceToCenter(deltaPos, true);
 		}
 	}
 

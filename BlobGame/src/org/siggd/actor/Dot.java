@@ -104,7 +104,7 @@ public class Dot extends Actor {
 			Vector2 offset = new Vector2(mTargetBlob.getX(), mTargetBlob.getY());
 			offset.sub(mBody.getPosition());
 			offset.scl(5);
-			mBody.applyForceToCenter(offset);
+			mBody.applyForceToCenter(offset, true);
 			mTargetBlob.applyForce(offset.scl(-1));
 			mEatTimer--;
 			if (mEatTimer < 0) {

@@ -134,7 +134,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 							tempforce = new Vector2(force);
 							tempforce.scl(subBody.getMass() / density);
 							tempforce.scl(subDiv * (float) Math.random() * mWaveyness * 4f);
-							subBody.applyForceToCenter(tempforce);
+							subBody.applyForceToCenter(tempforce, true);
 						}
 					}
 	
@@ -151,7 +151,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 					}
 					tempforce.scl(b.getMass() / density);
 	
-					b.applyForceToCenter(tempforce);
+					b.applyForceToCenter(tempforce, true);
 				}
 			}
 		}
