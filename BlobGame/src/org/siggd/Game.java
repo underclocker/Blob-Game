@@ -5,18 +5,20 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.Player.ControlType;
+import org.siggd.actor.Blob;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.actor.meta.PropScanner;
 import org.siggd.editor.Editor;
 import org.siggd.view.LevelView;
 import org.siggd.view.MenuView;
 
-import pong.client.core.BodyEditorLoader;
+import aurelienribon.bodyeditor.BodyEditorLoader;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
