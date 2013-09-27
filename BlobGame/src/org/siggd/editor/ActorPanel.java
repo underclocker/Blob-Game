@@ -27,7 +27,7 @@ import org.siggd.Game;
 import org.siggd.actor.Actor;
 import org.siggd.actor.Background;
 
-import aurelienribon.bodyeditor.BodyEditorLoader.RigidBodyModel;
+import pong.client.core.BodyEditorLoader.RigidBodyModel;
 
 /**
  * This class contains controls to add actors to the map

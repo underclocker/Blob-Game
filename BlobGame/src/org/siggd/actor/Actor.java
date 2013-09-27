@@ -15,7 +15,7 @@ import org.siggd.view.CompositeDrawable;
 import org.siggd.view.DebugActorLinkDrawable;
 import org.siggd.view.Drawable;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
+import pong.client.core.BodyEditorLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
