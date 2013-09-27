@@ -1067,7 +1067,7 @@ public class Blob extends Actor implements Controllable {
 
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			Vector2 vel;
-			float threshold = .12f;
+			float threshold = 2f;
 			if (mState == SQUISH_STATE) {
 				calcCenters();
 				vel = new Vector2(mVCenter);
