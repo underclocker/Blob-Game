@@ -51,7 +51,7 @@ public class DebugActorLinkDrawable implements Drawable {
 			mPropName = propName;
 			mColor = color;
 			mOffColor = offColor;
-			mOffSet = offSet.mul((float) (1.0 / Game.get().getLevelView()
+			mOffSet = offSet.scl((float) (1.0 / Game.get().getLevelView()
 					.getVScale())); // offset is in pixels
 			mVariableProp = variableProp;
 	}

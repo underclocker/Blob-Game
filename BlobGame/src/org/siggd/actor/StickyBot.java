@@ -100,14 +100,14 @@ public class StickyBot extends Actor {
 				Vector2 offset = mBody.getPosition().cpy();
 				offset.sub(blobPos);
 				offset.nor();
-				offset.mul(-5);
+				offset.scl(-5);
 				mBody.applyForceToCenter(offset);
 			}
 		}
 		if (!enemySeen) {
 			Vector2 offset = mBody.getPosition().cpy();
 			offset.sub(mStartPosition);
-			offset.mul(-1);
+			offset.scl(-1);
 			offset.nor();
 			mBody.applyForceToCenter(offset);
 		}

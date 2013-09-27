@@ -60,7 +60,7 @@ public class Parallax extends Actor {
 
 			float scale = distFromMainLayer
 					/ (distFromMainLayer + Convert.getFloat(getProp("Distance")));
-			offset.mul(scale);
+			offset.scl(scale);
 			scale *= Convert.getFloat(getProp("Scale"));
 			float halfwidth = tex.getWidth() / 2f / lv.getVScale() * scale;
 			float halfheight = tex.getHeight() / 2f / lv.getVScale() * scale;

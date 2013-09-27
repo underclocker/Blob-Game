@@ -257,7 +257,7 @@ public class MenuView {
 					}
 				} catch (JSONException e) {
 				}
-				mShapeRenderer.begin(ShapeType.FilledRectangle);
+				mShapeRenderer.begin(ShapeType.Filled);
 				mShapeRenderer.setColor(Color.BLACK);
 				mShapeRenderer.rect(x, y, width, 10);
 				if (progress < 1) {

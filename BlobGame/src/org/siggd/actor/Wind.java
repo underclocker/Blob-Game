@@ -112,7 +112,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 			Iterable<Body> bodies = ContactHandler.getBodies(contacts);
 			Vector2 force = new Vector2(0, Convert.getFloat(getProp("Wind Strength")))
 					.rotate((float) (Convert.getFloat(getProp("Angle"))));
-			force.mul(.2f);
+			force.scl(.2f);
 			Vector2 forceHat = new Vector2(force);
 			forceHat.nor();
 			Vector2 tempforce;
@@ -132,8 +132,8 @@ public class Wind extends Actor implements IObserver, IObservable{
 						if (Math.random() < mInverseWaveyness) {
 							subBody = actor.getSubBody(i);
 							tempforce = new Vector2(force);
-							tempforce.mul(subBody.getMass() / density);
-							tempforce.mul(subDiv * (float) Math.random() * mWaveyness * 4f);
+							tempforce.scl(subBody.getMass() / density);
+							tempforce.scl(subDiv * (float) Math.random() * mWaveyness * 4f);
 							subBody.applyForceToCenter(tempforce);
 						}
 					}
@@ -143,13 +143,13 @@ public class Wind extends Actor implements IObserver, IObservable{
 					posDiff.sub(this.mBody.getPosition());
 					float a1 = posDiff.dot(forceHat);
 					Vector2 a1vec = new Vector2(forceHat);
-					a1vec.mul(a1);
+					a1vec.scl(a1);
 					posDiff.sub(a1vec);
 					tempforce.add(posDiff);
 					if (posDiff.len() > .25f) {
-						tempforce.mul((Math.max(1f - posDiff.len(), 0f)));
+						tempforce.scl((Math.max(1f - posDiff.len(), 0f)));
 					}
-					tempforce.mul(b.getMass() / density);
+					tempforce.scl(b.getMass() / density);
 	
 					b.applyForceToCenter(tempforce);
 				}
