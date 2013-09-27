@@ -11,7 +11,7 @@ import org.siggd.editor.Editor;
 import org.siggd.view.LevelView;
 import org.siggd.view.MenuView;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
+import pong.client.core.BodyEditorLoader;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
