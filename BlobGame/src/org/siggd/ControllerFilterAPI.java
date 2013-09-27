@@ -37,7 +37,12 @@ public class ControllerFilterAPI {
 		json = new JSONObject(jsonstr);
 		// DebugOutput.info(new Object(), "This is the JSON " + jsonstr);
 	}
-
+/**
+ * use this to take a real button ID to the XBOX equivelant
+ * @param c
+ * @param id
+ * @return
+ */
 	public static int getFilteredId(Controller c, int id) {
 		String osName = System.getProperty("os.name");
 		String ctrlName = c.getName();

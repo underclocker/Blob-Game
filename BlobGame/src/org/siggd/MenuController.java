@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 
 public class MenuController implements InputProcessor, ControllerListener {
-	private static int FILTER_AMOUNT = 7;
+	private static int FILTER_AMOUNT = 9;
 	private static int KEY_FILTER_AMOUNT = 1;
 	private static final Set<Integer> NAV_KEYS = new HashSet<Integer>(
 			Arrays.asList(new Integer[] { Input.Keys.A, Input.Keys.LEFT,
@@ -72,7 +72,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 		mY = 0;
 		mPlayerId = 0;
 		Array<Controller> controllers = Controllers.getControllers();
-		mController = controllers.size>0?controllers.get(0):null;
+		mController = controllers.size > 0 ? controllers.get(0) : null;
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
@@ -278,28 +278,83 @@ public class MenuController implements InputProcessor, ControllerListener {
 			Game.get().setState(Game.MENU);
 			Game.get().getMenuView().setMenu(MenuView.FAKE_PAUSE);
 			Game.get().getMenuView().setFakePauseController(c);
+			mPlayerId = Game.get().getPlayer(c).id;
 		} else if (Game.get().getState() == Game.MENU
 				&& MenuView.FAKE_PAUSE.equals(Game.get().getMenuView()
 						.getCurrentMenu())) {
 			Game.get().setState(Game.PLAY);
+			mPlayerId = Game.get().getPlayer(mController).id;
 		}
 	}
 
 	private boolean controllerPermission(Controller c, int button) {
 		int gameState = Game.get().getState();
 		MenuView menuView = Game.get().getMenuView();
+		if (gameState == Game.MENU
+				&& MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
+				&& c == menuView.getFakePauseController()) {
+			return true;
+		}
 		if (button == ControllerFilterAPI.BUTTON_START) {
 			if (gameState == Game.PLAY
 					|| (gameState == Game.MENU && MenuView.PAUSE
 							.equals(menuView.getCurrentMenu()))) {
 				return true;
-			} else if (gameState == Game.MENU
-					&& MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
-					&& c == menuView.getFakePauseController()) {
-				return true;
 			}
 		} else if (c == mController) {
 			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean buttonDown(Controller c, int button) {
+		int realButton = ControllerFilterAPI.getFilteredId(c, button);
+		MenuView menuView = Game.get().getMenuView();
+		if (controllerPermission(c, realButton)) {
+			switch (realButton) {
+			case ControllerFilterAPI.BUTTON_B:
+				if (Game.get().getState() == Game.MENU && c == mController) {
+					handleEscape();
+				} else if (MenuView.FAKE_PAUSE
+						.equals(menuView.getCurrentMenu())
+						&& menuView.getFakePauseController() == c) {
+					Player p = Game.get().getPlayer(c);
+					if (p != null && p.active) {
+						fakePause(c);
+					}
+				}
+				break;
+			case ControllerFilterAPI.BUTTON_START:
+				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
+						.getCurrentMenu())
+						&& c == mController) {
+					handleEscape();
+				} else if (c != mController) {
+					Player p = Game.get().getPlayer(c);
+					if (p != null && p.active) {
+						fakePause(c);
+					}
+				}
+				break;
+			case ControllerFilterAPI.BUTTON_A:
+				if (Game.get().getState() == Game.MENU) {
+					if (MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
+							&& menuView.getFakePauseController() == c) {
+						Player p = Game.get().getPlayer(c);
+						if (p != null && p.active) {
+							fakePause(c);
+						}
+					} else if (!MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())){
+						Cell cell = getCell(mX, mY);
+						if (cell != null && cell.getWidget() != null) {
+							((Actor) cell.getWidget()).fire(new ChangeEvent());
+							mControllerFilter = 0;
+						}
+					}
+				}
+				break;
+			}
 		}
 		return false;
 	}
@@ -387,39 +442,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 	@Override
 	public boolean axisMoved(Controller c, int arg1, float arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean buttonDown(Controller c, int button) {
-		int realButton = ControllerFilterAPI.getButtonFromFilteredId(c, button);
-		if (controllerPermission(c, realButton)) {
-			switch (realButton) {
-			case ControllerFilterAPI.BUTTON_B:
-				if (Game.get().getState() == Game.MENU) {
-					handleEscape();
-				}
-				break;
-			case ControllerFilterAPI.BUTTON_START:
-				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView()
-						.getCurrentMenu())
-						&& c == mController) {
-					handleEscape();
-				} else if (c != mController) {
-					fakePause(c);
-				}
-				break;
-			case ControllerFilterAPI.BUTTON_A:
-				if (Game.get().getState() == Game.MENU) {
-					Cell cell = getCell(mX, mY);
-					if (cell != null && cell.getWidget() != null) {
-						((Actor) cell.getWidget()).fire(new ChangeEvent());
-						mControllerFilter = 0;
-					}
-				}
-				break;
-			}
-		}
 		return false;
 	}
 

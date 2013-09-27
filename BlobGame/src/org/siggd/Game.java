@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.Player.ControlType;
+import org.siggd.actor.Blob;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.actor.meta.PropScanner;
 import org.siggd.editor.Editor;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
@@ -48,7 +51,7 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 
 	public final String mStartingLevel = "level1";
 
@@ -115,20 +118,29 @@ public class Game implements ApplicationListener {
 
 		// Create the asset manager
 		mAssetManager = new AssetManager();
-		mAssetManager.setLoader(Level.class, new LevelLoader(
-				new InternalFileHandleResolver()));
+		mAssetManager.setLoader(Level.class, new LevelLoader(new InternalFileHandleResolver()));
 		mAssetManager.setLoader(Texture.class, new TextureLoaderWrapper(
 				new InternalFileHandleResolver()));
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
 		DebugOutput.enable();
-		DebugOutput.info(this, "Controllers: "
-				+ Controllers.getControllers().size);
+		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
 			e.printStackTrace();
+		}
+
+		// Create the level view
+		mLevelView = new LevelView();
+		mMenuView = new MenuView();
+		// Input
+		if (mMenuView.getMenuController() != null) {
+			mInput.addProcessor(mMenuView.getMenuController());
+		}
+		if (mMenuView.getStage() != null) {
+			mInput.addProcessor(mMenuView.getStage());
 		}
 
 		if (!RELEASE) {
@@ -140,8 +152,7 @@ public class Game implements ApplicationListener {
 				p.active = true;
 				p.controltype = ControlType.Controller;
 				mPlayers.add(p);
-				DebugOutput.info(this,
-						"Controller #" + i++ + ": " + controller.getName());
+				DebugOutput.info(this, "Controller #" + i++ + ": " + controller.getName());
 			}
 			if (Controllers.getControllers().size == 0) {
 				DebugOutput.info(this, "No controllers attached");
@@ -152,12 +163,6 @@ public class Game implements ApplicationListener {
 			}
 		}
 
-		// Create the level view
-		mLevelView = new LevelView();
-
-		mMenuView = new MenuView();
-		mInput.addProcessor(mMenuView.getMenuController());
-
 		// setup the listener that prints events to the console
 		mPlayerListener = new PlayerListener();
 		Controllers.addListener(mPlayerListener);
@@ -166,8 +171,7 @@ public class Game implements ApplicationListener {
 		// Load physics bodies
 
 		if (RELEASE && false) {
-			mBodyLoader = new BodyEditorLoader(
-					Gdx.files.internal("data/bodies.json"));
+			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
 		}
@@ -327,22 +331,18 @@ public class Game implements ApplicationListener {
 	 */
 	public void setState(int state) {
 		mState = state;
+		if (Gdx.input.getInputProcessor() == null && mInput != null) {
+			Gdx.input.setInputProcessor(mInput);
+		}
 		if (state == MENU) {
-			Gdx.input.setCursorCatched(false);
 			mMenuView.giveFocus();
+			Gdx.input.setCursorCatched(false);
 		} else if (state == EDIT) {
 			Gdx.input.setCursorCatched(false);
-			Gdx.input.setInputProcessor(mInput);
-			if (!mInput.getProcessors().contains(mEditor, true)) {
-				mInput.addProcessor(mEditor);
-			}
 		} else if (state == PLAY) {
 			setPaused(false);
-			Gdx.input.setInputProcessor(mInput);
 			if (RELEASE) {
 				Gdx.input.setCursorCatched(true);
-			} else if (!mInput.getProcessors().contains(mEditor, true)) {
-				mInput.addProcessor(mEditor);
 			}
 		}
 	}
@@ -413,10 +413,6 @@ public class Game implements ApplicationListener {
 		if (mLevel != null) {
 			mLevel.stopMusic();
 			mLevel.dispose();
-			if (!Game.RELEASE
-					&& !mInput.getProcessors().contains(mEditor, true)) {
-				Game.get().getInput().addProcessor(Game.get().getEditor());
-			}
 			music = mLevel.mMusic;
 			song = (String) mLevel.mProps.get("SongName");
 
@@ -573,13 +569,22 @@ public class Game implements ApplicationListener {
 		}
 	}
 
-	public int activePlayers() {
+	public int activePlayersNum() {
 		int i = 0;
 		for (Player p : mPlayers) {
 			if (p.active)
 				i++;
 		}
 		return i;
+	}
+
+	public ArrayList<Player> activePlayers() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		for (Player p : mPlayers) {
+			if (p.active)
+				players.add(p);
+		}
+		return players;
 	}
 
 	public void setNextLevel(String nextLevel) {

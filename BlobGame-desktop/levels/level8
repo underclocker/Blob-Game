@@ -1,10 +1,51 @@
 {
     "actors": [
         {
+            "id": 1326,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Wind Strength": "10",
+                "ID": 1326,
+                "Y": 35.35596,
+                "X": 2.288003
+            }
+        },
+        {
+            "id": 1325,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Wind Strength": "10",
+                "ID": 1325,
+                "Y": 35.35596,
+                "X": 1.1630028
+            }
+        },
+        {
+            "id": 1324,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "Extra Level": "level1_hard",
+                "ID": 1324,
+                "Level": "level1",
+                "Y": 36.827015,
+                "X": 0.8569324
+            }
+        },
+        {
+            "id": 1323,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "Extra Level": "level1_hard",
+                "ID": 1323,
+                "Level": "level1",
+                "Y": 36.827015,
+                "X": 3.0444324
+            }
+        },
+        {
             "id": 1122,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 1122,
                 "Y": 15.678358,
                 "X": 8.866198
@@ -14,7 +55,6 @@
             "id": 1121,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 1121,
                 "Y": 12.783352,
                 "X": 5.945366
@@ -24,7 +64,6 @@
             "id": 1120,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 1120,
                 "Y": 18.321856,
                 "X": 9.6
@@ -34,7 +73,6 @@
             "id": 1119,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 1119,
                 "Y": 19.919739,
                 "X": 9.6
@@ -44,7 +82,6 @@
             "id": 1118,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 1118,
                 "Y": 21.359053,
                 "X": 9.6
@@ -54,7 +91,6 @@
             "id": 922,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 922,
                 "Y": 9.85,
                 "X": 3.3852477
@@ -64,7 +100,6 @@
             "id": 921,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 921,
                 "Y": 9.85,
                 "X": 3.951634
@@ -74,7 +109,6 @@
             "id": 920,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 920,
                 "Y": 9.85,
                 "X": 4.489701
@@ -84,7 +118,6 @@
             "id": 918,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 918,
                 "Y": 23,
                 "X": 10.918185
@@ -94,7 +127,6 @@
             "id": 917,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 917,
                 "Y": 23,
                 "X": 11.56764
@@ -104,7 +136,6 @@
             "id": 916,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 916,
                 "Y": 30.1008,
                 "X": 33.430515
@@ -114,7 +145,6 @@
             "id": 915,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 915,
                 "Y": 29.80222,
                 "X": 30.247787
@@ -124,7 +154,6 @@
             "id": 914,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 914,
                 "Y": 28.95,
                 "X": 26.9
@@ -134,7 +163,6 @@
             "id": 913,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 913,
                 "Y": 27.4,
                 "X": 26
@@ -144,7 +172,6 @@
             "id": 912,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 912,
                 "Y": 29.93782,
                 "X": 23.213907
@@ -154,7 +181,6 @@
             "id": 911,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 911,
                 "Y": 29.82708,
                 "X": 20.999065
@@ -164,7 +190,6 @@
             "id": 910,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 910,
                 "Y": 28.95,
                 "X": 26
@@ -174,7 +199,6 @@
             "id": 909,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 909,
                 "Y": 25.15,
                 "X": 24.840742
@@ -184,7 +208,6 @@
             "id": 908,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 908,
                 "Y": 25.15,
                 "X": 23.750675
@@ -194,7 +217,6 @@
             "id": 907,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 907,
                 "Y": 27.4,
                 "X": 26.9
@@ -204,7 +226,6 @@
             "id": 906,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 906,
                 "Y": 16.474733,
                 "X": 20.556097
@@ -214,7 +235,6 @@
             "id": 905,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 905,
                 "Y": 16.474733,
                 "X": 21.281097
@@ -224,7 +244,6 @@
             "id": 904,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 904,
                 "Y": 5.7872314,
                 "X": 9.131095
@@ -234,7 +253,6 @@
             "id": 903,
             "class": "org.siggd.actor.Dot",
             "props": {
-                "Layer": 3,
                 "ID": 903,
                 "Y": 6.9247317,
                 "X": 8.493594
@@ -410,6 +428,7 @@
                 "Angle": 270,
                 "Target Input": 186,
                 "ID": 417,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 23.463758,
                 "X": 12.632274
@@ -490,6 +509,7 @@
                 "Angle": 180,
                 "Target Input": 191,
                 "ID": 226,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 32.204308,
                 "X": 31.622202
@@ -499,13 +519,14 @@
             "id": 140,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
-                "ID": 140,
                 "Grabbable": 1,
-                "Y": 23.35689,
+                "ID": 140,
+                "Y": 23.336866,
                 "X": 28.025036
             }
         },
@@ -745,6 +766,7 @@
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
                 "Layer": 0,
+                "ID": 21,
                 "Y": 2.996197,
                 "X": 6.4881105,
                 "Anticlockwise": "0"
@@ -869,8 +891,8 @@
                 "Exit Velocity": "15",
                 "ID": 4,
                 "Blob Spawner": "1",
-                "Y": 5.7683916,
-                "X": 0.38182962,
+                "Y": 6.0058928,
+                "X": -0.35567057,
                 "Rate": "10"
             }
         },
@@ -892,6 +914,7 @@
             "props": {
                 "Y Wave Angle": 0,
                 "X Wave Angle": 0,
+                "ID": 6,
                 "Y": 8.046408,
                 "X": -1.1848614
             }
@@ -1371,12 +1394,13 @@
             "id": 185,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
-                "ID": 185,
                 "Grabbable": 1,
+                "ID": 185,
                 "Y": 28.97522,
                 "X": 33.421665
             }
@@ -2039,33 +2063,14 @@
             }
         },
         {
-            "id": 544,
-            "class": "org.siggd.actor.Teleport",
-            "props": {
-                "ID": 544,
-                "Level": "level1",
-                "Y": 36.78952,
-                "X": 0.8564054
-            }
-        },
-        {
-            "id": 545,
-            "class": "org.siggd.actor.Teleport",
-            "props": {
-                "ID": 545,
-                "Level": "level1",
-                "Y": 36.786057,
-                "X": 2.9859219
-            }
-        },
-        {
             "id": 546,
             "class": "org.siggd.actor.Teleport",
             "props": {
+                "Extra Level": "level1_hard",
                 "ID": 546,
                 "Level": "level1",
-                "Y": 36.789516,
-                "X": 1.9194324
+                "Y": 36.827015,
+                "X": 1.9319327
             }
         },
         {
@@ -2097,6 +2102,7 @@
                 "Angle": 180,
                 "Target Input": 186,
                 "ID": 722,
+                "Camera Tracked": "1",
                 "Open Safety": "0",
                 "Y": 28.151396,
                 "X": 26.595236

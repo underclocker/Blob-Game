@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
+import org.box2dLight.LightMap;
 import org.box2dLight.RayHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
@@ -87,6 +88,7 @@ public class LevelView {
 			mMaxY = -Float.MAX_VALUE;
 
 	private static final Logger mLog = Logger.getLogger(LevelView.class.getName());
+
 	/**
 	 * Constructor
 	 */
@@ -159,7 +161,7 @@ public class LevelView {
 			positionCamera(true);
 		}
 		// Clear the screen
-		Gdx.gl.glClearColor(.2f,.2f,.2f, 1);
+		Gdx.gl.glClearColor(.0f, .0f, .0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		// Draw sprites
 		mBatch.setProjectionMatrix(mCamera.combined);
@@ -220,7 +222,8 @@ public class LevelView {
 						try {
 							draw.drawSprite(mBatch);
 						} catch (Exception e) {
-							mLog.severe("Exception drawing sprite for actor " + a.getId() + ": " + e);
+							mLog.severe("Exception drawing sprite for actor " + a.getId() + ": "
+									+ e);
 						}
 					}
 				}
@@ -258,7 +261,8 @@ public class LevelView {
 					try {
 						draw.drawElse(mShapeRenderer);
 					} catch (Exception e) {
-						mLog.severe("Exception drawing custom graphics for actor " + a.getId() + ": " + e);
+						mLog.severe("Exception drawing custom graphics for actor " + a.getId()
+								+ ": " + e);
 					}
 				}
 			}
@@ -316,7 +320,8 @@ public class LevelView {
 					try {
 						draw.drawDebug(mCamera);
 					} catch (Exception e) {
-						mLog.severe("Exception drawing debug information for actor " + a.getId() + ": " + e);
+						mLog.severe("Exception drawing debug information for actor " + a.getId()
+								+ ": " + e);
 					}
 				}
 			}
@@ -330,16 +335,36 @@ public class LevelView {
 	}
 
 	private void smoothCam() {
-		mCamera.position.x = mOldCamera.position.x + (mCamera.position.x - mOldCamera.position.x)
-				* CAM_SMOOTH;
-		mCamera.position.y = mOldCamera.position.y + (mCamera.position.y - mOldCamera.position.y)
-				* CAM_SMOOTH;
-		mCamera.viewportHeight = mOldCamera.viewportHeight
-				+ (mCamera.viewportHeight - mOldCamera.viewportHeight) * CAM_SMOOTH;
-		mCamera.viewportWidth = mOldCamera.viewportWidth
-				+ (mCamera.viewportWidth - mOldCamera.viewportWidth) * CAM_SMOOTH;
-		mScale = mOldScale + (mScale - mOldScale); // * CAM_SMOOTH;
+
+		float delta, scale;
+
+		delta = (mCamera.position.x - mOldCamera.position.x);
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.position.x = mOldCamera.position.x + delta;
+
+		delta = (mCamera.position.y - mOldCamera.position.y);
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.position.y = mOldCamera.position.y + delta;
+
+		delta = (mCamera.viewportHeight - mOldCamera.viewportHeight);
+
+		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		delta *= scale;
+
+		mCamera.viewportHeight = mOldCamera.viewportHeight + delta;
+
+		delta = (mCamera.viewportWidth - mOldCamera.viewportWidth);
+		delta *= scale;
+
+		mCamera.viewportWidth = mOldCamera.viewportWidth + delta;
+
+		mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
 		mOldScale = mScale;
+
 	}
 
 	public void setWorld(World world) {
@@ -378,7 +403,6 @@ public class LevelView {
 				setCameraPosition(new Vector2(s.getX(), s.getY()));
 			}
 		}
-
 		float minX = Convert.getFloat(lev.getProp("Min Camera X"));
 		float minY = Convert.getFloat(lev.getProp("Min Camera Y"));
 		float maxX = Convert.getFloat(lev.getProp("Max Camera X"));
@@ -389,6 +413,7 @@ public class LevelView {
 		calcScale(maxX - minX, maxY - minY);
 
 		onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 		if (smooth) {
 			smoothCam();
 		}
@@ -432,6 +457,7 @@ public class LevelView {
 	 * Called on resize.
 	 */
 	public void onResize(int width, int height) {
+		float cachedScale = mScale;
 		// Calculate the viewport size needed for a mWidthxmHeight region to be
 		// displayed within the window, as large as possible
 		float widthForHeight = mHeight / height * width; // The width in meters
@@ -464,6 +490,15 @@ public class LevelView {
 
 		// Update the camera's matrices
 		mCamera.update();
+
+		if (mRayHandler != null && cachedScale != mScale) {
+			LightMap lightMap = mRayHandler.getLightMap();
+			width /= 8;
+			height /= 8;
+			if (lightMap != null && !(lightMap.mWidth == width && lightMap.mHeight == height)) {
+				lightMap.constructLightMap(width, height);
+			}
+		}
 	}
 
 	// ACCESSORS & MUTATORS

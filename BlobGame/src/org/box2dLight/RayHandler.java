@@ -555,6 +555,10 @@ public class RayHandler implements Disposable {
 	public Texture getLightMapTexture() {
 		return lightMap.frameBuffer.getColorBufferTexture();
 	}
+	
+	public LightMap getLightMap(){
+		return lightMap;
+	}
 
 	/**
 	 * Expert functionality, no support given

@@ -1,6 +1,147 @@
 {
     "actors": [
         {
+            "id": 1381,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 3,
+                "Angle": 270,
+                "ID": 1381,
+                "Y": 2.5509524,
+                "X": 17.657375
+            }
+        },
+        {
+            "id": 1279,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "Layer": 0,
+                "Angle": 270,
+                "Target Input": 1276,
+                "ID": 1279,
+                "Camera Tracked": "1",
+                "Open Safety": "0",
+                "Y": 0.45514095,
+                "X": 17.64614
+            }
+        },
+        {
+            "id": 1171,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1078,
+                "Wind Strength": "15",
+                "ID": 1171,
+                "Y": -13.871855,
+                "X": 13.587562
+            }
+        },
+        {
+            "id": 1170,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 60,
+                "Body": "Outpipe colored",
+                "ID": 1170,
+                "CollisionSound": "",
+                "Y": -14.808463,
+                "X": 13.068964
+            }
+        },
+        {
+            "id": 1169,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 60,
+                "Body": "Outpipe colored",
+                "ID": 1169,
+                "CollisionSound": "",
+                "Y": -14.249855,
+                "X": 12.086632
+            }
+        },
+        {
+            "id": 1078,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "ID": 1078,
+                "Y": -14.760583,
+                "X": 22.79653
+            }
+        },
+        {
+            "id": 988,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 988,
+                "CollisionSound": "",
+                "Y": -8.330378,
+                "X": 22.163738
+            }
+        },
+        {
+            "id": 987,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 987,
+                "CollisionSound": "",
+                "Y": -12.701343,
+                "X": 11.258405
+            }
+        },
+        {
+            "id": 986,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 986,
+                "CollisionSound": "",
+                "Y": -12.70565,
+                "X": 10.035187
+            }
+        },
+        {
+            "id": 985,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 985,
+                "CollisionSound": "",
+                "Y": -9.350546,
+                "X": 6.845028
+            }
+        },
+        {
+            "id": 890,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 890,
+                "CollisionSound": "",
+                "Y": 12.822265,
+                "X": 21.40256
+            }
+        },
+        {
+            "id": 802,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 2,
+                "ID": 802,
+                "Y": 11.76822,
+                "X": 20.222307
+            }
+        },
+        {
+            "id": 801,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 2,
+                "Angle": 180,
+                "ID": 801,
+                "Y": 11.76822,
+                "X": 24.5887
+            }
+        },
+        {
             "id": 627,
             "class": "org.siggd.actor.Gear",
             "props": {
@@ -8,7 +149,7 @@
                 "Rotation Speed": "-0.5",
                 "ID": 627,
                 "Y": -4.3961644,
-                "X": 25.552794
+                "X": 23.552794
             }
         },
         {
@@ -93,145 +234,13 @@
             }
         },
         {
-            "id": 494,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "8",
-                "ID": 494,
-                "CollisionSound": "",
-                "Y": -9.554478,
-                "X": 21.96208
-            }
-        },
-        {
-            "id": 493,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "8",
-                "ID": 493,
-                "CollisionSound": "",
-                "Y": -9.529125,
-                "X": 23.0478
-            }
-        },
-        {
-            "id": 492,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "10",
-                "ID": 492,
-                "CollisionSound": "",
-                "Y": -11.776309,
-                "X": 23.06663
-            }
-        },
-        {
-            "id": 491,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "10",
-                "ID": 491,
-                "CollisionSound": "",
-                "Y": -11.778918,
-                "X": 21.996395
-            }
-        },
-        {
-            "id": 490,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "12",
-                "ID": 490,
-                "CollisionSound": "",
-                "Y": -12.905892,
-                "X": 23.090622
-            }
-        },
-        {
-            "id": 489,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "12",
-                "ID": 489,
-                "CollisionSound": "",
-                "Y": -12.887398,
-                "X": 22.0073
-            }
-        },
-        {
-            "id": 488,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 488,
-                "CollisionSound": "",
-                "Y": -13.976876,
-                "X": 23.054966
-            }
-        },
-        {
-            "id": 487,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 487,
-                "CollisionSound": "",
-                "Y": -13.984199,
-                "X": 21.990732
-            }
-        },
-        {
-            "id": 486,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 486,
-                "CollisionSound": "",
-                "Y": -15.063142,
-                "X": 23.045162
-            }
-        },
-        {
-            "id": 485,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 485,
-                "CollisionSound": "",
-                "Y": -15.070464,
-                "X": 21.98341
-            }
-        },
-        {
-            "id": 484,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Angle": 90,
-                "Body": "Outpipe colored",
-                "ID": 484,
-                "Y": -16.146208,
-                "X": 23.086145
-            }
-        },
-        {
-            "id": 483,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Angle": 90,
-                "Body": "Outpipe colored",
-                "ID": 483,
-                "Y": -16.146208,
-                "X": 21.973873
-            }
-        },
-        {
             "id": 374,
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 374,
                 "CollisionSound": "",
-                "Y": 1.8426865,
-                "X": 29.75
+                "Y": 1.8691351,
+                "X": 30.331871
             }
         },
         {
@@ -240,8 +249,8 @@
             "props": {
                 "ID": 373,
                 "CollisionSound": "",
-                "Y": 4,
-                "X": 29.75
+                "Y": 4.0793457,
+                "X": 30.39799
             }
         },
         {
@@ -250,8 +259,8 @@
             "props": {
                 "ID": 371,
                 "CollisionSound": "",
-                "Y": 7.929738,
-                "X": 31.848494
+                "Y": 5.6473045,
+                "X": 32.455833
             }
         },
         {
@@ -260,8 +269,8 @@
             "props": {
                 "ID": 370,
                 "CollisionSound": "",
-                "Y": 7.9315596,
-                "X": 31.5
+                "Y": 7.6572757,
+                "X": 29.09022
             }
         },
         {
@@ -270,28 +279,8 @@
             "props": {
                 "ID": 368,
                 "CollisionSound": "",
-                "Y": 8.130802,
-                "X": 31.681631
-            }
-        },
-        {
-            "id": 366,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 366,
-                "CollisionSound": "",
-                "Y": 8.333,
-                "X": 31.85
-            }
-        },
-        {
-            "id": 365,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 365,
-                "CollisionSound": "",
-                "Y": 8.333508,
-                "X": 31.501755
+                "Y": 5.652452,
+                "X": 31.417143
             }
         },
         {
@@ -300,8 +289,8 @@
             "props": {
                 "ID": 358,
                 "CollisionSound": "",
-                "Y": 14.4,
-                "X": 25.096231
+                "Y": 12.822265,
+                "X": 25.104548
             }
         },
         {
@@ -310,40 +299,8 @@
             "props": {
                 "ID": 357,
                 "CollisionSound": "",
-                "Y": 14.4,
-                "X": 23.794765
-            }
-        },
-        {
-            "id": 356,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 356,
-                "CollisionSound": "",
-                "Y": 11.9,
-                "X": 20.551111
-            }
-        },
-        {
-            "id": 355,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 355,
-                "CollisionSound": "",
-                "Y": 11.9,
-                "X": 19.329735
-            }
-        },
-        {
-            "id": 277,
-            "class": "org.siggd.actor.HookForCan",
-            "props": {
-                "Layer": 2,
-                "ID": 277,
-                "CollisionSound": "",
-                "HangingTarget": "46",
-                "Y": 9.565907,
-                "X": 29.85102
+                "Y": 12.822265,
+                "X": 19.422539
             }
         },
         {
@@ -356,8 +313,8 @@
                 "Density": 0.35,
                 "ID": 200,
                 "CollisionSound": "",
-                "Y": 15.187055,
-                "X": -1.9276434
+                "Y": 14.0745535,
+                "X": -2.0776434
             }
         },
         {
@@ -370,8 +327,8 @@
                 "ID": 125,
                 "CollisionSound": "",
                 "Blob Spawner": "1",
-                "Y": 15.523709,
-                "X": 0.21546525,
+                "Y": 15.598709,
+                "X": -0.34703475,
                 "Rate": "10"
             }
         },
@@ -399,9 +356,9 @@
                 "ID": 41,
                 "Scale": "4",
                 "CollisionSound": "",
-                "Y": 16.5,
+                "Y": 12.875,
                 "Scale Y": "1.0",
-                "X": -1.912499,
+                "X": -2.1249986,
                 "Scale X": ".5"
             }
         },
@@ -432,15 +389,16 @@
             "id": 47,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.3,
                 "Density": 0.15,
-                "ID": 47,
                 "Grabbable": 1,
+                "ID": 47,
                 "CollisionSound": "",
-                "Y": 12.240744,
-                "X": 22.636295
+                "Y": 10.4099655,
+                "X": 23.432291
             }
         },
         {
@@ -473,43 +431,42 @@
             "props": {
                 "BodyType": 2,
                 "Body": "BarrelTopView",
-                "Friction": 0.3,
-                "Density": 0.15,
-                "ID": 52,
+                "Friction": 0.2,
                 "Grabbable": 1,
+                "ID": 52,
                 "CollisionSound": "",
-                "Y": -1.6440247,
-                "X": 29.237642
+                "Y": -1.5764487,
+                "X": 29.282694
             }
         },
         {
             "id": 53,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.2,
-                "Density": 0.15,
-                "ID": 53,
                 "Grabbable": 1,
+                "ID": 53,
                 "CollisionSound": "",
-                "Y": -9.745833,
-                "X": 0.2532066
+                "Y": -9.755476,
+                "X": 0.2821349
             }
         },
         {
             "id": 54,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.2,
-                "Density": 0.15,
-                "ID": 54,
                 "Grabbable": 1,
+                "ID": 54,
                 "CollisionSound": "",
-                "Y": -9.725998,
-                "X": 1.7294726
+                "Y": -9.764569,
+                "X": 1.507689
             }
         },
         {
@@ -625,7 +582,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "20",
+                "Wind Strength": "25",
                 "ID": 65,
                 "CollisionSound": "",
                 "Y": 5.778231,
@@ -637,7 +594,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "20",
+                "Wind Strength": "25",
                 "ID": 66,
                 "CollisionSound": "",
                 "Y": 5.0282283,
@@ -649,7 +606,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "20",
+                "Wind Strength": "25",
                 "ID": 67,
                 "CollisionSound": "",
                 "Y": 4.2782264,
@@ -729,194 +686,6 @@
             }
         },
         {
-            "id": 74,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Outpipe colored",
-                "ID": 74,
-                "CollisionSound": "",
-                "Y": -11.871815,
-                "X": 3.824985
-            }
-        },
-        {
-            "id": 75,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Outpipe colored",
-                "ID": 75,
-                "CollisionSound": "",
-                "Y": -12.9968195,
-                "X": 3.8249846
-            }
-        },
-        {
-            "id": 76,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Outpipe colored",
-                "ID": 76,
-                "CollisionSound": "",
-                "Y": -14.121821,
-                "X": 3.824985
-            }
-        },
-        {
-            "id": 77,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Outpipe colored",
-                "ID": 77,
-                "CollisionSound": "",
-                "Y": -15.259324,
-                "X": 3.8374858
-            }
-        },
-        {
-            "id": 78,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "15",
-                "ID": 78,
-                "CollisionSound": "",
-                "Y": -15.096825,
-                "X": 4.937488
-            }
-        },
-        {
-            "id": 79,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "15",
-                "ID": 79,
-                "CollisionSound": "",
-                "Y": -14.034322,
-                "X": 4.937488
-            }
-        },
-        {
-            "id": 80,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "15",
-                "ID": 80,
-                "CollisionSound": "",
-                "Y": -12.959318,
-                "X": 4.937489
-            }
-        },
-        {
-            "id": 81,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "15",
-                "ID": 81,
-                "CollisionSound": "",
-                "Y": -11.896816,
-                "X": 4.9374886
-            }
-        },
-        {
-            "id": 82,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "12",
-                "ID": 82,
-                "CollisionSound": "",
-                "Y": -11.884316,
-                "X": 5.9999914
-            }
-        },
-        {
-            "id": 83,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "12",
-                "ID": 83,
-                "CollisionSound": "",
-                "Y": -12.946817,
-                "X": 5.9999914
-            }
-        },
-        {
-            "id": 84,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "12",
-                "ID": 84,
-                "CollisionSound": "",
-                "Y": -14.021822,
-                "X": 6.012491
-            }
-        },
-        {
-            "id": 86,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "12",
-                "ID": 86,
-                "CollisionSound": "",
-                "Y": -15.096825,
-                "X": 6.0124907
-            }
-        },
-        {
-            "id": 87,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "10",
-                "ID": 87,
-                "CollisionSound": "",
-                "Y": -15.096826,
-                "X": 7.0874968
-            }
-        },
-        {
-            "id": 88,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "10",
-                "ID": 88,
-                "CollisionSound": "",
-                "Y": -14.021822,
-                "X": 7.0874968
-            }
-        },
-        {
-            "id": 89,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "10",
-                "ID": 89,
-                "CollisionSound": "",
-                "Y": -12.959319,
-                "X": 7.062496
-            }
-        },
-        {
-            "id": 90,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "10",
-                "ID": 90,
-                "CollisionSound": "",
-                "Y": -11.8843155,
-                "X": 7.0624967
-            }
-        },
-        {
             "id": 91,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -924,31 +693,8 @@
                 "Body": "Outpipe colored",
                 "ID": 91,
                 "CollisionSound": "",
-                "Y": -16.384329,
-                "X": 17.075024
-            }
-        },
-        {
-            "id": 92,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Angle": 90,
-                "Body": "Outpipe colored",
-                "ID": 92,
-                "CollisionSound": "",
-                "Y": -16.384327,
-                "X": 15.937522
-            }
-        },
-        {
-            "id": 93,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 93,
-                "CollisionSound": "",
-                "Y": -15.434325,
-                "X": 15.987521
+                "Y": -14.600271,
+                "X": 8.78042
             }
         },
         {
@@ -958,19 +704,8 @@
                 "Wind Strength": "15",
                 "ID": 94,
                 "CollisionSound": "",
-                "Y": -15.434325,
-                "X": 17.050026
-            }
-        },
-        {
-            "id": 95,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "15",
-                "ID": 95,
-                "CollisionSound": "",
-                "Y": -14.371821,
-                "X": 15.987522
+                "Y": -13.532523,
+                "X": 8.76936
             }
         },
         {
@@ -980,52 +715,19 @@
                 "Wind Strength": "15",
                 "ID": 96,
                 "CollisionSound": "",
-                "Y": -14.371821,
-                "X": 17.050026
-            }
-        },
-        {
-            "id": 97,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "12",
-                "ID": 97,
-                "CollisionSound": "",
-                "Y": -13.309319,
-                "X": 15.987524
+                "Y": -12.461383,
+                "X": 8.76936
             }
         },
         {
             "id": 98,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Wind Strength": "12",
+                "Wind Strength": "15",
                 "ID": 98,
                 "CollisionSound": "",
-                "Y": -13.3093195,
-                "X": 17.050026
-            }
-        },
-        {
-            "id": 99,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "10",
-                "ID": 99,
-                "CollisionSound": "",
-                "Y": -12.246818,
-                "X": 15.987518
-            }
-        },
-        {
-            "id": 100,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Wind Strength": "10",
-                "ID": 100,
-                "CollisionSound": "",
-                "Y": -12.246815,
-                "X": 17.050024
+                "Y": -11.401194,
+                "X": 8.769351
             }
         },
         {
@@ -1068,15 +770,16 @@
             "id": 104,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.3,
                 "Density": 0.15,
-                "ID": 104,
                 "Grabbable": 1,
+                "ID": 104,
                 "CollisionSound": "",
-                "Y": 14.764531,
-                "X": 26.81529
+                "Y": 13.224999,
+                "X": 27.026482
             }
         },
         {
@@ -1128,25 +831,14 @@
             }
         },
         {
-            "id": 113,
-            "class": "org.siggd.actor.SwingingCan",
-            "props": {
-                "ID": 113,
-                "CollisionSound": "",
-                "HangingTarget": "277",
-                "Y": 7.829026,
-                "X": 29.849112
-            }
-        },
-        {
             "id": 117,
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "15",
+                "Wind Strength": "18",
                 "ID": 117,
                 "CollisionSound": "",
-                "Y": 7.2745237,
+                "Y": 7.256726,
                 "X": 4.787531
             }
         },
@@ -1155,11 +847,11 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "15",
+                "Wind Strength": "18",
                 "ID": 118,
                 "CollisionSound": "",
                 "Y": 6.512024,
-                "X": 5.5500307
+                "X": 5.534701
             }
         },
         {
@@ -1167,59 +859,11 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 315,
-                "Wind Strength": "15",
+                "Wind Strength": "18",
                 "ID": 119,
                 "CollisionSound": "",
                 "Y": 5.774524,
                 "X": 6.3125305
-            }
-        },
-        {
-            "id": 121,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "7",
-                "ID": 121,
-                "CollisionSound": "",
-                "Y": -12.925476,
-                "X": 8.112532
-            }
-        },
-        {
-            "id": 122,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "7",
-                "ID": 122,
-                "CollisionSound": "",
-                "Y": -14.025475,
-                "X": 8.125033
-            }
-        },
-        {
-            "id": 123,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "7",
-                "ID": 123,
-                "CollisionSound": "",
-                "Y": -15.075479,
-                "X": 8.137537
-            }
-        },
-        {
-            "id": 124,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 270,
-                "Wind Strength": "7",
-                "ID": 124,
-                "CollisionSound": "",
-                "Y": -11.875475,
-                "X": 8.112534
             }
         },
         {
@@ -1262,66 +906,6 @@
                 "CollisionSound": "",
                 "Y": -0.25,
                 "X": 10.634223
-            }
-        },
-        {
-            "id": 378,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 378,
-                "CollisionSound": "",
-                "Y": -9.575114,
-                "X": 3.863132
-            }
-        },
-        {
-            "id": 379,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 379,
-                "CollisionSound": "",
-                "Y": -7.6924973,
-                "X": 7.1695776
-            }
-        },
-        {
-            "id": 380,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 380,
-                "CollisionSound": "",
-                "Y": -8.515154,
-                "X": 9.447702
-            }
-        },
-        {
-            "id": 381,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 381,
-                "CollisionSound": "",
-                "Y": -9.480193,
-                "X": 11.282859
-            }
-        },
-        {
-            "id": 382,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 382,
-                "CollisionSound": "",
-                "Y": -9.496014,
-                "X": 12.611765
-            }
-        },
-        {
-            "id": 383,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 383,
-                "CollisionSound": "",
-                "Y": -8.989761,
-                "X": 0.9680104
             }
         },
         {
@@ -1374,25 +958,228 @@
             }
         },
         {
-            "id": 601,
-            "class": "org.siggd.actor.Wind",
+            "id": 630,
+            "class": "org.siggd.actor.Background",
             "props": {
-                "Wind Strength": "10",
-                "ID": 601,
+                "Layer": 3,
+                "BodyType": 2,
+                "Body": "BarrelTopView",
+                "Friction": 0.2,
+                "Grabbable": 1,
+                "ID": 630,
                 "CollisionSound": "",
-                "Y": -10.634619,
-                "X": 23.087017
+                "Y": -9.754927,
+                "X": 2.8094656
             }
         },
         {
-            "id": 602,
+            "id": 795,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "ID": 795,
+                "Y": 4.745143,
+                "X": 19.79005
+            }
+        },
+        {
+            "id": 796,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "Layer": 0,
+                "Angle": 180,
+                "Target Input": 795,
+                "ID": 796,
+                "Camera Tracked": "1",
+                "Open Safety": "0",
+                "Y": 9.200973,
+                "X": 23.430492
+            }
+        },
+        {
+            "id": 797,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "Layer": 0,
+                "Target Input": 795,
+                "ID": 797,
+                "Camera Tracked": "1",
+                "Open Safety": "0",
+                "Y": 11.76822,
+                "X": 23.396662
+            }
+        },
+        {
+            "id": 798,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 2,
+                "ID": 798,
+                "Y": 9.221326,
+                "X": 22.253746
+            }
+        },
+        {
+            "id": 799,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 2,
+                "Angle": 180,
+                "ID": 799,
+                "Y": 9.204009,
+                "X": 26.498096
+            }
+        },
+        {
+            "id": 892,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Wind Strength": "10",
-                "ID": 602,
+                "Angle": 315,
+                "Wind Strength": "15",
+                "ID": 892,
                 "CollisionSound": "",
-                "Y": -10.653552,
-                "X": 21.98262
+                "Y": 6.513085,
+                "X": 7.0571103
+            }
+        },
+        {
+            "id": 893,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "15",
+                "ID": 893,
+                "CollisionSound": "",
+                "Y": 7.2414985,
+                "X": 6.286557
+            }
+        },
+        {
+            "id": 894,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "15",
+                "ID": 894,
+                "CollisionSound": "",
+                "Y": 7.993992,
+                "X": 5.540084
+            }
+        },
+        {
+            "id": 895,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "12",
+                "ID": 895,
+                "CollisionSound": "",
+                "Y": 7.259558,
+                "X": 7.791544
+            }
+        },
+        {
+            "id": 896,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "12",
+                "ID": 896,
+                "CollisionSound": "",
+                "Y": 8.012052,
+                "X": 7.023004
+            }
+        },
+        {
+            "id": 897,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 315,
+                "Wind Strength": "12",
+                "ID": 897,
+                "CollisionSound": "",
+                "Y": 8.752504,
+                "X": 6.274517
+            }
+        },
+        {
+            "id": 1173,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1078,
+                "Wind Strength": "15",
+                "ID": 1173,
+                "Y": -13.342099,
+                "X": 12.664296
+            }
+        },
+        {
+            "id": 1174,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1171,
+                "Wind Strength": "12",
+                "ID": 1174,
+                "Y": -12.952411,
+                "X": 14.120015
+            }
+        },
+        {
+            "id": 1175,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1173,
+                "Wind Strength": "12",
+                "ID": 1175,
+                "Y": -12.425401,
+                "X": 13.19675
+            }
+        },
+        {
+            "id": 1176,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1174,
+                "Wind Strength": "12",
+                "ID": 1176,
+                "Y": -12.034424,
+                "X": 14.655508
+            }
+        },
+        {
+            "id": 1177,
+            "class": "org.siggd.actor.Wind",
+            "props": {
+                "Angle": 330,
+                "Target Input": 1175,
+                "Wind Strength": "12",
+                "ID": 1177,
+                "Y": -11.507413,
+                "X": 13.732242
+            }
+        },
+        {
+            "id": 1276,
+            "class": "org.siggd.actor.BlobLaser",
+            "props": {
+                "Angle": 180,
+                "ID": 1276,
+                "Y": 0.4743271,
+                "X": 28.913338
+            }
+        },
+        {
+            "id": 1377,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 3,
+                "Angle": 90,
+                "ID": 1377,
+                "Y": -0.7159725,
+                "X": 17.60945
             }
         }
     ],

@@ -57,7 +57,7 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.badlogic.gdx.utils.Array;
 
-public class Blob extends Actor implements InputProcessor, Controllable {
+public class Blob extends Actor implements Controllable {
 	private class Spring {
 		public int a; // First body
 		public int b; // Second body
@@ -424,7 +424,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				} else {
 					mAccessoryMouth.mAngle = rotation;
 				}
-				//mAccessoryMouth.drawSprite(mBatch);
+				// mAccessoryMouth.drawSprite(mBatch);
 			}
 		}
 
@@ -512,21 +512,13 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			// TODO Auto-generated method stub
 		}
 	}
-	public static final Color COLORS[] = {
-		new Color(0f, .8f, 0f, 1f),
-		new Color(.2f, .25f, .95f, 1f),
-		new Color(.9f, 0f, 0f, 1f),
-		new Color(1f, .5f, 0f, 1f),
-		new Color(1f, 1f, .0f, 1f),
-		new Color(.8f, 0f, .9f, 1f),
-		new Color(.21f, .71f, .9f, 1f),
-		new Color(0f, .4f, 0f, 1f),
-		new Color(1f, .5f, .9f, 1f),
-		new Color(0f, 0f, 0f, 1f),
-		new Color(1f, 1f, 1f, 1f),
-		new Color(.5f, .5f, .5f, 1f),
-		new Color(.6f, 0f, 0f, 1f)
-	};
+
+	public static final Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
+			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f), new Color(1f, .5f, 0f, 1f),
+			new Color(1f, 1f, .0f, 1f), new Color(.8f, 0f, .9f, 1f),
+			new Color(.21f, .71f, .9f, 1f), new Color(0f, .4f, 0f, 1f),
+			new Color(1f, .5f, .9f, 1f), new Color(0f, 0f, 0f, 1f), new Color(1f, 1f, 1f, 1f),
+			new Color(.5f, .5f, .5f, 1f), new Color(.6f, 0f, 0f, 1f) };
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
 	// use
 	private static final int SOLID_STATE = 1; // /< The number of particles to
@@ -590,6 +582,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;
 	private int mPoints = 0;
+	private boolean mWasDown;
+	private boolean mWasUp;
 
 	private boolean mGettingPulled = false;
 
@@ -631,7 +625,6 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		makeBlobBody();
 		mLight.setActive(false);
 		mLight.attachToBody(mLeftEye, 0f, 0f);
-		Game.get().getInput().addProcessor(this);
 		mSoundTimer = new Timer();
 		mSoundTimer.setTimer(12);
 		mSoundTimer.unpause();
@@ -898,7 +891,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 		mLightColor.set(mBlobDrawable.mSquishColor);
 		if (mExtraGlow > 0) {
-			mExtraGlow-= .75f;
+			mExtraGlow -= .75f;
 		} else {
 			mPointCombo = 0;
 		}
@@ -934,6 +927,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			boolean right = false;
 			boolean left = false;
 			boolean up = false;
+			boolean down = false;
 			int playerID = Convert.getInt(getProp("Player ID"));
 			Player p = Game.get().getPlayer(playerID);
 			if (p != null && p.active && p.controltype == ControlType.Controller) {
@@ -952,21 +946,29 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 				up |= c.getPov(0) == PovDirection.north;
 				up |= c.getPov(0) == PovDirection.northEast;
 				up |= c.getPov(0) == PovDirection.northWest;
+				down = c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
+						ControllerFilterAPI.BUTTON_B));
+				down |= c.getPov(0) == PovDirection.south;
+				down |= c.getPov(0) == PovDirection.southEast;
+				down |= c.getPov(0) == PovDirection.southWest;
 			} else if (p != null && p.active) {
 				if (p.controltype == ControlType.Arrows) {
 					right = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 					left = Gdx.input.isKeyPressed(Input.Keys.LEFT);
 					up = Gdx.input.isKeyPressed(Input.Keys.UP);
+					down = Gdx.input.isKeyPressed(Input.Keys.DOWN);
 				} else if (p.controltype == ControlType.WASD) {
 					right = Gdx.input.isKeyPressed(Input.Keys.D);
 					left = Gdx.input.isKeyPressed(Input.Keys.A);
 					up = Gdx.input.isKeyPressed(Input.Keys.W);
+					down = Gdx.input.isKeyPressed(Input.Keys.S);
 				}
 			}
 			if ("earth".equals(Game.get().getLevel().getAssetKey())) {
 				right = true;
 				left = false;
 				up = false;
+				down = false;
 			}
 			if (right && !left) {
 				mDirection = 1;
@@ -975,6 +977,15 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			} else {
 				mDirection = 0;
 			}
+			if (!mWasDown && down) {
+				transform();
+			}
+			if (!mWasUp && up && mState == SOLID_STATE) {
+				transform();
+			}
+			mWasDown = down;
+			mWasUp = up;
+
 			if (up) {
 				mAccAprox += .05f;
 			}
@@ -1050,6 +1061,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			} else {
 				mPoof = 1;
 			}
+
 			setPulling(false);
 		}
 
@@ -1057,15 +1069,15 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			Vector2 vel;
 			float threshold = .12f;
 			if (mState == SQUISH_STATE) {
+				calcCenters();
 				vel = new Vector2(mVCenter);
 			} else {
 				vel = new Vector2(mBody.getLinearVelocity());
-				vel.scl(1 / 20f);
 				threshold = .2f;
 			}
 			vel.sub(mOldVCenter);
 			float velLength = vel.len();
-			mAccAprox += velLength;
+			mAccAprox += velLength/10f;
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()) {
 				AssetManager man = Game.get().getAssetManager();
@@ -1078,15 +1090,14 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 						sound.setPitch(soundID, .5f + velLength * .002f);
 						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
 					} else {
-						if(!mSpawning)
-						{
-						soundID = sound.play();
-						sound.setPitch(soundID, 1f + velLength * .005f);
-						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
+						if (!mSpawning) {
+							soundID = sound.play();
+							sound.setPitch(soundID, 1f + velLength * .005f);
+							sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
 						}
 					}
 				}
-				
+
 				mSoundTimer.reset();
 			}
 			mSpawning = false;
@@ -1094,7 +1105,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		if (mState == SQUISH_STATE) {
 			mOldVCenter = new Vector2(mVCenter);
 		} else {
-			mOldVCenter = new Vector2(mBody.getLinearVelocity()).scl(1 / 20f);
+			mOldVCenter = new Vector2(mBody.getLinearVelocity());
 		}
 		inOtherBlobs();
 		mSoundTimer.update();
@@ -1141,7 +1152,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 		}
 		mPointCombo++;
 
-		if (Game.get().activePlayers() > 1) {
+		if (Game.get().activePlayersNum() > 1) {
 			ArrayList<Blob> blobs = Game.get().getLevel().getBlobs(false);
 			for (Blob blob : blobs) {
 				if (!blob.equals(this)) {
@@ -1246,10 +1257,10 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			mRightEye.getFixtureList().get(0).setFilterData(filter);
 
 			Color squishColor;
-			if(value>=0){
-				squishColor= COLORS[(int) (value%COLORS.length)];
-			}else{
-				squishColor= COLORS[0];
+			if (value >= 0) {
+				squishColor = COLORS[(int) (value % COLORS.length)];
+			} else {
+				squishColor = COLORS[0];
 			}
 
 			mLightColor = new Color();
@@ -1587,8 +1598,8 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	public void giveJoint(Joint j) {
 		mJoints.add(j);
 	}
-	
-	public ArrayList<Joint> getJoints(){
+
+	public ArrayList<Joint> getJoints() {
 		return mJoints;
 	}
 
@@ -1699,81 +1710,6 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	}
 
 	@Override
-	public boolean keyDown(int keycode) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY) {
-				int playerID = Convert.getInt(getProp("Player ID"));
-				boolean down = false;
-				boolean up = false;
-				Player p = Game.get().getPlayer(playerID);
-				if (p != null) {
-					if (p.controltype == ControlType.Arrows) {
-						down = keycode == Input.Keys.DOWN;
-						up = keycode == Input.Keys.UP;
-					} else if (p.controltype == ControlType.WASD) {
-						down = keycode == Input.Keys.S;
-						up = keycode == Input.Keys.W;
-					}
-				}
-
-				// Check to make sure keys are enabled
-				up &= Convert.getInt(getLevel().getProp("Puff Enabled")) == 1;
-				down &= Convert.getInt(getLevel().getProp("Solidity Enabled")) == 1;
-
-				if (down) {
-					transform();
-				}
-				if (up && mState == SOLID_STATE) {
-					transform();
-				}
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int x, int y, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int x, int y, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int x, int y, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void left() {
 
 	}
@@ -1809,15 +1745,12 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 	@Override
 	public void downAction(int id) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-				if (id == ControllerFilterAPI.BUTTON_A && mState == SOLID_STATE) {
-					transform();
-				} else if (id == ControllerFilterAPI.BUTTON_B) {
-					transform();
-				}
-			}
-		}
+		/*
+		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
+		 * Game.PLAY || Game.get().getState() == Game.MENU) { if (id ==
+		 * ControllerFilterAPI.BUTTON_A && mState == SOLID_STATE) { transform();
+		 * } else if (id == ControllerFilterAPI.BUTTON_B) { transform(); } } }
+		 */
 	}
 
 	@Override
@@ -1827,17 +1760,13 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 
 	@Override
 	public void dpad(int id, PovDirection dir) {
-		if (getLevel().getAssetKey() != null) {
-			if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-				boolean up = dir == PovDirection.north;
-				boolean down = dir == PovDirection.south;
-				if (up && mState == SOLID_STATE) {
-					transform();
-				} else if (down) {
-					transform();
-				}
-			}
-		}
+		/*
+		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
+		 * Game.PLAY || Game.get().getState() == Game.MENU) { boolean up = dir
+		 * == PovDirection.north; boolean down = dir == PovDirection.south; if
+		 * (up && mState == SOLID_STATE) { transform(); } else if (down) {
+		 * transform(); } } }
+		 */
 	}
 
 	@Override

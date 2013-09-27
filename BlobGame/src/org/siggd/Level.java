@@ -18,12 +18,14 @@ import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class represents a game world, or map.
@@ -175,7 +177,8 @@ public class Level implements Iterable<Actor> {
 				try {
 					a.update();
 				} catch (Exception e) {
-					mLog.severe("Exception when updating actor no " + a.getId() + ": " + e.toString());
+					mLog.severe("Exception when updating actor no " + a.getId() + ": "
+							+ e.toString());
 				}
 			}
 		}
@@ -359,8 +362,6 @@ public class Level implements Iterable<Actor> {
 		if (!mLevelSave.has("HASH")) {
 			saveToLevelSave("HASH", "NT4R33LH45H");
 			saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
-			// TODO: unhackify this Harrison
-			saveToLevelSave("level1_hard" + "Unlocked", 1);
 		}
 		if (mLevelSave.has(getAssetKey())) {
 			JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
@@ -373,6 +374,40 @@ public class Level implements Iterable<Actor> {
 			}
 		}
 		Game.get().getLevelView().setWorld(mWorld);
+	}
+
+	public void loadFromLevelSave() {
+		try {
+			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
+			FileHandle handle;
+			if (!f.exists()) {
+
+				mLevelSave = new JSONObject();
+				handle = new FileHandle(f);
+			} else {
+				handle = Gdx.files.external(mSaveFileName);
+				String json = handle.readString();
+				if ("".equals(json))
+					json = "{}";
+				mLevelSave = new JSONObject(json);
+			}
+			if (!mLevelSave.has("HASH")) {
+				saveToLevelSave("HASH", "NT4R33LH45H");
+				saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
+			}
+			if (mLevelSave.has(getAssetKey())) {
+				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
+				for (int i = 0; i < dots.length(); i++) {
+					Actor actor = getActorById(dots.getInt(i));
+					if (actor instanceof Dot) {
+						Dot d = (Dot) actor;
+						getActorById(d.getId()).setProp("Active", 0);
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public void saveToLevelSave(String key, Object value) {
@@ -415,7 +450,7 @@ public class Level implements Iterable<Actor> {
 			if (a instanceof Blob && templateBlob != null && !a.equals(templateBlob)) {
 				continue;
 			}
-			if (a instanceof Dot){
+			if (a instanceof Dot) {
 				a.setProp("Active", 1);
 			}
 			JSONObject jsonActor = new JSONObject();
@@ -634,11 +669,9 @@ public class Level implements Iterable<Actor> {
 		saveProgress();
 		Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
-			if(a instanceof Blob){
-				Game.get().getInput().removeProcessor((Blob)a);
-			}
 			a.dispose();
 		}
+	Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}

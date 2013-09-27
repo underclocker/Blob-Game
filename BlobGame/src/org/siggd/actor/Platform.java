@@ -29,6 +29,7 @@ public class Platform extends Actor implements IObserver {
 	private String mTex;
 	public int mHold;
 	public Redirector mRedirector;
+	private int mUncrushDelay;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -57,6 +58,7 @@ public class Platform extends Actor implements IObserver {
 		setProp("Grabbable", (Integer) 0);
 		setProp("Hold Time", (Integer) (0));
 		setProp("Return Target", (Integer) (-1));
+		mUncrushDelay = 0;
 	}
 
 	public boolean inputActive() {
@@ -101,7 +103,7 @@ public class Platform extends Actor implements IObserver {
 					if (!inputActive()) {
 						mHold--;
 					}
-				} else if (mHold >= Convert.getInt(getProp("Hold Time"))){
+				} else if (mHold >= Convert.getInt(getProp("Hold Time"))) {
 					yDir = Convert.getFloat(getProp("DirectionY"));
 					xDir = Convert.getFloat(getProp("DirectionX"));
 				}
@@ -112,9 +114,20 @@ public class Platform extends Actor implements IObserver {
 		// If we could potentially crush something, stop
 		if (Convert.getInt(getProp("Safety")) == 1
 				&& CrushSensor.canCrush(mLevel.getContactHandler(), this)) {
-			mBody.setLinearVelocity(new Vector2(0, 0));
+			if (inputSrc() instanceof SwingingCan) {
+				if (mUncrushDelay <= 0) {
+					float yDir = -Convert.getFloat(getProp("DirectionY"));
+					float xDir = -Convert.getFloat(getProp("DirectionX"));
+					setProp("DirectionX", xDir);
+					setProp("DirectionY", yDir);
+					mBody.setLinearVelocity(new Vector2(xDir, yDir));
+					mUncrushDelay = 30;
+				}
+			} else {
+				mBody.setLinearVelocity(new Vector2(0, 0));
+			}
 		}
-
+		mUncrushDelay--;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		Iterable<Actor> actors = ContactHandler.getActors(contacts);
