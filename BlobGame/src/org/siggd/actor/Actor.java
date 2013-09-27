@@ -27,6 +27,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * This class represents an object in the world.
@@ -333,7 +334,7 @@ public abstract class Actor {
 		Filter filter;
 
 		// Set all fixtures of the body to the same Collision Group.
-		ArrayList<Fixture> fixtures = mBody.getFixtureList();
+		Array<Fixture> fixtures = mBody.getFixtureList();
 		for (Fixture f : fixtures) {
 			// Get the Current Filter data
 			filter = f.getFilterData();

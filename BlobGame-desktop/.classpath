@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <classpath>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BlobGame"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="assets"/>
-	<classpathentry kind="src" path="levels"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl-natives.jar"/>
-	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar" sourcepath="libs/gdx-backend-lwjgl-sources.jar"/>
-	<classpathentry kind="lib" path="libs/gdx-natives.jar"/>
-	<classpathentry kind="lib" path="libs/gdx-controllers-desktop-natives.jar"/>
-	<classpathentry kind="lib" path="libs/gdx-controllers-desktop.jar"/>
-	<classpathentry kind="output" path="bin"/>
+    <classpathentry combineaccessrules="false" exported="true" kind="src" path="/BlobGame"/>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="src" path="assets"/>
+    <classpathentry kind="src" path="levels"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="output" path="bin"/>
+    <classpathentry kind="lib" path="libs/gdx-backend-lwjgl-natives.jar"/>
+    <classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar" sourcepath="libs/gdx-backend-lwjgl-sources.jar"/>
+    <classpathentry kind="lib" path="libs/gdx-controllers-desktop-natives.jar"/>
+    <classpathentry kind="lib" path="libs/gdx-controllers-desktop.jar"/>
+    <classpathentry kind="lib" path="libs/gdx-natives.jar"/>
 </classpath>

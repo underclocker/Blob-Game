@@ -3,6 +3,7 @@ package org.siggd;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
@@ -12,7 +13,7 @@ public class TextureLoaderWrapper extends TextureLoader {
 	}
 
 	@Override
-	public void loadAsync(AssetManager manager, String fileName, TextureParameter parameter) {
+	public void loadAsync(AssetManager manager, String fileName, FileHandle handle, TextureParameter parameter) {
 		TextureParameter mTextureParameter = new TextureParameter();
 		if (parameter != null) {
 			// copy old vars
@@ -27,11 +28,11 @@ public class TextureLoaderWrapper extends TextureLoader {
 		mTextureParameter.minFilter = TextureFilter.Linear;
 		mTextureParameter.wrapU = Texture.TextureWrap.MirroredRepeat;
 		mTextureParameter.wrapV = Texture.TextureWrap.MirroredRepeat;
-		super.loadAsync(manager, fileName, mTextureParameter);
+		super.loadAsync(manager, fileName, handle, mTextureParameter);
 	}
 
 	@Override
-	public Texture loadSync(AssetManager manager, String fileName, TextureParameter parameter) {
+	public Texture loadSync(AssetManager manager, String fileName, FileHandle handle, TextureParameter parameter) {
 		TextureParameter mTextureParameter = new TextureParameter();
 		if (parameter != null) {
 			// copy old vars
@@ -46,6 +47,6 @@ public class TextureLoaderWrapper extends TextureLoader {
 		mTextureParameter.minFilter = TextureFilter.Linear;
 		mTextureParameter.wrapU = Texture.TextureWrap.MirroredRepeat;
 		mTextureParameter.wrapV = Texture.TextureWrap.MirroredRepeat;
-		return super.loadSync(manager, fileName, mTextureParameter);
+		return super.loadSync(manager, fileName, handle, mTextureParameter);
 	}
 }

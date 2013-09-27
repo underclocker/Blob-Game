@@ -19,9 +19,8 @@ public class LevelLoader extends AsynchronousAssetLoader<Level, LevelLoader.Leve
 	}
 
 	@Override
-	public void loadAsync(AssetManager manager, String fileName, LevelParameter parameter) {
+	public void loadAsync(AssetManager manager, String fileName, FileHandle handle, LevelParameter parameter) {
 		level = null;
-		FileHandle handle = resolve(fileName);
 		String json = handle.readString();
 		level = new Level(fileName);
 		try {
@@ -32,12 +31,12 @@ public class LevelLoader extends AsynchronousAssetLoader<Level, LevelLoader.Leve
 	}
 
 	@Override
-	public Level loadSync(AssetManager manager, String fileName, LevelParameter parameter) {
+	public Level loadSync(AssetManager manager, String fileName, FileHandle handle, LevelParameter parameter) {
 		return level;
 	}
 
 	@Override
-	public Array<AssetDescriptor> getDependencies(String fileName, LevelParameter parameter) {
+	public Array<AssetDescriptor> getDependencies(String fileName, FileHandle handle, LevelParameter parameter) {
 		return null;
 	}
 

@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Array;
 
 public class PressurePlate extends Actor implements IObservable {
 	private String mTex;
@@ -75,7 +76,7 @@ public class PressurePlate extends Actor implements IObservable {
 		for (Body b : bodies) {
 
 			boolean isSensor = false;
-			ArrayList<Fixture> fixtures = b.getFixtureList();
+			Array<Fixture> fixtures = b.getFixtureList();
 			int i = 0;
 			for (Fixture f : fixtures) {
 				if (f.isSensor()) {

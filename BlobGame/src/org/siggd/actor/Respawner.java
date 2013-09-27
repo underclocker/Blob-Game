@@ -1,7 +1,5 @@
 package org.siggd.actor;
 
-import java.util.ArrayList;
-
 import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
@@ -19,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.JointEdge;
+import com.badlogic.gdx.utils.Array;
 
 public class Respawner extends Actor {
 	private String mTex;
@@ -63,8 +62,8 @@ public class Respawner extends Actor {
 			if (targetId != -1) {
 				Spawner sp = (Spawner) mLevel.getActorById(targetId);
 				sp.addToSpawn(actor);
-				ArrayList<JointEdge> edges = b.getJointList();
-				for (int i = 0; i < edges.size(); i++) {
+				Array<JointEdge> edges = b.getJointList();
+				for (int i = 0; i < edges.size; i++) {
 					JointEdge edge = edges.get(i);
 					// get the other actor this joint is connected to
 					// if the other actor is not itself and is a blob

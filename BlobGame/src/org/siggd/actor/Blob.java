@@ -28,7 +28,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -56,6 +55,7 @@ import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
+import com.badlogic.gdx.utils.Array;
 
 public class Blob extends Actor implements InputProcessor, Controllable {
 	private class Spring {
@@ -437,9 +437,9 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 			float rCrossS = cross(r, s);
 			if (rCrossS < 0.0000001 && rCrossS > -0.000001)
 				return null;
-			// t = (q - p) × s / (r × s)
+			// t = (q - p) ï¿½ s / (r ï¿½ s)
 			float t = cross(qSubP, s) / rCrossS;
-			// u = (q - p) × r / (r × s)
+			// u = (q - p) ï¿½ r / (r ï¿½ s)
 			float u = cross(qSubP, r) / rCrossS;
 			if (u >= 0 && t >= 0 && u <= 1 && t <= 1) {
 				Vector2 solution = q.add(s.scl(u));
@@ -792,7 +792,7 @@ public class Blob extends Actor implements InputProcessor, Controllable {
 	public void setCollisionGroup(int group) {
 		// Create a filter
 		Filter filter;
-		ArrayList<Fixture> fixtures;
+		Array<Fixture> fixtures;
 
 		// Set all of the fixtures in the bodies of mParticles to the same same
 		// Collision Group.
