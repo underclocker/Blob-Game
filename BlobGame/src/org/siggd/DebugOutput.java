@@ -1,7 +1,10 @@
 package org.siggd;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
@@ -31,7 +34,9 @@ public class DebugOutput {
 	private static boolean finerEnabled = false;
 	private static DebugFormatter format = new DebugFormatter();
 	private static ConsoleHandler handler;
-
+	private static PrintWriter pw;
+	private static boolean useFile = false;
+	private static int outCounter = 0;
 	public static void info(Object o, String s) {
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
@@ -46,8 +51,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (enabled)
+		if (enabled && !useFile)
+		{
 			logger.info(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " INFO: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void severe(Object o, String s) {
@@ -64,8 +79,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (enabled)
+		if (enabled && !useFile)
+		{
 			logger.severe(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " SEVERE: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void warning(Object o, String s) {
@@ -82,8 +107,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (enabled)
+		if (enabled && !useFile)
+		{
 			logger.warning(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " WARNING: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void fine(Object o, String s) {
@@ -100,8 +135,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (fineEnabled)
+		if (fineEnabled && !useFile)
+		{
 			logger.fine(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " FINE: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void finer(Object o, String s) {
@@ -118,8 +163,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (finerEnabled)
+		if (finerEnabled && !useFile)
+		{
 			logger.finer(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " FINER: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void finest(Object o, String s) {
@@ -136,8 +191,18 @@ public class DebugOutput {
 			Logger.getLogger(o.getClass().getSimpleName()).setLevel(Level.FINEST);
 		}
 		Logger.getLogger(o.getClass().getSimpleName()).getHandlers()[0].setFormatter(format);
-		if (heavyEnabled)
+		if (heavyEnabled && !useFile)
+		{
 			logger.finest(s);
+		}
+		else
+		{
+			if(enabled && useFile)
+			{
+				pw.println(outCounter + " FINEST: " + s);
+				outCounter++;
+			}
+		}
 	}
 
 	public static void disable() {
@@ -187,4 +252,31 @@ public class DebugOutput {
 	public static boolean isFinerEnabled() {
 		return heavyEnabled;
 	}
+	
+	
+	public static void setFile()
+	{
+		Date d = new Date();
+		setFile(d.getTime()+"");
+	}
+	public static void setFile(String filename)
+	{
+		if(Game.DEBUG)
+		{
+		try{
+			pw = new PrintWriter(filename + ".txt");
+			useFile = true;
+		}catch(Exception e){System.out.println(filename);e.printStackTrace();}
+		
+		}
+	}
+	public static void close()
+	{
+		try{
+		pw.flush();
+		pw.close();
+		}catch(Exception e){}
+		
+	}
+	
 }

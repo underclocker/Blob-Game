@@ -52,6 +52,7 @@ public class Game implements ApplicationListener {
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
+	public final static boolean DEBUG = true;
 
 	public final String mStartingLevel = "level1";
 
@@ -124,6 +125,12 @@ public class Game implements ApplicationListener {
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
+		
+		if(DEBUG)
+		{
+			DebugOutput.setFile();
+		}
+		
 		DebugOutput.enable();
 		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
 		try {
@@ -174,6 +181,7 @@ public class Game implements ApplicationListener {
 			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
+			
 		}
 
 		// BEGIN: EDITOR
@@ -184,7 +192,8 @@ public class Game implements ApplicationListener {
 
 		// BEGIN: EDITOR
 		// Create the editor
-		DebugOutput.disable();
+		
+		//DebugOutput.disable();
 		if (!RELEASE) {
 			mEditor = new Editor();
 			setLevel(mStartingLevel);
@@ -195,6 +204,7 @@ public class Game implements ApplicationListener {
 			setState(Game.MENU);
 			setLevel("earth");
 			mLevelView.setCameraPosition(new Vector2());
+			
 		}
 		// END: EDITOR
 
@@ -589,5 +599,12 @@ public class Game implements ApplicationListener {
 
 	public void setNextLevel(String nextLevel) {
 		mNextLevel = nextLevel;
+	}
+	
+	//I can't believe we didn't have a function for this before
+	public void exit()
+	{
+		DebugOutput.close();
+		Gdx.app.exit();
 	}
 }

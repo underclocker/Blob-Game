@@ -523,7 +523,7 @@ public class MenuView {
 		public void changed(ChangeEvent event, Actor actor) {
 			TextButton textButton = (TextButton) actor;
 			textButton.setChecked(false);
-			Gdx.app.exit();
+			Game.get().exit();
 		}
 	};
 
