@@ -60,7 +60,6 @@ public class Main {
 			cfg.fullscreen = mPrefs.getInt("fullscreen") != 0;
 			cfg.useGL20 = mPrefs.getInt("useGL20") != 0;
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
-			//cfg.useCPUSynch = mPrefs.getInt("useCPUSynch") != 0;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

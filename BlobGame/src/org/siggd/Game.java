@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.Player.ControlType;
-import org.siggd.actor.Blob;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.actor.meta.PropScanner;
 import org.siggd.editor.Editor;
@@ -18,7 +17,6 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
@@ -27,7 +25,6 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
@@ -146,9 +143,9 @@ public class Game implements ApplicationListener {
 		if (mMenuView.getMenuController() != null) {
 			mInput.addProcessor(mMenuView.getMenuController());
 		}
-		if (mMenuView.getStage() != null) {
-			mInput.addProcessor(mMenuView.getStage());
-		}
+		//if (mMenuView.getStage() != null) {
+			//mInput.addProcessor(mMenuView.getStage());
+		//}
 
 		if (!RELEASE) {
 			// Create players the old way if not in release mode

@@ -1,6 +1,16 @@
 {
     "actors": [
         {
+            "id": 990,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 990,
+                "CollisionSound": "",
+                "Y": 10.184377,
+                "X": 64.0372
+            }
+        },
+        {
             "id": 885,
             "class": "org.siggd.actor.BlobLaser",
             "props": {
@@ -15,9 +25,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".0015",
-                "Y Wave Angle": 292.6072,
+                "Y Wave Angle": 312.38742,
                 "Distance": "-.25",
-                "X Wave Angle": 94.64607,
+                "X Wave Angle": 101.91604,
                 "Y Wave Speed": ".0041",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -35,9 +45,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".003",
-                "Y Wave Angle": 81.035225,
+                "Y Wave Angle": 87.3088,
                 "Distance": "1",
-                "X Wave Angle": 189.74391,
+                "X Wave Angle": 204.28384,
                 "Y Wave Speed": ".0013",
                 "Layer": 0,
                 "Rotation Speed": 0,
@@ -113,8 +123,8 @@
             "props": {
                 "ID": 414,
                 "CollisionSound": "",
-                "Y": 7.9968777,
-                "X": 65.4872
+                "Y": 9.171877,
+                "X": 64.024704
             }
         },
         {
@@ -123,8 +133,8 @@
             "props": {
                 "ID": 413,
                 "CollisionSound": "",
-                "Y": 7.9968777,
-                "X": 64.89744
+                "Y": 8.184379,
+                "X": 64.034935
             }
         },
         {
@@ -1057,9 +1067,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".001",
-                "Y Wave Angle": 89.334816,
+                "Y Wave Angle": 100.6665,
                 "Distance": "3",
-                "X Wave Angle": 39.10214,
+                "X Wave Angle": 43.93748,
                 "Y Wave Speed": ".00234",
                 "Layer": 0,
                 "Rotation Speed": 0,

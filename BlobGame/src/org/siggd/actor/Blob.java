@@ -488,7 +488,7 @@ public class Blob extends Actor implements Controllable {
 				float eyescale = ((float) Math.max(1.2 - deltaPosition.len() * .25, 1f));
 				eyescale *= .45;
 				if (mState == SQUISH_STATE)
-					eyescale += mAccAprox * .2;
+					eyescale += mAccAprox * .12;
 				mBatch.draw(tex, center.x - texOffset.x, center.y - texOffset.y, origin.x,
 						origin.y, texSize.x / scale, texSize.y / scale, eyescale, eyescale,
 						rotation, 0, 0, (int) texSize.x, (int) texSize.y, mLastKnownDir, false);
@@ -499,7 +499,7 @@ public class Blob extends Actor implements Controllable {
 				eyescale = ((float) Math.max(1.2 - deltaPosition.len() * .25, 1f));
 				eyescale *= .45;
 				if (mState == SQUISH_STATE)
-					eyescale += mAccAprox * .2;
+					eyescale += mAccAprox * .12;
 				mBatch.draw(tex, center.x - texOffset.x, center.y - texOffset.y, origin.x,
 						origin.y, texSize.x / scale, texSize.y / scale, eyescale, eyescale,
 						rotation, 0, 0, (int) texSize.x, (int) texSize.y, mLastKnownDir, false);
@@ -1067,13 +1067,13 @@ public class Blob extends Actor implements Controllable {
 
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			Vector2 vel;
-			float threshold = 2f;
+			float threshold = 2.4f;
 			if (mState == SQUISH_STATE) {
 				calcCenters();
 				vel = new Vector2(mVCenter);
 			} else {
+				threshold = 4f;
 				vel = new Vector2(mBody.getLinearVelocity());
-				threshold = .2f;
 			}
 			vel.sub(mOldVCenter);
 			float velLength = vel.len();
@@ -1087,7 +1087,7 @@ public class Blob extends Actor implements Controllable {
 					sound = man.get(mMow, Sound.class);
 					if (mState == SOLID_STATE) {
 						soundID = sound.play();
-						sound.setPitch(soundID, .5f + velLength * .002f);
+						sound.setPitch(soundID, .5f + velLength * .0001f);
 						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
 					} else {
 						if (!mSpawning) {
