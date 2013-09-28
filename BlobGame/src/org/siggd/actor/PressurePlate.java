@@ -46,6 +46,7 @@ public class PressurePlate extends Actor implements IObservable {
 		mPointLight.setStaticLight(true);
 		// TODO: set light active based on if actor is dummy or not
 		setProp("X", -10000);
+		setProp("Restitution", 0f);
 		setState(false);
 	}
 

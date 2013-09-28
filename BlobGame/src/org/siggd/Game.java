@@ -48,8 +48,8 @@ public class Game implements ApplicationListener {
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = true;
-	public final static boolean DEBUG = true;
+	public final static boolean RELEASE = false;
+	public final static boolean DEBUG = false;
 
 	public final String mStartingLevel = "level1";
 
