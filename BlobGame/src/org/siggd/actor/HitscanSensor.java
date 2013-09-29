@@ -41,9 +41,9 @@ public class HitscanSensor extends Actor implements RayCastCallback, IObservable
 			else {
 				shapeRender.begin(ShapeType.Line);
 				if (mState == true) {
-					shapeRender.setColor(1, 0.5f, 1, 1);
+					shapeRender.setColor(Color.GRAY);
 				} else {
-					shapeRender.setColor(1, 1, 1, 1);
+					shapeRender.setColor(Color.LIGHT_GRAY);
 				}
 				shapeRender.line(getX(), getY(), mLaserEnd.x, mLaserEnd.y);
 				shapeRender.end();
