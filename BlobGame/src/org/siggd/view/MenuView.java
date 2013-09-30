@@ -55,6 +55,7 @@ public class MenuView {
 	private Table mTint;
 	private Table mCustomizeTable;
 	private Image mJoinImage;
+	private Image mStartImage;
 	private int mDelay;
 	private MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
@@ -236,7 +237,11 @@ public class MenuView {
 		// Customize menu
 		mCustomizeTable = new Table(mSkin);
 		mCustomizeTable.setFillParent(true);
+		//TODO: GET REAL JOIN IMAGE
 		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/circle.png")));
+		//TODO: GET A REAL START IMAGE
+		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Cannon.png")));
+		
 
 		// Set the starting menu
 		setMenu(MAIN);
@@ -276,6 +281,7 @@ public class MenuView {
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
 			if (Game.get().activePlayersNum() > 0) {
 				mJoinImage.remove();
+				mCustomizeTable.add(mStartImage);
 			}
 		}
 		mMenuController.draw(mShapeRenderer);
@@ -546,6 +552,7 @@ public class MenuView {
 		mFakePauseTable.remove();
 		mLevelsTable.remove();
 		mCustomizeTable.remove();
+		mStartImage.remove();
 		mTint.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
