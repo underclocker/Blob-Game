@@ -93,6 +93,17 @@ public class MenuView {
 		textButtonStyle.font = mSkin.getFont("default");
 		mSkin.add("default", textButtonStyle);
 
+		createMainMenu();
+		createPauseMenu();
+		createFakePauseMenu();
+		createLevelsMenu();
+		createCustomizeMenu();
+		
+		// Set the starting menu
+		setMenu(MAIN);
+	}
+
+	private void createMainMenu() {
 		mMainTable = new Table(mSkin);
 		mMainTable.setFillParent(true);
 
@@ -115,8 +126,9 @@ public class MenuView {
 		final TextButton exitButton = new TextButton(" Exit ", mSkin);
 		mMainTable.add(exitButton);
 		exitButton.addListener(mExit);
+	}
 
-		// Pause Menu
+	private void createPauseMenu() {
 		mPauseTable = new Table(mSkin);
 		mPauseTable.setFillParent(true);
 
@@ -131,122 +143,133 @@ public class MenuView {
 		final TextButton continueButton = new TextButton(" Continue ", mSkin);
 		mPauseTable.add(continueButton);
 		continueButton.addListener(mContinue);
+	}
 
-		// FakePause Menu
+	private void createFakePauseMenu() {
 		mFakePauseTable = new Table(mSkin);
 		mFakePauseTable.setFillParent(true);
 
 		final TextButton resumeButton = new TextButton(" Continue ", mSkin);
 		mFakePauseTable.add(resumeButton);
 		resumeButton.addListener(mContinue);
+	}
 
-		// Levels Menu
+	private void createLevelsMenu() {
 		mLevelsTable = new Table(mSkin);
 		mLevelsTable.setFillParent(true);
 		ImageButton imageButton;
 
 		mLevel1 = new HashMap<String, SiggdImageButton>();
 		mLevel1.put("level1", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level1"));
 		mLevel1.put("level7", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level7"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level7"));
 		mLevel1.put("level3", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level3"));
 		mLevel1.put("level4", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level4"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level4"));
 		mLevel1.put("level5", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level5"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level5"));
 		mLevel1.put("level2", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level2"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level2"));
 		mLevel1.put("level8", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level8"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png",
+				"level8"));
 
 		SiggdImageButton button = mLevel1.get("level1");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		mLevelsTable.invalidate();
 
 		button = mLevel1.get("level7");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level3");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level4");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level5");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level2");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level8");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		mLevelsTable.row();
 
-		mLevel1.put("level1_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1_hard"));
-		mLevel1.put("level3_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3_hard"));
-		mLevel1.put("level5_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level5_hard"));
-		mLevel1.put("level2_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level2_hard"));
+		mLevel1.put("level1_hard", new SiggdImageButton(
+				"data/gfx/buttonUp.png", "data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level1_hard"));
+		mLevel1.put("level3_hard", new SiggdImageButton(
+				"data/gfx/buttonUp.png", "data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level3_hard"));
+		mLevel1.put("level5_hard", new SiggdImageButton(
+				"data/gfx/buttonUp.png", "data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level5_hard"));
+		mLevel1.put("level2_hard", new SiggdImageButton(
+				"data/gfx/buttonUp.png", "data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level2_hard"));
 
 		button = mLevel1.get("level1_hard");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level3_hard");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level5_hard");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level2_hard");
-		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
-				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+				mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		mLevelsTable.row();
 
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png",
+				"data/gfx/backButton.png").getButton();
 		imageButton.addListener(mMainMenu);
 		mLevelsTable.add(imageButton);
-		// Customize menu
+	}
+	private void createCustomizeMenu(){
 		mCustomizeTable = new Table(mSkin);
 		mCustomizeTable.setFillParent(true);
-		//TODO: GET REAL JOIN IMAGE
-		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/circle.png")));
-		//TODO: GET A REAL START IMAGE
-		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Cannon.png")));
-		
-
-		// Set the starting menu
-		setMenu(MAIN);
+		// TODO: GET REAL JOIN IMAGE
+		mJoinImage = new Image(new Texture(
+				Gdx.files.internal("data/gfx/circle.png")));
+		// TODO: GET A REAL START IMAGE
+		mStartImage = new Image(new Texture(
+				Gdx.files.internal("data/gfx/Cannon.png")));
 	}
-
 	public void render() {
 		mStage.act(Gdx.graphics.getDeltaTime());
 		mStage.draw();
@@ -289,7 +312,8 @@ public class MenuView {
 
 	public void update() {
 		mMenuController.update();
-		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
+		if (CUSTOMIZE.equals(mCurrentMenu)
+				&& Game.get().getState() != Game.PLAY) {
 			Player p = null;
 			if (mDelay > 10) {
 				p = testForNewPlayer();
@@ -298,7 +322,8 @@ public class MenuView {
 			}
 			if (p != null) {
 				if (!Game.get().playerExists(p)) {
-					System.out.println("Adding player of type: " + p.controltype);
+					System.out.println("Adding player of type: "
+							+ p.controltype);
 					Game.get().addPlayer(p);
 				}
 				activatePlayer(p);
@@ -307,11 +332,13 @@ public class MenuView {
 			for (Player pl : Game.get().getPlayers()) {
 				if (!pl.active)
 					continue;
-				if (pl.controltype == ControlType.Controller && pl.controller != null) {
+				if (pl.controltype == ControlType.Controller
+						&& pl.controller != null) {
 					Controller c = pl.controller;
 					start = start
-							|| c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
-									ControllerFilterAPI.BUTTON_START));
+							|| c.getButton(ControllerFilterAPI
+									.getButtonFromFilteredId(c,
+											ControllerFilterAPI.BUTTON_START));
 				} else if (pl.controltype == ControlType.WASD
 						|| pl.controltype == ControlType.Arrows) {
 					start = start || Gdx.input.isKeyPressed(Input.Keys.SPACE)
@@ -383,10 +410,12 @@ public class MenuView {
 			}
 		}
 		if (p == null) {
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)
+					|| Gdx.input.isKeyPressed(Input.Keys.RIGHT)
 					|| Gdx.input.isKeyPressed(Input.Keys.DOWN)
 					|| Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				Player inactivePlayer = Game.get().getPlayer(org.siggd.Player.ControlType.Arrows);
+				Player inactivePlayer = Game.get().getPlayer(
+						org.siggd.Player.ControlType.Arrows);
 				if (inactivePlayer == null) {
 					p = new Player(Game.get().getNumberOfPlayers());
 					p.controltype = org.siggd.Player.ControlType.Arrows;
@@ -395,9 +424,12 @@ public class MenuView {
 						p = inactivePlayer;
 					}
 				}
-			} else if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)
-					|| Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-				Player inactivePlayer = Game.get().getPlayer(org.siggd.Player.ControlType.WASD);
+			} else if (Gdx.input.isKeyPressed(Input.Keys.A)
+					|| Gdx.input.isKeyPressed(Input.Keys.D)
+					|| Gdx.input.isKeyPressed(Input.Keys.S)
+					|| Gdx.input.isKeyPressed(Input.Keys.W)) {
+				Player inactivePlayer = Game.get().getPlayer(
+						org.siggd.Player.ControlType.WASD);
 				if (inactivePlayer == null) {
 					p = new Player(Game.get().getNumberOfPlayers());
 					p.controltype = org.siggd.Player.ControlType.WASD;
@@ -425,8 +457,9 @@ public class MenuView {
 			Blob b = new Blob(l, l.getId());
 			l.addActor(b);
 			Vector2 pos = new Vector2((p.id % 4) * Gdx.graphics.getWidth() / 4
-					+ Gdx.graphics.getWidth() / 8, p.id < 4 ? 5 * Gdx.graphics.getHeight() / 12
-					: 11 * Gdx.graphics.getHeight() / 12);
+					+ Gdx.graphics.getWidth() / 8,
+					p.id < 4 ? 5 * Gdx.graphics.getHeight() / 12
+							: 11 * Gdx.graphics.getHeight() / 12);
 			Game.get().getLevelView().unproject(pos);
 			b.setX(pos.x);
 			b.setY(pos.y);
@@ -514,7 +547,8 @@ public class MenuView {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
 			try {
-				FileHandle handleSt = Gdx.files.external(".BlobGame/BlobSave.json");
+				FileHandle handleSt = Gdx.files
+						.external(".BlobGame/BlobSave.json");
 
 				handleSt.writeString("", false);
 			} catch (Exception e) {
@@ -594,7 +628,8 @@ public class MenuView {
 					Level l = Game.get().getLevel();
 					Blob b = new Blob(l, l.getId());
 					l.addActor(b);
-					Vector2 pos = new Vector2((p.id % 4) * Gdx.graphics.getWidth() / 4
+					Vector2 pos = new Vector2((p.id % 4)
+							* Gdx.graphics.getWidth() / 4
 							+ Gdx.graphics.getWidth() / 8,
 							p.id < 4 ? 5 * Gdx.graphics.getHeight() / 12
 									: 11 * Gdx.graphics.getHeight() / 12);
