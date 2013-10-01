@@ -44,6 +44,7 @@ public class MenuView {
 	public static String FAKE_PAUSE = "FakePause";
 	public static String LEVELS = "Levels";
 	public static String CUSTOMIZE = "Customize";
+	public static String CONTROL =  "Controllers";
 
 	private Stage mStage;
 	private Skin mSkin;
@@ -64,6 +65,7 @@ public class MenuView {
 	private String mSelectedLevel;
 	private final float mHorizontalSpacing = 10f;
 	private final float mVerticalSpacing = 30f;
+	private Table mControllerTable;
 
 	public MenuView() {
 		mStage = new Stage();
@@ -98,9 +100,10 @@ public class MenuView {
 		createFakePauseMenu();
 		createLevelsMenu();
 		createCustomizeMenu();
+		createControllerMenu();
 		
 		// Set the starting menu
-		setMenu(MAIN);
+		setMenu(CONTROL);
 	}
 
 	private void createMainMenu() {
@@ -270,10 +273,28 @@ public class MenuView {
 		mStartImage = new Image(new Texture(
 				Gdx.files.internal("data/gfx/Cannon.png")));
 	}
+	private void createControllerMenu(){
+		mControllerTable = new Table(mSkin);
+		mControllerTable.setFillParent(true);
+		mControllerTable.top();
+		int i = 0;
+		for(Controller c :  Controllers.getControllers()){
+			ImageButton imageButton = new SiggdImageButton("data/gfx/backButton.png",
+					"data/gfx/backButton.png").getButton();
+			imageButton.setName(""+i);
+			mControllerTable.add(imageButton);
+			i++;
+		}
+		mControllerTable.add().row();
+		mControllerTable.add(new Image(new Texture(
+				Gdx.files.internal("data/gfx/Cannon.png")))).colspan(i).spaceTop(Gdx.graphics.getHeight()/4);
+		mControllerTable.debug();
+		
+	}
 	public void render() {
 		mStage.act(Gdx.graphics.getDeltaTime());
 		mStage.draw();
-		// Table.drawDebug(mStage);
+		Table.drawDebug(mStage);
 		mShapeRenderer.setProjectionMatrix(mStage.getCamera().combined);
 		JSONObject levelSave = Game.get().getLevel().getLevelSave();
 		if (LEVELS.equals(mCurrentMenu)) {
@@ -602,6 +623,8 @@ public class MenuView {
 			mStage.addActor(mTint);
 			mStage.addActor(mFakePauseTable);
 			mMenuController.setTable(mFakePauseTable);
+		} else if (CONTROL.equals(menu)){
+			mStage.addActor(mControllerTable);
 		} else if (LEVELS.equals(menu)) {
 			mStage.addActor(mLevelsTable);
 			JSONObject levelSave = Game.get().getLevel().getLevelSave();
