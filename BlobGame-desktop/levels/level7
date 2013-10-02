@@ -1,6 +1,50 @@
 {
     "actors": [
         {
+            "id": 1419,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 450.00003,
+                "Distance": "20.0",
+                "ID": 1419,
+                "Y": -8.701487,
+                "X": 57.80878
+            }
+        },
+        {
+            "id": 1418,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1418,
+                "Y": 5.911011,
+                "X": 35.696278
+            }
+        },
+        {
+            "id": 1417,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 300,
+                "Distance": "10.0",
+                "ID": 1417,
+                "Y": 11.461011,
+                "X": 5.4587784
+            }
+        },
+        {
+            "id": 1416,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 240,
+                "Distance": "10.0",
+                "ID": 1416,
+                "Y": 11.42351,
+                "X": 11.446279
+            }
+        },
+        {
             "id": 1312,
             "class": "org.siggd.actor.Gear",
             "props": {
@@ -482,9 +526,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "",
-                "Y Wave Angle": 405.92844,
+                "Y Wave Angle": 435.0922,
                 "Distance": 3,
-                "X Wave Angle": 55.72956,
+                "X Wave Angle": 66.14015,
                 "Y Wave Speed": ".014",
                 "Rotation Speed": 0,
                 "ID": 4,
@@ -1176,9 +1220,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 27.319925,
+                "Y Wave Angle": 31.068644,
                 "Distance": "-.15",
-                "X Wave Angle": 13.495387,
+                "X Wave Angle": 17.659876,
                 "Y Wave Speed": ".0018",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -1198,8 +1242,8 @@
                 "X Wave Speed": ".007",
                 "Rotation Speed": 0,
                 "Distance": "2",
-                "Y Wave Angle": 26.506334,
-                "X Wave Angle": 66.57112,
+                "Y Wave Angle": 32.752396,
+                "X Wave Angle": 81.153,
                 "ID": 1310,
                 "CollisionSound": "",
                 "X Wave Amplitude": ".4",
