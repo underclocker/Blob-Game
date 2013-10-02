@@ -369,7 +369,7 @@ public class LevelView {
 	}
 	public float scaleSmooth(float delta){
 		float abs = Math.abs(delta);
-		return (40f / (200f + 10f*abs + 200f*(float)Math.sqrt(abs)));
+		return (40f / (200f + 10f*abs + 250f*(float)Math.sqrt(abs)));
 	}
 
 	public void setWorld(World world) {

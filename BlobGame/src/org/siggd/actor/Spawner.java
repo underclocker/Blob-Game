@@ -186,7 +186,7 @@ public class Spawner extends Actor implements IObservable {
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
 		Vector2 vel = new Vector2(0, Convert.getInt(getProp("Exit Velocity")));
-		vel.rotate(Convert.getDegrees(mBody.getAngle()));
+		vel.rotate(Convert.getDegrees(mBody.getAngle())+(float)(10f*Math.random()-5f));
 		spawnee.setVelocityX(vel.x);
 		spawnee.setVelocityY(vel.y);
 		if (spawnee instanceof Blob) {

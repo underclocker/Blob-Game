@@ -56,7 +56,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 				}
 				shapeRender.end();
 				shapeRender.begin(ShapeType.Filled);
-				Vector2 offset = new Vector2(0, -.11f).rotate(angle);
+				Vector2 offset = new Vector2(0, -.12f).rotate(angle);
 				for (int i = 0; i < mLaserStarts.size(); i++) {
 					p = players.get(i);
 					if (mDetectedBlobs.contains((Blob)p.mActor)) {
@@ -65,7 +65,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 						shapeRender.setColor(Color.BLACK);
 					}
 					start = mLaserStarts.get(i).cpy().add(offset);
-					shapeRender.circle(start.x, start.y, .06f, 16);
+					shapeRender.circle(start.x, start.y, 1f/(15+Game.get().getNumberOfPlayers()), 16);
 				}
 				shapeRender.end();
 			}
