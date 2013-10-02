@@ -82,15 +82,10 @@ public class Teleport extends Actor {
 			if (!a.isActive())
 				continue;
 			if (a instanceof Blob) {
+				Blob b = (Blob) a;
 				a.setActive(false);
-				if (mLevel.mFirstBlobFinished == null) {
-					mLevel.mFirstBlobFinished = (Blob) a;
-
-				}
-				if (!aBlobIsActive()) {
-					if (mLevel.mFirstBlobFinished != null) {
-						mLevel.mFirstBlobFinished = (Blob) a;
-					}
+				b.mFinishedLevel = true;
+				if (!aBlobIsPlaying()) {
 					changeLevel();
 				}
 			} else {
@@ -100,10 +95,10 @@ public class Teleport extends Actor {
 		}
 	}
 
-	private boolean aBlobIsActive() {
+	private boolean aBlobIsPlaying() {
 		ArrayList<Actor> actors = Game.get().getLevel().getActors();
 		for (Actor a : actors) {
-			if ((a instanceof Blob) && a.isActive()) {
+			if ((a instanceof Blob) && !((Blob)a).mFinishedLevel) {
 				return true;
 			}
 		}

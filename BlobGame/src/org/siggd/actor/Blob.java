@@ -584,6 +584,7 @@ public class Blob extends Actor implements Controllable {
 	private int mPoints = 0;
 	private boolean mWasDown;
 	private boolean mWasUp;
+	public boolean mFinishedLevel = false;
 
 	private boolean mGettingPulled = false;
 
