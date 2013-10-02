@@ -339,32 +339,37 @@ public class LevelView {
 		float delta, scale;
 
 		delta = (mCamera.position.x - mOldCamera.position.x);
-		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		scale = scaleSmooth(delta);
 		delta *= scale;
 
 		mCamera.position.x = mOldCamera.position.x + delta;
 
 		delta = (mCamera.position.y - mOldCamera.position.y);
-		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
+		scale = scaleSmooth(delta);
 		delta *= scale;
 
 		mCamera.position.y = mOldCamera.position.y + delta;
 
-		delta = (mCamera.viewportHeight - mOldCamera.viewportHeight);
+		float deltax = (mCamera.viewportWidth - mOldCamera.viewportWidth);
+		scale = scaleSmooth(deltax);
+		float deltay = (mCamera.viewportHeight - mOldCamera.viewportHeight);
+		float scalecache = scaleSmooth(deltay);
+		
+		if (scalecache > scale) scale = scalecache;
 
-		scale = (100f + Math.abs(delta)) / (500f + 200 * Math.abs(delta));
-		delta *= scale;
+		deltax *= scale;
+		deltay *= scale;
 
-		mCamera.viewportHeight = mOldCamera.viewportHeight + delta;
-
-		delta = (mCamera.viewportWidth - mOldCamera.viewportWidth);
-		delta *= scale;
-
-		mCamera.viewportWidth = mOldCamera.viewportWidth + delta;
+		mCamera.viewportHeight = mOldCamera.viewportHeight + deltay;
+		mCamera.viewportWidth = mOldCamera.viewportWidth + deltax;
 
 		mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
 		mOldScale = mScale;
 
+	}
+	public float scaleSmooth(float delta){
+		float abs = Math.abs(delta);
+		return (40f / (200f + 10f*abs + 200f*(float)Math.sqrt(abs)));
 	}
 
 	public void setWorld(World world) {

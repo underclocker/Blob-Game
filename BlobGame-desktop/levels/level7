@@ -1,6 +1,17 @@
 {
     "actors": [
         {
+            "id": 1312,
+            "class": "org.siggd.actor.Gear",
+            "props": {
+                "Rotation Speed": "-0.5",
+                "Safety": "0",
+                "ID": 1312,
+                "Y": 7.6235085,
+                "X": 44.35877
+            }
+        },
+        {
             "id": 1116,
             "class": "org.siggd.actor.Redirector",
             "props": {
@@ -69,8 +80,8 @@
                 "Rotation Speed": "-0.5",
                 "Safety": "0",
                 "ID": 914,
-                "Y": 3.773509,
-                "X": 46.53377
+                "Y": 3.5485091,
+                "X": 47.70877
             }
         },
         {
@@ -471,9 +482,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "",
-                "Y Wave Angle": 386.612,
+                "Y Wave Angle": 405.92844,
                 "Distance": 3,
-                "X Wave Angle": 48.833088,
+                "X Wave Angle": 55.72956,
                 "Y Wave Speed": ".014",
                 "Rotation Speed": 0,
                 "ID": 4,
@@ -595,7 +606,7 @@
                 "Angle": 270,
                 "Target Input": 644,
                 "ID": 45,
-                "Camera Tracked": "1",
+                "Camera Tracked": "0",
                 "Open Safety": "0",
                 "CollisionSound": "",
                 "Y": 3.8669198,
@@ -633,7 +644,7 @@
                 "Target Input": 644,
                 "Friction": 0.2,
                 "ID": 50,
-                "Camera Tracked": "1",
+                "Camera Tracked": "0",
                 "Open Safety": "0",
                 "CollisionSound": "",
                 "Y": 11.594554,
@@ -1025,8 +1036,8 @@
             "props": {
                 "ID": 551,
                 "CollisionSound": "",
-                "Y": 3.3158875,
-                "X": 30.610334
+                "Y": 3.453387,
+                "X": 29.347836
             }
         },
         {
@@ -1035,8 +1046,8 @@
             "props": {
                 "ID": 552,
                 "CollisionSound": "",
-                "Y": 3.3158875,
-                "X": 33.078304
+                "Y": 3.4283872,
+                "X": 33.153305
             }
         },
         {
@@ -1055,8 +1066,8 @@
             "props": {
                 "ID": 735,
                 "CollisionSound": "",
-                "Y": 5.44322,
-                "X": 49.052166
+                "Y": 5.65572,
+                "X": 49.489666
             }
         },
         {
@@ -1064,19 +1075,8 @@
             "class": "org.siggd.actor.GrabSign",
             "props": {
                 "ID": 834,
-                "Y": 7.2860103,
-                "X": 8.408777
-            }
-        },
-        {
-            "id": 922,
-            "class": "org.siggd.actor.Gear",
-            "props": {
-                "Rotation Speed": "-0.5",
-                "Safety": "0",
-                "ID": 922,
-                "Y": 9.018597,
-                "X": 44.444794
+                "Y": 6.82351,
+                "X": 8.433777
             }
         },
         {
@@ -1176,9 +1176,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 24.836985,
+                "Y Wave Angle": 27.319925,
                 "Distance": "-.15",
-                "X Wave Angle": 10.737587,
+                "X Wave Angle": 13.495387,
                 "Y Wave Speed": ".0018",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -1198,8 +1198,8 @@
                 "X Wave Speed": ".007",
                 "Rotation Speed": 0,
                 "Distance": "2",
-                "Y Wave Angle": 22.368977,
-                "X Wave Angle": 56.91676,
+                "Y Wave Angle": 26.506334,
+                "X Wave Angle": 66.57112,
                 "ID": 1310,
                 "CollisionSound": "",
                 "X Wave Amplitude": ".4",
@@ -1208,6 +1208,16 @@
                 "Y Wave Amplitude": ".8",
                 "Y Wave Speed": ".003",
                 "X": -1.1844594
+            }
+        },
+        {
+            "id": 1413,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 1413,
+                "CollisionSound": "",
+                "Y": 3.4408872,
+                "X": 31.853306
             }
         }
     ],
