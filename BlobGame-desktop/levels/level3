@@ -414,8 +414,8 @@
                 "Body": "BigBarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 31,
+                "Grabbable": 1,
                 "CollisionSound": "",
                 "Y": 10.491718,
                 "X": 20.101967
@@ -456,8 +456,8 @@
                 "Body": "BarrelTopView",
                 "Friction": 0.3,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 5,
+                "Grabbable": 1,
                 "CollisionSound": "",
                 "Y": 5.918429,
                 "X": 30.06332
@@ -507,8 +507,8 @@
             "props": {
                 "ID": 216,
                 "CollisionSound": "",
-                "Y": -2.4786632,
-                "X": 17.325243
+                "Y": -2.4583337,
+                "X": 17.312744
             }
         },
         {
@@ -1075,10 +1075,11 @@
             "class": "org.siggd.actor.Gear",
             "props": {
                 "Rotation Speed": 0.5,
+                "Safety": "0",
                 "ID": 726,
                 "CollisionSound": "",
-                "Y": 9.5134945,
-                "X": 10.820543
+                "Y": 9.863494,
+                "X": 10.983044
             }
         },
         {
@@ -1086,10 +1087,11 @@
             "class": "org.siggd.actor.Gear",
             "props": {
                 "Rotation Speed": 0.5,
+                "Safety": "0",
                 "ID": 727,
                 "CollisionSound": "",
-                "Y": 4.825993,
-                "X": 15.045547
+                "Y": 4.588493,
+                "X": 15.895547
             }
         }
     ],

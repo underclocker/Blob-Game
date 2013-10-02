@@ -75,7 +75,7 @@ public class PressurePlate extends Actor implements IObservable {
 		boolean active = false;
 
 		for (Body b : bodies) {
-
+			if (b.getUserData() instanceof Dot) continue;
 			boolean isSensor = false;
 			Array<Fixture> fixtures = b.getFixtureList();
 			int i = 0;
