@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,8 +31,8 @@ import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 
 public class MenuController implements InputProcessor, ControllerListener {
-	private static int FILTER_AMOUNT = 9;
-	private static int KEY_FILTER_AMOUNT = 1;
+	private static final int FILTER_AMOUNT = 10;
+	private static final int KEY_FILTER_AMOUNT = 10;
 	private static final Set<Integer> NAV_KEYS = new HashSet<Integer>(
 			Arrays.asList(new Integer[] { Input.Keys.A, Input.Keys.LEFT,
 					Input.Keys.D, Input.Keys.RIGHT, Input.Keys.W,
@@ -179,7 +180,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 				if (getCell(mX + deltaX, mY + deltaY) != null) {
 					mX = mX + deltaX;
 					mY = mY + deltaY;
-					mControllerFilter++;
+					if (deltaX != 0 || deltaY != 0){
+						mControllerFilter++;
+					}
 				}
 			}
 		}
@@ -199,9 +202,16 @@ public class MenuController implements InputProcessor, ControllerListener {
 				shapeRender.setColor(Blob.COLORS[mPlayerId]);
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
-				shapeRender.box(mTable.getX() + selected.getX(), mTable.getY()
-						+ selected.getY(), 0, selected.getWidth(),
-						selected.getHeight(), 0);
+				Vector2 topleft = new Vector2(mTable.getX() + selected.getX(),mTable.getY()+selected.getY());
+				Vector2 topright = new Vector2(mTable.getX() + selected.getX() + selected.getWidth(),mTable.getY()+selected.getY());
+				Vector2 bottomleft = new Vector2(mTable.getX() + selected.getX(),mTable.getY()+selected.getY()+selected.getHeight());
+				Vector2 bottomright = new Vector2(mTable.getX() + selected.getX() + selected.getWidth(),mTable.getY()+selected.getY()+selected.getHeight());
+				float half = sLineWidth/2+.01f;
+				shapeRender.line(topleft.cpy().sub(new Vector2(half,0)),topright.cpy().add(new Vector2(half,0)));
+				shapeRender.line(bottomleft.cpy().sub(new Vector2(half,0)),bottomright.cpy().add(new Vector2(half,0)));
+				shapeRender.line(topleft.cpy().sub(new Vector2(0,half)),bottomleft.cpy().add(new Vector2(0,half)));
+				shapeRender.line(topright.cpy().sub(new Vector2(0,half)),bottomright.cpy().add(new Vector2(0,half)));
+
 				gl.glLineWidth(sLineWidth);
 				shapeRender.end();
 				gl.glLineWidth(1);
