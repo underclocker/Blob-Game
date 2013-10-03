@@ -1368,8 +1368,6 @@ public class Blob extends Actor implements Controllable {
 	}
 
 	public void transform() {
-		if (!mActive || Game.get().getState() != Game.PLAY)
-			return;
 		AssetManager man = Game.get().getAssetManager();
 		Sound sound;
 		long soundID;

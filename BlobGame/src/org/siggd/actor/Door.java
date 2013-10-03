@@ -101,7 +101,8 @@ public class Door extends Actor implements IObserver {
 			mCamDelay--;
 		}
 		if (mCamDelay > 5 && Convert.getInt(getProp("Camera Tracked")) != 0) {
-			Game.get().getLevelView().setCameraPosition(mBody.getPosition());
+			// TODO: figure out how to move camera less violently and we can reenable this.
+			//Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
 	}
 
