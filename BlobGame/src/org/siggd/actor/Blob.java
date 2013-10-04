@@ -585,6 +585,7 @@ public class Blob extends Actor implements Controllable {
 	private boolean mWasDown;
 	private boolean mWasUp;
 	public boolean mFinishedLevel = false;
+	private int mPoofTimer = 0;
 
 	private boolean mGettingPulled = false;
 
@@ -979,21 +980,32 @@ public class Blob extends Actor implements Controllable {
 			} else {
 				mDirection = 0;
 			}
+
+			if (up) {
+				mPoofTimer++;
+			} else {
+				mPoofTimer = 0;
+			}
+			if (mPoofTimer > 15) {
+				up = false;
+			}
+
 			if (!mWasDown && down) {
 				transform();
 			}
 			if (!mWasUp && up && mState == SOLID_STATE) {
 				transform();
 			}
+
 			mWasDown = down;
 			mWasUp = up;
 
-			if (up) {
-				mAccAprox += .05f;
-			}
-
 			// Check if keys are enabled in the level
 			up &= Convert.getInt(getLevel().getProp("Puff Enabled")) == 1;
+
+			if (up) {
+				mAccAprox += .1f;
+			}
 
 			if (mState == SQUISH_STATE) {
 				if (right) {
@@ -1059,6 +1071,7 @@ public class Blob extends Actor implements Controllable {
 			}
 
 			if (up && !mGettingPulled) {
+
 				mPoof = POOF_COEFF;
 			} else {
 				mPoof = 1;
@@ -1079,7 +1092,7 @@ public class Blob extends Actor implements Controllable {
 			}
 			vel.sub(mOldVCenter);
 			float velLength = vel.len();
-			mAccAprox += velLength/10f;
+			mAccAprox += velLength / 10f;
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()) {
 				AssetManager man = Game.get().getAssetManager();
