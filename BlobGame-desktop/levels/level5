@@ -1,6 +1,19 @@
 {
     "actors": [
         {
+            "id": 1858,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 360.00006,
+                "Speed": "1",
+                "ID": 1858,
+                "CollisionSound": "",
+                "Y": 11.537364,
+                "X": 9.704394,
+                "Anticlockwise": "0"
+            }
+        },
+        {
             "id": 1741,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -405,7 +418,7 @@
                 "ID": 964,
                 "CollisionSound": "",
                 "Y": 2.9968317,
-                "X": 9.271325,
+                "X": 9.258825,
                 "Anticlockwise": "0"
             }
         },
@@ -665,8 +678,8 @@
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 54,
+                "Grabbable": 1,
                 "CollisionSound": "",
                 "Y": 8.440975,
                 "X": 25.120262
@@ -795,8 +808,8 @@
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 29,
+                "Grabbable": 1,
                 "CollisionSound": "",
                 "Y": 15.162194,
                 "X": 12.596711
@@ -1346,6 +1359,30 @@
                 "CollisionSound": "",
                 "Y": -16.625784,
                 "X": 0.7248192
+            }
+        },
+        {
+            "id": 1860,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 315,
+                "Speed": ".5",
+                "ID": 1860,
+                "CollisionSound": "",
+                "Y": 9.206237,
+                "X": 7.2534285
+            }
+        },
+        {
+            "id": 1861,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 315,
+                "Speed": ".5",
+                "ID": 1861,
+                "CollisionSound": "",
+                "Y": 10.643735,
+                "X": 5.7922087
             }
         }
     ],
