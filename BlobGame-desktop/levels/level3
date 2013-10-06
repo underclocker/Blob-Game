@@ -1,6 +1,76 @@
 {
     "actors": [
         {
+            "id": 1054,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1054,
+                "Y": 17.015963,
+                "X": 25.336601
+            }
+        },
+        {
+            "id": 1053,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1053,
+                "Y": 9.248323,
+                "X": 29.412214
+            }
+        },
+        {
+            "id": 1052,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1052,
+                "Y": 8.624994,
+                "X": 23.202898
+            }
+        },
+        {
+            "id": 1051,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1051,
+                "Y": 14.450724,
+                "X": 20.901375
+            }
+        },
+        {
+            "id": 1050,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1050,
+                "Y": -0.2992257,
+                "X": 11.337477
+            }
+        },
+        {
+            "id": 1049,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1049,
+                "Y": -7.0512004,
+                "X": 13.87999
+            }
+        },
+        {
+            "id": 1048,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 1048,
+                "Y": -7.0175247,
+                "X": 11.101745
+            }
+        },
+        {
             "id": 836,
             "class": "org.siggd.actor.Door",
             "props": {
@@ -106,25 +176,6 @@
                 "CollisionSound": "",
                 "Y": -10.99238,
                 "X": 13.675147
-            }
-        },
-        {
-            "id": 522,
-            "class": "org.siggd.actor.SpotLight",
-            "props": {
-                "Angle": 270,
-                "Alpha": 1,
-                "Blue": 0.1,
-                "Softness": 0.5,
-                "Red": 0.1,
-                "Friction": 0,
-                "Distance": 5,
-                "Green": 0.1,
-                "ID": 522,
-                "CollisionSound": "",
-                "Y": -6.970389,
-                "X": 13.838515,
-                "Cone Angle": "20"
             }
         },
         {
@@ -412,9 +463,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "0",
-                "Y Wave Angle": 53.77984,
+                "Y Wave Angle": 68.13295,
                 "Distance": 3,
-                "X Wave Angle": 92.513794,
+                "X Wave Angle": 116.435646,
                 "Y Wave Speed": ".003",
                 "Rotation Speed": 0,
                 "ID": 41,
@@ -1137,9 +1188,9 @@
             "props": {
                 "X Wave Speed": ".006",
                 "Y Offset": "0",
-                "Y Wave Angle": 61.991062,
+                "Y Wave Angle": 78.75812,
                 "Distance": "1",
-                "X Wave Angle": 108.9712,
+                "X Wave Angle": 137.68343,
                 "Y Wave Speed": ".0035",
                 "Rotation Speed": 0,
                 "ID": 828,
@@ -1159,9 +1210,9 @@
             "props": {
                 "X Wave Speed": ".004",
                 "Y Offset": "0",
-                "Y Wave Angle": 103.78475,
+                "Y Wave Angle": 132.49098,
                 "Distance": "-.3",
-                "X Wave Angle": 75.94892,
+                "X Wave Angle": 95.0864,
                 "Y Wave Speed": ".006",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -1239,6 +1290,61 @@
                 "CollisionSound": "",
                 "Y": -13.360571,
                 "X": 12.499391
+            }
+        },
+        {
+            "id": 1162,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1162,
+                "Y": 9.543873,
+                "X": 14.133304
+            }
+        },
+        {
+            "id": 1163,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1163,
+                "Y": 9.586173,
+                "X": 7.830537
+            }
+        },
+        {
+            "id": 1164,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1164,
+                "Y": 15.127531,
+                "X": 8.16894
+            }
+        },
+        {
+            "id": 1165,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1165,
+                "Y": 1.5067899,
+                "X": 26.019726
+            }
+        },
+        {
+            "id": 1166,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "10.0",
+                "ID": 1166,
+                "Y": -7.714707,
+                "X": 28.430853
             }
         }
     ],

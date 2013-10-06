@@ -1,6 +1,17 @@
 {
     "actors": [
         {
+            "id": 1521,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 610,
+                "Distance": "20.0",
+                "ID": 1521,
+                "Y": 16.594193,
+                "X": 45.751186
+            }
+        },
+        {
             "id": 1413,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -17,8 +28,8 @@
                 "X Wave Speed": ".007",
                 "Rotation Speed": 0,
                 "Distance": "2",
-                "Y Wave Angle": 34.11065,
-                "X Wave Angle": 84.325714,
+                "Y Wave Angle": 38.994965,
+                "X Wave Angle": 95.73488,
                 "ID": 1310,
                 "CollisionSound": "",
                 "X Wave Amplitude": ".4",
@@ -34,9 +45,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 31.884287,
+                "Y Wave Angle": 34.81736,
                 "Distance": "-.15",
-                "X Wave Angle": 18.566242,
+                "X Wave Angle": 21.82556,
                 "Y Wave Speed": ".0018",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -47,87 +58,6 @@
                 "Y": 13.081405,
                 "Y Wave Amplitude": ".736",
                 "X": -1.2469599
-            }
-        },
-        {
-            "id": 1208,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 1208,
-                "CollisionSound": "",
-                "Y": 16.332865,
-                "X": 41.939342
-            }
-        },
-        {
-            "id": 1207,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 1207,
-                "CollisionSound": "",
-                "Y": 16.303936,
-                "X": 39.54793
-            }
-        },
-        {
-            "id": 1206,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 1206,
-                "CollisionSound": "",
-                "Y": 16.25948,
-                "X": 47.36091
-            }
-        },
-        {
-            "id": 1205,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 1205,
-                "CollisionSound": "",
-                "Y": 16.255722,
-                "X": 46.789665
-            }
-        },
-        {
-            "id": 1204,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 1204,
-                "CollisionSound": "",
-                "Y": 15.830721,
-                "X": 47.089664
-            }
-        },
-        {
-            "id": 1108,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 240,
-                "ID": 1108,
-                "Y": 16.35866,
-                "X": 42.908
-            }
-        },
-        {
-            "id": 1107,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 60,
-                "ID": 1107,
-                "Y": 12.937547,
-                "X": 41.000965
-            }
-        },
-        {
-            "id": 1106,
-            "class": "org.siggd.actor.Platform",
-            "props": {
-                "Layer": 3,
-                "Angle": 60,
-                "ID": 1106,
-                "Y": 13.944595,
-                "X": 41.57596
             }
         },
         {
@@ -730,9 +660,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "",
-                "Y Wave Angle": 441.43762,
+                "Y Wave Angle": 464.25595,
                 "Distance": 3,
-                "X Wave Angle": 68.40391,
+                "X Wave Angle": 76.54443,
                 "Y Wave Speed": ".014",
                 "Rotation Speed": 0,
                 "ID": 4,
@@ -1148,68 +1078,6 @@
             }
         },
         {
-            "id": 1110,
-            "class": "org.siggd.actor.Platform",
-            "props": {
-                "Layer": 3,
-                "Angle": 60,
-                "ID": 1110,
-                "Y": 14.00645,
-                "X": 39.291725
-            }
-        },
-        {
-            "id": 1111,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 240,
-                "ID": 1111,
-                "Y": 16.391083,
-                "X": 40.546284
-            }
-        },
-        {
-            "id": 1112,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 60,
-                "ID": 1112,
-                "Y": 13.003185,
-                "X": 38.725582
-            }
-        },
-        {
-            "id": 1114,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 60,
-                "ID": 1114,
-                "Y": 12.789325,
-                "X": 43.401505
-            }
-        },
-        {
-            "id": 1115,
-            "class": "org.siggd.actor.Platform",
-            "props": {
-                "Layer": 3,
-                "Angle": 60,
-                "ID": 1115,
-                "Y": 13.785916,
-                "X": 43.97874
-            }
-        },
-        {
-            "id": 1116,
-            "class": "org.siggd.actor.Redirector",
-            "props": {
-                "Angle": 240,
-                "ID": 1116,
-                "Y": 16.349707,
-                "X": 45.36977
-            }
-        },
-        {
             "id": 1312,
             "class": "org.siggd.actor.Gear",
             "props": {
@@ -1257,11 +1125,11 @@
             "id": 1419,
             "class": "org.siggd.actor.SpotLight",
             "props": {
-                "Angle": 450.00003,
+                "Angle": 610,
                 "Distance": "20.0",
                 "ID": 1419,
-                "Y": -8.701487,
-                "X": 57.80878
+                "Y": 16.642765,
+                "X": 39.60421
             }
         }
     ],

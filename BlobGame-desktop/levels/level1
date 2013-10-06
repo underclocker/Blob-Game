@@ -1,6 +1,21 @@
 {
     "actors": [
         {
+            "id": 1090,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Blue": "0.2",
+                "Red": "0.2",
+                "Distance": "20.0",
+                "Green": "0.2",
+                "ID": 1090,
+                "Y": 17.102919,
+                "X": 39.146965,
+                "Cone Angle": "25.0"
+            }
+        },
+        {
             "id": 990,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -25,9 +40,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".0015",
-                "Y Wave Angle": 312.38742,
+                "Y Wave Angle": 327.8738,
                 "Distance": "-.25",
-                "X Wave Angle": 101.91604,
+                "X Wave Angle": 107.607864,
                 "Y Wave Speed": ".0041",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -45,9 +60,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".003",
-                "Y Wave Angle": 87.3088,
+                "Y Wave Angle": 92.22053,
                 "Distance": "1",
-                "X Wave Angle": 204.28384,
+                "X Wave Angle": 215.6675,
                 "Y Wave Speed": ".0013",
                 "Layer": 0,
                 "Rotation Speed": 0,
@@ -71,8 +86,8 @@
                 "Distance": "14.0",
                 "Green": "0.2",
                 "ID": 599,
-                "Y": 17.810295,
-                "X": 16.991932,
+                "Y": 17.025719,
+                "X": 16.997513,
                 "Cone Angle": "25.0"
             }
         },
@@ -1067,9 +1082,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".001",
-                "Y Wave Angle": 100.6665,
+                "Y Wave Angle": 109.5365,
                 "Distance": "3",
-                "X Wave Angle": 43.93748,
+                "X Wave Angle": 47.7224,
                 "Y Wave Speed": ".00234",
                 "Layer": 0,
                 "Rotation Speed": 0,
@@ -1108,8 +1123,8 @@
                 "Distance": "20.0",
                 "Green": "0.2",
                 "ID": 786,
-                "Y": 20.400717,
-                "X": 28.209583,
+                "Y": 16.959372,
+                "X": 28.222898,
                 "Cone Angle": "25.0"
             }
         },
