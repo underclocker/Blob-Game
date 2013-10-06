@@ -51,7 +51,7 @@ public class Game implements ApplicationListener {
 	public final static boolean RELEASE = false;
 	public final static boolean DEBUG = false;
 
-	public final String mStartingLevel = "level4";
+	public final String mStartingLevel = "level1";
 
 	// The game's current state
 	private int mState;
