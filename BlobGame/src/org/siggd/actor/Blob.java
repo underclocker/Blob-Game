@@ -623,7 +623,6 @@ public class Blob extends Actor implements Controllable {
 			solidColor.mul(.7f, .7f, .7f, 1f);
 			mBlobDrawable = new BlobDrawable(squishColor, solidColor);
 			((CompositeDrawable) mDrawable).mDrawables.add(mBlobDrawable);
-			mFinishedLevel = true;
 		}
 		makeBlobBody();
 		mLight.setActive(false);
