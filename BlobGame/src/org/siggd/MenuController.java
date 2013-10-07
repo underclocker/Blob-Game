@@ -373,6 +373,35 @@ public class MenuController implements InputProcessor, ControllerListener {
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
+		case Input.Keys.A:
+		case Input.Keys.LEFT:
+			if (getCell(mX - 1, mY) != null)
+				mX--;
+			mControllerFilter = 1;
+			mRepeats = 0;
+			break;
+		case Input.Keys.D:
+		case Input.Keys.RIGHT:
+			if (getCell(mX + 1, mY) != null)
+				mX++;
+			mControllerFilter = 1;
+			mRepeats = 0;
+			break;
+		case Input.Keys.W:
+		case Input.Keys.UP:
+			if (getCell(mX, mY - 1) != null)
+				mY--;
+			mControllerFilter = 1;
+			mRepeats = 0;
+			break;
+		case Input.Keys.S:
+		case Input.Keys.DOWN:
+			if (getCell(mX, mY + 1) != null)
+				mY++;
+			mControllerFilter = 1;
+			mRepeats = 0;
+			break;
+
 		case Input.Keys.ENTER:
 		case Input.Keys.SPACE:
 			if (mTable != null) {
