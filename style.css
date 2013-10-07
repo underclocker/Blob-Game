@@ -6,9 +6,9 @@ body {
 	margin: 0px auto;
 }
 a.button {
-	border-radius:2px;
+	border-radius:6px;
 	padding:5px;
-	background-color: #00DD00;
+	background-color: #00CC00;
 	color: white;
 	text-decoration: none;
 }
