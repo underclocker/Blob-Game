@@ -1,0 +1,81 @@
+{
+    "actors": [
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Active": 0,
+                "Density": 0.35,
+                "ID": 3,
+                "CollisionSound": "",
+                "Y": 15.514525,
+                "X": 18.048384
+            }
+        },
+        {
+            "id": 0,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 0,
+                "Y Wave Angle": 0,
+                "Distance": 3,
+                "X Wave Angle": 0,
+                "ID": 0,
+                "Scale": 4,
+                "CollisionSound": "",
+                "Y": 14.254868,
+                "X": 18.028416
+            }
+        },
+        {
+            "id": 2,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 4,
+                "Exit Velocity": "10",
+                "Friction": 0.2,
+                "ID": 2,
+                "CollisionSound": "",
+                "Blob Spawner": "1",
+                "Y": 6.7330284,
+                "X": 19.470474,
+                "Rate": 30
+            }
+        },
+        {
+            "id": 6,
+            "class": "org.siggd.actor.Cutscene",
+            "props": {
+                "ID": 6,
+                "Y": 6.282687,
+                "X": 17.565998,
+                "Texture": "tablecloth.png"
+            }
+        },
+        {
+            "id": 11,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 11,
+                "Timer": "420",
+                "Level": "level1",
+                "Y": 3.3561444,
+                "X": 19.555656
+            }
+        }
+    ],
+    "props": {
+        "Ambient Light": 0.3,
+        "Min Camera Y": "0",
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": 1,
+        "Max Camera Y": "9",
+        "Parallax": "",
+        "Min Camera X": "-8",
+        "Max Camera X": "8",
+        "SongName": "wobhappy.ogg",
+        "Use Light": 1,
+        "Solidity Enabled": 1
+    }
+}

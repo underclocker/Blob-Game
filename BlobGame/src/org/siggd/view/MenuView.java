@@ -167,7 +167,7 @@ public class MenuView {
 
 		mLevel1 = new HashMap<String, SiggdImageButton>();
 		mLevel1.put("level1", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1"));
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "opening"));
 		mLevel1.put("level7", new SiggdImageButton("data/gfx/buttonUp.png",
 				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level7"));
 		mLevel1.put("level3", new SiggdImageButton("data/gfx/buttonUp.png",

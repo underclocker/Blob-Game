@@ -32,6 +32,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  */
 public class Teleport extends Actor {
 	private String mTex;
+	private int mTimer = 0;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -55,6 +56,7 @@ public class Teleport extends Actor {
 		setProp("Teleport_YPos", (Float) 0f);
 		setProp("Level", "");
 		setProp("Extra Level", "");
+		setProp("Timer", -1);
 	}
 
 	/**
@@ -75,6 +77,11 @@ public class Teleport extends Actor {
 
 	@Override
 	public void update() {
+		mTimer++;
+		int timer = Convert.getInt(getProp("Timer"));
+		if (timer != -1  && mTimer > timer){
+			changeLevel();
+		}
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		Iterable<Actor> actors = ContactHandler.getActors(contacts);
