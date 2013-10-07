@@ -51,7 +51,7 @@ public class LevelView {
 												// viewport, in pixels
 	public static final float vHEIGHT = 1080; // /< "Virtual" height of the
 												// viewport, in pixels
-	public static final float BORDER = 3; // /< Border around visible display,
+	public static final float BORDER = 3.5f; // /< Border around visible display,
 											// in meters. Only used in
 											// multiplayer
 	public static final float CAM_SMOOTH = .08f; // /< coefficient for how much

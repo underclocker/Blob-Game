@@ -34,7 +34,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 	private float mInverseWaveyness = 1f / mWaveyness;
 	private Animation mAnimation;
 	private Drawable frame;
-	private int mInputDelay = 2;
+	private int mInputDelay = 4;
 	private int mDelay = 0;
 	private boolean mState = false; 
 
