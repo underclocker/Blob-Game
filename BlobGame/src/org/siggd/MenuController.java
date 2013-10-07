@@ -40,7 +40,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 	private int mPlayerId;
 	private int mX, mY;
 	private int mControllerFilter;
-	private int mKeyFilter;
 	private int mFilteredKey;
 	private int mRepeats = 0;
 
@@ -235,7 +234,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 			for (Cell c : mTable.getCells()) {
 				if (c.getColumn() == x && c.getRow() == y) {
 					Actor cellActor = (Actor) (c.getWidget());
-					if (cellActor instanceof ImageButton && ((ImageButton) cellActor).isDisabled()) {
+					if (cellActor instanceof ImageButton
+							&& (((ImageButton) cellActor).isDisabled() || !((ImageButton) cellActor)
+									.isVisible())) {
 						return null;
 					} else {
 						return c;
@@ -386,7 +387,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 			break;
 		}
 		mFilteredKey = keycode;
-		mKeyFilter = 0;
 		return false;
 	}
 
