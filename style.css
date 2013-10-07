@@ -1,5 +1,17 @@
-.button{
+body {
+	font-family: 'Open Sans', sans-serif
+}
+#wrapper{
+	width: 940px;
+	margin: 0px auto;
+}
+a.button {
 	border-radius:2px;
 	padding:5px;
-	background-color: #000FFF000
+	background-color: #00DD00;
+	color: white;
+	text-decoration: none;
+}
+a.button:hover{
+	background-color: #00BB00;
 }
