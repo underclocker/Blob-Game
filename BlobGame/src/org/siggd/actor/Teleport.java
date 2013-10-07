@@ -106,7 +106,7 @@ public class Teleport extends Actor {
 		ArrayList<Actor> actors = Game.get().getLevel().getActors();
 		for (Actor a : actors) {
 			if ((a instanceof Blob)
-					&& (!((Blob) a).mFinishedLevel && ((Blob) a).getmPlayerID() > 0)) {
+					&& (!((Blob) a).mFinishedLevel && ((Blob) a).getmPlayerID() >= 0)) {
 				return true;
 			}
 		}
