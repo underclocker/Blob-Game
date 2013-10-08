@@ -33,11 +33,14 @@ margin-bottom: 10px;
 
 .dl-btns{
 	list-style-type: none;
+	padding: 0;
 }
 .dl-btns li {
 	display: inline;
 	width:128px;
 	height:128px;
+	margin-left: 80.75px;
+	margin-right: 80.75px;
 }
 .dl-btns a {
 	text-decoration: none;
