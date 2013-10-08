@@ -1,6 +1,7 @@
-body {
+﻿body {
 	font-family: Arial, sans-serif;
 	background-image: url(images/blob-blur.png);
+	color: #EEE;
 }
 #wrapper{
 	width: 940px;
@@ -23,4 +24,30 @@ a.button {
 }
 a.button:hover{
 	background-color: #00CB00;
+}
+.youtube {
+display:block;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.dl-btns{
+	list-style-type: none;
+}
+.dl-btns li {
+	display: inline;
+	width:128px;
+	height:128px;
+}
+.dl-btns a {
+	text-decoration: none;
+}
+.dl-btns img{
+	border-radius:6px;
+	padding:5px;
+	background-color: #E0E0E0;
+}
+
+.dl-btns img:hover{
+	background-color: #EEE;
 }
