@@ -1,17 +1,26 @@
 body {
-	font-family: 'Open Sans', sans-serif
+	font-family: Arial, sans-serif;
+	background-image: url(images/blob-blur.png);
 }
 #wrapper{
 	width: 940px;
 	margin: 0px auto;
 }
+.box{
+	padding: 20px;
+	background-color: #EEE;
+	border-radius:2px;
+}
+p{
+	margin-top: 0px;
+}
 a.button {
 	border-radius:6px;
 	padding:5px;
-	background-color: #00CC00;
+	background-color: #00D500;
 	color: white;
 	text-decoration: none;
 }
 a.button:hover{
-	background-color: #00BB00;
+	background-color: #00CB00;
 }
