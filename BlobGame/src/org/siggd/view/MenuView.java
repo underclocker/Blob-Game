@@ -259,6 +259,9 @@ public class MenuView {
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		
+		//TODO: scale if < screen resolution
+		//mLevelsTable.setTransform(true);
 
 	}
 

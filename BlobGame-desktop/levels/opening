@@ -57,7 +57,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 11,
-                "Timer": "420",
+                "Timer": "180",
                 "Level": "level1",
                 "Y": 3.3561444,
                 "X": 19.555656
@@ -74,8 +74,8 @@
         "Parallax": "",
         "Min Camera X": "-8",
         "Max Camera X": "8",
-        "SongName": "wobhappy.ogg",
-        "Use Light": 1,
+        "SongName": "",
+        "Use Light": "0",
         "Solidity Enabled": 1
     }
 }

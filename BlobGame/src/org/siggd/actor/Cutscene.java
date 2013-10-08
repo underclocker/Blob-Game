@@ -48,7 +48,9 @@ public class Cutscene extends Actor {
 
 		@Override
 		public void drawSprite(SpriteBatch batch) {
-			frame++;
+			if (Game.get().getState() == Game.PLAY) {
+				frame++;
+			}
 
 			if (batch == null)
 				return;
@@ -119,7 +121,7 @@ public class Cutscene extends Actor {
 		setProp("X Offset", 0);
 		setProp("Y Offset", 0);
 		setProp("Start", 60);
-		setProp("End", 300);
+		setProp("End", 120);
 		setProp("X Pan", .000f);
 	}
 
