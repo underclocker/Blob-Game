@@ -1,6 +1,17 @@
 {
     "actors": [
         {
+            "id": 2090,
+            "class": "org.siggd.actor.HookForCan",
+            "props": {
+                "Layer": 3,
+                "ID": 2090,
+                "HangingTarget": "1979",
+                "Y": 3.007819,
+                "X": 12.189804
+            }
+        },
+        {
             "id": 1988,
             "class": "org.siggd.actor.Wind",
             "props": {
@@ -1087,11 +1098,11 @@
             "id": 1979,
             "class": "org.siggd.actor.HookForCan",
             "props": {
-                "Layer": 3,
+                "Layer": 4,
                 "ID": 1979,
                 "HangingTarget": "45",
-                "Y": 3.048875,
-                "X": 12.198611
+                "Y": 3.7341373,
+                "X": 12.177281
             }
         },
         {
@@ -1100,9 +1111,9 @@
             "props": {
                 "Layer": 2,
                 "ID": 1980,
-                "HangingTarget": "1979",
-                "Y": 1.2926965,
-                "X": 12.228384
+                "HangingTarget": "2090",
+                "Y": 1.2402618,
+                "X": 12.2119255
             }
         },
         {
@@ -1112,8 +1123,8 @@
                 "Layer": 2,
                 "Angle": 180,
                 "ID": 1981,
-                "Y": 2.7426364,
-                "X": 8.3554325
+                "Y": 3.528221,
+                "X": 8.316676
             }
         },
         {
