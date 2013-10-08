@@ -12,6 +12,7 @@ import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -45,7 +46,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 				Player p;
 				for (int i = 0; i < mLaserStarts.size(); i++) {
 					p = players.get(i);
-					if (mDetectedBlobs.contains((Blob)p.mActor)) {
+					if (mDetectedBlobs.contains((Blob) p.mActor)) {
 						shapeRender.setColor(Color.GRAY);
 					} else {
 						shapeRender.setColor(Blob.COLORS[p.id]);
@@ -59,13 +60,14 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 				Vector2 offset = new Vector2(0, -.12f).rotate(angle);
 				for (int i = 0; i < mLaserStarts.size(); i++) {
 					p = players.get(i);
-					if (mDetectedBlobs.contains((Blob)p.mActor)) {
+					if (mDetectedBlobs.contains((Blob) p.mActor)) {
 						shapeRender.setColor(Blob.COLORS[p.id]);
 					} else {
 						shapeRender.setColor(Color.BLACK);
 					}
 					start = mLaserStarts.get(i).cpy().add(offset);
-					shapeRender.circle(start.x, start.y, 1f/(15+Game.get().getNumberOfPlayers()), 16);
+					shapeRender.circle(start.x, start.y,
+							1f / (15 + Game.get().getNumberOfPlayers()), 16);
 				}
 				shapeRender.end();
 			}
@@ -86,6 +88,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 	private ArrayList<Blob> mDetectedBlobs;
 	private Blob mCurrentBlob;
 	private final float mLaserLength = 1000;
+	private String mString = "data/sfx/string.ogg";
 
 	public BlobLaser(Level level, long id) {
 		super(level, id);
@@ -116,6 +119,15 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 					mLaserEnd = point.cpy();
 					if (!mDetectedBlobs.contains(mCurrentBlob)) {
 						mDetectedBlobs.add(mCurrentBlob);
+						AssetManager man = Game.get().getAssetManager();
+						long soundID;
+						Sound sound;
+						if (man.isLoaded(mString)) {
+							sound = man.get(mString, Sound.class);
+							soundID = sound.play();
+							sound.setPitch(soundID, 1f+.2f*mDetectedBlobs.size());
+							sound.setVolume(soundID, Math.min(1f, .6f));
+						}
 					}
 					return fraction;
 				} else {
@@ -159,6 +171,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load(mString, Sound.class);
 	}
 
 	@Override
