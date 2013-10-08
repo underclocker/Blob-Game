@@ -156,7 +156,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 		slider.div(playerNum + 1);
 		mLaserEnds.clear();
 		mLaserStarts.clear();
-		ArrayList<Player> players = Game.get().getPlayers();
+		ArrayList<Player> players = Game.get().activePlayers();
 		for (int i = 0; i < playerNum; i++) {
 			mLaserStart.add(slider);
 			mLaserEnd = end.cpy().add(mLaserStart);

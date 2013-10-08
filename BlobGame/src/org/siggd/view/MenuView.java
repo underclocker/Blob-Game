@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -37,6 +38,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MenuView {
 	public static String MAIN = "Main";
@@ -112,6 +114,7 @@ public class MenuView {
 		final TextButton campaignButton = new TextButton(" Campaign ", mSkin);
 		mMainTable.add(campaignButton);
 		campaignButton.addListener(mStartCampaign);
+		campaignButton.addListener(mClickListener);
 		/*
 		 * final TextButton battleButton = new TextButton(" Battle ", mSkin);
 		 * mMainTable.add(battleButton); battleButton.addListener(mStartBattle);
@@ -122,10 +125,12 @@ public class MenuView {
 		final TextButton clearButton = new TextButton(" Clear Save ", mSkin);
 		mMainTable.add(clearButton);
 		clearButton.addListener(mClear);
+		clearButton.addListener(mClickListener);
 
 		final TextButton exitButton = new TextButton(" Exit ", mSkin);
 		mMainTable.add(exitButton);
 		exitButton.addListener(mExit);
+		exitButton.addListener(mClickListener);
 	}
 
 	private void createPauseMenu() {
@@ -135,14 +140,17 @@ public class MenuView {
 		final TextButton mainMenuButton = new TextButton(" Main ", mSkin);
 		mPauseTable.add(mainMenuButton);
 		mainMenuButton.addListener(mMainMenu);
+		mainMenuButton.addListener(mClickListener);
 
 		final TextButton resetButton = new TextButton(" Reset ", mSkin);
 		mPauseTable.add(resetButton);
 		resetButton.addListener(mReset);
+		resetButton.addListener(mClickListener);
 
 		final TextButton continueButton = new TextButton(" Continue ", mSkin);
 		mPauseTable.add(continueButton);
 		continueButton.addListener(mContinue);
+		continueButton.addListener(mClickListener);
 	}
 
 	private void createFakePauseMenu() {
@@ -152,6 +160,7 @@ public class MenuView {
 		final TextButton resumeButton = new TextButton(" Continue ", mSkin);
 		mFakePauseTable.add(resumeButton);
 		resumeButton.addListener(mContinue);
+		resumeButton.addListener(mClickListener);
 	}
 
 	private void createLevelsMenu() {
@@ -162,6 +171,7 @@ public class MenuView {
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
 		imageButton.addListener(mMainMenu);
+		imageButton.addListener(mClickListener);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
 				mHorizontalSpacing);
 
@@ -185,37 +195,44 @@ public class MenuView {
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 		mLevelsTable.invalidate();
 
 		button = mLevel1.get("level7");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level4");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level5");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level8");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
@@ -244,24 +261,28 @@ public class MenuView {
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level5_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		
-		//TODO: scale if < screen resolution
-		//mLevelsTable.setTransform(true);
+		button.getButton().addListener(mClickListener);
+
+		// TODO: scale if < screen resolution
+		// mLevelsTable.setTransform(true);
 
 	}
 
@@ -460,6 +481,14 @@ public class MenuView {
 			b.setProp("Player ID", p.id);
 		}
 	}
+
+	private final ClickListener mClickListener = new ClickListener() {
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			Game.get().playNomSound();
+		}
+
+	};
 
 	private final ChangeListener mStartCampaign = new ChangeListener() {
 		@Override

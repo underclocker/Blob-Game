@@ -20,6 +20,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
@@ -77,6 +78,8 @@ public class Game implements ApplicationListener {
 	private ArrayList<Player> mPlayers;
 	private PlayerListener mPlayerListener;
 	private String mNextLevel;
+	private String mTickSound = "data/sfx/tick.ogg";
+	private String mNomSound = "data/sfx/nom.wav";
 
 	/**
 	 * Constructor (private)
@@ -122,12 +125,11 @@ public class Game implements ApplicationListener {
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
-		
-		if(DEBUG)
-		{
+
+		if (DEBUG) {
 			DebugOutput.setFile();
 		}
-		
+
 		DebugOutput.enable();
 		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
 		try {
@@ -143,9 +145,9 @@ public class Game implements ApplicationListener {
 		if (mMenuView.getMenuController() != null) {
 			mInput.addProcessor(mMenuView.getMenuController());
 		}
-		//if (mMenuView.getStage() != null) {
-			//mInput.addProcessor(mMenuView.getStage());
-		//}
+		// if (mMenuView.getStage() != null) {
+		// mInput.addProcessor(mMenuView.getStage());
+		// }
 
 		if (!RELEASE) {
 			// Create players the old way if not in release mode
@@ -178,7 +180,7 @@ public class Game implements ApplicationListener {
 			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
-			
+
 		}
 
 		// BEGIN: EDITOR
@@ -189,8 +191,8 @@ public class Game implements ApplicationListener {
 
 		// BEGIN: EDITOR
 		// Create the editor
-		
-		//DebugOutput.disable();
+
+		// DebugOutput.disable();
 		if (!RELEASE) {
 			mEditor = new Editor();
 			setLevel(mStartingLevel);
@@ -201,7 +203,7 @@ public class Game implements ApplicationListener {
 			setState(Game.MENU);
 			setLevel("earth");
 			mLevelView.setCameraPosition(new Vector2());
-			
+
 		}
 		// END: EDITOR
 
@@ -210,7 +212,10 @@ public class Game implements ApplicationListener {
 		// BEGIN: EDITOR
 		// Load all actor resources
 		mActorEnum.loadActorResources();
+
 		// END: EDITOR
+		mAssetManager.load(mTickSound, Sound.class);
+		mAssetManager.load(mNomSound, Sound.class);
 
 		// Finish loading all the resources
 		mAssetManager.finishLoading();
@@ -598,9 +603,32 @@ public class Game implements ApplicationListener {
 		mNextLevel = nextLevel;
 	}
 	
-	//I can't believe we didn't have a function for this before
-	public void exit()
-	{
+//TODO: move these functions somewhere more appropriate
+	public void playTickSound() {
+		Sound sound;
+		long soundID;
+		if (mAssetManager.isLoaded(mTickSound)) {
+			sound = mAssetManager.get(mTickSound, Sound.class);
+			soundID = sound.play();
+			sound.setPitch(soundID, 1);
+			sound.setVolume(soundID, .2f);
+		}
+	}
+	public void playNomSound() {
+		Sound sound;
+		long soundID;
+		if (mAssetManager.isLoaded(mNomSound)) {
+			sound = mAssetManager.get(mNomSound, Sound.class);
+			soundID = sound.play();
+			sound.setPitch(soundID, 1);
+			sound.setVolume(soundID, .2f);
+		}
+	}
+	
+	
+
+	// I can't believe we didn't have a function for this before
+	public void exit() {
 		DebugOutput.close();
 		Gdx.app.exit();
 	}

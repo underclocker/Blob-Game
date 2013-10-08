@@ -183,6 +183,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 					mX = mX + deltaX;
 					mY = mY + deltaY;
 					if (deltaX != 0 || deltaY != 0) {
+						Game.get().playTickSound();
 						mControllerFilter++;
 					}
 				}
@@ -257,7 +258,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 				return;
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
-			if (selected != null) {
+			if (selected != null && (mX != selected.getColumn() || mY != selected.getRow())) {
+				Game.get().playTickSound();
 				mX = selected.getColumn();
 				mY = selected.getRow();
 			}
@@ -328,9 +330,12 @@ public class MenuController implements InputProcessor, ControllerListener {
 			switch (realButton) {
 			case ControllerFilterAPI.BUTTON_B:
 				if (Game.get().getState() == Game.MENU && c == mController) {
+					if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+						Game.get().playNomSound();
 					handleEscape();
 				} else if (MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
 						&& menuView.getFakePauseController() == c) {
+					Game.get().playNomSound();
 					Player p = Game.get().getPlayer(c);
 					if (p != null && p.active) {
 						fakePause(c);
@@ -338,6 +343,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 				}
 				break;
 			case ControllerFilterAPI.BUTTON_START:
+				Game.get().playNomSound();
 				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu())
 						&& c == mController) {
 					handleEscape();
@@ -350,6 +356,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 				break;
 			case ControllerFilterAPI.BUTTON_A:
 				if (Game.get().getState() == Game.MENU) {
+					if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+						Game.get().playNomSound();
+
 					if (MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
 							&& menuView.getFakePauseController() == c) {
 						Player p = Game.get().getPlayer(c);
@@ -375,29 +384,46 @@ public class MenuController implements InputProcessor, ControllerListener {
 		switch (keycode) {
 		case Input.Keys.A:
 		case Input.Keys.LEFT:
-			if (getCell(mX - 1, mY) != null)
+			if (getCell(mX - 1, mY) != null) {
+				if (Game.get().getState() == Game.MENU
+						&& !MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+					Game.get().playTickSound();
 				mX--;
+			}
 			mControllerFilter = 1;
 			mRepeats = 0;
+
 			break;
 		case Input.Keys.D:
 		case Input.Keys.RIGHT:
-			if (getCell(mX + 1, mY) != null)
+			if (getCell(mX + 1, mY) != null) {
+				if (Game.get().getState() == Game.MENU
+						&& !MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+					Game.get().playTickSound();
 				mX++;
+			}
 			mControllerFilter = 1;
 			mRepeats = 0;
 			break;
 		case Input.Keys.W:
 		case Input.Keys.UP:
-			if (getCell(mX, mY - 1) != null)
+			if (getCell(mX, mY - 1) != null) {
+				if (Game.get().getState() == Game.MENU
+						&& !MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+					Game.get().playTickSound();
 				mY--;
+			}
 			mControllerFilter = 1;
 			mRepeats = 0;
 			break;
 		case Input.Keys.S:
 		case Input.Keys.DOWN:
-			if (getCell(mX, mY + 1) != null)
+			if (getCell(mX, mY + 1) != null) {
+				if (Game.get().getState() == Game.MENU
+						&& !MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
+					Game.get().playTickSound();
 				mY++;
+			}
 			mControllerFilter = 1;
 			mRepeats = 0;
 			break;
@@ -408,11 +434,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 				Actor a = (Actor) getCell(mX, mY).getWidget();
 				if (a != null) {
 					a.fire(new ChangeEvent());
+					Game.get().playNomSound();
 				}
 			}
 			break;
 		case Input.Keys.ESCAPE:
 			handleEscape();
+			Game.get().playNomSound();
 			break;
 		}
 		mFilteredKey = keycode;
