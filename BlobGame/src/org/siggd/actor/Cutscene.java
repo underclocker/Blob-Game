@@ -66,20 +66,20 @@ public class Cutscene extends Actor {
 
 			if (frame > Convert.getFloat(getProp("Start"))
 					&& frame < Convert.getFloat(getProp("End"))) {
-				alpha += .03f;
+				alpha += .015f;
 				if (alpha > 1) {
 					alpha = 1;
 				}
-				xpan += Convert.getFloat(getProp("X Pan"));
-				pos.x += xpan;
-
 			} else {
-				alpha -= .03f;
+				alpha -= .015f;
 				if (alpha < 0) {
 					alpha = 0;
 				}
 			}
-
+			if (frame > Convert.getFloat(getProp("Start"))) {
+				xpan += Convert.getFloat(getProp("X Pan"));
+			}
+			pos.x += xpan;
 			float distFromMainLayer = lv.getVScale() / lv.getScale();
 
 			float scale = distFromMainLayer

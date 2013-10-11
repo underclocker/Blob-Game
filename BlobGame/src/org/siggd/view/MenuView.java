@@ -55,6 +55,7 @@ public class MenuView {
 	private Controller mFakePauseController;
 	private Table mLevelsTable;
 	private Table mTint;
+	private Table mBaseCustomizeTable;
 	private Table mCustomizeTable;
 	private Image mJoinImage;
 	private Image mStartImage;
@@ -66,6 +67,8 @@ public class MenuView {
 	private String mSelectedLevel;
 	private final float mHorizontalSpacing = 10f;
 	private final float mVerticalSpacing = 30f;
+	private float mRollingAlpha = 0f;
+	private int mHintTimer = 0;
 
 	public MenuView() {
 		mStage = new Stage();
@@ -289,15 +292,17 @@ public class MenuView {
 	private void createCustomizeMenu() {
 		mCustomizeTable = new Table(mSkin);
 		mCustomizeTable.setFillParent(true);
-		// TODO: GET REAL JOIN IMAGE
-		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/circle.png")));
-		// TODO: GET A REAL START IMAGE
-		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Cannon.png")));
+		mBaseCustomizeTable = new Table(mSkin);
+		mBaseCustomizeTable.setFillParent(true);
+		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst1.png")));
+		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
+		Image baseImage = new Image(new Texture(Gdx.files.internal("data/gfx/InstBlank.png")));
+		baseImage.setColor(1,1,1,0.75f);
+		mBaseCustomizeTable.add(baseImage);
 	}
 
 	public void render() {
-		mStage.act(Gdx.graphics.getDeltaTime());
-		mStage.draw();
+
 		// Table.drawDebug(mStage);
 		mShapeRenderer.setProjectionMatrix(mStage.getCamera().combined);
 		JSONObject levelSave = Game.get().getLevel().getLevelSave();
@@ -329,15 +334,32 @@ public class MenuView {
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
 			if (Game.get().activePlayersNum() > 0) {
 				mJoinImage.remove();
-				mCustomizeTable.add(mStartImage);
+				if (!mStartImage.isDescendantOf(mCustomizeTable)) {
+					mRollingAlpha = 0;
+					mHintTimer = 0;
+					mCustomizeTable.add(mStartImage);
+					mBaseCustomizeTable.setColor(1,1,1,0);
+					mCustomizeTable.setColor(1,1,1,0);
+				}
 			}
 		}
+		mRollingAlpha += .03f;
+		Color tColor = new Color(1.0f, 1.0f, 1.0f, (float) (1 - Math.cos(mRollingAlpha)) / 2.0f);
+		mStartImage.setColor(tColor);
+		mJoinImage.setColor(tColor);
+		mStage.act(Gdx.graphics.getDeltaTime());
+		mStage.draw();
 		mMenuController.draw(mShapeRenderer);
 	}
 
 	public void update() {
 		mMenuController.update();
 		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
+			mHintTimer++;
+			if (mHintTimer> 120 && mHintTimer <= 180){
+				mCustomizeTable.setColor(1,1,1,(mHintTimer-120)/60f);
+				mBaseCustomizeTable.setColor(1,1,1,(mHintTimer-120)/60f);
+			}
 			Player p = null;
 			if (mDelay > 10) {
 				p = testForNewPlayer();
@@ -607,6 +629,7 @@ public class MenuView {
 		mPauseTable.remove();
 		mFakePauseTable.remove();
 		mLevelsTable.remove();
+		mBaseCustomizeTable.remove();
 		mCustomizeTable.remove();
 		mStartImage.remove();
 		mTint.remove();
@@ -639,10 +662,15 @@ public class MenuView {
 			mMenuController.setTable(mLevelsTable);
 			mMenuController.setIndex(1);
 		} else if (CUSTOMIZE.equals(menu)) {
-			if (!mCustomizeTable.getChildren().contains(mJoinImage, false)) {
+			mHintTimer = 0;
+			if (!mJoinImage.isDescendantOf(mCustomizeTable)) {
+				mRollingAlpha = 0;
 				mCustomizeTable.add(mJoinImage);
 			}
+			mStage.addActor(mBaseCustomizeTable);
 			mStage.addActor(mCustomizeTable);
+			mBaseCustomizeTable.setColor(1,1,1,0);
+			mCustomizeTable.setColor(1,1,1,0);
 			mMenuController.setTable(null);
 			Game.get().setLevel("charselect");
 			for (Player p : Game.get().getPlayers()) {
