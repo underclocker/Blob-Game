@@ -422,12 +422,11 @@ public class Game implements ApplicationListener {
 	public void setLevel(String fileName) {
 		Music music = null;
 		String song = null;
+		Level oldLevel = mLevel;
 		if (mLevel != null) {
-			mLevel.stopMusic();
 			mLevel.dispose();
 			music = mLevel.mMusic;
 			song = (String) mLevel.mProps.get("SongName");
-
 		}
 
 		if (mLevel != null && mLevel.getAssetKey() != null) {
@@ -450,6 +449,10 @@ public class Game implements ApplicationListener {
 			mLevel.mMusic = music;
 		}
 		mLevel.loadResources();
+		
+		if (oldLevel != null) {
+			oldLevel.stopMusic();
+		}
 
 		// Finish loading the level resources
 		mAssetManager.finishLoading();
