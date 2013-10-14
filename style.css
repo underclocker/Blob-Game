@@ -32,15 +32,14 @@ a.button:hover{
 	list-style-type: none;
 	margin:0px;
 	padding: 5px 0px;
-	background-image: linear-gradient(to bottom, #BBB, #AAA);
+	background: #555;
 }
 .nav li {
 	display: inline;
 }
 .nav a{
-	border-radius:6px;
 	padding:5px;
-	background-color: #00D500;
+	background-color: #555;
 	color: white;
 	text-decoration: none;
 }
