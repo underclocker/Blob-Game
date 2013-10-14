@@ -1,6 +1,11 @@
 ﻿body {
 	font-family: Arial, sans-serif;
-	background-image: url(images/blob-blur.png);
+	background: url(images/bg-blob.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	margin-top:10px;
 }
 #wrapper{
 	width: 940px;
@@ -26,22 +31,32 @@ a.button:hover{
 	background-color: #00CB00;
 }
 .nav{
-
+	float: left;
+	margin-bottom:10px;
 }
 .nav ul{
 	list-style-type: none;
 	margin:0px;
-	padding: 5px 0px;
+	padding: 5px 5px;
 	background: #555;
+	float: left;
+	width:930px;
 }
 .nav li {
-	display: inline;
+	display: block;
+	float: left;
+	width: 33%;
+	text-align: center;
 }
 .nav a{
 	padding:5px;
 	background-color: #555;
 	color: white;
 	text-decoration: none;
+	width: 100%;
+	float: left;
+	font-weight: bold;
+	font-size:20;
 }
 .nav a:hover{
 	background-color: #00CB00;
