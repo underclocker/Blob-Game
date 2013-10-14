@@ -45,11 +45,12 @@ a.button:hover{
 .nav li {
 	display: block;
 	float: left;
-	width: 33%;
+	width: 20%;
 	text-align: center;
 }
 .nav a{
-	padding:5px;
+	padding-top:5px;
+	padding-bottom:5px;
 	background-color: #555;
 	color: white;
 	text-decoration: none;
