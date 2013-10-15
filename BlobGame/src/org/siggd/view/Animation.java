@@ -41,7 +41,14 @@ public class Animation {
 	public void addFrame(String mTexName) {
 		mFrames.add(new BodySprite(mBody, mOrigin, mTexName));
 	}
-
+	
+	/**
+	 * Clears frames of the Animation
+	 * 
+	 */
+	public void clearFrames() {
+		mFrames.clear();
+	}
 	/**
 	 * Updates the animation
 	 */

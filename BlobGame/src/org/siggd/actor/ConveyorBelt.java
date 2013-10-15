@@ -4,8 +4,10 @@ import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.StableContact;
+import org.siggd.view.Animation;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
+import org.siggd.view.Drawable;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -41,11 +43,13 @@ public class ConveyorBelt extends Actor {
 	private Fixture mLeftCircle;
 	private Fixture mRightCircle;
 	private Fixture mBox;
+	private Animation mAnimation;
+	private Drawable frame;
 
 	public ConveyorBelt(Level level, long id) {
 		super(level, id);
 		mName = "ConveyorBelt";
-		mTex = "data/gfx/conveyor.png";
+		mTex = "data/gfx/conveyor0000.png";
 		float scale = Game.get().getLevelView().getVScale();
 		Vector2 origin = new Vector2(128 / scale, 128 / scale);
 		BodyDef bd = new BodyDef();
@@ -84,10 +88,16 @@ public class ConveyorBelt extends Actor {
 
 		setProp("Friction", 0f);
 
-		setProp("Anticlockwise", (Integer) 1);
 		setProp("Speed", (Float) .5f);
 
-		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, origin, mTex));
+		frame = new BodySprite(mBody, origin, mTex);
+		((CompositeDrawable) mDrawable).mDrawables.add(frame);
+		mAnimation = new Animation(mBody, origin);
+		mAnimation.mTicksPerFrame = 5;
+
+		mAnimation.setCurFrame(((Double) (Math.random() * 4)).intValue());
+		setProp("Anticlockwise", (Integer) 1);
+
 	}
 
 	/**
@@ -97,6 +107,9 @@ public class ConveyorBelt extends Actor {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load("data/gfx/conveyor0001.png", Texture.class);
+		man.load("data/gfx/conveyor0002.png", Texture.class);
+		man.load("data/gfx/conveyor0003.png", Texture.class);
 	}
 
 	/**
@@ -108,6 +121,10 @@ public class ConveyorBelt extends Actor {
 
 	@Override
 	public void update() {
+		mAnimation.update();
+		((CompositeDrawable) mDrawable).mDrawables.remove(frame);
+		frame = mAnimation.getCurFrame();
+		((CompositeDrawable) mDrawable).mDrawables.add(frame);
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(mBox);
 
@@ -120,9 +137,7 @@ public class ConveyorBelt extends Actor {
 		for (StableContact sc : contacts) {
 			Vector2 tempRot = rot.cpy();
 			body = sc.getFixtureB().getBody();
-			if ((Actor) body.getUserData() instanceof Redirector
-					|| (Actor) body.getUserData() instanceof ExplodeBall
-					|| (Actor) body.getUserData() instanceof ImplodeBall)
+			if ((Actor) body.getUserData() instanceof Redirector)
 				continue;
 			deltaPos = mBody.getPosition();
 			deltaPos.sub(body.getPosition());
@@ -137,9 +152,7 @@ public class ConveyorBelt extends Actor {
 		contacts = Game.get().getLevel().getContactHandler().getContacts(mLeftCircle);
 		for (StableContact sc : contacts) {
 			body = sc.getFixtureB().getBody();
-			if ((Actor) body.getUserData() instanceof Redirector
-					|| (Actor) body.getUserData() instanceof ExplodeBall
-					|| (Actor) body.getUserData() instanceof ImplodeBall)
+			if ((Actor) body.getUserData() instanceof Redirector)
 				continue;
 			deltaPos = mBody.getPosition().cpy();
 			deltaPos.add(-0.78f, 0f);
@@ -153,9 +166,7 @@ public class ConveyorBelt extends Actor {
 		contacts = Game.get().getLevel().getContactHandler().getContacts(mRightCircle);
 		for (StableContact sc : contacts) {
 			body = sc.getFixtureB().getBody();
-			if ((Actor) body.getUserData() instanceof Redirector
-					|| (Actor) body.getUserData() instanceof ExplodeBall
-					|| (Actor) body.getUserData() instanceof ImplodeBall)
+			if ((Actor) body.getUserData() instanceof Redirector)
 				continue;
 			deltaPos = mBody.getPosition().cpy();
 			deltaPos.add(0.78f, 0f);
@@ -167,13 +178,33 @@ public class ConveyorBelt extends Actor {
 		}
 	}
 
+	
+	@Override
+	public void setProp(String name, Object val) {
+		if ("Anticlockwise".equals(name)){
+			if ((Convert.getInt(val)) == 0){
+				mAnimation.clearFrames();
+				mAnimation.addFrame("data/gfx/conveyor0000.png");
+				mAnimation.addFrame("data/gfx/conveyor0001.png");
+				mAnimation.addFrame("data/gfx/conveyor0002.png");
+				mAnimation.addFrame("data/gfx/conveyor0003.png");
+			} else {
+				mAnimation.clearFrames();
+				mAnimation.addFrame("data/gfx/conveyor0003.png");
+				mAnimation.addFrame("data/gfx/conveyor0002.png");
+				mAnimation.addFrame("data/gfx/conveyor0001.png");
+				mAnimation.addFrame("data/gfx/conveyor0000.png");
+			}
+		}
+		super.setProp(name, val);
+	}
 	/**
 	 * Dispose of the actor's resources
 	 */
 	@Override
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
-		if(man.containsAsset(mTex)) {
+		if (man.containsAsset(mTex)) {
 			man.unload(mTex);
 		}
 	}
