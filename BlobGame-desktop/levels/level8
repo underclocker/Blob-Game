@@ -1,6 +1,81 @@
 {
     "actors": [
         {
+            "id": 2076,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2076,
+                "Grabbable": 1,
+                "Y": 14.777492,
+                "X": 16.832216
+            }
+        },
+        {
+            "id": 2075,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2075,
+                "Grabbable": 1,
+                "Y": 14.759519,
+                "X": 15.852735
+            }
+        },
+        {
+            "id": 2074,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2074,
+                "Grabbable": 1,
+                "Y": 15.514347,
+                "X": 17.398336
+            }
+        },
+        {
+            "id": 2073,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2073,
+                "Grabbable": 1,
+                "Y": 15.514347,
+                "X": 16.320011
+            }
+        },
+        {
+            "id": 2072,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2072,
+                "Grabbable": 1,
+                "Y": 15.514347,
+                "X": 15.367489
+            }
+        },
+        {
             "id": 1867,
             "class": "org.siggd.actor.Wind",
             "props": {
@@ -978,8 +1053,8 @@
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 185,
+                "Grabbable": 1,
                 "Y": 28.97522,
                 "X": 33.421665
             }
@@ -1490,7 +1565,7 @@
                 "Blob Spawner": "1",
                 "Y": 6.030893,
                 "X": 2.1068296,
-                "Rate": "10"
+                "Rate": "15"
             }
         },
         {
@@ -1533,6 +1608,7 @@
                 "Layer": 2,
                 "Body": "Level8_0_0",
                 "Friction": 0.05,
+                "ID": 0,
                 "Y": 17.066
             }
         },
@@ -1732,8 +1808,8 @@
                 "Body": "BarrelTopView",
                 "Friction": 0.15,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 140,
+                "Grabbable": 1,
                 "Y": 23.336866,
                 "X": 28.025036
             }
@@ -2196,6 +2272,21 @@
                 "ID": 1893,
                 "Y": 29.962803,
                 "X": 29.07063
+            }
+        },
+        {
+            "id": 2103,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "Friction": 0.2,
+                "Density": 0.3,
+                "ID": 2103,
+                "Grabbable": 1,
+                "Y": 14.752492,
+                "X": 18.007215
             }
         }
     ],
