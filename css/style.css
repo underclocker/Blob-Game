@@ -1,6 +1,6 @@
 ﻿body {
 	font-family: Arial, sans-serif;
-	background: url(images/bg-blob.png) no-repeat center center fixed;
+	background: url(../images/bg-blob.png) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -17,6 +17,11 @@
 	background-color: #EEE;
 	border-radius:2px;
 }
+.gallery img{
+	width: 250px;
+	margin: 0px 30px;
+}
+
 p{
 	margin-top: 0px;
 }
