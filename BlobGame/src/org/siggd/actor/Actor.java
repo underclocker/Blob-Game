@@ -620,7 +620,7 @@ public abstract class Actor {
 		mSpawner = id;
 		Actor spawner = mLevel.getActorById(Convert.getInt(id));
 		if (spawner != null && spawner instanceof Spawner) {
-			((Spawner) spawner).addToSpawn(this);
+			((Spawner) spawner).addToSpawn(this,0);
 		}
 	}
 	

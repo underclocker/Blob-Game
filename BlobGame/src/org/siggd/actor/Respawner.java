@@ -34,6 +34,7 @@ public class Respawner extends Actor {
 		setProp("Target Spawner", -1);
 		setProp("Ignore Blobs", 0);
 		setProp("Ignore Non-Blobs", 0);
+		setProp("Delay", 30);
 		setProp("Visible", 0);
 	}
 
@@ -61,7 +62,7 @@ public class Respawner extends Actor {
 			// there is a targeted spawner to send actors to
 			if (targetId != -1) {
 				Spawner sp = (Spawner) mLevel.getActorById(targetId);
-				sp.addToSpawn(actor);
+				sp.addToSpawn(actor, Convert.getInt(getProp("Delay")));
 				Array<JointEdge> edges = b.getJointList();
 				for (int i = 0; i < edges.size; i++) {
 					JointEdge edge = edges.get(i);

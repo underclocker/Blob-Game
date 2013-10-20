@@ -156,13 +156,14 @@ public class Spawner extends Actor implements IObservable {
 		return blob;
 	}
 
-	public void addToSpawn(Actor a) {
+	public void addToSpawn(Actor a, int delay) {
 		if (!mSpawnees.contains(a)) {
 			if (a.isActive()) {
 				a.setActive(false);
 			}
 			if (mSpawnees.size() == 0) {
-				mSpawnTimer.reset();
+				mSpawnTimer.unpause();
+				mSpawnTimer.mCurTime = -delay;
 			}
 			mSpawnees.add(a);
 		}
