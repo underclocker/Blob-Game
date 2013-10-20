@@ -79,7 +79,7 @@ public class Teleport extends Actor {
 	public void update() {
 		mTimer++;
 		int timer = Convert.getInt(getProp("Timer"));
-		if (timer != -1  && mTimer > timer){
+		if (timer != -1 && mTimer > timer) {
 			changeLevel();
 		}
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()

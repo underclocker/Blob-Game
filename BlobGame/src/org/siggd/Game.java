@@ -48,8 +48,9 @@ public class Game implements ApplicationListener {
 	public final static int EDIT = 0;
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
+	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
 
 	public final String mStartingLevel = "level1";
@@ -80,6 +81,9 @@ public class Game implements ApplicationListener {
 	private String mNextLevel;
 	private String mTickSound = "data/sfx/tick.ogg";
 	private String mNomSound = "data/sfx/nom.wav";
+	public ArrayList<String> mHackishLoader;
+	public int mLoaderMax;
+	private boolean mFlipper = true;
 
 	/**
 	 * Constructor (private)
@@ -115,6 +119,8 @@ public class Game implements ApplicationListener {
 	 */
 	@Override
 	public void create() {
+		mHackishLoader = new ArrayList<String>();
+
 		mPropScanner = new PropScanner("org.siggd.actor");
 
 		// Create the asset manager
@@ -180,7 +186,6 @@ public class Game implements ApplicationListener {
 			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
-
 		}
 
 		// BEGIN: EDITOR
@@ -200,10 +205,18 @@ public class Game implements ApplicationListener {
 			// load the select/point image
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
-			setState(Game.MENU);
-			setLevel("earth");
-			mLevelView.setCameraPosition(new Vector2());
-
+			setState(Game.LOAD);
+			setLevel("emptylevel");
+			mMenuView.setMenu(MenuView.LOADING);
+			mHackishLoader.add("level1");
+			mHackishLoader.add("level2");
+			mHackishLoader.add("level3");
+			mHackishLoader.add("level4");
+			mHackishLoader.add("level5");
+			mHackishLoader.add("level7");
+			mHackishLoader.add("level8");
+			mHackishLoader.add("earth");
+			mLoaderMax = mHackishLoader.size();
 		}
 		// END: EDITOR
 
@@ -273,6 +286,17 @@ public class Game implements ApplicationListener {
 	 */
 	@Override
 	public void render() {
+		if (!mHackishLoader.isEmpty()) {
+			if (mFlipper = !mFlipper) {
+				String level = mHackishLoader.remove(0);
+				setLevel(level);
+				if (mHackishLoader.isEmpty()) {
+					setState(MENU);
+					Game.get().getLevelView().resetCamera();
+					mMenuView.setMenu(MenuView.MAIN);
+				}
+			}
+		}
 		// Load any necessary resources
 		if (!mAssetManager.update()) {
 			// Show loading screen if not done loading
@@ -293,12 +317,13 @@ public class Game implements ApplicationListener {
 			mEditor.update();
 		}
 
-		if (mNextLevel == null) {
+		if (mState != LOAD && mNextLevel == null)
 			mLevelView.render();
-		}
-		if (mState == MENU) {
+
+		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
 		}
+
 	}
 
 	/**
@@ -449,7 +474,7 @@ public class Game implements ApplicationListener {
 			mLevel.mMusic = music;
 		}
 		mLevel.loadResources();
-		
+
 		if (oldLevel != null) {
 			oldLevel.stopMusic();
 		}
@@ -605,8 +630,8 @@ public class Game implements ApplicationListener {
 	public void setNextLevel(String nextLevel) {
 		mNextLevel = nextLevel;
 	}
-	
-//TODO: move these functions somewhere more appropriate
+
+	// TODO: move these functions somewhere more appropriate
 	public void playTickSound() {
 		Sound sound;
 		long soundID;
@@ -617,6 +642,7 @@ public class Game implements ApplicationListener {
 			sound.setVolume(soundID, .2f);
 		}
 	}
+
 	public void playNomSound() {
 		Sound sound;
 		long soundID;
@@ -627,8 +653,6 @@ public class Game implements ApplicationListener {
 			sound.setVolume(soundID, .2f);
 		}
 	}
-	
-	
 
 	// I can't believe we didn't have a function for this before
 	public void exit() {
