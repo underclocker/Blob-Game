@@ -562,6 +562,7 @@ public class MenuView {
 			}
 			Game.get().setState(Game.PLAY);
 			Game.get().setLevel(Game.get().getLevel().getAssetKey());
+			Game.get().getLevel().killFade();
 		}
 	};
 
