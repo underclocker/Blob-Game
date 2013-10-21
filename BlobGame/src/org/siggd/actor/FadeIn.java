@@ -51,6 +51,7 @@ public class FadeIn extends Actor {
 			alpha -= .05f;
 			if (alpha < 0) {
 				alpha = 0;
+				return;
 			}
 
 			if (batch == null)
