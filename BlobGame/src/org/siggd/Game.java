@@ -52,6 +52,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
+	public final static boolean PRELOAD = true; // only preloads in release
 
 	public final String mStartingLevel = "level1";
 
@@ -182,7 +183,7 @@ public class Game implements ApplicationListener {
 
 		// Load physics bodies
 
-		if (RELEASE && false) {
+		if (RELEASE) {
 			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
@@ -205,18 +206,24 @@ public class Game implements ApplicationListener {
 			// load the select/point image
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
-			setState(Game.LOAD);
-			setLevel("emptylevel");
-			mMenuView.setMenu(MenuView.LOADING);
-			mHackishLoader.add("level1");
-			mHackishLoader.add("level2");
-			mHackishLoader.add("level3");
-			mHackishLoader.add("level4");
-			mHackishLoader.add("level5");
-			mHackishLoader.add("level7");
-			mHackishLoader.add("level8");
-			mHackishLoader.add("earth");
-			mLoaderMax = mHackishLoader.size();
+			if (PRELOAD) {
+				setState(Game.LOAD);
+				setLevel("emptylevel");
+				mMenuView.setMenu(MenuView.LOADING);
+				mHackishLoader.add("level1");
+				mHackishLoader.add("level2");
+				mHackishLoader.add("level3");
+				mHackishLoader.add("level4");
+				mHackishLoader.add("level5");
+				mHackishLoader.add("level7");
+				mHackishLoader.add("level8");
+				mHackishLoader.add("earth");
+				mLoaderMax = mHackishLoader.size();
+			} else {
+				setState(Game.MENU);
+				setLevel("earth");
+				mLevelView.resetCamera();
+			}
 		}
 		// END: EDITOR
 
@@ -256,6 +263,9 @@ public class Game implements ApplicationListener {
 		}
 		sbOut.delete(sbOut.length() - 1, sbOut.length());
 		sbOut.append("],\"dynamicObjects\":[]}");
+		FileHandle output = new FileHandle(
+				"../../Blob-Game/BlobGame-android/assets/data/bodies.json");
+		output.writeString(sbOut.toString(), false);
 		// System.out.println(sbOut.toString());
 		return sbOut.toString();
 	}
