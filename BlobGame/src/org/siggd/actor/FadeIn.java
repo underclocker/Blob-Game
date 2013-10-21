@@ -50,7 +50,7 @@ public class FadeIn extends Actor {
 				return;
 			alpha -= .05f;
 			if (alpha < 0) {
-				alpha = 0;
+				setVisible(0);
 				return;
 			}
 

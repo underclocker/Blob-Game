@@ -99,7 +99,7 @@ public class Level implements Iterable<Actor> {
 		mProps.put("Parallax", "");
 
 		mProps.put("Use Light", 1);
-		
+
 		setProp("Ambient Light", .3f);
 		mNextId = 0;
 
@@ -109,17 +109,22 @@ public class Level implements Iterable<Actor> {
 		mWorld.setContactListener(mContactHandler);
 		mContactHandler.addListener(new BlobDetangler());
 	}
-	
-	public void killFade(){
-		for (Actor a : mActors){
-			if (a instanceof FadeIn){
-				FadeIn fi = (FadeIn)a;
-				fi.setProp("Visible", 0);
+
+	public void killFade() {
+		for (Actor a : mActors) {
+			if (a instanceof FadeIn) {
+				FadeIn fi = (FadeIn) a;
+				fi.setVisible(0);
 			}
 		}
 	}
 
 	public void startMusic() {
+		for (Actor a : mActors) {
+			if (a instanceof FadeIn && a.getVisible() != 0) {
+				return;
+			}
+		}
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
 
@@ -680,7 +685,7 @@ public class Level implements Iterable<Actor> {
 		for (Actor a : mActors) {
 			a.dispose();
 		}
-	Gdx.input.setInputProcessor(Game.get().getInput());
+		Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}
