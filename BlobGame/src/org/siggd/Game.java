@@ -53,6 +53,7 @@ public class Game implements ApplicationListener {
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
 	public final static boolean PRELOAD = true; // only preloads in release
+	public final static boolean FRAMEBYFRAME = true;
 
 	public final String mStartingLevel = "level1";
 
@@ -327,8 +328,10 @@ public class Game implements ApplicationListener {
 			mEditor.update();
 		}
 
-		if (mState != LOAD && mNextLevel == null)
+		if (mState != LOAD && mNextLevel == null) {
+			mLevelView.update();
 			mLevelView.render();
+		}
 
 		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();

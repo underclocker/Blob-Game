@@ -19,6 +19,7 @@ import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -57,6 +58,7 @@ public class Level implements Iterable<Actor> {
 	private JSONObject mLevelSave;
 	private final String mSaveFileName = ".BlobGame/BlobSave.json";
 	private static final Logger mLog = Logger.getLogger(Level.class.getName());
+	private boolean isF12Down = false;
 
 	/**
 	 * Constructor
@@ -179,22 +181,27 @@ public class Level implements Iterable<Actor> {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
 			// Begin the step.
-			mWorld.step(1 / 60f, 6, 2);
+
+			if ((Gdx.input.isKeyPressed(Input.Keys.F12) && !isF12Down) || !Game.FRAMEBYFRAME) {
+				isF12Down = true;
+				mWorld.step(1 / 60f, 6, 2);
+				Actor a;
+				for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
+					a = actor.next();
+					if (a.isActive()) {
+						try {
+							a.update();
+						} catch (Exception e) {
+							mLog.severe("Exception when updating actor no " + a.getId() + ": "
+									+ e.toString());
+						}
+					}
+				}
+			} else if (!Gdx.input.isKeyPressed(Input.Keys.F12)) {
+				isF12Down = false;
+			}
 		} else {
 			stopMusic();
-		}
-		Actor a;
-
-		for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
-			a = actor.next();
-			if (a.isActive()) {
-				try {
-					a.update();
-				} catch (Exception e) {
-					mLog.severe("Exception when updating actor no " + a.getId() + ": "
-							+ e.toString());
-				}
-			}
 		}
 		flushActorQueue();
 	}

@@ -51,9 +51,10 @@ public class LevelView {
 												// viewport, in pixels
 	public static final float vHEIGHT = 1080; // /< "Virtual" height of the
 												// viewport, in pixels
-	public static final float BORDER = 3.5f; // /< Border around visible display,
-											// in meters. Only used in
-											// multiplayer
+	public static final float BORDER = 3.5f; // /< Border around visible
+												// display,
+												// in meters. Only used in
+												// multiplayer
 	public static final float CAM_SMOOTH = .08f; // /< coefficient for how much
 													// closer the camera gets to
 													// its
@@ -153,13 +154,6 @@ public class LevelView {
 		// Update ambient light level
 		mRayHandler.setAmbientLight(.1f, .1f, .1f, level.getAmbientLight());
 
-		mOldCamera.position.x = mCamera.position.x;
-		mOldCamera.position.y = mCamera.position.y;
-		mOldCamera.viewportWidth = mCamera.viewportWidth;
-		mOldCamera.viewportHeight = mCamera.viewportHeight;
-		if (state == Game.PLAY) {
-			positionCamera(true);
-		}
 		// Clear the screen
 		Gdx.gl.glClearColor(.0f, .0f, .0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -334,6 +328,16 @@ public class LevelView {
 		mMaxY = -Float.MAX_VALUE;
 	}
 
+	public void update() {
+		mOldCamera.position.x = mCamera.position.x;
+		mOldCamera.position.y = mCamera.position.y;
+		mOldCamera.viewportWidth = mCamera.viewportWidth;
+		mOldCamera.viewportHeight = mCamera.viewportHeight;
+		if (Game.get().getState() == Game.PLAY) {
+			positionCamera(true);
+		}
+	}
+
 	private void smoothCam() {
 
 		float delta, scale;
@@ -354,8 +358,9 @@ public class LevelView {
 		scale = scaleSmooth(deltax);
 		float deltay = (mCamera.viewportHeight - mOldCamera.viewportHeight);
 		float scalecache = scaleSmooth(deltay);
-		
-		if (scalecache > scale) scale = scalecache;
+
+		if (scalecache > scale)
+			scale = scalecache;
 
 		deltax *= scale;
 		deltay *= scale;
@@ -367,9 +372,10 @@ public class LevelView {
 		mOldScale = mScale;
 
 	}
-	public float scaleSmooth(float delta){
+
+	public float scaleSmooth(float delta) {
 		float abs = Math.abs(delta);
-		return (40f / (200f + 10f*abs + 250f*(float)Math.sqrt(abs)));
+		return (40f / (200f + 10f * abs + 250f * (float) Math.sqrt(abs)));
 	}
 
 	public void setWorld(World world) {

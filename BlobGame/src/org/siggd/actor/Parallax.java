@@ -64,14 +64,16 @@ public class Parallax extends Actor {
 			scale *= Convert.getFloat(getProp("Scale"));
 			float halfwidth = tex.getWidth() / 2f / lv.getVScale() * scale;
 			float halfheight = tex.getHeight() / 2f / lv.getVScale() * scale;
-			setProp("Rotation",Convert.getFloat(getProp("Rotation Speed"))+Convert.getFloat(getProp("Rotation")));
+
 			mRotation = Convert.getFloat(getProp("Rotation"));
-			setProp("X Wave Angle", Convert.getFloat(getProp("X Wave Angle"))+ Convert.getFloat(getProp("X Wave Speed")));
-			pos.x += Math.sin(Convert.getFloat(getProp("X Wave Angle")))* Convert.getFloat(getProp("X Wave Amplitude"));
-			setProp("Y Wave Angle", Convert.getFloat(getProp("Y Wave Angle"))+ Convert.getFloat(getProp("Y Wave Speed")));
-			pos.y += Math.sin(Convert.getFloat(getProp("Y Wave Angle")))* Convert.getFloat(getProp("Y Wave Amplitude"));
-			batch.draw(tex, pos.x - halfwidth + offset.x + Convert.getFloat(getProp("X Offset"))*scale, pos.y - halfheight + offset.y + Convert.getFloat(getProp("Y Offset"))*scale, halfwidth,halfheight,
-					halfwidth * 2, halfheight * 2,1f,1f,mRotation,0,0,tex.getWidth(),tex.getHeight(),false,false);
+			pos.x += Math.sin(Convert.getFloat(getProp("X Wave Angle")))
+					* Convert.getFloat(getProp("X Wave Amplitude"));
+			pos.y += Math.sin(Convert.getFloat(getProp("Y Wave Angle")))
+					* Convert.getFloat(getProp("Y Wave Amplitude"));
+			batch.draw(tex, pos.x - halfwidth + offset.x + Convert.getFloat(getProp("X Offset"))
+					* scale, pos.y - halfheight + offset.y + Convert.getFloat(getProp("Y Offset"))
+					* scale, halfwidth, halfheight, halfwidth * 2, halfheight * 2, 1f, 1f,
+					mRotation, 0, 0, tex.getWidth(), tex.getHeight(), false, false);
 		}
 
 		@Override
@@ -103,7 +105,8 @@ public class Parallax extends Actor {
 		setProp("X Wave Speed", 0);
 		setProp("Y Wave Amplitude", 0);
 		setProp("Y Wave Angle", 0);
-		setProp("Y Wave Speed", 0);
+		setProp("Y Wave Speed", 0);
+
 	}
 
 	/**
@@ -155,6 +158,14 @@ public class Parallax extends Actor {
 
 	@Override
 	public void update() {
+		setProp("Rotation",
+				Convert.getFloat(getProp("Rotation Speed")) + Convert.getFloat(getProp("Rotation")));
+		setProp("X Wave Angle",
+				Convert.getFloat(getProp("X Wave Angle"))
+						+ Convert.getFloat(getProp("X Wave Speed")));
+		setProp("Y Wave Angle",
+				Convert.getFloat(getProp("Y Wave Angle"))
+						+ Convert.getFloat(getProp("Y Wave Speed")));
 	}
 
 	/**
@@ -163,8 +174,8 @@ public class Parallax extends Actor {
 	@Override
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
-		if(man.containsAsset(mTex)) {
-			//man.unload(mTex);
+		if (man.containsAsset(mTex)) {
+			// man.unload(mTex);
 		}
 	}
 
