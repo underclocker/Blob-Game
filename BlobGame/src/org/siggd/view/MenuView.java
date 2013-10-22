@@ -56,10 +56,6 @@ public class MenuView {
 	private Controller mFakePauseController;
 	private Table mLevelsTable;
 	private Table mTint;
-	private Table mBaseCustomizeTable;
-	private Table mCustomizeTable;
-	private Image mJoinImage;
-	private Image mStartImage;
 	private int mDelay;
 	private MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
@@ -103,7 +99,6 @@ public class MenuView {
 		createPauseMenu();
 		createFakePauseMenu();
 		createLevelsMenu();
-		createCustomizeMenu();
 
 		// Set the starting menu
 		setMenu(MAIN);
@@ -290,18 +285,6 @@ public class MenuView {
 
 	}
 
-	private void createCustomizeMenu() {
-		mCustomizeTable = new Table(mSkin);
-		mCustomizeTable.setFillParent(true);
-		mBaseCustomizeTable = new Table(mSkin);
-		mBaseCustomizeTable.setFillParent(true);
-		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst1.png")));
-		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
-		Image baseImage = new Image(new Texture(Gdx.files.internal("data/gfx/InstBlank.png")));
-		baseImage.setColor(1, 1, 1, 0.75f);
-		mBaseCustomizeTable.add(baseImage);
-	}
-
 	public void render() {
 
 		// Table.drawDebug(mStage);
@@ -333,16 +316,7 @@ public class MenuView {
 				mShapeRenderer.end();
 			}
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
-			if (Game.get().activePlayersNum() > 0) {
-				mJoinImage.remove();
-				if (!mStartImage.isDescendantOf(mCustomizeTable)) {
-					mRollingAlpha = 0;
-					mHintTimer = 0;
-					mCustomizeTable.add(mStartImage);
-					mBaseCustomizeTable.setColor(1, 1, 1, 0);
-					mCustomizeTable.setColor(1, 1, 1, 0);
-				}
-			}
+			
 		} else if (LOADING.equals(mCurrentMenu)) {
 			mShapeRenderer.begin(ShapeType.Filled);
 			mShapeRenderer.setColor(Color.DARK_GRAY);
@@ -355,10 +329,6 @@ public class MenuView {
 							.get().mLoaderMax), 10);
 			mShapeRenderer.end();
 		}
-		mRollingAlpha += .03f;
-		Color tColor = new Color(1.0f, 1.0f, 1.0f, (float) (1 - Math.cos(mRollingAlpha)) / 2.0f);
-		mStartImage.setColor(tColor);
-		mJoinImage.setColor(tColor);
 		mStage.act(Gdx.graphics.getDeltaTime());
 		mStage.draw();
 		if (!LOADING.equals(mCurrentMenu))
@@ -368,11 +338,7 @@ public class MenuView {
 	public void update() {
 		mMenuController.update();
 		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
-			mHintTimer++;
-			if (mHintTimer > 120 && mHintTimer <= 180) {
-				mCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
-				mBaseCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
-			}
+			
 			Player p = null;
 			if (mDelay > 10) {
 				p = testForNewPlayer();
@@ -643,9 +609,6 @@ public class MenuView {
 		mPauseTable.remove();
 		mFakePauseTable.remove();
 		mLevelsTable.remove();
-		mBaseCustomizeTable.remove();
-		mCustomizeTable.remove();
-		mStartImage.remove();
 		mTint.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
@@ -676,17 +639,8 @@ public class MenuView {
 			mMenuController.setTable(mLevelsTable);
 			mMenuController.setIndex(1);
 		} else if (CUSTOMIZE.equals(menu)) {
-			mHintTimer = 0;
-			if (!mJoinImage.isDescendantOf(mCustomizeTable)) {
-				mRollingAlpha = 0;
-				mCustomizeTable.add(mJoinImage);
-			}
-			mStage.addActor(mBaseCustomizeTable);
-			mStage.addActor(mCustomizeTable);
-			mBaseCustomizeTable.setColor(1, 1, 1, 0);
-			mCustomizeTable.setColor(1, 1, 1, 0);
-			mMenuController.setTable(null);
 			Game.get().setLevel("charselect");
+			mMenuController.setTable(null);
 			for (Player p : Game.get().getPlayers()) {
 				if (p.active) {
 					Level l = Game.get().getLevel();
