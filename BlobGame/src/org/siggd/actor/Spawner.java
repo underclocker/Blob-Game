@@ -58,7 +58,8 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Blob Spawner", 0);
 		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
-		
+		this.setFriction(.1f);
+
 		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
 		mPointLight.setDistance(1.5f);
 		mPointLight.attachToBody(mBody, 0, 0);
