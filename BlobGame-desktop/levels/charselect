@@ -10,7 +10,7 @@
         }
     }],
     "props": {
-        "Ambient Light": 0.3,
+        "Ambient Light": 0.85,
         "Min Camera Y": "-4.5",
         "Gravity X": 0,
         "Gravity Y": -9.8,
@@ -20,7 +20,7 @@
         "Min Camera X": "-8",
         "Max Camera X": "8",
         "SongName": "pop.ogg",
-        "Use Light": "0",
+        "Use Light": "1",
         "Solidity Enabled": 1
     }
 }
