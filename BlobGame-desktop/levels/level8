@@ -1994,7 +1994,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1851,
                 "Y": 3.4999387,
                 "X": 2.5966105
@@ -2005,7 +2005,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1852,
                 "Y": 3.4999387,
                 "X": 3.6449819
@@ -2016,7 +2016,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1853,
                 "Y": 3.4999387,
                 "X": 4.6933537
@@ -2027,7 +2027,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1854,
                 "Y": 3.506928,
                 "X": 5.7417254
@@ -2038,7 +2038,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1855,
                 "Y": 3.506928,
                 "X": 6.7900968
@@ -2049,7 +2049,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1856,
                 "Y": 3.506928,
                 "X": 7.845457
@@ -2060,7 +2060,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1857,
                 "Y": 3.506928,
                 "X": 8.900818
@@ -2071,7 +2071,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1858,
                 "Y": 3.506928,
                 "X": 9.956179
@@ -2082,7 +2082,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1859,
                 "Y": 3.506928,
                 "X": 11.018529
@@ -2093,7 +2093,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1860,
                 "Y": 3.506928,
                 "X": 12.073889
@@ -2104,7 +2104,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1861,
                 "Y": 3.499939,
                 "X": 13.129251
@@ -2115,7 +2115,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1862,
                 "Y": 3.499939,
                 "X": 14.18461
@@ -2126,7 +2126,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1863,
                 "Y": 3.499939,
                 "X": 15.239971
@@ -2137,7 +2137,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1864,
                 "Y": 3.499939,
                 "X": 16.30232
@@ -2148,7 +2148,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1865,
                 "Y": 3.499939,
                 "X": 17.350693
@@ -2159,7 +2159,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1866,
                 "Y": 3.499939,
                 "X": 18.415375
@@ -2170,7 +2170,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 270,
-                "Wind Strength": "15",
+                "Wind Strength": "7",
                 "ID": 1867,
                 "Y": 3.5035238,
                 "X": 19.472887
