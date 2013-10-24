@@ -100,6 +100,8 @@ public class Level implements Iterable<Actor> {
 
 		mProps.put("Use Light", 1);
 
+		mProps.put("Difficulty", 0);
+
 		setProp("Ambient Light", .3f);
 		mNextId = 0;
 

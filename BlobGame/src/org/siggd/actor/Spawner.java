@@ -149,6 +149,7 @@ public class Spawner extends Actor implements IObservable {
 	private Blob spawnBlob(int id) {
 		Blob blob = new Blob(this.getLevel(), this.getLevel().getId());
 		blob.setProp("Player ID", id);
+		blob.postLoad();
 		// assign blob to player
 		blob.setActive(false);
 		// set the layer to the layer of the placeholder blob
