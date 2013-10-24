@@ -649,7 +649,7 @@ public class Game implements ApplicationListener {
 			sound = mAssetManager.get(mTickSound, Sound.class);
 			soundID = sound.play();
 			sound.setPitch(soundID, 1);
-			sound.setVolume(soundID, .2f);
+			sound.setVolume(soundID, .5f);
 		}
 	}
 
@@ -660,7 +660,7 @@ public class Game implements ApplicationListener {
 			sound = mAssetManager.get(mNomSound, Sound.class);
 			soundID = sound.play();
 			sound.setPitch(soundID, 1);
-			sound.setVolume(soundID, .2f);
+			sound.setVolume(soundID, .5f);
 		}
 	}
 
