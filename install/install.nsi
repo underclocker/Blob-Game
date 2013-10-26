@@ -12,7 +12,7 @@
 
   ;Name and file
   Name "Blob Game"
-  OutFile "BlobGame.exe"
+  OutFile "BlobInstall.exe"
 
   ;Default installation folder
   InstallDir "C:\Blob Game"
@@ -27,6 +27,10 @@
 ;Interface Settings
 
   !define MUI_ABORTWARNING
+  !define MUI_ICON "blob.ico"
+  !define MUI_UNICON "blob.ico"
+  !define MUI_HEADERIMAGE_BITMAP "blob.bmp"
+  !define MUI_HEADERIMAGE_UNBITMAP "blob.bmp"
 
 ;--------------------------------
 ;Pages
