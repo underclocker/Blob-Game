@@ -10,6 +10,7 @@ import org.siggd.Level;
 import org.siggd.StableContact;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
+import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -57,12 +58,14 @@ public class Dot extends Actor {
 		mBody.setLinearDamping(.5f);
 		mBody.setAngularDamping(.9f);
 
-		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 32);
-		mPointLight.setColor(.1f, .1f, .1f, .9f);
-		mPointLight.setDistance(1f);
-		mPointLight.setXray(true);
-		mPointLight.attachToBody(mBody, 0, 0);
-		mPointLight.setActive(false);
+		if (LevelView.mUseLights) {
+			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 32);
+			mPointLight.setColor(.1f, .1f, .1f, .9f);
+			mPointLight.setDistance(1f);
+			mPointLight.setXray(true);
+			mPointLight.attachToBody(mBody, 0, 0);
+			mPointLight.setActive(false);
+		}
 		setProp("Active", 1);
 		setProp("Layer", 3);
 		// TODO: set light active based on if actor is dummy or not
@@ -120,7 +123,8 @@ public class Dot extends Actor {
 	@Override
 	public void setProp(String name, Object val) {
 		if (name.equals("Active")) {
-			mPointLight.setActive(Convert.getInt(val) != 0);
+			if (mPointLight != null)
+				mPointLight.setActive(Convert.getInt(val) != 0);
 			setActive(Convert.getInt(val) != 0);
 		}
 		super.setProp(name, val);

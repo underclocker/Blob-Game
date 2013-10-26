@@ -1,5 +1,7 @@
 package org.siggd;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -24,8 +26,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
@@ -85,6 +90,7 @@ public class Game implements ApplicationListener {
 	public ArrayList<String> mHackishLoader;
 	public int mLoaderMax;
 	private boolean mFlipper = true;
+	private boolean mPrtScn = false;
 
 	/**
 	 * Constructor (private)
@@ -333,7 +339,6 @@ public class Game implements ApplicationListener {
 		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
 		}
-
 	}
 
 	/**
@@ -662,6 +667,36 @@ public class Game implements ApplicationListener {
 			sound.setPitch(soundID, 1);
 			sound.setVolume(soundID, .5f);
 		}
+	}
+
+	public void saveScreenshot(FileHandle file) {
+		Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		PixmapIO.writePNG(file, pixmap);
+	}
+
+	public Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {
+		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+
+		final Pixmap pixmap = new Pixmap(w, h, Format.RGBA8888);
+		ByteBuffer pixels = pixmap.getPixels();
+		Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
+
+		final int numBytes = w * h * 4;
+		byte[] lines = new byte[numBytes];
+		if (flipY) {
+			final int numBytesPerLine = w * 4;
+			for (int i = 0; i < h; i++) {
+				pixels.position((h - i - 1) * numBytesPerLine);
+				pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+			}
+			pixels.clear();
+			pixels.put(lines);
+		} else {
+			pixels.clear();
+			pixels.get(lines);
+		}
+
+		return pixmap;
 	}
 
 	// I can't believe we didn't have a function for this before

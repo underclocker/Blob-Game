@@ -17,6 +17,7 @@ import org.siggd.actor.Dot;
 import org.siggd.actor.FadeIn;
 import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
+import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -683,7 +684,8 @@ public class Level implements Iterable<Actor> {
 	 */
 	public void dispose() {
 		saveProgress();
-		Game.get().getLevelView().getRayHandler().removeAll();
+		if (LevelView.mUseLights)
+			Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
 			a.dispose();
 		}

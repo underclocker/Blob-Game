@@ -6,9 +6,9 @@ import java.io.File;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
@@ -17,7 +17,6 @@ import com.badlogic.gdx.files.FileHandle;
 public class Main {
 	private final static String mPrefFileName = ".BlobGame/BlobPref.txt";
 	private static JSONObject mPrefs;
-
 	public static void main(String[] args) {
 
 		LwjglFiles tempLwFiles = new LwjglFiles();
@@ -37,6 +36,8 @@ public class Main {
 			saveToPref("vSyncEnabled", (Integer) 1);
 			// Related to harrison's computer speedups.
 			saveToPref("useCPUSynch", (Integer) 0);
+			saveToPref("useLights", (Integer) 1);
+
 
 			// Flush
 			handle.writeString(mPrefs.toString(), false);
@@ -60,6 +61,7 @@ public class Main {
 			cfg.fullscreen = mPrefs.getInt("fullscreen") != 0;
 			cfg.useGL20 = mPrefs.getInt("useGL20") != 0;
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
+			LevelView.mUseLights = mPrefs.getInt("useLights") != 0;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

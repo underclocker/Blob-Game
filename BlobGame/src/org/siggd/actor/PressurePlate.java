@@ -11,6 +11,7 @@ import org.siggd.StableContact;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
 import org.siggd.view.Drawable;
+import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,12 +39,14 @@ public class PressurePlate extends Actor implements IObservable {
 		mDefaultDrawable = new BodySprite(mBody, origin, mTex);
 		mDrawable.mDrawables.add(mDefaultDrawable);
 		mActiveDrawable = new BodySprite(mBody, origin, mActiveTex);
-		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
-		mPointLight.setDistance(1.5f);
-		mPointLight.attachToBody(mBody, 0, 0);
-		mPointLight.setSoftnessLenght(1f);
-		mPointLight.setXray(true);
-		mPointLight.setStaticLight(true);
+		if (LevelView.mUseLights) {
+			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
+			mPointLight.setDistance(1.5f);
+			mPointLight.attachToBody(mBody, 0, 0);
+			mPointLight.setSoftnessLenght(1f);
+			mPointLight.setXray(true);
+			mPointLight.setStaticLight(true);
+		}
 		// TODO: set light active based on if actor is dummy or not
 		setProp("X", -10000);
 		setProp("Restitution", 0f);
@@ -75,7 +78,8 @@ public class PressurePlate extends Actor implements IObservable {
 		boolean active = false;
 
 		for (Body b : bodies) {
-			if (b.getUserData() instanceof Dot) continue;
+			if (b.getUserData() instanceof Dot)
+				continue;
 			boolean isSensor = false;
 			Array<Fixture> fixtures = b.getFixtureList();
 			int i = 0;
@@ -99,7 +103,8 @@ public class PressurePlate extends Actor implements IObservable {
 	@Override
 	public void setProp(String name, Object val) {
 		if (name.equals("Active")) {
-			mPointLight.setActive(Convert.getInt(val) != 0);
+			if (mPointLight != null)
+				mPointLight.setActive(Convert.getInt(val) != 0);
 		}
 		super.setProp(name, val);
 	}
@@ -122,7 +127,8 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
-		mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
+		if (mPointLight != null)
+			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
 		if (state == mState)
 			return;
 		if (state) {

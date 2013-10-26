@@ -32,7 +32,7 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
-	private Vector2 spawnOffset = new Vector2(0,1.5f);
+	private Vector2 spawnOffset = new Vector2(0, 1.5f);
 	private Vector2 rotatedOffset;
 
 	public Spawner(Level level, long id) {
@@ -47,10 +47,10 @@ public class Spawner extends Actor implements IObservable {
 		mOffDrawable = (new BodySprite(mBody, origin, offTex));
 		mDrawable.mDrawables.add(mOffDrawable);
 		maxBlobs = Game.get().getNumberOfPlayers();
-		
+
 		mSpawnTimer = new Timer();
 		mSpawnTimer.unpause();
-		
+
 		mTexTimer = new Timer();
 		mTexTimer.setTimer(texChangeTime);
 		mTexTimer.unpause();
@@ -60,12 +60,14 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Exit Velocity", 2);
 		this.setFriction(.1f);
 
-		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
-		mPointLight.setDistance(1.5f);
-		mPointLight.attachToBody(mBody, 0, 0);
-		mPointLight.setSoftnessLenght(1f);
-		mPointLight.setXray(true);
-		
+		if (LevelView.mUseLights) {
+			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
+			mPointLight.setDistance(1.5f);
+			mPointLight.attachToBody(mBody, 0, 0);
+			mPointLight.setSoftnessLenght(1f);
+			mPointLight.setXray(true);
+		}
+
 		setState(true);
 	}
 
@@ -82,7 +84,7 @@ public class Spawner extends Actor implements IObservable {
 		super.update();
 		mSpawnTimer.update();
 		mTexTimer.update();
-		if (mSpawnees.size() > 0){
+		if (mSpawnees.size() > 0) {
 			setState(true);
 			if (mSpawnTimer.isTriggered()) {
 				spawnActor();
@@ -137,8 +139,7 @@ public class Spawner extends Actor implements IObservable {
 
 		LevelView lv = Game.get().getLevelView();
 
-		if (mLevel.getAssetKey() != null
-				&& Convert.getInt(this.getProp("Blob Spawner")) == 1) {
+		if (mLevel.getAssetKey() != null && Convert.getInt(this.getProp("Blob Spawner")) == 1) {
 			lv.setCameraPosition(mBody.getPosition());
 			if (Game.get().getState() != Game.MENU) {
 				lv.positionCamera(false);
@@ -153,8 +154,7 @@ public class Spawner extends Actor implements IObservable {
 		// assign blob to player
 		blob.setActive(false);
 		// set the layer to the layer of the placeholder blob
-		int layer = Convert.getInt(mLevel.getBlobs(false).get(0)
-				.getProp("Layer"));
+		int layer = Convert.getInt(mLevel.getBlobs(false).get(0).getProp("Layer"));
 		blob.setProp("Layer", (Integer) layer);
 		mSpawnees.add((int) Math.floor(Math.random() * mSpawnees.size()), blob);
 		return blob;
@@ -180,8 +180,8 @@ public class Spawner extends Actor implements IObservable {
 				this.getLevel().addActor(spawnee);
 			}
 		}
-		
-		Vector2 pos = new Vector2 (getX() + rotatedOffset.x, getY() + rotatedOffset.y);
+
+		Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() + rotatedOffset.y);
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
@@ -192,7 +192,7 @@ public class Spawner extends Actor implements IObservable {
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
 		Vector2 vel = new Vector2(0, Convert.getInt(getProp("Exit Velocity")));
-		vel.rotate(Convert.getDegrees(mBody.getAngle())+(float)(20f*Math.random()-10f));
+		vel.rotate(Convert.getDegrees(mBody.getAngle()) + (float) (20f * Math.random() - 10f));
 		spawnee.setVelocityX(vel.x);
 		spawnee.setVelocityY(vel.y);
 		if (spawnee instanceof Blob) {
@@ -223,7 +223,8 @@ public class Spawner extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
-		mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, 0.8f);
+		if (mPointLight != null)
+			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, 0.8f);
 		if (state == mState)
 			return;
 		if (state) {
@@ -245,11 +246,11 @@ public class Spawner extends Actor implements IObservable {
 		if (name.equals("Rate")) {
 			mSpawnTimer.setTimer(Convert.getInt(val));
 		}
-		
+
 		if (name.equals("Angle")) {
 			rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
 		}
-		
+
 		super.setProp(name, val);
 	}
 }

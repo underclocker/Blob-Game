@@ -20,6 +20,7 @@ import org.siggd.StableContact;
 import org.siggd.Timer;
 import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
+import org.siggd.view.LevelView;
 import org.siggd.view.Sprite;
 
 import com.badlogic.gdx.Gdx;
@@ -618,10 +619,7 @@ public class Blob extends Actor implements Controllable {
 		mOldVCenter = new Vector2();
 		mLeftEyeDest = new Vector2(0, 0);
 		mRightEyeDest = new Vector2(0, 0);
-		mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(.1f, .1f,
-				.1f, 1f), 7, -10000, -10000);
-		mLight.setSoft(true);
-		mLight.setSoftnessLenght(.5f);
+
 		mPoof = 1;
 
 		if (getLevel().getAssetKey() != null) {
@@ -632,8 +630,14 @@ public class Blob extends Actor implements Controllable {
 			((CompositeDrawable) mDrawable).mDrawables.add(mBlobDrawable);
 		}
 		makeBlobBody();
-		mLight.setActive(false);
-		mLight.attachToBody(mLeftEye, 0f, 0f);
+		if (LevelView.mUseLights) {
+			mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(.1f,
+					.1f, .1f, 1f), 7, -10000, -10000);
+			mLight.setSoft(true);
+			mLight.setSoftnessLenght(.5f);
+			mLight.setActive(false);
+			mLight.attachToBody(mLeftEye, 0f, 0f);
+		}
 		mSoundTimer = new Timer();
 		mSoundTimer.setTimer(12);
 		mSoundTimer.unpause();
@@ -900,17 +904,18 @@ public class Blob extends Actor implements Controllable {
 		eyeDelta.sub(mRightEye.getPosition());
 		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
 
-		mLightColor.set(mBlobDrawable.mSquishColor);
-		if (mExtraGlow > 0) {
-			mExtraGlow -= .75f;
-		} else {
-			mPointCombo = 0;
+		if (mLight != null) {
+			mLightColor.set(mBlobDrawable.mSquishColor);
+			if (mExtraGlow > 0) {
+				mExtraGlow -= .75f;
+			} else {
+				mPointCombo = 0;
+			}
+			float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
+			mLightColor.mul(brightness, brightness, brightness, 1f);
+			mLight.setColor(mLightColor);
+			mLight.setDistance(3f + 10f * brightness);
 		}
-		float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
-		mLightColor.mul(brightness, brightness, brightness, 1f);
-		mLight.setColor(mLightColor);
-		mLight.setDistance(3f + 10f * brightness);
-
 		Vector2 center;
 		float rotation;
 		if (mState == SQUISH_STATE) {
@@ -1196,7 +1201,8 @@ public class Blob extends Actor implements Controllable {
 			for (Body b : mParticles) {
 				b.setActive(false);
 			}
-			mLight.setActive(false);
+			if (mLight != null)
+				mLight.setActive(false);
 			mLeftEye.setActive(false);
 			mRightEye.setActive(false);
 		} else {
@@ -1207,7 +1213,8 @@ public class Blob extends Actor implements Controllable {
 					b.setActive(true);
 				}
 			}
-			mLight.setActive(true);
+			if (mLight != null)
+				mLight.setActive(true);
 			mLeftEye.setActive(true);
 			mRightEye.setActive(true);
 		}
@@ -1273,7 +1280,8 @@ public class Blob extends Actor implements Controllable {
 				f = b.getFixtureList().get(0);
 				f.setFilterData(filter);
 			}
-			mLight.setContactFilter((short) (2 << (int) value), (short) 0, filter.maskBits);
+			if (mLight != null)
+				mLight.setContactFilter((short) (2 << (int) value), (short) 0, filter.maskBits);
 			filter = new Filter();
 			filter.categoryBits = (short) (2 << (int) value);
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
@@ -1286,12 +1294,12 @@ public class Blob extends Actor implements Controllable {
 				squishColor = COLORS[0];
 			}
 
-			mLightColor = new Color();
-
-			mLightColor.set(squishColor);
-			mLightColor.mul(.1f, .1f, .1f, 1f);
-			mLight.setColor(mLightColor);
-
+			if (mLight != null) {
+				mLightColor = new Color();
+				mLightColor.set(squishColor);
+				mLightColor.mul(.1f, .1f, .1f, 1f);
+				mLight.setColor(mLightColor);
+			}
 			Color solidColor = new Color(squishColor);
 			solidColor.mul(.65f, .65f, .65f, 1f);
 			Drawable bd = null;
@@ -1309,7 +1317,8 @@ public class Blob extends Actor implements Controllable {
 			}
 		}
 		if (name.equals("Active")) {
-			mLight.setActive(value != 0);
+			if (mLight != null)
+				mLight.setActive(value != 0);
 		}
 		if (name.equals("Velocity X")) {
 			float yVel = mBody.getLinearVelocity().y;
@@ -1370,7 +1379,8 @@ public class Blob extends Actor implements Controllable {
 		fd.density = 1.75f;
 		fd.friction = 1f;
 		fd.filter.maskBits = (short) (0x7FFF - (2 << getmPlayerID()));
-		mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0, fd.filter.maskBits);
+		if (mLight != null)
+			mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0, fd.filter.maskBits);
 		return fd;
 	}
 
