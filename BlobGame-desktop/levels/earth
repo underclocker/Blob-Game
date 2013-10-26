@@ -4,11 +4,10 @@
             "id": 313,
             "class": "org.siggd.actor.Earth",
             "props": {
-                "Friction": 0.4,
                 "Density": 0,
                 "ID": 313,
                 "CollisionSound": "",
-                "Y": -9.812679
+                "Y": -15.807304
             }
         },
         {
@@ -28,15 +27,15 @@
             "class": "org.siggd.actor.Spawner",
             "props": {
                 "Layer": 4,
-                "Angle": 195.00003,
-                "Exit Velocity": "5",
+                "Angle": 285,
+                "Exit Velocity": "4",
                 "Visible": 0,
                 "ID": 23,
                 "CollisionSound": "",
                 "Blob Spawner": "1",
-                "Y": 6.4922233,
-                "X": -3.4886365,
-                "Rate": "45"
+                "Y": -1.1383507,
+                "X": -11.916764,
+                "Rate": "60"
             }
         },
         {
@@ -251,7 +250,7 @@
             "id": 315,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Y Offset": "-4",
+                "Y Offset": "-1",
                 "Y Wave Angle": 0,
                 "Distance": 3,
                 "X Wave Angle": 0,
@@ -261,15 +260,25 @@
                 "Friction": 0,
                 "ID": 315,
                 "CollisionSound": "",
-                "Scale": "8",
+                "Scale": "32",
                 "Y": 7.487246,
-                "Rotation": 309.09805,
+                "Rotation": 1546.7836,
                 "X": -12.167363
+            }
+        },
+        {
+            "id": 345,
+            "class": "org.siggd.actor.FadeIn",
+            "props": {
+                "Visible": 0,
+                "ID": 345,
+                "Y": 8.704723,
+                "X": -11.188635
             }
         }
     ],
     "props": {
-        "Ambient Light": 0.7,
+        "Ambient Light": 0.95,
         "Min Camera Y": "-10",
         "Gravity X": -3,
         "Gravity Y": -9.8,

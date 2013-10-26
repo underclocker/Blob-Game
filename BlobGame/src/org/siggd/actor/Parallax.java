@@ -164,7 +164,7 @@ public class Parallax extends Actor {
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
 		if(man.containsAsset(mTex)) {
-			man.unload(mTex);
+			//man.unload(mTex);
 		}
 	}
 

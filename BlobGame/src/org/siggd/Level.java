@@ -14,18 +14,17 @@ import org.json.JSONObject;
 import org.siggd.actor.Actor;
 import org.siggd.actor.Blob;
 import org.siggd.actor.Dot;
+import org.siggd.actor.FadeIn;
 import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * This class represents a game world, or map.
@@ -100,6 +99,9 @@ public class Level implements Iterable<Actor> {
 		mProps.put("Parallax", "");
 
 		mProps.put("Use Light", 1);
+
+		mProps.put("Difficulty", 0);
+
 		setProp("Ambient Light", .3f);
 		mNextId = 0;
 
@@ -110,7 +112,21 @@ public class Level implements Iterable<Actor> {
 		mContactHandler.addListener(new BlobDetangler());
 	}
 
+	public void killFade() {
+		for (Actor a : mActors) {
+			if (a instanceof FadeIn) {
+				FadeIn fi = (FadeIn) a;
+				fi.setVisible(0);
+			}
+		}
+	}
+
 	public void startMusic() {
+		for (Actor a : mActors) {
+			if (a instanceof FadeIn && a.getVisible() != 0) {
+				return;
+			}
+		}
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
 
@@ -671,7 +687,7 @@ public class Level implements Iterable<Actor> {
 		for (Actor a : mActors) {
 			a.dispose();
 		}
-	Gdx.input.setInputProcessor(Game.get().getInput());
+		Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}

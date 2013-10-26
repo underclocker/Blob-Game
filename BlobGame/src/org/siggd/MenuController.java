@@ -283,6 +283,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 				// deactivate any players that may have joined
 				Game.get().deactivatePlayers();
 				Game.get().setLevel("earth");
+				Game.get().getLevel().killFade();
 				Game.get().getMenuView().setMenu(MenuView.LEVELS);
 				mControllerFilter = 0;
 			}

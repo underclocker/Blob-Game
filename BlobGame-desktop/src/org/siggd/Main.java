@@ -15,7 +15,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 import com.badlogic.gdx.files.FileHandle;
 
 public class Main {
-	private final static String mPrefFileName = ".BlobGame/BlobPref.json";
+	private final static String mPrefFileName = ".BlobGame/BlobPref.txt";
 	private static JSONObject mPrefs;
 
 	public static void main(String[] args) {

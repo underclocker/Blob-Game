@@ -1,8 +1,12 @@
 package org.siggd;
 
+import java.io.File;
+import java.util.Iterator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
@@ -29,6 +33,7 @@ public class ControllerFilterAPI {
 	public final static int AXIS_NO = -1;
 
 	private static JSONObject json;
+	private static String CUSTOM_BINDINGS = ".BlobGame/BlobBindings.json";
 
 	public static void load() throws JSONException {
 		FileHandle handle = (new InternalFileHandleResolver())
@@ -36,6 +41,28 @@ public class ControllerFilterAPI {
 		String jsonstr = handle.readString();
 		json = new JSONObject(jsonstr);
 		// DebugOutput.info(new Object(), "This is the JSON " + jsonstr);
+		loadCustomBindings();
+	}
+	/**
+	 * Loads custom bindings from ".BlobGame/BlobBindings.json"
+	 * @throws JSONException
+	 */
+	public static  void loadCustomBindings() throws JSONException{
+		File f = new File(Gdx.files.getExternalStoragePath() + CUSTOM_BINDINGS);
+		FileHandle bindingsFile;
+		if (f.exists()) {
+			String osName = System.getProperty("os.name");
+			JSONObject osSpecificBindings = json.getJSONObject(osName);
+			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
+			String bindingsJson = bindingsFile.readString();
+			JSONObject customBindings = new JSONObject(bindingsJson);
+			Iterator<String> t = customBindings.keys();
+			while(t.hasNext()){
+				String controller = t.next();
+				JSONObject controllerBindings = customBindings.getJSONObject(controller);
+				osSpecificBindings.put(controller, controllerBindings);
+			}
+		}
 	}
 /**
  * use this to take a real button ID to the XBOX equivelant

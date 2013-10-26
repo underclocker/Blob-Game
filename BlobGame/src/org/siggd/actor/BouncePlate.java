@@ -86,7 +86,7 @@ public class BouncePlate extends Actor {
 				sound = man.get(mBouncePlateFile, Sound.class);
 				soundID = sound.play();
 				sound.setPitch(soundID, 1.25f);
-				sound.setVolume(soundID, .35f);
+				sound.setVolume(soundID, .45f);
 
 			}
 		} else if (mTimer >= mRate && output == 1) {

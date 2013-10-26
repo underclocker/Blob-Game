@@ -413,17 +413,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 496,
-                "Y": -5.3563395,
-                "X": 31.229126
-            }
-        },
-        {
-            "id": 495,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 495,
-                "Y": -5.3284054,
-                "X": 30.384274
+                "Y": -5.321725,
+                "X": 31.332972
             }
         },
         {
@@ -520,8 +511,8 @@
                 "ID": 125,
                 "CollisionSound": "",
                 "Blob Spawner": "1",
-                "Y": 15.707572,
-                "X": 1.1602892,
+                "Y": 15.698075,
+                "X": 1.1720091,
                 "Rate": "10"
             }
         },
@@ -1451,6 +1442,53 @@
                 "ID": 2092,
                 "Y": 0.53534,
                 "X": 16.494186
+            }
+        },
+        {
+            "id": 2221,
+            "class": "org.siggd.actor.BlobLaser",
+            "props": {
+                "Layer": 2,
+                "Angle": 540,
+                "ID": 2221,
+                "Y": -4.600755,
+                "X": 24.203175
+            }
+        },
+        {
+            "id": 2222,
+            "class": "org.siggd.actor.Door",
+            "props": {
+                "Layer": 0,
+                "Angle": 630,
+                "Target Input": 2221,
+                "ID": 2222,
+                "Camera Tracked": "1",
+                "Open Safety": "0",
+                "Y": -3.8402667,
+                "X": 30.545568
+            }
+        },
+        {
+            "id": 2223,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 3,
+                "Angle": 90,
+                "ID": 2223,
+                "Y": -2.6556368,
+                "X": 30.534637
+            }
+        },
+        {
+            "id": 2224,
+            "class": "org.siggd.actor.Redirector",
+            "props": {
+                "Layer": 3,
+                "Angle": 90,
+                "ID": 2224,
+                "Y": -5.87481,
+                "X": 30.534637
             }
         }
     ],

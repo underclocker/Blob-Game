@@ -83,8 +83,11 @@ public class Blob extends Actor implements Controllable {
 		private boolean mDrawTop = false;
 
 		public final String mCrown = "data/gfx/crown.png";
+		public final String mCatHat = "data/gfx/cat_hat.png";
+		public final String mGloveHat = "data/gfx/rubberglovehat.png";
 		public final String mHandlebarMustache = "data/gfx/handlebarmustache.png";
-		public final String mMouth = "data/gfx/mouth.png";
+
+		public ArrayList<Sprite> mHats;
 
 		public BlobDrawable(Color squishColor, Color solidColor) {
 			mSquishColor = squishColor;
@@ -92,7 +95,11 @@ public class Blob extends Actor implements Controllable {
 			mCurrentColor = new Color(mSquishColor);
 			mDestColor = new Color(mSquishColor);
 			float scale = Game.get().getLevelView().getVScale();
-			mAccessoryHat = new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown);
+			mHats = new ArrayList<Sprite>();
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mGloveHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCatHat));
+			mAccessoryHat = mHats.get(0);
 			mAccessoryMouth = new Sprite(new Vector2(), new Vector2(16 / scale, 16 / scale),
 					mHandlebarMustache);
 		}
@@ -410,7 +417,7 @@ public class Blob extends Actor implements Controllable {
 					}
 				}
 			}
-			if (mTop != null && mDrawTop) {
+			if (mTop != null && mDrawTop && mAccessoryHat != null) {
 				mAccessoryHat.mPosition = mTop;
 				mAccessoryHat.mAngle = mTopNormal.angle();
 				mAccessoryHat.drawSprite(mBatch);
@@ -653,6 +660,8 @@ public class Blob extends Actor implements Controllable {
 
 		if (getLevel().getAssetKey() != null) {
 			man.load(mBlobDrawable.mCrown, Texture.class);
+			man.load(mBlobDrawable.mCatHat, Texture.class);
+			man.load(mBlobDrawable.mGloveHat, Texture.class);
 			man.load(mBlobDrawable.mHandlebarMustache, Texture.class);
 			// man.load(mBlobDrawable.mMouth, Texture.class);
 		}
@@ -1783,8 +1792,16 @@ public class Blob extends Actor implements Controllable {
 
 	@Override
 	public void postLoad() {
-		// TODO Auto-generated method stub
-
+		if (getLevel().getAssetKey() == null)
+			return;
+		int difficulty = Convert.getInt(Game.get().getLevel().getProp("Difficulty"));
+		if (difficulty == 0) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(0);
+		} else if (difficulty == 1) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(1);
+		} else if (difficulty == 2) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(2);
+		}
 	}
 
 	/**

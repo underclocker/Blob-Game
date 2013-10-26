@@ -32,6 +32,8 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
+	private Vector2 spawnOffset = new Vector2(0,1.5f);
+	private Vector2 rotatedOffset;
 
 	public Spawner(Level level, long id) {
 		super(level, id);
@@ -56,7 +58,8 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Blob Spawner", 0);
 		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
-		
+		this.setFriction(.1f);
+
 		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
 		mPointLight.setDistance(1.5f);
 		mPointLight.attachToBody(mBody, 0, 0);
@@ -146,6 +149,7 @@ public class Spawner extends Actor implements IObservable {
 	private Blob spawnBlob(int id) {
 		Blob blob = new Blob(this.getLevel(), this.getLevel().getId());
 		blob.setProp("Player ID", id);
+		blob.postLoad();
 		// assign blob to player
 		blob.setActive(false);
 		// set the layer to the layer of the placeholder blob
@@ -156,13 +160,14 @@ public class Spawner extends Actor implements IObservable {
 		return blob;
 	}
 
-	public void addToSpawn(Actor a) {
+	public void addToSpawn(Actor a, int delay) {
 		if (!mSpawnees.contains(a)) {
 			if (a.isActive()) {
 				a.setActive(false);
 			}
 			if (mSpawnees.size() == 0) {
-				mSpawnTimer.reset();
+				mSpawnTimer.unpause();
+				mSpawnTimer.mCurTime = -delay;
 			}
 			mSpawnees.add(a);
 		}
@@ -175,7 +180,8 @@ public class Spawner extends Actor implements IObservable {
 				this.getLevel().addActor(spawnee);
 			}
 		}
-		Vector2 pos = mBody.getPosition();
+		
+		Vector2 pos = new Vector2 (getX() + rotatedOffset.x, getY() + rotatedOffset.y);
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
@@ -186,7 +192,7 @@ public class Spawner extends Actor implements IObservable {
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
 		Vector2 vel = new Vector2(0, Convert.getInt(getProp("Exit Velocity")));
-		vel.rotate(Convert.getDegrees(mBody.getAngle())+(float)(10f*Math.random()-5f));
+		vel.rotate(Convert.getDegrees(mBody.getAngle())+(float)(20f*Math.random()-10f));
 		spawnee.setVelocityX(vel.x);
 		spawnee.setVelocityY(vel.y);
 		if (spawnee instanceof Blob) {
@@ -239,6 +245,11 @@ public class Spawner extends Actor implements IObservable {
 		if (name.equals("Rate")) {
 			mSpawnTimer.setTimer(Convert.getInt(val));
 		}
+		
+		if (name.equals("Angle")) {
+			rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
+		}
+		
 		super.setProp(name, val);
 	}
 }

@@ -486,9 +486,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "",
-                "Y Wave Angle": 519.3317,
+                "Y Wave Angle": 548.54376,
                 "Distance": 3,
-                "X Wave Angle": 96.19863,
+                "X Wave Angle": 106.64289,
                 "Y Wave Speed": ".014",
                 "Rotation Speed": 0,
                 "ID": 4,
@@ -530,7 +530,7 @@
             "id": 39,
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
-                "Angle": 270,
+                "Angle": 90,
                 "Speed": "1",
                 "ID": 39,
                 "CollisionSound": "",
@@ -543,7 +543,7 @@
             "id": 40,
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
-                "Angle": 270,
+                "Angle": 90,
                 "Speed": "1",
                 "ID": 40,
                 "CollisionSound": "",
@@ -556,7 +556,7 @@
             "id": 41,
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
-                "Angle": 270,
+                "Angle": 90,
                 "Speed": "1",
                 "ID": 41,
                 "CollisionSound": "",
@@ -584,7 +584,6 @@
             "props": {
                 "Angle": 270,
                 "Speed": "1",
-                "ID": 43,
                 "CollisionSound": "",
                 "Y": 11.311957,
                 "X": 23.846277,
@@ -818,8 +817,8 @@
                 "Exit Velocity": "10",
                 "ID": 67,
                 "CollisionSound": "",
-                "Y": 15.918449,
-                "X": 49.104244
+                "Y": 16.703018,
+                "X": 49.810955
             }
         },
         {
@@ -1075,9 +1074,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 41.898872,
+                "Y Wave Angle": 45.661995,
                 "Distance": "-.15",
-                "X Wave Angle": 29.69474,
+                "X Wave Angle": 33.87464,
                 "Y Wave Speed": ".0018",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -1097,8 +1096,8 @@
                 "X Wave Speed": ".007",
                 "Rotation Speed": 0,
                 "Distance": "2",
-                "Y Wave Angle": 50.79048,
-                "X Wave Angle": 123.287766,
+                "Y Wave Angle": 57.057037,
+                "X Wave Angle": 137.92567,
                 "ID": 1310,
                 "CollisionSound": "",
                 "X Wave Amplitude": ".4",
