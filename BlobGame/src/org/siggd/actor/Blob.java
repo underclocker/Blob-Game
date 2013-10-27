@@ -903,14 +903,14 @@ public class Blob extends Actor implements Controllable {
 		eyeDelta = new Vector2(mRightEyeDest);
 		eyeDelta.sub(mRightEye.getPosition());
 		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
-
+		if (mExtraGlow > 0) {
+			mExtraGlow -= .75f;
+		} else {
+			mPointCombo = 0;
+		}
 		if (mLight != null) {
 			mLightColor.set(mBlobDrawable.mSquishColor);
-			if (mExtraGlow > 0) {
-				mExtraGlow -= .75f;
-			} else {
-				mPointCombo = 0;
-			}
+
 			float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
 			mLightColor.mul(brightness, brightness, brightness, 1f);
 			mLight.setColor(mLightColor);

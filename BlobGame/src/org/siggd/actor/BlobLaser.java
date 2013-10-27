@@ -125,7 +125,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 						if (man.isLoaded(mString)) {
 							sound = man.get(mString, Sound.class);
 							soundID = sound.play();
-							sound.setPitch(soundID, 2f-.125f*mDetectedBlobs.size());
+							sound.setPitch(soundID, 2f - .125f * mDetectedBlobs.size());
 							sound.setVolume(soundID, .35f);
 						}
 					}
@@ -144,6 +144,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 
 	@Override
 	public void update() {
+
 		float angle = Convert.getDegrees(mBody.getAngle());
 		mLaserStart = mBody.getPosition().cpy();
 		mLaserStart.add(new Vector2(-.4f, 0).rotate(angle));
@@ -152,6 +153,8 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 		mLaserEnd = end.cpy().add(mLaserStart);
 		// changes could be made to start and end, thats why a copy is passed
 		int playerNum = Game.get().activePlayersNum();
+		if (playerNum == 1)
+			playerNum = 0;
 		Vector2 slider = new Vector2(.8f, 0).rotate(angle);
 		slider.div(playerNum + 1);
 		mLaserEnds.clear();
@@ -184,7 +187,8 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 
 	@Override
 	public Object observe() {
-		return mDetectedBlobs.size() == Game.get().activePlayersNum();
+		return mDetectedBlobs.size() == Game.get().activePlayersNum()
+				|| Game.get().activePlayersNum() == 1;
 	}
 
 	public boolean getState() {
