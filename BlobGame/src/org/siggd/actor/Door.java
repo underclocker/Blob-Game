@@ -44,7 +44,7 @@ public class Door extends Actor implements IObserver {
 	 */
 	public Door(Level level, long id) {
 		super(level, id);
-		mName = "Platform";
+		mName = "Door";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 256, BodyType.KinematicBody, origin, false);
