@@ -20,6 +20,7 @@ import org.siggd.actor.meta.ActorEnum;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -183,21 +184,20 @@ public class Level implements Iterable<Actor> {
 			}
 			// Begin the step.
 			mWorld.step(1 / 60f, 6, 2);
-		} else {
-			stopMusic();
-		}
-		Actor a;
-
-		for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
-			a = actor.next();
-			if (a.isActive()) {
-				try {
-					a.update();
-				} catch (Exception e) {
-					mLog.severe("Exception when updating actor no " + a.getId() + ": "
-							+ e.toString());
+			Actor a;
+			for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
+				a = actor.next();
+				if (a.isActive()) {
+					try {
+						a.update();
+					} catch (Exception e) {
+						mLog.severe("Exception when updating actor no " + a.getId() + ": "
+								+ e.toString());
+					}
 				}
 			}
+		} else {
+			stopMusic();
 		}
 		flushActorQueue();
 	}

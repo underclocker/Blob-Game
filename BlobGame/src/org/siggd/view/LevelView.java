@@ -160,13 +160,6 @@ public class LevelView {
 			mRayHandler.setCombinedMatrix(mCamera.combined);
 		}
 
-		mOldCamera.position.x = mCamera.position.x;
-		mOldCamera.position.y = mCamera.position.y;
-		mOldCamera.viewportWidth = mCamera.viewportWidth;
-		mOldCamera.viewportHeight = mCamera.viewportHeight;
-		if (state == Game.PLAY) {
-			positionCamera(true);
-		}
 		// Clear the screen
 		Gdx.gl.glClearColor(.0f, .0f, .0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -338,6 +331,16 @@ public class LevelView {
 		mMaxX = -Float.MAX_VALUE;
 		mMinY = Float.MAX_VALUE;
 		mMaxY = -Float.MAX_VALUE;
+	}
+
+	public void update() {
+		mOldCamera.position.x = mCamera.position.x;
+		mOldCamera.position.y = mCamera.position.y;
+		mOldCamera.viewportWidth = mCamera.viewportWidth;
+		mOldCamera.viewportHeight = mCamera.viewportHeight;
+		if (Game.get().getState() == Game.PLAY) {
+			positionCamera(true);
+		}
 	}
 
 	private void smoothCam() {

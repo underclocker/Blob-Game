@@ -16,6 +16,7 @@ import org.siggd.view.MenuView;
 import pong.client.core.BodyEditorLoader;
 
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -57,7 +58,8 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean PRELOAD = false; // only preloads in release
+	public final static boolean PRELOAD = true; // only preloads in release
+	public final static boolean FRAMEBYFRAME = false;
 
 	public final String mStartingLevel = "level1";
 
@@ -90,7 +92,7 @@ public class Game implements ApplicationListener {
 	public ArrayList<String> mHackishLoader;
 	public int mLoaderMax;
 	private boolean mFlipper = true;
-	private boolean mPrtScn = false;
+	private boolean mF12 = false;
 
 	/**
 	 * Constructor (private)
@@ -313,6 +315,18 @@ public class Game implements ApplicationListener {
 				}
 			}
 		}
+
+		boolean f12 = false;
+		if (Gdx.input.isKeyPressed(Keys.F12) && !mF12 ) {
+			mF12 = true;
+			f12 = true;
+		} else if (!Gdx.input.isKeyPressed(Keys.F12)) {
+			mF12 = false;
+		}
+		if (Gdx.input.isKeyPressed(Keys.F11)){
+			f12 = true;
+		}
+
 		// Load any necessary resources
 		if (!mAssetManager.update()) {
 			// Show loading screen if not done loading
@@ -324,7 +338,7 @@ public class Game implements ApplicationListener {
 		}
 		if (mState == PLAY || mState == MENU) {
 			mMenuView.update();
-			if (!mPaused) {
+			if (!mPaused && (!FRAMEBYFRAME || f12)) {
 				mLevel.update();
 			}
 		}
@@ -333,8 +347,12 @@ public class Game implements ApplicationListener {
 			mEditor.update();
 		}
 
-		if (mState != LOAD && mNextLevel == null)
+		if (mState != LOAD && mNextLevel == null) {
+			if (!FRAMEBYFRAME || f12) {
+				mLevelView.update();
+			}
 			mLevelView.render();
+		}
 
 		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
