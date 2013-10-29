@@ -103,6 +103,12 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 		mDetectedBlobs = new ArrayList<Blob>();
 		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, origin, mTex));
 		((CompositeDrawable) mDrawable).mDrawables.add(new HitScanDrawable());
+		if (Game.get().activePlayersNum() <= 1) {
+			setActive(false);
+			setVisible(0);
+			
+		}
+
 	}
 
 	@Override

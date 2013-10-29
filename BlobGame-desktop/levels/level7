@@ -28,8 +28,8 @@
                 "X Wave Speed": ".007",
                 "Rotation Speed": 0,
                 "Distance": "2",
-                "Y Wave Angle": 59.08992,
-                "X Wave Angle": 142.67424,
+                "Y Wave Angle": 62.741913,
+                "X Wave Angle": 151.20485,
                 "ID": 1310,
                 "CollisionSound": "",
                 "X Wave Amplitude": ".4",
@@ -45,9 +45,9 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "X Wave Speed": ".002",
-                "Y Wave Angle": 46.88276,
+                "Y Wave Angle": 49.075813,
                 "Distance": "-.15",
-                "X Wave Angle": 35.229897,
+                "X Wave Angle": 37.66456,
                 "Y Wave Speed": ".0018",
                 "Layer": 100,
                 "Rotation Speed": 0,
@@ -470,8 +470,8 @@
                 "Angle": 90,
                 "ID": 53,
                 "CollisionSound": "",
-                "Y": 11.658897,
-                "X": 30.978477
+                "Y": 11.668171,
+                "X": 31.153416
             }
         },
         {
@@ -509,8 +509,8 @@
                 "Layer": 3,
                 "ID": 49,
                 "CollisionSound": "",
-                "Y": 6.2941327,
-                "X": 30.340738
+                "Y": 6.7227745,
+                "X": 30.318178
             }
         },
         {
@@ -636,9 +636,9 @@
             "props": {
                 "X Wave Speed": ".005",
                 "Y Offset": "",
-                "Y Wave Angle": 558.0202,
+                "Y Wave Angle": 575.04425,
                 "Distance": 3,
-                "X Wave Angle": 110.03103,
+                "X Wave Angle": 116.11768,
                 "Y Wave Speed": ".014",
                 "Rotation Speed": 0,
                 "ID": 4,
@@ -692,7 +692,6 @@
                 "Layer": 2,
                 "Body": "Level7_3_0",
                 "Friction": 0.2,
-                "ID": 3,
                 "CollisionSound": "",
                 "X": 51.198
             }
@@ -784,7 +783,7 @@
                 "Layer": 3,
                 "ID": 33,
                 "CollisionSound": "",
-                "Y": 8.75457,
+                "Y": 9.324102,
                 "X": 19.303701
             }
         },
@@ -1027,8 +1026,8 @@
                 "Angle": 90,
                 "ID": 817,
                 "CollisionSound": "",
-                "Y": 14.721891,
-                "X": 31.004583
+                "Y": 14.695862,
+                "X": 31.297426
             }
         },
         {
