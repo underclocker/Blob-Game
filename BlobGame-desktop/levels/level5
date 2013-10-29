@@ -1386,7 +1386,7 @@
         }
     ],
     "props": {
-        "Ambient Light": 0.3,
+        "Ambient Light": 0.6,
         "Min Camera Y": "-17.066",
         "Gravity X": 0,
         "Gravity Y": -9.8,
