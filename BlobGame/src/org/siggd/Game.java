@@ -336,6 +336,10 @@ public class Game implements ApplicationListener {
 			setLevel(mNextLevel);
 			mNextLevel = null;
 		}
+		if (FRAMEBYFRAME && f12){
+			mLevel.update();
+			mLevelView.update();
+		}
 		if (mState == PLAY || mState == MENU) {
 			mMenuView.update();
 			if (!mPaused && (!FRAMEBYFRAME || f12)) {
