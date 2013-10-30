@@ -7,10 +7,9 @@ import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 import org.siggd.view.LevelView;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GLCommon;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -70,10 +69,13 @@ public class Parallax extends Actor {
 					* Convert.getFloat(getProp("X Wave Amplitude"));
 			pos.y += Math.sin(Convert.getFloat(getProp("Y Wave Angle")))
 					* Convert.getFloat(getProp("Y Wave Amplitude"));
+			float tint = Convert.getFloat(getProp("Lightness"));
+			batch.setColor(new Color(tint, tint, tint, 1));
 			batch.draw(tex, pos.x - halfwidth + offset.x + Convert.getFloat(getProp("X Offset"))
 					* scale, pos.y - halfheight + offset.y + Convert.getFloat(getProp("Y Offset"))
 					* scale, halfwidth, halfheight, halfwidth * 2, halfheight * 2, 1f, 1f,
 					mRotation, 0, 0, tex.getWidth(), tex.getHeight(), false, false);
+			batch.setColor(Color.WHITE);
 		}
 
 		@Override
@@ -106,7 +108,7 @@ public class Parallax extends Actor {
 		setProp("Y Wave Amplitude", 0);
 		setProp("Y Wave Angle", 0);
 		setProp("Y Wave Speed", 0);
-
+		setProp("Lightness", (Float) 1f);
 	}
 
 	/**
