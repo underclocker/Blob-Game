@@ -585,7 +585,7 @@ public class Blob extends Actor implements Controllable {
 	// density
 	private float mAccAprox = 0; // < approximates acceleration of squishy blob
 	private PointLight mLight;
-	private float mExtraGlow = 0;
+	private float mExtraGlow = -100;
 	private Color mLightColor;
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;
@@ -631,8 +631,8 @@ public class Blob extends Actor implements Controllable {
 		}
 		makeBlobBody();
 		if (LevelView.mUseLights) {
-			mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(.1f,
-					.1f, .1f, 1f), 7, -10000, -10000);
+			mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(0f,
+					0f, 0f, 1f), 7, -10000, -10000);
 			mLight.setSoft(true);
 			mLight.setSoftnessLenght(.5f);
 			mLight.setActive(false);
@@ -904,14 +904,19 @@ public class Blob extends Actor implements Controllable {
 		eyeDelta.sub(mRightEye.getPosition());
 		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
 		if (mExtraGlow > 0) {
-			mExtraGlow -= .75f;
+			mExtraGlow -= .5f;
 		} else {
+			if (mExtraGlow < -.5f)
+				mExtraGlow += .5f;
 			mPointCombo = 0;
 		}
 		if (mLight != null) {
 			mLightColor.set(mBlobDrawable.mSquishColor);
 
 			float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
+			if (brightness < 0) {
+				brightness = 0;
+			}
 			mLightColor.mul(brightness, brightness, brightness, 1f);
 			mLight.setColor(mLightColor);
 			mLight.setDistance(3f + 10f * brightness);
@@ -1297,8 +1302,8 @@ public class Blob extends Actor implements Controllable {
 			if (mLight != null) {
 				mLightColor = new Color();
 				mLightColor.set(squishColor);
-				mLightColor.mul(.1f, .1f, .1f, 1f);
 				mLight.setColor(mLightColor);
+				mLight.setDistance(0);
 			}
 			Color solidColor = new Color(squishColor);
 			solidColor.mul(.65f, .65f, .65f, 1f);
