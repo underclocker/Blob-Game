@@ -10,6 +10,13 @@ body {
 	background-size: cover;
 	margin:0;
 }
+h1{
+	font-size: 1.5em;
+}
+h2 {
+	font-size: 1.375em;
+	font-weight: 300;
+}
 #wrapper{
 	width: 940px;
 	margin: 0px auto;
@@ -20,28 +27,8 @@ body {
 	background-color: #EEE;
 	border-radius:2px;
 }
-.gallery img{
-	width: 250px;
-	margin: 0px 30px;
-}
-.gallery a {
-	width: 250px;
-	height: 125px;
-	overflow: hidden;
-}
-
 p{
 	margin-top: 0px;
-}
-a.button {
-	border-radius:6px;
-	padding:5px;
-	background-color: #00D500;
-	color: white;
-	text-decoration: none;
-}
-a.button:hover{
-	background-color: #00CB00;
 }
 .nav{
 	float: left;

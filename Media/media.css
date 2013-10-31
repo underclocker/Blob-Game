@@ -1,0 +1,9 @@
+.gallery img{
+	width: 250px;
+	margin: 0px 30px;
+}
+.gallery a {
+	width: 250px;
+	height: 125px;
+	overflow: hidden;
+}

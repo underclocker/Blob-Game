@@ -1,0 +1,18 @@
+article header a {
+	color: black;
+}
+article header a:hover{
+	text-decoration: none;
+	color: #00CB00;
+}
+article header h1 {
+	margin-bottom:0;
+}
+article header{
+	margin-bottom:10px;
+}
+article{
+}
+.box{
+	padding:50px;
+}
