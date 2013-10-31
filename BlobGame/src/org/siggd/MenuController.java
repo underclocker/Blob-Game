@@ -431,11 +431,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 		case Input.Keys.ENTER:
 		case Input.Keys.SPACE:
-			if (mTable != null) {
-				Actor a = (Actor) getCell(mX, mY).getWidget();
-				if (a != null) {
-					a.fire(new ChangeEvent());
-					Game.get().playNomSound();
+			if (Game.get().getState() != Game.PLAY) {
+				if (mTable != null) {
+					Actor a = (Actor) getCell(mX, mY).getWidget();
+					if (a != null) {
+						a.fire(new ChangeEvent());
+						Game.get().playNomSound();
+					}
 				}
 			}
 			break;

@@ -34,6 +34,7 @@ public class Spawner extends Actor implements IObservable {
 	private PointLight mPointLight;
 	private Vector2 spawnOffset = new Vector2(0, 1.5f);
 	private Vector2 rotatedOffset;
+	private int mInitDelay = 0;
 
 	public Spawner(Level level, long id) {
 		super(level, id);
@@ -58,6 +59,7 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Blob Spawner", 0);
 		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
+		this.setProp("Initial Delay", 10);
 		this.setFriction(.1f);
 
 		if (LevelView.mUseLights) {
@@ -82,6 +84,8 @@ public class Spawner extends Actor implements IObservable {
 	@Override
 	public void update() {
 		super.update();
+		if (--mInitDelay > 0)
+			return;
 		mSpawnTimer.update();
 		mTexTimer.update();
 		if (mSpawnees.size() > 0) {
@@ -102,6 +106,7 @@ public class Spawner extends Actor implements IObservable {
 
 	@Override
 	public void postLoad() {
+		mInitDelay = Convert.getInt(getProp("Initial Delay"));
 		if ("earth".equals(Game.get().getLevel().getAssetKey())) {
 			maxBlobs = 8;
 		}
@@ -131,9 +136,6 @@ public class Spawner extends Actor implements IObservable {
 						player.mActor = spawnBlob(i);
 					}
 				}
-			}
-			if (mSpawnees.size() > 0 && mSpawnees.get(0) instanceof Blob) {
-				spawnActor();
 			}
 		}
 
