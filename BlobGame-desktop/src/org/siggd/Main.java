@@ -37,6 +37,7 @@ public class Main {
 			// Related to harrison's computer speedups.
 			saveToPref("useCPUSynch", (Integer) 0);
 			saveToPref("useLights", (Integer) 1);
+			saveToPref("usePreload", (Integer) 1);
 
 
 			// Flush
@@ -62,6 +63,7 @@ public class Main {
 			cfg.useGL20 = mPrefs.getInt("useGL20") != 0;
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
 			LevelView.mUseLights = mPrefs.getInt("useLights") != 0;
+			Game.PRELOAD = mPrefs.getInt("usePreload") != 0;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +88,4 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 }
