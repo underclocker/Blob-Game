@@ -1,6 +1,53 @@
 {
     "actors": [
         {
+            "id": 3302,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -2,
+                "X Wave Speed": ".002",
+                "ID": 3302,
+                "X Wave Amplitude": "1.4",
+                "Y": 10.373076,
+                "Y Wave Speed": ".0037",
+                "Rotation": "180",
+                "Y Wave Amplitude": ".3",
+                "X": -1.9654918
+            }
+        },
+        {
+            "id": 3301,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -2,
+                "X Wave Speed": ".0053",
+                "Distance": "1.0",
+                "ID": 3301,
+                "X Wave Amplitude": ".6",
+                "Y": 11.473076,
+                "Y Wave Speed": ".001",
+                "Rotation": "90",
+                "Y Wave Amplitude": ".7",
+                "X": -2.0029907
+            }
+        },
+        {
+            "id": 3300,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 100,
+                "X Wave Speed": ".00412",
+                "Distance": "-.25",
+                "X Wave Angle": "0",
+                "ID": 3300,
+                "X Wave Amplitude": "1.7",
+                "Y": 12.560577,
+                "Y Wave Speed": ".003",
+                "Y Wave Amplitude": ".5",
+                "X": -1.9779916
+            }
+        },
+        {
             "id": 3264,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -937,21 +984,6 @@
             }
         },
         {
-            "id": 0,
-            "class": "org.siggd.actor.Parallax",
-            "props": {
-                "Rotation Speed": 0,
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "ID": 0,
-                "Scale": 4,
-                "CollisionSound": "",
-                "Y": 16.594784,
-                "X": -0.6370555
-            }
-        },
-        {
             "id": 1,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -1875,6 +1907,20 @@
                 "ID": 3262,
                 "Y": -9.768642,
                 "X": 36.212376
+            }
+        },
+        {
+            "id": 3436,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -3,
+                "Lightness": "0.05",
+                "Distance": "5.0",
+                "ID": 3436,
+                "Scale": "6.0",
+                "Y": 14.027933,
+                "X": -0.7970724,
+                "Texture": "level3_1_0.png"
             }
         }
     ],

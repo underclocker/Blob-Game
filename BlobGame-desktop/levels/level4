@@ -1,6 +1,53 @@
 {
     "actors": [
         {
+            "id": 2246,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -2,
+                "X Wave Speed": ".002",
+                "ID": 2246,
+                "X Wave Amplitude": "1.4",
+                "Y": 10.373076,
+                "Y Wave Speed": ".0067",
+                "Rotation": "180",
+                "Y Wave Amplitude": ".3",
+                "X": -1.9654918
+            }
+        },
+        {
+            "id": 2245,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -2,
+                "X Wave Speed": ".0053",
+                "Distance": "1.0",
+                "ID": 2245,
+                "X Wave Amplitude": ".6",
+                "Y": 11.473076,
+                "Y Wave Speed": ".001",
+                "Rotation": "90",
+                "Y Wave Amplitude": ".7",
+                "X": -2.0029907
+            }
+        },
+        {
+            "id": 2244,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 100,
+                "X Wave Speed": ".00312",
+                "Distance": "-.25",
+                "X Wave Angle": "0",
+                "ID": 2244,
+                "X Wave Amplitude": "1.7",
+                "Y": 12.560577,
+                "Y Wave Speed": ".002",
+                "Y Wave Amplitude": ".5",
+                "X": -1.9779916
+            }
+        },
+        {
             "id": 2116,
             "class": "org.siggd.actor.Wind",
             "props": {
@@ -527,23 +574,6 @@
                 "CollisionSound": "",
                 "Y": -15.391213,
                 "X": 35.71921
-            }
-        },
-        {
-            "id": 41,
-            "class": "org.siggd.actor.Parallax",
-            "props": {
-                "Rotation Speed": 0,
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "ID": 41,
-                "Scale": "4",
-                "CollisionSound": "",
-                "Y": 12.875,
-                "Scale Y": "1.0",
-                "X": -2.1249986,
-                "Scale X": ".5"
             }
         },
         {
