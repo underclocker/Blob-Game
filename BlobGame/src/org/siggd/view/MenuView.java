@@ -47,6 +47,7 @@ public class MenuView {
 	public static String LEVELS = "Levels";
 	public static String CUSTOMIZE = "Customize";
 	public static String LOADING = "Loading";
+	public static String CONTROLLER = "Controller";
 
 	private Stage mStage;
 	private Skin mSkin;
@@ -58,6 +59,7 @@ public class MenuView {
 	private Table mTint;
 	private Table mBaseCustomizeTable;
 	private Table mCustomizeTable;
+	private Table mControllerTable;
 	private Image mJoinImage;
 	private Image mStartImage;
 	private int mDelay;
@@ -104,6 +106,7 @@ public class MenuView {
 		createFakePauseMenu();
 		createLevelsMenu();
 		createCustomizeMenu();
+		createControllerMenu();
 
 		// Set the starting menu
 		setMenu(MAIN);
@@ -119,17 +122,16 @@ public class MenuView {
 		mMainTable.add(campaignButton);
 		campaignButton.addListener(mStartCampaign);
 		campaignButton.addListener(mClickListener);
-		/*
-		 * final TextButton battleButton = new TextButton(" Battle ", mSkin);
-		 * mMainTable.add(battleButton); battleButton.addListener(mStartBattle);
-		 * 
-		 * final TextButton slamButton = new TextButton(" Slam ", mSkin);
-		 * mMainTable.add(slamButton); slamButton.addListener(mStartSlam);
-		 */
+
 		final TextButton clearButton = new TextButton(" Clear Save ", mSkin);
 		mMainTable.add(clearButton);
 		clearButton.addListener(mClear);
 		clearButton.addListener(mClickListener);
+
+		final TextButton controllerButton = new TextButton(" Config Controller ", mSkin);
+		mMainTable.add(controllerButton);
+		controllerButton.addListener(mController);
+		controllerButton.addListener(mClickListener);
 
 		final TextButton exitButton = new TextButton(" Exit ", mSkin);
 		mMainTable.add(exitButton);
@@ -300,6 +302,32 @@ public class MenuView {
 		Image baseImage = new Image(new Texture(Gdx.files.internal("data/gfx/InstBlank.png")));
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
+	}
+
+	private void createControllerMenu() {
+		mControllerTable = new Table(mSkin);
+		mControllerTable.setFillParent(true);
+		ImageButton imageButton;
+		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
+				.getButton();
+		imageButton.addListener(mMainMenu);
+		imageButton.addListener(mClickListener);
+		mControllerTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+
+		imageButton = new SiggdImageButton("data/gfx/controllerconfig1.png",
+				"data/gfx/backButton.png").getButton();
+		imageButton.setDisabled(true);
+		// baseImage.set
+		mControllerTable.add(imageButton);
+		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
+				.getButton();
+		imageButton.addListener(mMainMenu);
+		imageButton.addListener(mClickListener);
+		mControllerTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		imageButton.setDisabled(true);
+		imageButton.setVisible(false);
 	}
 
 	public void render() {
@@ -534,25 +562,6 @@ public class MenuView {
 		}
 	};
 
-	private final ChangeListener mStartBattle = new ChangeListener() {
-		@Override
-		public void changed(ChangeEvent event, Actor actor) {
-			TextButton textButton = (TextButton) actor;
-			textButton.setChecked(false);
-			Game.get().setState(Game.PLAY);
-			Game.get().setLevel("battleground");
-		}
-	};
-
-	private final ChangeListener mStartSlam = new ChangeListener() {
-		@Override
-		public void changed(ChangeEvent event, Actor actor) {
-			TextButton textButton = (TextButton) actor;
-			textButton.setChecked(false);
-			Game.get().setState(Game.PLAY);
-			Game.get().setLevel("SLAM");
-		}
-	};
 	private final ChangeListener mReset = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
@@ -616,6 +625,13 @@ public class MenuView {
 		}
 	};
 
+	private final ChangeListener mController = new ChangeListener() {
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			setMenu(CONTROLLER);
+		}
+	};
+
 	private final ChangeListener mExit = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
@@ -647,6 +663,7 @@ public class MenuView {
 		mCustomizeTable.remove();
 		mStartImage.remove();
 		mTint.remove();
+		mControllerTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
 			mMenuController.setTable(mMainTable);
@@ -702,6 +719,9 @@ public class MenuView {
 					b.setProp("Player ID", p.id);
 				}
 			}
+		} else if (CONTROLLER.equals(menu)) {
+			mStage.addActor(mControllerTable);
+			mMenuController.setTable(mControllerTable);
 		}
 	}
 

@@ -278,6 +278,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 			} else if (MenuView.LEVELS.equals(Game.get().getMenuView().getCurrentMenu())) {
 				Game.get().getMenuView().setMenu(MenuView.MAIN);
 				mControllerFilter = 0;
+			} else if (MenuView.CONTROLLER.equals(Game.get().getMenuView().getCurrentMenu())) {
+				Game.get().getMenuView().setMenu(MenuView.MAIN);
 			} else if (MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu())) {
 				// Customize Menu
 				// deactivate any players that may have joined

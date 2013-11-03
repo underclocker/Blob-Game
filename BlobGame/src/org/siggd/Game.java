@@ -1,6 +1,5 @@
 package org.siggd;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
@@ -16,9 +15,9 @@ import org.siggd.view.MenuView;
 import pong.client.core.BodyEditorLoader;
 
 import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -59,7 +58,7 @@ public class Game implements ApplicationListener {
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
 	public final static boolean FRAMEBYFRAME = false;
-	public static boolean PRELOAD = true; // only preloads in release
+	public static boolean PRELOAD = false; // only preloads in release and reads from config file
 
 	public final String mStartingLevel = "level1";
 
