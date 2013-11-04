@@ -39,7 +39,7 @@ public class ExplodeBall extends Actor{
 	public ExplodeBall(Level level, long id) {
 		super(level, id);
 		thisID = id;
-		mName = "ExplodeBall";
+		mName = "lightbulb";
 		mTex = "data/"+Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 64, BodyType.DynamicBody, origin, false);
