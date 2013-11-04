@@ -183,7 +183,7 @@ public class Level implements Iterable<Actor> {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
 			// Begin the step.
-			mWorld.step(1 / 60f, 6, 2);
+			mWorld.step(1 / 60f, 12, 6);
 			Actor a;
 			for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
 				a = actor.next();
