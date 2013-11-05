@@ -32,8 +32,9 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
-	private Vector2 spawnOffset = new Vector2(0, 1.5f);
-	private Vector2 rotatedOffset;
+	//For Spawning Offset
+	//private Vector2 spawnOffset = new Vector2(0, 1.5f);
+	//private Vector2 rotatedOffset;
 	private int mInitDelay = 0;
 
 	public Spawner(Level level, long id) {
@@ -182,8 +183,10 @@ public class Spawner extends Actor implements IObservable {
 				this.getLevel().addActor(spawnee);
 			}
 		}
-
-		Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() + rotatedOffset.y);
+		
+		//For Spawning Offset
+		//Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() + rotatedOffset.y);
+		Vector2 pos = mBody.getPosition().cpy();
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
@@ -194,7 +197,7 @@ public class Spawner extends Actor implements IObservable {
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
 		Vector2 vel = new Vector2(0, Convert.getInt(getProp("Exit Velocity")));
-		vel.rotate(Convert.getDegrees(mBody.getAngle()) + (float) (20f * Math.random() - 10f));
+		vel.rotate(Convert.getDegrees(mBody.getAngle()) + (float) (10f * Math.random() - 5f));
 		spawnee.setVelocityX(vel.x);
 		spawnee.setVelocityY(vel.y);
 		if (spawnee instanceof Blob) {
@@ -248,10 +251,11 @@ public class Spawner extends Actor implements IObservable {
 		if (name.equals("Rate")) {
 			mSpawnTimer.setTimer(Convert.getInt(val));
 		}
-
-		if (name.equals("Angle")) {
-			rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
-		}
+		
+		//For Spawning Offset
+		//if (name.equals("Angle")) {
+		//	rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
+		//}
 
 		super.setProp(name, val);
 	}
