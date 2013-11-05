@@ -42,6 +42,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 	private int mControllerFilter;
 	private int mFilteredKey;
 	private int mRepeats = 0;
+	
+	public boolean ignore; //> Flag whether to ignore any further inputs;
 
 	private static float sLineWidth = 3;
 
@@ -73,6 +75,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
+		ignore = false;
 	}
 
 	public void setIndex(int i) {
@@ -197,7 +200,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 	 * @param shapeRender
 	 */
 	public void draw(ShapeRenderer shapeRender) {
-		if (mTable != null) {
+		if (mTable != null && !ignore) {
 			Cell c = getCell(mX, mY);
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
@@ -308,6 +311,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 	}
 
 	private boolean controllerPermission(Controller c, int button) {
+		if(ignore){
+			return false;
+		}
 		int gameState = Game.get().getState();
 		MenuView menuView = Game.get().getMenuView();
 		if (gameState == Game.MENU && MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())

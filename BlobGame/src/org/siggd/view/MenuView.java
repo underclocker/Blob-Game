@@ -79,6 +79,7 @@ public class MenuView {
 		mMenuController = new MenuController();
 		mShapeRenderer = new ShapeRenderer();
 		mDelay = 0;
+		mBindingController = null;
 
 		// Generate a 1x1 white texture and store it in the skin named "white".
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
@@ -396,54 +397,9 @@ public class MenuView {
 	public void update() {
 		mMenuController.update();
 		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
-			mHintTimer++;
-			if (mHintTimer > 120 && mHintTimer <= 180) {
-				mCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
-				mBaseCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
-			}
-			Player p = null;
-			if (mDelay > 10) {
-				p = testForNewPlayer();
-			} else {
-				mDelay++;
-			}
-			if (p != null) {
-				if (!Game.get().playerExists(p)) {
-					System.out.println("Adding player of type: " + p.controltype);
-					Game.get().addPlayer(p);
-				}
-				activatePlayer(p);
-			}
-			boolean start = false;
-			for (Player pl : Game.get().getPlayers()) {
-				if (!pl.active)
-					continue;
-				if (pl.controltype == ControlType.Controller && pl.controller != null) {
-					Controller c = pl.controller;
-					start = start
-							|| c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
-									ControllerFilterAPI.BUTTON_START));
-				} else if (pl.controltype == ControlType.WASD
-						|| pl.controltype == ControlType.Arrows) {
-					start = start || Gdx.input.isKeyPressed(Input.Keys.SPACE)
-							|| Gdx.input.isKeyPressed(Input.Keys.ENTER);
-				}
-				if (start)
-					break;
-			}
-			if (start) {
-				for (Player pl : Game.get().getPlayers()) {
-					if (pl.active && pl.controltype == ControlType.Controller
-							&& pl.controller != null) {
-						mMenuController.setController(pl.controller);
-						mMenuController.setPlayerId(pl.id);
-						break;
-					}
-				}
-				setMenu("NULL");
-				Game.get().setState(Game.PLAY);
-				Game.get().setLevel(mSelectedLevel);
-			}
+			customizeMenuUpdate();
+		} else if (CONTROLLER.equals(mCurrentMenu)) {
+			controllerMenuUpdate();
 		}
 	}
 
@@ -455,6 +411,94 @@ public class MenuView {
 		mStage.dispose();
 	}
 
+	private Controller mBindingController;
+	private int mBindingDelay;
+	private static int BINDING_MENU_DELAY = 20;
+
+	private void controllerMenuUpdate() {
+		if (mBindingController == null) {
+			// listen for new controller axis wiggle
+			if(mBindingDelay <= 0){
+				mMenuController.ignore=true;
+				mBindingController = testForBindingController();
+			}else{
+				mBindingDelay--;
+			}
+		} else {
+			// listen for keys to bind
+		}
+	}
+
+	private Controller testForBindingController() {
+		for (Controller c : Controllers.getControllers()) {
+			for (int i = 0; i < 10; i++) {
+				if (c.getButton(i)) {
+					return c;
+				}
+			}
+			for (int i = 0; i < 4; i++) {
+				if (Math.abs(c.getAxis(i)) > 0.25f) {
+					return c;
+				}
+			}
+		}
+		return null;
+	}
+
+	private void customizeMenuUpdate() {
+		mHintTimer++;
+		if (mHintTimer > 120 && mHintTimer <= 180) {
+			mCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
+			mBaseCustomizeTable.setColor(1, 1, 1, (mHintTimer - 120) / 60f);
+		}
+		Player p = null;
+		if (mDelay > 10) {
+			p = testForNewPlayer();
+		} else {
+			mDelay++;
+		}
+		if (p != null) {
+			if (!Game.get().playerExists(p)) {
+				System.out.println("Adding player of type: " + p.controltype);
+				Game.get().addPlayer(p);
+			}
+			activatePlayer(p);
+		}
+		boolean start = false;
+		for (Player pl : Game.get().getPlayers()) {
+			if (!pl.active)
+				continue;
+			if (pl.controltype == ControlType.Controller && pl.controller != null) {
+				Controller c = pl.controller;
+				start = start
+						|| c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
+								ControllerFilterAPI.BUTTON_START));
+			} else if (pl.controltype == ControlType.WASD || pl.controltype == ControlType.Arrows) {
+				start = start || Gdx.input.isKeyPressed(Input.Keys.SPACE)
+						|| Gdx.input.isKeyPressed(Input.Keys.ENTER);
+			}
+			if (start)
+				break;
+		}
+		if (start) {
+			for (Player pl : Game.get().getPlayers()) {
+				if (pl.active && pl.controltype == ControlType.Controller && pl.controller != null) {
+					mMenuController.setController(pl.controller);
+					mMenuController.setPlayerId(pl.id);
+					break;
+				}
+			}
+			setMenu("NULL");
+			Game.get().setState(Game.PLAY);
+			Game.get().setLevel(mSelectedLevel);
+		}
+	}
+
+	/**
+	 * Checks controllers for new player, returns the first candidate
+	 * 
+	 * @return Player to add to game or null if there is no new player
+	 */
 	private Player testForNewPlayer() {
 		Player p = null;
 		for (Controller c : Controllers.getControllers()) {
@@ -607,6 +651,7 @@ public class MenuView {
 				Game.get().getLevelView().resetCamera();
 			}
 			Game.get().deactivatePlayers();
+			mMenuController.ignore = false;
 			setMenu(MAIN);
 		}
 	};
@@ -655,6 +700,7 @@ public class MenuView {
 	public void setMenu(String menu) {
 		mCurrentMenu = menu;
 		mDelay = 0;
+		mBindingController = null;
 		mMainTable.remove();
 		mPauseTable.remove();
 		mFakePauseTable.remove();
@@ -720,6 +766,7 @@ public class MenuView {
 				}
 			}
 		} else if (CONTROLLER.equals(menu)) {
+			mBindingDelay = BINDING_MENU_DELAY;
 			mStage.addActor(mControllerTable);
 			mMenuController.setTable(mControllerTable);
 		}
