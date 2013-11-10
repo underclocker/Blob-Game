@@ -412,21 +412,124 @@ public class MenuView {
 	}
 
 	private Controller mBindingController;
+	private Binding mCustomBinding;
 	private int mBindingDelay;
 	private static int BINDING_MENU_DELAY = 20;
+
+	private class Binding {
+		public int POOF = -1;
+		public int TRANSFORM = -1;
+		public int START = -1;
+		public int LRAXIS = -1;
+		public int UDAXIS = -1;
+	}
 
 	private void controllerMenuUpdate() {
 		if (mBindingController == null) {
 			// listen for new controller axis wiggle
-			if(mBindingDelay <= 0){
-				mMenuController.ignore=true;
+			if (mBindingDelay <= 0) {
+				mMenuController.ignore = true;
 				mBindingController = testForBindingController();
-			}else{
+				mCustomBinding = new Binding();
+				mBindingDelay = BINDING_MENU_DELAY / 2;
+			} else {
 				mBindingDelay--;
 			}
 		} else {
-			// listen for keys to bind
+			// listen for keys to bind\
+			if (mBindingDelay <= 0) {
+				System.out.print("LISTENING FOR BUTTON...");
+				if (mCustomBinding.POOF == -1) {
+					mCustomBinding.POOF = testForButton(mBindingController);
+					if(mCustomBinding.POOF != -1){
+						Game.get().playNomSound();
+					}
+					System.out.println("POOF");
+				} else if (mCustomBinding.TRANSFORM == -1) {
+					mCustomBinding.TRANSFORM = testForButton(mBindingController);
+					if(mCustomBinding.TRANSFORM == mCustomBinding.POOF){
+						mCustomBinding.TRANSFORM = -1;
+					}
+					if(mCustomBinding.TRANSFORM != -1){
+						Game.get().playNomSound();
+					}
+					System.out.println("TRANS");
+				} else if (mCustomBinding.START == -1) {
+					mCustomBinding.START = testForButton(mBindingController);
+					if(mCustomBinding.START == mCustomBinding.TRANSFORM || mCustomBinding.START == mCustomBinding.POOF){
+						mCustomBinding.START = -1;
+					}
+					if(mCustomBinding.START != -1){
+						Game.get().playNomSound();
+					}
+					System.out.println("START");
+				} else if (mCustomBinding.LRAXIS == -1) {
+					mCustomBinding.LRAXIS = testForAxis(mBindingController);
+					if(mCustomBinding.LRAXIS != -1){
+						Game.get().playNomSound();
+					}
+					System.out.println("LRAXIS");
+				} else if (mCustomBinding.UDAXIS == -1) {
+					mCustomBinding.UDAXIS = testForAxis(mBindingController);
+					if(mCustomBinding.UDAXIS == mCustomBinding.LRAXIS){
+						mCustomBinding.UDAXIS = -1;
+					}
+					if(mCustomBinding.UDAXIS != -1){
+						Game.get().playNomSound();
+					}
+					System.out.println("UDAXIS");
+				} else {
+					JSONObject bindings = new JSONObject();
+					JSONObject buttons = new JSONObject();
+					JSONObject axis = new JSONObject();
+					try {
+						buttons.put("BUTTON_A", mCustomBinding.POOF);
+						buttons.put("BUTTON_B", mCustomBinding.TRANSFORM);
+						buttons.put("BUTTON_START", mCustomBinding.START);
+						axis.put("AXIS_LEFT_UD", mCustomBinding.UDAXIS);
+						axis.put("AXIS_LEFT_LR", mCustomBinding.LRAXIS);
+						bindings.put("Buttons",buttons);
+						bindings.put("Axes", axis);
+						ControllerFilterAPI.saveCustomBinding(mBindingController.getName(),
+								bindings);
+					} catch (JSONException e) {
+						System.out.println( "Failed creating binding obj");
+					}
+					mBindingController = null;
+					setMenu(MAIN);
+				}
+				System.out.println("STOP");
+				mBindingDelay = BINDING_MENU_DELAY / 2;
+			} else {
+				mBindingDelay--;
+			}
 		}
+	}
+
+	private int testForAxis(Controller c) {
+		if (c == null) {
+			System.out.println("NULL CONTROLLER");
+			return -1;
+		}
+		for (int i = 0; i < 4; i++) {
+			if (Math.abs(c.getAxis(i)) > 0.25f) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private int testForButton(Controller c) {
+		if (c == null) {
+			System.out.println("NULL CONTROLLER");
+			return -1;
+		}
+		for (int i = 0; i < 10; i++) {
+			if (c.getButton(i)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	private Controller testForBindingController() {
@@ -698,6 +801,7 @@ public class MenuView {
 	}
 
 	public void setMenu(String menu) {
+		mMenuController.ignore = false;
 		mCurrentMenu = menu;
 		mDelay = 0;
 		mBindingController = null;

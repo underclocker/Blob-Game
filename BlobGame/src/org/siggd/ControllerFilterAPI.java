@@ -64,6 +64,23 @@ public class ControllerFilterAPI {
 			}
 		}
 	}
+	public static void saveCustomBinding(String controllerName, JSONObject bindings) throws JSONException{
+		File f = new File(Gdx.files.getExternalStoragePath() + CUSTOM_BINDINGS);
+		FileHandle bindingsFile;
+		JSONObject customBindings;
+		if (f.exists()) {
+			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
+			String bindingsJson = bindingsFile.readString();
+			customBindings = new JSONObject(bindingsJson);
+		}else{
+			bindingsFile = new FileHandle(f);
+			customBindings = new JSONObject();
+		}
+		customBindings.put(controllerName, bindings);
+		System.out.println("SAVING: "+bindings.toString());
+		bindingsFile.writeString(customBindings.toString(), false);
+		loadCustomBindings();
+	}
 /**
  * use this to take a real button ID to the XBOX equivelant
  * @param c
