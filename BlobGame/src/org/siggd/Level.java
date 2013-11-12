@@ -181,7 +181,6 @@ public class Level implements Iterable<Actor> {
 		long deltat = System.currentTimeMillis()-mLastTime;
 		mLastTime = System.currentTimeMillis();
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-			System.out.println(deltat);
 			if (deltat > 25) {
 				mLastTime += 33;
 				update();
