@@ -48,7 +48,6 @@ public class MenuView {
 	public static String CUSTOMIZE = "Customize";
 	public static String LOADING = "Loading";
 	public static String CONTROLLER = "Controller";
-
 	private Stage mStage;
 	private Skin mSkin;
 	private Table mMainTable;
@@ -59,9 +58,17 @@ public class MenuView {
 	private Table mTint;
 	private Table mBaseCustomizeTable;
 	private Table mCustomizeTable;
-	private Table mControllerTable;
 	private Image mJoinImage;
 	private Image mStartImage;
+	private Table mControllerTable;
+	private Table mControllerOverTable;
+	private Image mControllerLeft;
+	private Image mControllerRight;
+	private Image mControllerUp;
+	private Image mControllerDown;
+	private Image mControllerPoof;
+	private Image mControllerSolid;
+	private Image mControllerStart;
 	private int mDelay;
 	private MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
@@ -72,6 +79,7 @@ public class MenuView {
 	private final float mVerticalSpacing = 30f;
 	private float mRollingAlpha = 0f;
 	private int mHintTimer = 0;
+	private int mTwoSecondTimer = 0;
 
 	public MenuView() {
 		mStage = new Stage();
@@ -308,6 +316,8 @@ public class MenuView {
 	private void createControllerMenu() {
 		mControllerTable = new Table(mSkin);
 		mControllerTable.setFillParent(true);
+		mControllerOverTable = new Table(mSkin);
+		mControllerOverTable.setFillParent(true);
 		ImageButton imageButton;
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
@@ -319,7 +329,6 @@ public class MenuView {
 		imageButton = new SiggdImageButton("data/gfx/controllerconfig1.png",
 				"data/gfx/backButton.png").getButton();
 		imageButton.setDisabled(true);
-		// baseImage.set
 		mControllerTable.add(imageButton);
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
@@ -329,6 +338,16 @@ public class MenuView {
 				mVerticalSpacing, mHorizontalSpacing);
 		imageButton.setDisabled(true);
 		imageButton.setVisible(false);
+		mControllerLeft = new Image(new Texture(Gdx.files.internal("data/gfx/controllerleft.png")));
+		mControllerRight = new Image(
+				new Texture(Gdx.files.internal("data/gfx/controllerright.png")));
+		mControllerPoof = new Image(new Texture(Gdx.files.internal("data/gfx/controllerpoof.png")));
+		mControllerSolid = new Image(
+				new Texture(Gdx.files.internal("data/gfx/controllersolid.png")));
+		mControllerStart = new Image(
+				new Texture(Gdx.files.internal("data/gfx/controllerstart.png")));
+		mControllerDown = new Image(new Texture(Gdx.files.internal("data/gfx/controllerdown.png")));
+		mControllerUp = new Image(new Texture(Gdx.files.internal("data/gfx/controllerup.png")));
 	}
 
 	public void render() {
@@ -395,6 +414,9 @@ public class MenuView {
 	}
 
 	public void update() {
+		mTwoSecondTimer++;
+		if (mTwoSecondTimer > 120)
+			mTwoSecondTimer -= 120;
 		mMenuController.update();
 		if (CUSTOMIZE.equals(mCurrentMenu) && Game.get().getState() != Game.PLAY) {
 			customizeMenuUpdate();
@@ -414,7 +436,7 @@ public class MenuView {
 	private Controller mBindingController;
 	private Binding mCustomBinding;
 	private int mBindingDelay;
-	private static int BINDING_MENU_DELAY = 20;
+	private static int BINDING_MENU_DELAY = 0;
 
 	private class Binding {
 		public int POOF = -1;
@@ -426,58 +448,82 @@ public class MenuView {
 
 	private void controllerMenuUpdate() {
 		if (mBindingController == null) {
-			// listen for new controller axis wiggle
 			if (mBindingDelay <= 0) {
 				mMenuController.ignore = true;
 				mBindingController = testForBindingController();
 				mCustomBinding = new Binding();
-				mBindingDelay = BINDING_MENU_DELAY / 2;
+				// Set left/right immediately
+				// mBindingDelay = BINDING_MENU_DELAY / 2;
+				mControllerOverTable.clear();
+				if (mTwoSecondTimer < 40) {
+					mControllerOverTable.add(mControllerLeft);
+				} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
+					mControllerOverTable.add(mControllerRight);
+				}
+				if (mBindingController != null) mTwoSecondTimer = 0;
 			} else {
 				mBindingDelay--;
 			}
 		} else {
 			// listen for keys to bind\
 			if (mBindingDelay <= 0) {
-				System.out.print("LISTENING FOR BUTTON...");
-				if (mCustomBinding.POOF == -1) {
-					mCustomBinding.POOF = testForButton(mBindingController);
-					if(mCustomBinding.POOF != -1){
-						Game.get().playNomSound();
+				mControllerOverTable.clear();
+				if (mCustomBinding.LRAXIS == -1) {
+					if (mTwoSecondTimer < 40) {
+						mControllerOverTable.add(mControllerLeft);
+					} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
+						mControllerOverTable.add(mControllerRight);
 					}
-					System.out.println("POOF");
+					mCustomBinding.LRAXIS = testForAxis(mBindingController);
+					if (mCustomBinding.LRAXIS != -1) {
+						Game.get().playTickSound();
+						mTwoSecondTimer = 0;
+					}
+				} else if (mCustomBinding.POOF == -1) {
+					mCustomBinding.POOF = testForButton(mBindingController);
+					if ((mTwoSecondTimer / 30) % 2 == 0)
+						mControllerOverTable.add(mControllerPoof);
+					if (mCustomBinding.POOF != -1) {
+						Game.get().playTickSound();
+						mTwoSecondTimer = 0;
+					}
 				} else if (mCustomBinding.TRANSFORM == -1) {
 					mCustomBinding.TRANSFORM = testForButton(mBindingController);
-					if(mCustomBinding.TRANSFORM == mCustomBinding.POOF){
+					if ((mTwoSecondTimer / 30) % 2 == 0)
+						mControllerOverTable.add(mControllerSolid);
+					if (mCustomBinding.TRANSFORM == mCustomBinding.POOF) {
 						mCustomBinding.TRANSFORM = -1;
 					}
-					if(mCustomBinding.TRANSFORM != -1){
-						Game.get().playNomSound();
+					if (mCustomBinding.TRANSFORM != -1) {
+						Game.get().playTickSound();
+						mTwoSecondTimer = 0;
 					}
-					System.out.println("TRANS");
 				} else if (mCustomBinding.START == -1) {
 					mCustomBinding.START = testForButton(mBindingController);
-					if(mCustomBinding.START == mCustomBinding.TRANSFORM || mCustomBinding.START == mCustomBinding.POOF){
+					if ((mTwoSecondTimer / 30) % 2 == 0)
+						mControllerOverTable.add(mControllerStart);
+					if (mCustomBinding.START == mCustomBinding.TRANSFORM
+							|| mCustomBinding.START == mCustomBinding.POOF) {
 						mCustomBinding.START = -1;
 					}
-					if(mCustomBinding.START != -1){
-						Game.get().playNomSound();
+					if (mCustomBinding.START != -1) {
+						Game.get().playTickSound();
+						mTwoSecondTimer = 0;
 					}
-					System.out.println("START");
-				} else if (mCustomBinding.LRAXIS == -1) {
-					mCustomBinding.LRAXIS = testForAxis(mBindingController);
-					if(mCustomBinding.LRAXIS != -1){
-						Game.get().playNomSound();
-					}
-					System.out.println("LRAXIS");
 				} else if (mCustomBinding.UDAXIS == -1) {
+					if (mTwoSecondTimer < 40) {
+						mControllerOverTable.add(mControllerUp);
+					} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
+						mControllerOverTable.add(mControllerDown);
+					}
 					mCustomBinding.UDAXIS = testForAxis(mBindingController);
-					if(mCustomBinding.UDAXIS == mCustomBinding.LRAXIS){
+					if (mCustomBinding.UDAXIS == mCustomBinding.LRAXIS) {
 						mCustomBinding.UDAXIS = -1;
 					}
-					if(mCustomBinding.UDAXIS != -1){
+					if (mCustomBinding.UDAXIS != -1) {
 						Game.get().playNomSound();
+						mTwoSecondTimer = 0;
 					}
-					System.out.println("UDAXIS");
 				} else {
 					JSONObject bindings = new JSONObject();
 					JSONObject buttons = new JSONObject();
@@ -488,17 +534,16 @@ public class MenuView {
 						buttons.put("BUTTON_START", mCustomBinding.START);
 						axis.put("AXIS_LEFT_UD", mCustomBinding.UDAXIS);
 						axis.put("AXIS_LEFT_LR", mCustomBinding.LRAXIS);
-						bindings.put("Buttons",buttons);
+						bindings.put("Buttons", buttons);
 						bindings.put("Axes", axis);
 						ControllerFilterAPI.saveCustomBinding(mBindingController.getName(),
 								bindings);
 					} catch (JSONException e) {
-						System.out.println( "Failed creating binding obj");
+						System.out.println("Failed creating binding obj");
 					}
 					mBindingController = null;
 					setMenu(MAIN);
 				}
-				System.out.println("STOP");
 				mBindingDelay = BINDING_MENU_DELAY / 2;
 			} else {
 				mBindingDelay--;
@@ -512,7 +557,7 @@ public class MenuView {
 			return -1;
 		}
 		for (int i = 0; i < 4; i++) {
-			if (Math.abs(c.getAxis(i)) > 0.25f) {
+			if (Math.abs(c.getAxis(i)) > 0.75f) {
 				return i;
 			}
 		}
@@ -540,7 +585,7 @@ public class MenuView {
 				}
 			}
 			for (int i = 0; i < 4; i++) {
-				if (Math.abs(c.getAxis(i)) > 0.25f) {
+				if (Math.abs(c.getAxis(i)) > 0.75f) {
 					return c;
 				}
 			}
@@ -814,6 +859,7 @@ public class MenuView {
 		mStartImage.remove();
 		mTint.remove();
 		mControllerTable.remove();
+		mControllerOverTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
 			mMenuController.setTable(mMainTable);
@@ -872,6 +918,7 @@ public class MenuView {
 		} else if (CONTROLLER.equals(menu)) {
 			mBindingDelay = BINDING_MENU_DELAY;
 			mStage.addActor(mControllerTable);
+			mStage.addActor(mControllerOverTable);
 			mMenuController.setTable(mControllerTable);
 		}
 	}
