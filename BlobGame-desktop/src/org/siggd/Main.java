@@ -34,11 +34,8 @@ public class Main {
 			saveToPref("fullscreen", (Integer) 1);
 			saveToPref("useGL20", (Integer) 1);
 			saveToPref("vSyncEnabled", (Integer) 1);
-			// Related to harrison's computer speedups.
-			saveToPref("useCPUSynch", (Integer) 0);
 			saveToPref("useLights", (Integer) 1);
 			saveToPref("usePreload", (Integer) 1);
-
 
 			// Flush
 			handle.writeString(mPrefs.toString(), false);
