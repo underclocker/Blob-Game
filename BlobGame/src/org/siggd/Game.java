@@ -57,10 +57,10 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = false;
 	public final static boolean DEBUG = false;
-	public final static boolean FRAMEBYFRAME = false;
+	public final static boolean FRAMEBYFRAME = true;
 	public static boolean PRELOAD = false; // only preloads in release and reads from config file
 
-	public final String mStartingLevel = "level1_med";
+	public final String mStartingLevel = "level1";
 
 	// The game's current state
 	private int mState;
