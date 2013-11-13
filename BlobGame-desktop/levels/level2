@@ -113,7 +113,7 @@
             "class": "org.siggd.actor.Parallax",
             "props": {
                 "Layer": -3,
-                "Lightness": "0.05",
+                "Lightness": "0.07",
                 "Distance": "5.0",
                 "ID": 3436,
                 "Scale": "6.0",
