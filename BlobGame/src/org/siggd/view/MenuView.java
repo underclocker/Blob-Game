@@ -256,9 +256,7 @@ public class MenuView {
 				mHorizontalSpacing);
 
 		mLevelsTable.row();
-		
 
-		
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
 		imageButton.setVisible(false);
@@ -269,6 +267,9 @@ public class MenuView {
 				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1_med"));
 		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/buttonUp.png",
 				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level7_med"));
+		mLevel1.put("level3_med", new SiggdImageButton("data/gfx/buttonUp.png",
+				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3_med"));
+
 
 		button = mLevel1.get("level1_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -282,9 +283,13 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
+		button = mLevel1.get("level3_med");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
+
 		mLevelsTable.row();
-
-
 
 		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
 				.getButton();
@@ -489,7 +494,8 @@ public class MenuView {
 				} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
 					mControllerOverTable.add(mControllerRight);
 				}
-				if (mBindingController != null) mTwoSecondTimer = 0;
+				if (mBindingController != null)
+					mTwoSecondTimer = 0;
 			} else {
 				mBindingDelay--;
 			}
