@@ -48,7 +48,8 @@ public class FadeIn extends Actor {
 		public void drawSprite(SpriteBatch batch) {
 			if (Convert.getInt(getProp("Visible")) == 0)
 				return;
-			alpha -= .05f;
+			if (alpha > Convert.getFloat(getProp("Stop")))
+				alpha -= .05f;
 			if (alpha < 0) {
 				setVisible(0);
 				return;
@@ -101,6 +102,7 @@ public class FadeIn extends Actor {
 		setProp("Distance", (Float) 0f);
 		setProp("Scale", (Float) 100f);
 		setProp("Layer", 101);
+		setProp("Stop", .0f);
 		setProp("X Offset", 0);
 		setProp("Y Offset", 0);
 	}
