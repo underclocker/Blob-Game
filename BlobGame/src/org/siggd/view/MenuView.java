@@ -183,28 +183,27 @@ public class MenuView {
 		mLevelsTable.setFillParent(true);
 		ImageButton imageButton;
 
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.addListener(mMainMenu);
 		imageButton.addListener(mClickListener);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
 				mHorizontalSpacing);
 
 		mLevel1 = new HashMap<String, SiggdImageButton>();
-		mLevel1.put("level1", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1"));
-		mLevel1.put("level7", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level7"));
-		mLevel1.put("level3", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3"));
-		mLevel1.put("level4", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level4"));
-		mLevel1.put("level5", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level5"));
-		mLevel1.put("level2", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level2"));
-		mLevel1.put("level8", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level8"));
+		mLevel1.put("level1", new SiggdImageButton("data/gfx/lvl1Down.png",
+				"data/gfx/buttonDisabled.png", "level1"));
+		mLevel1.put("level7", new SiggdImageButton("data/gfx/lvl7Down.png",
+				"data/gfx/buttonDisabled.png", "level7"));
+		mLevel1.put("level3", new SiggdImageButton("data/gfx/lvl3Down.png",
+				"data/gfx/buttonDisabled.png", "level3"));
+		mLevel1.put("level4", new SiggdImageButton("data/gfx/lvl4Down.png",
+				"data/gfx/buttonDisabled.png", "level4"));
+		mLevel1.put("level5", new SiggdImageButton("data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level5"));
+		mLevel1.put("level2", new SiggdImageButton("data/gfx/lvl2Down.png",
+				"data/gfx/buttonDisabled.png", "level2"));
+		mLevel1.put("level8", new SiggdImageButton("data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level8"));
 
 		SiggdImageButton button = mLevel1.get("level1");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -249,27 +248,24 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.setVisible(false);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
 				mHorizontalSpacing);
 
 		mLevelsTable.row();
 
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.setVisible(false);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
 				mHorizontalSpacing);
 
-		mLevel1.put("level1_med", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1_med"));
-		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level7_med"));
-		mLevel1.put("level3_med", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3_med"));
-
+		mLevel1.put("level1_med", new SiggdImageButton("data/gfx/lvl1Down.png",
+				"data/gfx/buttonDisabled.png", "level1_med"));
+		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/lvl7Down.png",
+				"data/gfx/buttonDisabled.png", "level7_med"));
+		mLevel1.put("level3_med", new SiggdImageButton("data/gfx/lvl3Down.png",
+				"data/gfx/buttonDisabled.png", "level3_med"));
 
 		button = mLevel1.get("level1_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -291,20 +287,19 @@ public class MenuView {
 
 		mLevelsTable.row();
 
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.setVisible(false);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
 				mHorizontalSpacing);
 
-		mLevel1.put("level1_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level1_hard"));
-		mLevel1.put("level3_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level3_hard"));
-		mLevel1.put("level5_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level5_hard"));
-		mLevel1.put("level2_hard", new SiggdImageButton("data/gfx/buttonUp.png",
-				"data/gfx/buttonDown.png", "data/gfx/buttonDisabled.png", "level2_hard"));
+		mLevel1.put("level1_hard", new SiggdImageButton("data/gfx/lvl1Down.png",
+				"data/gfx/buttonDisabled.png", "level1_hard"));
+		mLevel1.put("level3_hard", new SiggdImageButton("data/gfx/lvl3Down.png",
+				"data/gfx/buttonDisabled.png", "level3_hard"));
+		mLevel1.put("level5_hard", new SiggdImageButton("data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level5_hard"));
+		mLevel1.put("level2_hard", new SiggdImageButton("data/gfx/lvl2Down.png",
+				"data/gfx/buttonDisabled.png", "level2_hard"));
 
 		button = mLevel1.get("level1_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -353,19 +348,16 @@ public class MenuView {
 		mControllerOverTable = new Table(mSkin);
 		mControllerOverTable.setFillParent(true);
 		ImageButton imageButton;
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.addListener(mMainMenu);
 		imageButton.addListener(mClickListener);
 		mControllerTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 
-		imageButton = new SiggdImageButton("data/gfx/controllerconfig1.png",
-				"data/gfx/backButton.png").getButton();
+		imageButton = new SiggdImageButton("data/gfx/controllerconfig1.png").getButton();
 		imageButton.setDisabled(true);
 		mControllerTable.add(imageButton);
-		imageButton = new SiggdImageButton("data/gfx/backButton.png", "data/gfx/backButton.png")
-				.getButton();
+		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.addListener(mMainMenu);
 		imageButton.addListener(mClickListener);
 		mControllerTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing,

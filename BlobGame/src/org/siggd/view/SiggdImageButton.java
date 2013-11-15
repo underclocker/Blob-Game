@@ -11,25 +11,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class SiggdImageButton {
 	ImageButton mImageButton;
 
-	public SiggdImageButton(String up, String down, String disabled, String metaData) {
-		Texture texture1 = new Texture(Gdx.files.internal(up));
+	public SiggdImageButton(String down, String disabled, String metaData) {
 		Texture texture2 = new Texture(Gdx.files.internal(down));
 		Texture texture3 = new Texture(Gdx.files.internal(disabled));
-		TextureRegion imageUp = new TextureRegion(texture1);
 		TextureRegion imageDown = new TextureRegion(texture2);
 		TextureRegion imageDisabled = new TextureRegion(texture3);
-		TextureRegionDrawable drawableUp = new TextureRegionDrawable(imageUp);
 		TextureRegionDrawable drawableDown = new TextureRegionDrawable(imageDown);
 		TextureRegionDrawable drawableDisabled = new TextureRegionDrawable(imageDisabled);
-		ImageButtonStyle imageButtonStyle = new ImageButtonStyle(drawableUp, drawableDown,
+		ImageButtonStyle imageButtonStyle = new ImageButtonStyle(drawableDown, drawableDown,
 				drawableDown, drawableDown, drawableDown, drawableDown);
 		imageButtonStyle.imageDisabled = drawableDisabled;
 		mImageButton = new ImageButton(imageButtonStyle);
 		mImageButton.setName(metaData);
 	}
 
-	public SiggdImageButton(String up, String down) {
-		this(up, down, up, null);
+	public SiggdImageButton(String down) {
+		this(down, down, null);
 	}
 
 	public ImageButton getButton() {
