@@ -652,7 +652,7 @@
         }
     ],
     "props": {
-        "Min Camera Y": 0,
+        "Ambient Light": 0.0,        "Min Camera Y": 0,
         "Gravity X": 0,
         "Gravity Y": -9.8,
         "Puff Enabled": 1,

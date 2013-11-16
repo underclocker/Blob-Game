@@ -913,7 +913,10 @@ public class Blob extends Actor implements Controllable {
 		if (mLight != null) {
 			mLightColor.set(mBlobDrawable.mSquishColor);
 
-			float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
+			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
+			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
+			diff *= diff;
+			brightness += .075f*diff;
 			if (brightness < 0) {
 				brightness = 0;
 			}
@@ -1100,12 +1103,12 @@ public class Blob extends Actor implements Controllable {
 
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			Vector2 vel;
-			float threshold = 2.8f;
+			float threshold = 3f;
 			if (mState == SQUISH_STATE) {
 				calcCenters();
 				vel = new Vector2(mVCenter);
 			} else {
-				threshold = 4f;
+				threshold = 6f;
 				vel = new Vector2(mBody.getLinearVelocity());
 			}
 			vel.sub(mOldVCenter);
@@ -1122,12 +1125,12 @@ public class Blob extends Actor implements Controllable {
 					if (mState == SOLID_STATE) {
 						soundID = sound.play();
 						sound.setPitch(soundID, .5f + velLength * .0001f);
-						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
+						sound.setVolume(soundID, Math.min(1f, .6f + velLength * .002f));
 					} else {
 						if (!mSpawning) {
 							soundID = sound.play();
 							sound.setPitch(soundID, 1f + velLength * .005f);
-							sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
+							sound.setVolume(soundID, Math.min(1f, .6f + velLength * .005f));
 						}
 					}
 				}

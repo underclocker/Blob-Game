@@ -758,6 +758,8 @@ public class MenuView {
 			p.active = true;
 			Level l = Game.get().getLevel();
 			Blob b = new Blob(l, l.getId());
+			b.postLoad();
+			b.setActive(true);
 			l.addActor(b);
 			Vector2 pos = mSpawnPos.remove((int) ((mSpawnPos.size()) * Math.random()));
 			b.setX(pos.x);
