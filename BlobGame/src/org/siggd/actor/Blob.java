@@ -1112,7 +1112,8 @@ public class Blob extends Actor implements Controllable {
 			float velLength = vel.len();
 			mAccAprox += velLength / 10f;
 			mAccAprox *= .9f;
-			if (velLength > threshold && mSoundTimer.isTriggered()) {
+			if (velLength > threshold && mSoundTimer.isTriggered()
+					&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -1130,7 +1131,6 @@ public class Blob extends Actor implements Controllable {
 						}
 					}
 				}
-
 				mSoundTimer.reset();
 			}
 			mSpawning = false;

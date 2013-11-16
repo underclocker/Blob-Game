@@ -61,6 +61,7 @@ public class MenuView {
 	private Table mCustomizeTable;
 	private Image mJoinImage;
 	private Image mStartImage;
+	private Image mSpacerImage;
 	private Table mControllerTable;
 	private Table mControllerOverTable;
 	private Image mControllerLeft;
@@ -340,9 +341,14 @@ public class MenuView {
 		mBaseCustomizeTable.setFillParent(true);
 		mJoinImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst1.png")));
 		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
-		Image baseImage = new Image(new Texture(Gdx.files.internal("data/gfx/InstBlank.png")));
+		Texture t = new Texture(Gdx.files.internal("data/gfx/InstBlank.png"));
+		Image baseImage = new Image(t);
+		//mSpacerImage = new Image(t);
+		//spacer.setVisible(false);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
+		mBaseCustomizeTable.row();
+		//mBaseCustomizeTable.add(spacer);
 	}
 
 	private void createControllerMenu() {
@@ -757,7 +763,7 @@ public class MenuView {
 			Level l = Game.get().getLevel();
 			Blob b = new Blob(l, l.getId());
 			l.addActor(b);
-			Vector2 pos = mSpawnPos.remove((int)((mSpawnPos.size())*Math.random()));
+			Vector2 pos = mSpawnPos.remove((int) ((mSpawnPos.size()) * Math.random()));
 			b.setX(pos.x);
 			b.setY(pos.y);
 			b.setLayer(4);
@@ -919,14 +925,14 @@ public class MenuView {
 		} else if (CUSTOMIZE.equals(menu)) {
 
 			mSpawnPos.clear();
-			mSpawnPos.add(new Vector2(-6.587499f,-3.74256f));
-			mSpawnPos.add(new Vector2(-4.2386f,-3.86658f));
-			mSpawnPos.add(new Vector2(-3.10779f,-2.038028f));
-			mSpawnPos.add(new Vector2(-2.0781898f,-3.8859222f));
-			mSpawnPos.add(new Vector2(-0.61969f,-2.32333f));
-			mSpawnPos.add(new Vector2(0.82276f,-3.88321f));
-			mSpawnPos.add(new Vector2(3.9117f,-3.7765992f));
-			mSpawnPos.add(new Vector2(4.488303f,-1.361473f));
+			mSpawnPos.add(new Vector2(-6.587499f, -3.74256f));
+			mSpawnPos.add(new Vector2(-4.2386f, -3.86658f));
+			mSpawnPos.add(new Vector2(-3.10779f, -2.038028f));
+			mSpawnPos.add(new Vector2(-2.0781898f, -3.8859222f));
+			mSpawnPos.add(new Vector2(-0.61969f, -2.32333f));
+			mSpawnPos.add(new Vector2(0.82276f, -3.88321f));
+			mSpawnPos.add(new Vector2(3.9117f, -3.7765992f));
+			mSpawnPos.add(new Vector2(4.488303f, -1.361473f));
 
 			mHintTimer = 0;
 			if (!mJoinImage.isDescendantOf(mCustomizeTable)) {

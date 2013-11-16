@@ -29,6 +29,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class FadeIn extends Actor {
 	private String mTex;
 	private float mRotation = 0;
+	private FadeInDrawable mFIDrawable;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -48,9 +49,9 @@ public class FadeIn extends Actor {
 		public void drawSprite(SpriteBatch batch) {
 			if (Convert.getInt(getProp("Visible")) == 0)
 				return;
-			if (alpha > Convert.getFloat(getProp("Stop")))
+			if (alpha >= Convert.getFloat(getProp("Stop")))
 				alpha -= .05f;
-			if (alpha < 0) {
+			if (alpha <= 0) {
 				return;
 			}
 
@@ -122,6 +123,10 @@ public class FadeIn extends Actor {
 	public void loadBodies() {
 	}
 
+	public boolean fadedOut() {
+		return mFIDrawable.alpha <= 0;
+	}
+
 	@Override
 	public void setProp(String name, Object val) {
 		if (name.equals("Texture")) {
@@ -142,7 +147,8 @@ public class FadeIn extends Actor {
 			}
 			mTex = "data/gfx/" + val;
 			loadResources();
-			((CompositeDrawable) mDrawable).mDrawables.add(new FadeInDrawable());
+			mFIDrawable = new FadeInDrawable();
+			((CompositeDrawable) mDrawable).mDrawables.add(mFIDrawable);
 		}
 		super.setProp(name, val);
 	}

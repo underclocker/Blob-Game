@@ -126,7 +126,7 @@ public class Level implements Iterable<Actor> {
 
 	public void startMusic() {
 		for (Actor a : mActors) {
-			if (a instanceof FadeIn && a.getVisible() != 0) {
+			if (a instanceof FadeIn && !((FadeIn)a).fadedOut()) {
 				return;
 			}
 		}
@@ -157,7 +157,6 @@ public class Level implements Iterable<Actor> {
 						mMusic.stop();
 					}
 				} catch (Exception e) {
-
 					mMusic = null;
 					// e.printStackTrace();
 					DebugOutput.info(new Object(), (String) getProp("SongName"));
