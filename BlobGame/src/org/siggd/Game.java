@@ -484,6 +484,7 @@ public class Game implements ApplicationListener {
 	public void setLevel(String fileName) {
 		Music music = null;
 		String song = null;
+		float vol = mLevel.mCurrentVolume;
 		Level oldLevel = mLevel;
 		if (mLevel != null) {
 			mLevel.dispose();
@@ -509,7 +510,7 @@ public class Game implements ApplicationListener {
 		String newSong = (String) mLevel.mProps.get("SongName");
 		
 			mLevel.mMusic = music;
-		
+			mLevel.mCurrentVolume = vol;
 		mLevel.loadResources();
 
 		if (oldLevel != null) {
