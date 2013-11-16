@@ -60,8 +60,8 @@
 				"BUTTON_RS": 11,
 			},
 			"Axes": {
-				"AXIS_LEFT_UD": 1,
-				"AXIS_LEFT_LR": 0,
+				"AXIS_LEFT_UD": 0,
+				"AXIS_LEFT_LR": 1,
 				"AXIS_RIGHT_UD": 3,
 				"AXIS_RIGHT_LR": 2,
 				"AXIS_TRIGGER": -1,
