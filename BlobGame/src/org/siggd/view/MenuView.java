@@ -460,10 +460,6 @@ public class MenuView {
 		}
 	}
 
-	public void resize(int width, int height) {
-		mStage.setViewport(width, height, true);
-	}
-
 	public void dispose() {
 		mStage.dispose();
 	}
@@ -991,6 +987,8 @@ public class MenuView {
 	}
 
 	public void onResize(int width, int height) {
+		if (width < 1280) width *= 2;
+		if (height < 640) height *= 2;
 		mStage.setViewport(width, height, true);
 	}
 }
