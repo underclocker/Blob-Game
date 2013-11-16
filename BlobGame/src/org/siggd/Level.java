@@ -52,7 +52,11 @@ public class Level implements Iterable<Actor> {
 	private ArrayList<Body> mBodiesToDestroy;
 	private ContactHandler mContactHandler;
 	private String mAssetKey;
+	private float mVolume = 0.7f;
+	private float mCurrentVolume = 0.7f;
+	private float mFadeRate = 0.02f;
 	Music mMusic;
+	Music nMusic = null;
 	private LinkedList<Actor> mAddQueue;
 	public Blob mFirstBlobFinished = null;
 	private float mAmbientLight;
@@ -125,22 +129,41 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public void startMusic() {
-		for (Actor a : mActors) {
+		/*for (Actor a : mActors) {
 			if (a instanceof FadeIn && !((FadeIn)a).fadedOut()) {
 				return;
 			}
-		}
+		}*/
+		
+		//Music nMusic = null;
+		
+		//Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
 
 			String musicPath = "data/mus/" + (String) getProp("SongName");
-
+			try
+			{
+				if(nMusic == null){
+				String extension = musicPath.substring(musicPath.length() - 4,
+						musicPath.length());
+				if (".wav".equals(extension) || ".mp3".equals(extension)
+						|| ".ogg".equals(extension)) {
+					man.load(musicPath, Music.class);
+					man.finishLoading();
+					nMusic = man.get(musicPath, Music.class);
+					
+				}
+				}
+			}catch(Exception e){}
 			// If the music was changed to a nonexistent song in realtime, stop
 			// the music
 			if (!man.isLoaded(musicPath)) {
 				mMusic = null;
 			}
 		}
+		
+		//Didn't inherit a song
 		if (mMusic == null) {
 			AssetManager man = Game.get().getAssetManager();
 			String musicPath = "data/mus/" + (String) getProp("SongName");
@@ -163,10 +186,28 @@ public class Level implements Iterable<Actor> {
 				}
 			}
 		}
-
-		if (mMusic != null && !mMusic.isPlaying()) {
-			mMusic.play();
-			mMusic.setVolume(.5f);
+		
+		//Inherited a song, need to switch to new one
+		if(nMusic != null && mMusic.hashCode() != nMusic.hashCode() && !nMusic.isPlaying())
+		{
+			mCurrentVolume -= mFadeRate;
+			if(mCurrentVolume >= 0f)
+			{
+				if(!mMusic.isPlaying())mMusic.play();
+				mMusic.setVolume(mCurrentVolume);
+			}
+			else
+			{
+				mMusic.stop();
+				mMusic = nMusic;
+				nMusic = null;
+			}
+		}
+		else if (mMusic != null) {
+			mCurrentVolume += mFadeRate;
+			if(mCurrentVolume > mVolume) mCurrentVolume = mVolume;
+			if(!mMusic.isPlaying())mMusic.play();
+			mMusic.setVolume(mCurrentVolume);
 		}
 	}
 

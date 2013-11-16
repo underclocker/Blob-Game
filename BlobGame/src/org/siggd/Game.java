@@ -507,9 +507,9 @@ public class Game implements ApplicationListener {
 
 		// Load all level resources
 		String newSong = (String) mLevel.mProps.get("SongName");
-		if (newSong.equals(song)) {
+		
 			mLevel.mMusic = music;
-		}
+		
 		mLevel.loadResources();
 
 		if (oldLevel != null) {
