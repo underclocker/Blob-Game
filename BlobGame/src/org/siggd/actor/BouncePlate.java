@@ -72,7 +72,11 @@ public class BouncePlate extends Actor {
 		float stroke = Convert.getFloat(getProp("Stroke Length"));
 		int output = Convert.getInt(getProp("Output")) * 2 - 1;
 		mTimer += output;
-		if (bodies.size() > 0 && output == -1 && mTimer <= -mRate) {
+		int bods = 0;
+		for (Body b : bodies)
+			if (b.isActive())
+				bods++;
+		if (bods > 0 && output == -1 && mTimer <= -mRate) {
 			setProp("Output", (Integer) 1);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mDefaultDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mActiveDrawable);
