@@ -51,7 +51,6 @@ public class FadeIn extends Actor {
 			if (alpha > Convert.getFloat(getProp("Stop")))
 				alpha -= .05f;
 			if (alpha < 0) {
-				setVisible(0);
 				return;
 			}
 

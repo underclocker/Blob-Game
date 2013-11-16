@@ -37,21 +37,19 @@
             "id": 354,
             "class": "org.siggd.actor.Parallax",
             "props": {
+                "Layer": 0,
                 "Lightness": ".1",
                 "Y Offset": "-3",
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "Texture": "level3_1_0.png",
-                "Layer": 0,
                 "Rotation Speed": ".05",
                 "Friction": 0,
+                "Distance": 3,
                 "ID": 354,
                 "CollisionSound": "",
                 "Scale": "6",
                 "Y": 5.829684,
                 "Rotation": 103.25188,
-                "X": -12.457542
+                "X": -12.457542,
+                "Texture": "level3_1_0.png"
             }
         },
         {
@@ -305,32 +303,29 @@
             "id": 315,
             "class": "org.siggd.actor.Parallax",
             "props": {
+                "Layer": 0,
                 "Lightness": ".1",
                 "Y Offset": "-3",
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "Texture": "level7_1_0.png",
-                "Layer": 0,
                 "Rotation Speed": ".03",
                 "Friction": 0,
+                "Distance": 3,
                 "ID": 315,
                 "CollisionSound": "",
                 "Scale": "6",
                 "Y": 7.2243886,
                 "Rotation": 43.949833,
-                "X": -12.382154
+                "X": -12.382154,
+                "Texture": "level7_1_0.png"
             }
         },
         {
             "id": 345,
             "class": "org.siggd.actor.FadeIn",
             "props": {
-                "Visible": 0,
                 "ID": 345,
                 "Y": 8.704723,
                 "X": -11.188635,
-                "Stop": "0.5"
+                "Stop": "0.0"
             }
         }
     ],

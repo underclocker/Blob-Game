@@ -1,5 +1,6 @@
 package org.siggd.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -80,6 +81,7 @@ public class MenuView {
 	private float mRollingAlpha = 0f;
 	private int mHintTimer = 0;
 	private int mTwoSecondTimer = 0;
+	private ArrayList<Vector2> mSpawnPos;
 
 	public MenuView() {
 		mStage = new Stage();
@@ -88,6 +90,7 @@ public class MenuView {
 		mShapeRenderer = new ShapeRenderer();
 		mDelay = 0;
 		mBindingController = null;
+		mSpawnPos = new ArrayList<Vector2>();
 
 		// Generate a 1x1 white texture and store it in the skin named "white".
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
@@ -754,12 +757,10 @@ public class MenuView {
 			Level l = Game.get().getLevel();
 			Blob b = new Blob(l, l.getId());
 			l.addActor(b);
-			Vector2 pos = new Vector2((p.id % 4) * Gdx.graphics.getWidth() / 4
-					+ Gdx.graphics.getWidth() / 8, p.id < 4 ? 5 * Gdx.graphics.getHeight() / 12
-					: 11 * Gdx.graphics.getHeight() / 12);
-			Game.get().getLevelView().unproject(pos);
+			Vector2 pos = mSpawnPos.remove((int)((mSpawnPos.size())*Math.random()));
 			b.setX(pos.x);
 			b.setY(pos.y);
+			b.setLayer(4);
 			b.setProp("Player ID", p.id);
 		}
 	}
@@ -916,6 +917,17 @@ public class MenuView {
 			mMenuController.setTable(mLevelsTable);
 			mMenuController.setIndex(1);
 		} else if (CUSTOMIZE.equals(menu)) {
+
+			mSpawnPos.clear();
+			mSpawnPos.add(new Vector2(-6.587499f,-3.74256f));
+			mSpawnPos.add(new Vector2(-4.2386f,-3.86658f));
+			mSpawnPos.add(new Vector2(-3.10779f,-2.038028f));
+			mSpawnPos.add(new Vector2(-2.0781898f,-3.8859222f));
+			mSpawnPos.add(new Vector2(-0.61969f,-2.32333f));
+			mSpawnPos.add(new Vector2(0.82276f,-3.88321f));
+			mSpawnPos.add(new Vector2(3.9117f,-3.7765992f));
+			mSpawnPos.add(new Vector2(4.488303f,-1.361473f));
+
 			mHintTimer = 0;
 			if (!mJoinImage.isDescendantOf(mCustomizeTable)) {
 				mRollingAlpha = 0;

@@ -1,16 +1,141 @@
 {
-    "actors": [{
-        "id": 0,
-        "class": "org.siggd.actor.Background",
-        "props": {
-            "Body": "charSelect",
-            "ID": 0,
-            "Y": -8.533,
-            "X": -8.533
+    "actors": [
+        {
+            "id": 16,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Angle": -90,
+                "Lightness": ".05",
+                "Rotation Speed": "0.0",
+                "ID": 16,
+                "Scale": "4",
+                "Y": 1.0500008,
+                "Rotation": "90",
+                "X": -0.37499905,
+                "Texture": "level2_1_1.png"
+            }
+        },
+        {
+            "id": 8,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "CanDark",
+                "Friction": 0.2,
+                "ID": 8,
+                "Y": -2.4529202,
+                "X": -6.569597
+            }
+        },
+        {
+            "id": 7,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 7,
+                "Y": -1.8664067,
+                "X": -0.6259757
+            }
+        },
+        {
+            "id": 6,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 6,
+                "Y": -3.4283206,
+                "X": 0.8128911
+            }
+        },
+        {
+            "id": 5,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 5,
+                "Y": -1.5816412,
+                "X": -3.1173828
+            }
+        },
+        {
+            "id": 4,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 4,
+                "Y": -3.4283204,
+                "X": -2.0806642
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 3,
+                "Y": -3.4091797,
+                "X": -4.250015
+            }
+        },
+        {
+            "id": 2,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 2,
+                "Y": -0.9040332,
+                "X": 4.485981
+            }
+        },
+        {
+            "id": 1,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": -90,
+                "Body": "CanDark",
+                "Friction": 0.2,
+                "ID": 1,
+                "Y": -3.2227404,
+                "X": 3.925321
+            }
+        },
+        {
+            "id": 18,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 100,
+                "X Wave Speed": ".003",
+                "Y Offset": "0",
+                "X Wave Angle": "0",
+                "ID": 18,
+                "X Wave Amplitude": "1.2",
+                "Y": 0.83750045,
+                "Y Wave Speed": ".001",
+                "Y Wave Amplitude": ".4",
+                "X": -4.3125005,
+                "X Offset": "0"
+            }
+        },
+        {
+            "id": 19,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 220,
+                "Distance": "30.0",
+                "ID": 19,
+                "Y": 7.3444343,
+                "X": 11.16846
+            }
         }
-    }],
+    ],
     "props": {
-        "Ambient Light": 0.85,
+        "Ambient Light": 0.6,
         "Min Camera Y": "-4.5",
         "Gravity X": 0,
         "Gravity Y": -9.8,
@@ -20,6 +145,7 @@
         "Min Camera X": "-8",
         "Max Camera X": "8",
         "SongName": "pop.ogg",
+        "Difficulty": 0,
         "Use Light": "1",
         "Solidity Enabled": 1
     }
