@@ -141,10 +141,12 @@ public class MenuView {
 		clearButton.addListener(mClear);
 		clearButton.addListener(mClickListener);
 
-		final TextButton controllerButton = new TextButton(" Config Controller ", mSkin);
-		mMainTable.add(controllerButton);
-		controllerButton.addListener(mController);
-		controllerButton.addListener(mClickListener);
+		if (Controllers.getControllers().size>0) {
+			final TextButton controllerButton = new TextButton(" Config Controller ", mSkin);
+			mMainTable.add(controllerButton);
+			controllerButton.addListener(mController);
+			controllerButton.addListener(mClickListener);
+		}
 
 		final TextButton exitButton = new TextButton(" Exit ", mSkin);
 		mMainTable.add(exitButton);
@@ -974,8 +976,10 @@ public class MenuView {
 	}
 
 	public void onResize(int width, int height) {
-		if (width < 1280) width *= 2;
-		if (height < 640) height *= 2;
+		if (width < 1280)
+			width *= 2;
+		if (height < 640)
+			height *= 2;
 		mStage.setViewport(width, height, true);
 	}
 }
