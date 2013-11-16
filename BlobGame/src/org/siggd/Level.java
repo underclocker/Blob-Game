@@ -54,7 +54,7 @@ public class Level implements Iterable<Actor> {
 	private String mAssetKey;
 	private float mVolume = 0.7f;
 	private float mCurrentVolume = 0.7f;
-	private float mFadeRate = 0.02f;
+	private float mFadeRate = 0.03f;
 	Music mMusic;
 	Music nMusic = null;
 	private LinkedList<Actor> mAddQueue;
