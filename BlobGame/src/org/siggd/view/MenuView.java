@@ -460,10 +460,6 @@ public class MenuView {
 		}
 	}
 
-	public void resize(int width, int height) {
-		mStage.setViewport(width, height, true);
-	}
-
 	public void dispose() {
 		mStage.dispose();
 	}
@@ -947,21 +943,6 @@ public class MenuView {
 			mCustomizeTable.setColor(1, 1, 1, 0);
 			mMenuController.setTable(null);
 			Game.get().setLevel("charselect");
-			for (Player p : Game.get().getPlayers()) {
-				if (p.active) {
-					Level l = Game.get().getLevel();
-					Blob b = new Blob(l, l.getId());
-					l.addActor(b);
-					Vector2 pos = new Vector2((p.id % 4) * Gdx.graphics.getWidth() / 4
-							+ Gdx.graphics.getWidth() / 8,
-							p.id < 4 ? 5 * Gdx.graphics.getHeight() / 12
-									: 11 * Gdx.graphics.getHeight() / 12);
-					Game.get().getLevelView().unproject(pos);
-					b.setX(pos.x);
-					b.setY(pos.y);
-					b.setProp("Player ID", p.id);
-				}
-			}
 		} else if (CONTROLLER.equals(menu)) {
 			mBindingDelay = BINDING_MENU_DELAY;
 			mStage.addActor(mControllerTable);
@@ -991,6 +972,8 @@ public class MenuView {
 	}
 
 	public void onResize(int width, int height) {
+		if (width < 1280) width *= 2;
+		if (height < 640) height *= 2;
 		mStage.setViewport(width, height, true);
 	}
 }
