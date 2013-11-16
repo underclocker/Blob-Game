@@ -58,6 +58,7 @@ public class Game implements ApplicationListener {
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
 	public final static boolean FRAMEBYFRAME = false;
+	public final static boolean UNLOCKED = true;
 	public static boolean PRELOAD = false; // only preloads in release and reads from config file
 
 	public final String mStartingLevel = "level1";

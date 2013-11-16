@@ -343,12 +343,12 @@ public class MenuView {
 		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
 		Texture t = new Texture(Gdx.files.internal("data/gfx/InstBlank.png"));
 		Image baseImage = new Image(t);
-		//mSpacerImage = new Image(t);
-		//spacer.setVisible(false);
+		// mSpacerImage = new Image(t);
+		// spacer.setVisible(false);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
 		mBaseCustomizeTable.row();
-		//mBaseCustomizeTable.add(spacer);
+		// mBaseCustomizeTable.add(spacer);
 	}
 
 	private void createControllerMenu() {
@@ -911,13 +911,15 @@ public class MenuView {
 		} else if (LEVELS.equals(menu)) {
 			mStage.addActor(mLevelsTable);
 			JSONObject levelSave = Game.get().getLevel().getLevelSave();
-			for (String s : mLevel1.keySet()) {
-				ImageButton tmp = mLevel1.get(s).getButton();
-				String key = s + "Unlocked";
-				if (levelSave.isNull(key)) {
-					tmp.setDisabled(true);
-				} else {
-					tmp.setDisabled(false);
+			if (!Game.UNLOCKED) {
+				for (String s : mLevel1.keySet()) {
+					ImageButton tmp = mLevel1.get(s).getButton();
+					String key = s + "Unlocked";
+					if (levelSave.isNull(key)) {
+						tmp.setDisabled(true);
+					} else {
+						tmp.setDisabled(false);
+					}
 				}
 			}
 			mMenuController.setTable(mLevelsTable);
