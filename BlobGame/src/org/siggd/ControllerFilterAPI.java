@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
-
+import com.badlogic.gdx.controllers.PovDirection;
 public class ControllerFilterAPI {
 
 	public final static int BUTTON_A = 0;
@@ -24,7 +24,12 @@ public class ControllerFilterAPI {
 	public final static int BUTTON_LS = 8;
 	public final static int BUTTON_RS = 9;
 	public final static int NOBUTTON = -1;
-
+	
+	public final static PovDirection EAST = PovDirection.east;
+	public final static PovDirection WEST = PovDirection.west;
+	public final static PovDirection NORTH = PovDirection.north;
+	public final static PovDirection SOUTH = PovDirection.south;
+	
 	public final static int AXIS_LEFT_UD = 0;
 	public final static int AXIS_RIGHT_LR = 3;
 	public final static int AXIS_RIGHT_UD = 2;
@@ -42,6 +47,7 @@ public class ControllerFilterAPI {
 		json = new JSONObject(jsonstr);
 		// DebugOutput.info(new Object(), "This is the JSON " + jsonstr);
 		loadCustomBindings();
+		
 	}
 	/**
 	 * Loads custom bindings from ".BlobGame/BlobBindings.json"

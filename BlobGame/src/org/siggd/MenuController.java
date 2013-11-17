@@ -145,7 +145,14 @@ public class MenuController implements InputProcessor, ControllerListener {
 					down = down || upDown > 0.5;
 					r = r || leftRight > 0.5;
 					l = l || leftRight < -0.5;
+					
+					if(mController.getPov(0) == PovDirection.east) r = true;
+					if(mController.getPov(0) == PovDirection.west) l = true;
+					if(mController.getPov(0) == PovDirection.north) up = true;
+					if(mController.getPov(0) == PovDirection.south) down = true;
 				}
+				
+				
 				if (NAV_KEYS.contains(mFilteredKey)) {
 					if (Gdx.input.isKeyPressed(mFilteredKey)) {
 						switch (mFilteredKey) {
