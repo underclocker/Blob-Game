@@ -1,12 +1,8 @@
 package org.siggd.actor;
 
-import java.util.ArrayList;
-
-import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
-import org.siggd.StableContact;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.actor.meta.IObserver;
 import org.siggd.view.BodySprite;
@@ -15,11 +11,7 @@ import org.siggd.view.CompositeDrawable;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 /**
  * I like too copy and paste
@@ -27,7 +19,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  * @author underclocker
  * 
  */
-public class JiggleBall extends Actor implements IObserver {
+public class JiggleBall extends Actor implements IObserver, IObservable {
+	private int delay = DELAY;
+	private static int DELAY = 30;
 	private String mTex;
 	private Vector2 mStartPosition;
 
@@ -82,12 +76,20 @@ public class JiggleBall extends Actor implements IObserver {
 		if (offset.len() > 15) {
 			offset.nor().scl(15);
 		}
+		if (delay > -600 && delay < 0)
+			offset.scl((-delay) / 600f);;
 		mBody.applyForceToCenter(offset, true);
 		if (mInputSrc != null) {
 			Object input = mInputSrc.observe();
-			if ((input instanceof Boolean) && !(Boolean)input) {
-				mBody.applyForceToCenter(new Vector2(0, -20), true);
+			if (((input instanceof Boolean) && (Boolean) input)) {
+				delay--;
+			} else {
+				delay = DELAY;
 			}
+			if (delay > 0)
+				mBody.applyForceToCenter(new Vector2(0, -16f), true);
+		} else {
+			delay = DELAY;
 		}
 	}
 
@@ -129,4 +131,9 @@ public class JiggleBall extends Actor implements IObserver {
 		mInputSrc = (inputSrc instanceof IObservable) ? (IObservable) inputSrc : null;
 	}
 
+	@Override
+	public Object observe() {
+		// TODO Auto-generated method stub
+		return delay < 0;
+	}
 }
