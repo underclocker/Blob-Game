@@ -13,6 +13,22 @@ article header{
 }
 article{
 }
+article img{
+	display:block;
+	margin: 5px auto;
+	border-radius:2px;
+}
 .box{
 	padding:50px;
+}
+code {
+	outline: 1px solid #ccc;
+	background: #fff;
+	padding: 15px;
+	margin: 5px auto;
+	display: block;
+}
+code span{
+	display: block;
+	padding-left:15px;
 }

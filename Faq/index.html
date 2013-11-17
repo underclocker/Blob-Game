@@ -31,10 +31,24 @@
 <h2 id="Prefs"><b>How do I modify my game preferences?</b></h2>
 <h3>Windows:</h3>
 <p> Click the <b>Start</b> button and enter <b>%userprofile%/.BlobGame/BlobPref.txt</b> into the search box.</p>
-<p><img src="../images/blobpref.jpg"></p>
+<img src="../images/blobpref.jpg">
+<h3>Mac:</h3>
+<p>In <b>Finder</b> navigate to the <b>.BlobGame</b> folder in your home directory by using the shortcut <b>&#8679;&#8984;G</b> and entering <b>~/.BlobGame</b>. Open the <b>blobpref.txt</b> file.</p>
+<img src="../images/mac_open_pref.png">
 <br>
-<p> Change the value to <b>0</b> to disable a feature, <b>1</b> to enable, or set an <b>integer value</b> for width and height. Remember to save after any changes. You can return to the default values by deleting this file and running the game.</p>
-<p><img src="../images/blobpreftxt.jpg"></p>
+<p>Below is the contents of a sample preference file, change a value to <b>0</b> to disable a feature, <b>1</b> to enable, or set an <b>integer value</b> for width and height. Remember to save after any changes. You can return to the default values by deleting this file and running the game.</p>
+<code style="width:150px;">
+	{
+	<span>"fullscreen":1,</span>
+	<span>"height":720,</span>
+	<span>"width":1280,</span>
+	<span>"useCPUSynch":0,</span>
+	<span>"useLights":1,</span>
+	<span>"vSyncEnabled":1,</span>
+	<span>"useGL20":1,</span>
+	<span>"usePreload":1</span>
+	}
+</code>
 <br>
 <h2 id="LoadCrash"><b>How do I prevent the game from crashing during the loading screen?</b></h2>
 <p>Set the usePreload property to <b>0</b>. This may cause the game to pause briefly when transitioning between levels.</p>
