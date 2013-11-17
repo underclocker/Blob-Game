@@ -55,12 +55,14 @@ public class ControllerFilterAPI {
 			JSONObject osSpecificBindings = json.getJSONObject(osName);
 			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
 			String bindingsJson = bindingsFile.readString();
-			JSONObject customBindings = new JSONObject(bindingsJson);
-			Iterator<String> t = customBindings.keys();
-			while(t.hasNext()){
-				String controller = t.next();
-				JSONObject controllerBindings = customBindings.getJSONObject(controller);
-				osSpecificBindings.put(controller, controllerBindings);
+			if(!bindingsJson.isEmpty()){
+				JSONObject customBindings = new JSONObject(bindingsJson);
+				Iterator<String> t = customBindings.keys();
+				while(t.hasNext()){
+					String controller = t.next();
+					JSONObject controllerBindings = customBindings.getJSONObject(controller);
+					osSpecificBindings.put(controller, controllerBindings);
+				}
 			}
 		}
 	}
@@ -71,7 +73,11 @@ public class ControllerFilterAPI {
 		if (f.exists()) {
 			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
 			String bindingsJson = bindingsFile.readString();
-			customBindings = new JSONObject(bindingsJson);
+			if(!bindingsJson.isEmpty()){
+				customBindings = new JSONObject(bindingsJson);
+			}else{
+				customBindings = new JSONObject();
+			}
 		}else{
 			bindingsFile = new FileHandle(f);
 			customBindings = new JSONObject();
