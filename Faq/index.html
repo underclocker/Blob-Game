@@ -25,18 +25,12 @@
 	<li><a href="#Prefs" rel="internal">How do I modify my game preferences?</a></li>
 	<li><a href="#LoadCrash" rel="internal">How do I prevent the game from crashing during the loading screen?</a></li>
 	<li><a href="#Fast" rel="internal">How do I make the game run faster?</a></li>
+	<li><a href="#Controller" rel="internal">How do I play with a controller?</a></li>
 </ul>
 <hr>
 </header>
 <h2 id="Prefs"><b>How do I modify my game preferences?</b></h2>
-<h3>Windows:</h3>
-<p> Click the <b>Start</b> button and enter <b>%userprofile%/.BlobGame/BlobPref.txt</b> into the search box.</p>
-<img src="../images/blobpref.jpg">
-<h3>Mac:</h3>
-<p>In <b>Finder</b> navigate to the <b>.BlobGame</b> folder in your home directory by using the shortcut <b>&#8679;&#8984;G</b> and entering <b>~/.BlobGame</b>. Open the <b>blobpref.txt</b> file.</p>
-<img src="../images/mac_open_pref.png">
-<br>
-<p>Below is the contents of a sample preference file, change a value to <b>0</b> to disable a feature, <b>1</b> to enable, or set an <b>integer value</b> for width and height. Remember to save after any changes. You can return to the default values by deleting this file and running the game.</p>
+<p>Below is the contents of a sample preference file, change a value to <b>0</b> to disable a feature, <b>1</b> to enable, or set an <b>integer value</b> for width and height. Remember to save after any changes. You can return to the default values by deleting the BlobPref.txt file and running the game.</p>
 <code style="width:150px;">
 	{
 	<span>"fullscreen":1,</span>
@@ -50,12 +44,28 @@
 	}
 </code>
 <br>
+<p> Access the <b>BlobPref.txt</b> file:</p>
+<h3>Windows:</h3>
+<p> Click the <b>Start</b> button and enter <b>%userprofile%/.BlobGame/BlobPref.txt</b> into the search box.</p>
+<img src="../images/blobpref.jpg">
+<h3>Mac:</h3>
+<p>In <b>Finder</b>, use the shortcut <b>&#8679;&#8984;G</b> and enter <b>~/.BlobGame</b> to navigate to the <b>.BlobGame</b> folder in your home directory.  Then open the <b>blobpref.txt</b> file.</p>
+<img src="../images/mac_open_pref.png">
+<br>
+<h3>Linux:</h3>
+<p>In <b>Terminal</b>, enter <b>vim $home/.BlobGame/BlobPref.txt</b></p>
+<br>
 <h2 id="LoadCrash"><b>How do I prevent the game from crashing during the loading screen?</b></h2>
 <p>Set the usePreload property to <b>0</b>. This may cause the game to pause briefly when transitioning between levels.</p>
 <br>
 <h2 id="Fast"><b>How do I make the game run faster?</b></h2>
-<p> Check if your computer has both an integrated graphics card and a dedicated graphics card.  Make sure that your system is using the dedicated card for Blob Game. </p>
+<p> Check if your computer has both integrated graphics and a dedicated graphics card.  Make sure that your system is using the dedicated card for Blob Game. </p>
 <p> Also try setting fullscreen to <b>0</b>, playing in a smaller window, and/or setting useLights to <b>0</b>.</p>
+<br>
+<h2 id="Controller"><b>How do I play with a controller?</b></h2>
+<p> First, make sure any Bluetooth or USB controller is connected <b>before</b> running Blob Game. </p>
+<p> If the game detects a controller, the configure controller button will appear on the main menu screen. </p>
+<p> Click this button and follow the instructions to configure your controller.  This step only needs to be done once for each type of controller that you are using.</p>
 </article>
 </div>
 </div>
