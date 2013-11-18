@@ -1,12 +1,133 @@
 {
     "actors": [
         {
+            "id": 407,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 78.6497,
+                "Density": 0,
+                "ID": 407,
+                "CollisionSound": "",
+                "Y": -15.8
+            }
+        },
+        {
+            "id": 406,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 348.6497,
+                "Density": 0,
+                "ID": 406,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 405,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 318.6497,
+                "Density": 0,
+                "ID": 405,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 404,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 288.6497,
+                "Density": 0,
+                "ID": 404,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 403,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 228.6497,
+                "Density": 0,
+                "ID": 403,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 402,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 168.64969,
+                "Density": 0,
+                "ID": 402,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 401,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 138.6497,
+                "Density": 0,
+                "ID": 401,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 400,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 108.6497,
+                "Density": 0,
+                "ID": 400,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 399,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 18.649794,
+                "Density": 0,
+                "ID": 399,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 398,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 48.649696,
+                "Density": 0,
+                "ID": 398,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 397,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 198.64969,
+                "Density": 0,
+                "ID": 397,
+                "CollisionSound": "",
+                "Y": -15.799995
+            }
+        },
+        {
             "id": 345,
             "class": "org.siggd.actor.FadeIn",
             "props": {
                 "ID": 345,
-                "Y": 8.787527,
-                "X": -11.230036,
+                "Y": -1.9057381,
+                "X": -4.355793,
                 "Stop": "0.0"
             }
         },
@@ -14,19 +135,21 @@
             "id": 315,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Angle": 30,
                 "Lightness": ".1",
                 "Y Offset": "-3",
+                "Y Wave Angle": 0,
+                "Distance": 3,
+                "X Wave Angle": 0,
+                "Texture": "level4_1_0.png",
+                "Angle": 30,
                 "Rotation Speed": ".03",
                 "Friction": 0,
-                "Distance": 3,
                 "ID": 315,
                 "CollisionSound": "",
                 "Scale": "6",
                 "Y": -1.8073734,
-                "Rotation": "-20",
-                "X": -0.030850202,
-                "Texture": "level4_1_0.png"
+                "Rotation": -17.209936,
+                "X": -0.030850202
             }
         },
         {
@@ -60,8 +183,8 @@
                 "Target Spawner": "23",
                 "ID": 149,
                 "CollisionSound": "",
-                "Y": -16.963594,
-                "X": -18.03403
+                "Y": -16.861755,
+                "X": -16.557343
             }
         },
         {
@@ -153,8 +276,8 @@
                 "ID": 141,
                 "CollisionSound": "",
                 "Ignore Non-Blobs": "1",
-                "Y": -14.978706,
-                "X": -20.586369
+                "Y": -15.386069,
+                "X": 16.12718
             }
         },
         {
@@ -200,8 +323,8 @@
                 "Target Spawner": "23",
                 "ID": 137,
                 "CollisionSound": "",
-                "Y": -16.79409,
-                "X": 3.3236618
+                "Y": -16.84501,
+                "X": 4.1893096
             }
         },
         {
@@ -211,8 +334,8 @@
                 "Target Spawner": "23",
                 "ID": 136,
                 "CollisionSound": "",
-                "Y": -16.766342,
-                "X": -0.3959818
+                "Y": -16.970024,
+                "X": -0.29414082
             }
         },
         {
@@ -249,7 +372,8 @@
                 "CollisionSound": "",
                 "Blob Spawner": "1",
                 "Y": -1.1383507,
-                "X": -11.916779,
+                "Initial Delay": "0",
+                "X": -11.9167795,
                 "Rate": "40"
             }
         },
@@ -269,7 +393,7 @@
             "id": 313,
             "class": "org.siggd.actor.Earth",
             "props": {
-                "Angle": 293.78302,
+                "Angle": 258.64972,
                 "Density": 0,
                 "ID": 313,
                 "CollisionSound": "",
@@ -280,52 +404,21 @@
             "id": 354,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": 0,
                 "Lightness": ".2",
                 "Y Offset": "-3",
+                "Y Wave Angle": 0,
+                "Distance": 3,
+                "X Wave Angle": 0,
+                "Texture": "Level1_1_0.png",
+                "Layer": 0,
                 "Rotation Speed": ".05",
                 "Friction": 0,
-                "Distance": 3,
                 "ID": 354,
                 "CollisionSound": "",
                 "Scale": "6",
                 "Y": -1.9129425,
-                "Rotation": "190",
-                "X": -2.2225864,
-                "Texture": "Level1_1_0.png"
-            }
-        },
-        {
-            "id": 386,
-            "class": "org.siggd.actor.Earth",
-            "props": {
-                "Angle": 383.7829,
-                "Density": 0,
-                "ID": 386,
-                "CollisionSound": "",
-                "Y": -15.800005
-            }
-        },
-        {
-            "id": 387,
-            "class": "org.siggd.actor.Earth",
-            "props": {
-                "Angle": 473.78262,
-                "Density": 0,
-                "ID": 387,
-                "CollisionSound": "",
-                "Y": -15.800005
-            }
-        },
-        {
-            "id": 388,
-            "class": "org.siggd.actor.Earth",
-            "props": {
-                "Angle": 563.7826,
-                "Density": 0,
-                "ID": 388,
-                "CollisionSound": "",
-                "Y": -15.799995
+                "Rotation": 194.65028,
+                "X": -2.2225864
             }
         }
     ],
