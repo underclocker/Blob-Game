@@ -61,7 +61,7 @@ public class Game implements ApplicationListener {
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
 
-	public final String mStartingLevel = "earth";
+	public final String mStartingLevel = "level1";
 
 	// The game's current state
 	private int mState;
