@@ -275,6 +275,8 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level3_med"));
 		mLevel1.put("level4_med", new SiggdImageButton("data/gfx/lvl4Down.png",
 				"data/gfx/buttonDisabled.png", "level4_med"));
+		mLevel1.put("level2_med", new SiggdImageButton("data/gfx/lvl2Down.png",
+				"data/gfx/buttonDisabled.png", "level2_med"));
 
 		button = mLevel1.get("level1_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -299,6 +301,12 @@ public class MenuView {
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
+
+		button = mLevel1.get("level2_med");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 		
 		mLevelsTable.row();
 
