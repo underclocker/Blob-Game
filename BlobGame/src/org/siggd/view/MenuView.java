@@ -38,6 +38,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -353,12 +354,10 @@ public class MenuView {
 		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
 		Texture t = new Texture(Gdx.files.internal("data/gfx/InstBlank.png"));
 		Image baseImage = new Image(t);
-		// mSpacerImage = new Image(t);
-		// spacer.setVisible(false);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
-		mBaseCustomizeTable.row();
-		// mBaseCustomizeTable.add(spacer);
+		mBaseCustomizeTable.align(Align.top);
+		mCustomizeTable.align(Align.top);
 	}
 
 	private void createControllerMenu() {
