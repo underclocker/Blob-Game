@@ -8,6 +8,7 @@ import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.StableContact;
+import org.siggd.actor.meta.Prop;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
 import org.siggd.view.LevelView;
@@ -28,10 +29,14 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  * 
  */
 public class Dot extends Actor {
+	private static String HOLLOW_GFX = "HollowDot.png";
+	private static String STANDARD_GFX = "Dot.png";
+	private final Vector2 mOrigin;
 	private String mTex;
 	public Blob mTargetBlob;
 	private int mEatTimer = 10;
 	private PointLight mPointLight;
+	private int mHollowFlag;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -47,9 +52,9 @@ public class Dot extends Actor {
 		super(level, id);
 		mName = "Dot";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
-		Vector2 origin = new Vector2();
-		mBody = makeBody(mName, 32, BodyType.DynamicBody, origin, false);
-		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, origin, mTex));
+		mOrigin = new Vector2();
+		mBody = makeBody(mName, 32, BodyType.DynamicBody, mOrigin, false);
+		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,mTex));
 
 		setProp("Density", (Float) .3f);
 		setProp("Friction", (Float) .1f);
@@ -80,6 +85,7 @@ public class Dot extends Actor {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load("data/gfx/"+HOLLOW_GFX, Texture.class);
 	}
 
 	/**
@@ -138,6 +144,25 @@ public class Dot extends Actor {
 		AssetManager man = Game.get().getAssetManager();
 		if (man.containsAsset(mTex)) {
 			man.unload(mTex);
+		}
+	}
+	@Prop(name = "Hollow")
+	public int getHollow() {
+		return mHollowFlag;
+	}
+
+	@Prop(name = "Hollow")
+	/**
+	 * @param flag 1 or 0
+	 */
+	public void setHollow(int flag) {
+		mHollowFlag = flag;
+		((CompositeDrawable) mDrawable).mDrawables.clear();
+		if(flag==1){
+			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin, "data/gfx/"+HOLLOW_GFX));
+			mPointLight.setDistance(.75f);
+		}else{
+			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin, "data/gfx/"+STANDARD_GFX));
 		}
 	}
 

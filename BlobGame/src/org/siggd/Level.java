@@ -54,7 +54,7 @@ public class Level implements Iterable<Actor> {
 	private String mAssetKey;
 	private float mVolume = 0.7f;
 
-	 float mCurrentVolume = 0f;
+	float mCurrentVolume = 0f;
 	private float mFadeRate = 0.03f;
 
 	Music mMusic;
@@ -131,41 +131,40 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public void startMusic() {
-		/*for (Actor a : mActors) {
-			if (a instanceof FadeIn && !((FadeIn)a).fadedOut()) {
-				return;
-			}
-		}*/
-		
-		//Music nMusic = null;
-		
-		//Inherited a song
+		/*
+		 * for (Actor a : mActors) { if (a instanceof FadeIn &&
+		 * !((FadeIn)a).fadedOut()) { return; } }
+		 */
+
+		// Music nMusic = null;
+
+		// Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
 
 			String musicPath = "data/mus/" + (String) getProp("SongName");
-			try
-			{
-				if(nMusic == null){
-				String extension = musicPath.substring(musicPath.length() - 4,
-						musicPath.length());
-				if (".wav".equals(extension) || ".mp3".equals(extension)
-						|| ".ogg".equals(extension)) {
-					man.load(musicPath, Music.class);
-					man.finishLoading();
-					nMusic = man.get(musicPath, Music.class);
-					
+			try {
+				if (nMusic == null) {
+					String extension = musicPath.substring(musicPath.length() - 4,
+							musicPath.length());
+					if (".wav".equals(extension) || ".mp3".equals(extension)
+							|| ".ogg".equals(extension)) {
+						man.load(musicPath, Music.class);
+						man.finishLoading();
+						nMusic = man.get(musicPath, Music.class);
+
+					}
 				}
-				}
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 			// If the music was changed to a nonexistent song in realtime, stop
 			// the music
 			if (!man.isLoaded(musicPath)) {
 				mMusic = null;
 			}
 		}
-		
-		//Didn't inherit a song
+
+		// Didn't inherit a song
 		if (mMusic == null) {
 			AssetManager man = Game.get().getAssetManager();
 			String musicPath = "data/mus/" + (String) getProp("SongName");
@@ -188,27 +187,25 @@ public class Level implements Iterable<Actor> {
 				}
 			}
 		}
-		
-		//Inherited a song, need to switch to new one
-		if(nMusic != null && mMusic.hashCode() != nMusic.hashCode() && !nMusic.isPlaying())
-		{
+
+		// Inherited a song, need to switch to new one
+		if (nMusic != null && mMusic.hashCode() != nMusic.hashCode() && !nMusic.isPlaying()) {
 			mCurrentVolume -= mFadeRate;
-			if(mCurrentVolume >= 0f)
-			{
-				if(!mMusic.isPlaying())mMusic.play();
+			if (mCurrentVolume >= 0f) {
+				if (!mMusic.isPlaying())
+					mMusic.play();
 				mMusic.setVolume(mCurrentVolume);
-			}
-			else
-			{
+			} else {
 				mMusic.stop();
 				mMusic = nMusic;
 				nMusic = null;
 			}
-		}
-		else if (mMusic != null) {
+		} else if (mMusic != null) {
 			mCurrentVolume += mFadeRate;
-			if(mCurrentVolume > mVolume) mCurrentVolume = mVolume;
-			if(!mMusic.isPlaying())mMusic.play();
+			if (mCurrentVolume > mVolume)
+				mCurrentVolume = mVolume;
+			if (!mMusic.isPlaying())
+				mMusic.play();
 			mMusic.setVolume(mCurrentVolume);
 		}
 	}
@@ -220,7 +217,7 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public void update() {
-		long deltat = System.currentTimeMillis()-mLastTime;
+		long deltat = System.currentTimeMillis() - mLastTime;
 		mLastTime = System.currentTimeMillis();
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			if (deltat > 25) {
@@ -431,13 +428,7 @@ public class Level implements Iterable<Actor> {
 		}
 		if (mLevelSave.has(getAssetKey())) {
 			JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-			for (int i = 0; i < dots.length(); i++) {
-				Actor actor = getActorById(dots.getInt(i));
-				if (actor instanceof Dot) {
-					Dot d = (Dot) actor;
-					getActorById(d.getId()).setProp("Active", 0);
-				}
-			}
+			loadDots(dots);
 		}
 		Game.get().getLevelView().setWorld(mWorld);
 	}
@@ -463,16 +454,20 @@ public class Level implements Iterable<Actor> {
 			}
 			if (mLevelSave.has(getAssetKey())) {
 				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-				for (int i = 0; i < dots.length(); i++) {
-					Actor actor = getActorById(dots.getInt(i));
-					if (actor instanceof Dot) {
-						Dot d = (Dot) actor;
-						getActorById(d.getId()).setProp("Active", 0);
-					}
-				}
+				loadDots(dots);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}
+
+	private void loadDots(JSONArray dots) throws JSONException {
+		for (int i = 0; i < dots.length(); i++) {
+			Actor actor = getActorById(dots.getInt(i));
+			if (actor instanceof Dot) {
+				Dot d = (Dot) actor;
+				getActorById(d.getId()).setProp("Hollow", 1);
+			}
 		}
 	}
 
@@ -770,7 +765,7 @@ public class Level implements Iterable<Actor> {
 			for (Actor a : actors) {
 				if (a instanceof Dot) {
 					totalDots++;
-					if (!a.isActive() || ((Dot) a).mTargetBlob != null) {
+					if (!a.isActive() || ((Dot) a).mTargetBlob != null || ((Dot) a).getHollow() == 1) {
 						collectedDots++;
 						dotIds.put(a.getId());
 					}
