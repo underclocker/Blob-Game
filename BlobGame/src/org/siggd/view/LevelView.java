@@ -174,7 +174,8 @@ public class LevelView {
 			float maxX = Convert.getFloat(level.getProp("Max Camera X"));
 			float maxY = Convert.getFloat(level.getProp("Max Camera Y"));
 			Rectangle worldClip = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-			ScissorStack.calculateScissors(mCamera, new Matrix4(), worldClip, mClip);
+			ScissorStack.calculateScissors(mCamera, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Matrix4(),
+					worldClip, mClip);
 
 			// Apply clipping
 			ScissorStack.pushScissors(mClip);
@@ -302,8 +303,7 @@ public class LevelView {
 		if (state == Game.PLAY || state == Game.MENU) {
 			// End clipping
 			ScissorStack.popScissors();
-		}
-
+		}
 		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0) {
 			mRayHandler.updateAndRender();
 		}

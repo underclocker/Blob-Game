@@ -38,6 +38,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -353,12 +354,10 @@ public class MenuView {
 		mStartImage = new Image(new Texture(Gdx.files.internal("data/gfx/Inst2.png")));
 		Texture t = new Texture(Gdx.files.internal("data/gfx/InstBlank.png"));
 		Image baseImage = new Image(t);
-		// mSpacerImage = new Image(t);
-		// spacer.setVisible(false);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
-		mBaseCustomizeTable.row();
-		// mBaseCustomizeTable.add(spacer);
+		mBaseCustomizeTable.align(Align.top);
+		mCustomizeTable.align(Align.top);
 	}
 
 	private void createControllerMenu() {
@@ -935,15 +934,16 @@ public class MenuView {
 		} else if (CUSTOMIZE.equals(menu)) {
 
 			mSpawnPos.clear();
-			mSpawnPos.add(new Vector2(-6.587499f, -3.74256f));
-			mSpawnPos.add(new Vector2(-4.2386f, -3.86658f));
-			mSpawnPos.add(new Vector2(-3.10779f, -2.038028f));
-			mSpawnPos.add(new Vector2(-2.0781898f, -3.8859222f));
-			mSpawnPos.add(new Vector2(-0.61969f, -2.32333f));
-			mSpawnPos.add(new Vector2(0.82276f, -3.88321f));
-			mSpawnPos.add(new Vector2(3.9117f, -3.7765992f));
-			mSpawnPos.add(new Vector2(4.488303f, -1.361473f));
-
+			
+			mSpawnPos.add(new Vector2(-6.0547f, -2.0357f));
+			mSpawnPos.add(new Vector2(-2.0885f, -0.9769f));
+			mSpawnPos.add(new Vector2(-0.7361f, 0.6420f));
+			mSpawnPos.add(new Vector2(0.5428f, -1.2608f));
+			mSpawnPos.add(new Vector2(2.4356f, 0.1152f));
+			mSpawnPos.add(new Vector2(2.4956f, -2.3311f));
+			mSpawnPos.add(new Vector2(4.2844f, -1.2078f));
+			mSpawnPos.add(new Vector2(3.7163f, -3.7335f));
+			
 			mHintTimer = 0;
 			if (!mJoinImage.isDescendantOf(mCustomizeTable)) {
 				mRollingAlpha = 0;

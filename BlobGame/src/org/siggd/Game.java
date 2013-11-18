@@ -57,9 +57,9 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean FRAMEBYFRAME = false;
 	public final static boolean UNLOCKED = true;
-	public static boolean PRELOAD = false; // only preloads in release and reads from config file
+	public static boolean PRELOAD = false; // only preloads in release and reads
+											// from config file
 
 	public final String mStartingLevel = "level1";
 
@@ -92,7 +92,6 @@ public class Game implements ApplicationListener {
 	public ArrayList<String> mHackishLoader;
 	public int mLoaderMax;
 	private boolean mFlipper = true;
-	private boolean mF12 = false;
 
 	/**
 	 * Constructor (private)
@@ -316,17 +315,6 @@ public class Game implements ApplicationListener {
 			}
 		}
 
-		boolean f12 = false;
-		if (Gdx.input.isKeyPressed(Keys.F12) && !mF12 ) {
-			mF12 = true;
-			f12 = true;
-		} else if (!Gdx.input.isKeyPressed(Keys.F12)) {
-			mF12 = false;
-		}
-		if (Gdx.input.isKeyPressed(Keys.F11)){
-			f12 = true;
-		}
-
 		// Load any necessary resources
 		if (!mAssetManager.update()) {
 			// Show loading screen if not done loading
@@ -336,13 +324,9 @@ public class Game implements ApplicationListener {
 			setLevel(mNextLevel);
 			mNextLevel = null;
 		}
-		if (FRAMEBYFRAME && f12){
-			mLevel.update();
-			mLevelView.update();
-		}
 		if (mState == PLAY || mState == MENU) {
 			mMenuView.update();
-			if (!mPaused && (!FRAMEBYFRAME || f12)) {
+			if (!mPaused) {
 				mLevel.update();
 			}
 		}
@@ -352,9 +336,7 @@ public class Game implements ApplicationListener {
 		}
 
 		if (mState != LOAD && mNextLevel == null) {
-			if (!FRAMEBYFRAME || f12) {
-				mLevelView.update();
-			}
+			mLevelView.update();
 			mLevelView.render();
 		}
 
@@ -508,9 +490,9 @@ public class Game implements ApplicationListener {
 
 		// Load all level resources
 		String newSong = (String) mLevel.mProps.get("SongName");
-		
-			mLevel.mMusic = music;
-			mLevel.mCurrentVolume = vol;
+
+		mLevel.mMusic = music;
+		mLevel.mCurrentVolume = vol;
 		mLevel.loadResources();
 
 		if (oldLevel != null) {
