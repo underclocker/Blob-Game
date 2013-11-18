@@ -1,6 +1,15 @@
 {
     "actors": [
         {
+            "id": 2838,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 2838,
+                "Y": 13.510576,
+                "X": 15.197011
+            }
+        },
+        {
             "id": 2563,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -1415,8 +1424,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 2393,
-                "Y": 14.1855755,
-                "X": 13.934513
+                "Y": 14.385575,
+                "X": 16.647013
             }
         },
         {
@@ -1424,8 +1433,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 2394,
-                "Y": 15.160575,
-                "X": 15.497013
+                "Y": 15.135575,
+                "X": 18.097012
             }
         },
         {
@@ -1515,7 +1524,7 @@
             "props": {
                 "BodyType": 2,
                 "Body": "Gear",
-                "Density": 0.02,
+                "Density": 0.3,
                 "ID": 2409,
                 "Grabbable": 1,
                 "Y": 14.241574,
@@ -1619,6 +1628,30 @@
                 "ID": 2835,
                 "Y": -14.314423,
                 "X": 25.459513
+            }
+        },
+        {
+            "id": 2984,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 90,
+                "Speed": "1.5",
+                "ID": 2984,
+                "Y": 5.985577,
+                "X": 20.85951,
+                "Anticlockwise": "0"
+            }
+        },
+        {
+            "id": 2985,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 90,
+                "Speed": "1.5",
+                "ID": 2985,
+                "Y": 8.048077,
+                "X": 20.859509,
+                "Anticlockwise": "0"
             }
         }
     ],
