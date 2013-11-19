@@ -97,18 +97,13 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 128, BodyType.StaticBody, origin, false);
 		setProp("Output", 0);
+		setProp("ForceUse", 0);
 		mLaserEnd = null;
 		mLaserStarts = new ArrayList<Vector2>(Game.get().getNumberOfPlayers());
 		mLaserEnds = new ArrayList<Vector2>(Game.get().getNumberOfPlayers());
 		mDetectedBlobs = new ArrayList<Blob>();
 		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, origin, mTex));
 		((CompositeDrawable) mDrawable).mDrawables.add(new HitScanDrawable());
-		if (Game.get().activePlayersNum() <= 1) {
-			setActive(false);
-			setVisible(0);
-			
-		}
-
 	}
 
 	@Override
@@ -150,7 +145,6 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 
 	@Override
 	public void update() {
-
 		float angle = Convert.getDegrees(mBody.getAngle());
 		mLaserStart = mBody.getPosition().cpy();
 		mLaserStart.add(new Vector2(-.4f, 0).rotate(angle));
@@ -159,7 +153,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 		mLaserEnd = end.cpy().add(mLaserStart);
 		// changes could be made to start and end, thats why a copy is passed
 		int playerNum = Game.get().activePlayersNum();
-		if (playerNum == 1)
+		if (playerNum == 1 && Convert.getInt("ForceUse") == 0)
 			playerNum = 0;
 		Vector2 slider = new Vector2(.8f, 0).rotate(angle);
 		slider.div(playerNum + 1);
@@ -192,9 +186,25 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 	}
 
 	@Override
+	public void setProp(String name, Object val) {
+		if (name.equals("ForceUse")) {
+			if (Convert.getInt(val) != 0) {
+				setActive(true);
+				setVisible(1);
+			} else {
+				if (Game.get().activePlayersNum() <= 1) {
+					setActive(false);
+					setVisible(0);
+				}
+			}
+		}
+		super.setProp(name, val);
+	}
+
+	@Override
 	public Object observe() {
 		return mDetectedBlobs.size() == Game.get().activePlayersNum()
-				|| Game.get().activePlayersNum() == 1;
+				|| (Game.get().activePlayersNum() == 1 && Convert.getFloat(getProp("ForceUse")) == 0);
 	}
 
 	public boolean getState() {
