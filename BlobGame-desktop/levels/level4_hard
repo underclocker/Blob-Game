@@ -1,6 +1,150 @@
 {
     "actors": [
         {
+            "id": 5038,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5038,
+                "Grabbable": 1,
+                "Y": -14.614426,
+                "X": 26.122002
+            }
+        },
+        {
+            "id": 5037,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5037,
+                "Grabbable": 1,
+                "Y": -13.051927,
+                "X": 26.722002
+            }
+        },
+        {
+            "id": 5036,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5036,
+                "Grabbable": 1,
+                "Y": -13.314425,
+                "X": 26.209501
+            }
+        },
+        {
+            "id": 5035,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5035,
+                "Grabbable": 1,
+                "Y": -13.439425,
+                "X": 25.372002
+            }
+        },
+        {
+            "id": 5034,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5034,
+                "Grabbable": 1,
+                "Y": -14.676926,
+                "X": 25.372004
+            }
+        },
+        {
+            "id": 5033,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5033,
+                "Grabbable": 1,
+                "Y": -13.614426,
+                "X": 26.772003
+            }
+        },
+        {
+            "id": 5032,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5032,
+                "Grabbable": 1,
+                "Y": -13.976925,
+                "X": 26.159504
+            }
+        },
+        {
+            "id": 5031,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5031,
+                "Grabbable": 1,
+                "Y": -15.239426,
+                "X": 25.384502
+            }
+        },
+        {
+            "id": 5030,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5030,
+                "Grabbable": 1,
+                "Y": -14.214425,
+                "X": 26.922
+            }
+        },
+        {
+            "id": 5029,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5029,
+                "Grabbable": 1,
+                "Y": -14.0019245,
+                "X": 25.509504
+            }
+        },
+        {
+            "id": 5026,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5026,
+                "Grabbable": 1,
+                "Y": -15.364427,
+                "X": 26.834509
+            }
+        },
+        {
+            "id": 5025,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5025,
+                "Grabbable": 1,
+                "Y": -14.814425,
+                "X": 26.94701
+            }
+        },
+        {
             "id": 4837,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -35,15 +179,6 @@
                 "ID": 4671,
                 "Y": 10.660575,
                 "X": 14.197008
-            }
-        },
-        {
-            "id": 4506,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 4506,
-                "Y": -9.914096,
-                "X": 31.795828
             }
         },
         {
@@ -290,15 +425,6 @@
             }
         },
         {
-            "id": 2835,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 2835,
-                "Y": -12.8438225,
-                "X": 26.05436
-            }
-        },
-        {
             "id": 2833,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -342,15 +468,6 @@
                 "ID": 2405,
                 "Y": -5.144094,
                 "X": 32.46583
-            }
-        },
-        {
-            "id": 2404,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "ID": 2404,
-                "Y": -11.370858,
-                "X": 29.321714
             }
         },
         {
@@ -1665,26 +1782,6 @@
             }
         },
         {
-            "id": 4179,
-            "class": "org.siggd.actor.JiggleBall",
-            "props": {
-                "Layer": 3,
-                "ID": 4179,
-                "Y": -11.507917,
-                "X": 30.12447
-            }
-        },
-        {
-            "id": 4180,
-            "class": "org.siggd.actor.JiggleBall",
-            "props": {
-                "Layer": 3,
-                "ID": 4180,
-                "Y": -10.569116,
-                "X": 29.520655
-            }
-        },
-        {
             "id": 4341,
             "class": "org.siggd.actor.JiggleBall",
             "props": {
@@ -1756,6 +1853,267 @@
                 "Y": 13.223076,
                 "X": 25.972008
             }
+        },
+        {
+            "id": 4999,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 4999,
+                "Grabbable": 1,
+                "Y": 2.6605766,
+                "X": 10.809514
+            }
+        },
+        {
+            "id": 5000,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5000,
+                "Grabbable": 1,
+                "Y": -11.689423,
+                "X": 30.32201
+            }
+        },
+        {
+            "id": 5001,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5001,
+                "Grabbable": 1,
+                "Y": -11.126923,
+                "X": 30.33451
+            }
+        },
+        {
+            "id": 5002,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5002,
+                "Grabbable": 1,
+                "Y": -10.576922,
+                "X": 30.33451
+            }
+        },
+        {
+            "id": 5003,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5003,
+                "Grabbable": 1,
+                "Y": -11.464423,
+                "X": 29.80951
+            }
+        },
+        {
+            "id": 5004,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5004,
+                "Grabbable": 1,
+                "Y": -10.876923,
+                "X": 29.82201
+            }
+        },
+        {
+            "id": 5008,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5008,
+                "Grabbable": 1,
+                "Y": -11.651923,
+                "X": 31.472012
+            }
+        },
+        {
+            "id": 5009,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5009,
+                "Grabbable": 1,
+                "Y": -11.464423,
+                "X": 30.89701
+            }
+        },
+        {
+            "id": 5010,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5010,
+                "Grabbable": 1,
+                "Y": -10.851923,
+                "X": 30.89701
+            }
+        },
+        {
+            "id": 5011,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5011,
+                "Grabbable": 1,
+                "Y": -15.451923,
+                "X": 27.45951
+            }
+        },
+        {
+            "id": 5012,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5012,
+                "Grabbable": 1,
+                "Y": -15.351923,
+                "X": 28.05951
+            }
+        },
+        {
+            "id": 5013,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5013,
+                "Grabbable": 1,
+                "Y": -14.876923,
+                "X": 27.55951
+            }
+        },
+        {
+            "id": 5014,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5014,
+                "Grabbable": 1,
+                "Y": -15.264423,
+                "X": 29.39701
+            }
+        },
+        {
+            "id": 5015,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5015,
+                "Grabbable": 1,
+                "Y": -14.739423,
+                "X": 28.12201
+            }
+        },
+        {
+            "id": 5016,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5016,
+                "Grabbable": 1,
+                "Y": -15.339422,
+                "X": 28.722012
+            }
+        },
+        {
+            "id": 5017,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5017,
+                "Grabbable": 1,
+                "Y": -14.776922,
+                "X": 28.68451
+            }
+        },
+        {
+            "id": 5018,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5018,
+                "Grabbable": 1,
+                "Y": -14.276922,
+                "X": 27.70951
+            }
+        },
+        {
+            "id": 5206,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "Hexamag",
+                "ID": 5206,
+                "Grabbable": 1,
+                "Y": -15.276924,
+                "X": 26.134508
+            }
+        },
+        {
+            "id": 5392,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 5392,
+                "Y": -14.951923,
+                "X": 25.734507
+            }
+        },
+        {
+            "id": 5393,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 5393,
+                "Y": -15.114424,
+                "X": 28.384506
+            }
+        },
+        {
+            "id": 5394,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 5394,
+                "Y": -14.476924,
+                "X": 27.309505
+            }
+        },
+        {
+            "id": 5395,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 5395,
+                "Y": -11.826923,
+                "X": 30.809505
+            }
+        },
+        {
+            "id": 5396,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 5396,
+                "Y": -11.564424,
+                "X": 29.384506
+            }
         }
     ],
     "props": {
@@ -1769,7 +2127,7 @@
         "Min Camera X": -1,
         "Max Camera X": 33.132,
         "SongName": "wobhappy.ogg",
-        "Difficulty": "1",
+        "Difficulty": "2",
         "Use Light": 1,
         "Solidity Enabled": "1"
     }
