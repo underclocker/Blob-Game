@@ -1939,10 +1939,10 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 240,
-                "Wind Strength": "20",
+                "Wind Strength": "15",
                 "ID": 2859,
-                "Y": -7.7211723,
-                "X": 2.8243854
+                "Y": -7.7811723,
+                "X": 2.804386
             }
         }
     ],
