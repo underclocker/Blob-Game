@@ -332,11 +332,11 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
-		button = mLevel1.get("level3_hard");
+		/*button = mLevel1.get("level3_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		button.getButton().addListener(mClickListener);
+		button.getButton().addListener(mClickListener);*/
 
 		button = mLevel1.get("level4_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -344,17 +344,17 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 		
-		button = mLevel1.get("level5_hard");
+		/*button = mLevel1.get("level5_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		button.getButton().addListener(mClickListener);
+		button.getButton().addListener(mClickListener);*/
 
-		button = mLevel1.get("level2_hard");
+		/*button = mLevel1.get("level2_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		button.getButton().addListener(mClickListener);
+		button.getButton().addListener(mClickListener);*/
 
 		// TODO: scale if < screen resolution
 		// mLevelsTable.setTransform(true);
