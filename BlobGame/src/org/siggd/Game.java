@@ -224,8 +224,9 @@ public class Game implements ApplicationListener {
 				mHackishLoader.add("level5");
 				mHackishLoader.add("level7");
 				mHackishLoader.add("level8");
-				mHackishLoader.add("earth");
 				mHackishLoader.add("charselect");
+				mHackishLoader.add("earth");
+				
 				mLoaderMax = mHackishLoader.size();
 			} else {
 				setState(Game.MENU);
