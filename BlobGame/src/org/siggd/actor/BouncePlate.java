@@ -24,7 +24,6 @@ public class BouncePlate extends Actor {
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private int mTimer = 0;
-	private int mRate = 5;
 	private String mBouncePlateFile = "data/sfx/bounceplate.wav";
 
 	public BouncePlate(Level level, long id) {
@@ -43,6 +42,7 @@ public class BouncePlate extends Actor {
 		setProp("Output", (Integer) 0);
 		setProp("Restitution", (Float) 0.25f);
 		setProp("Stroke Length", (Float) 8f);
+		setProp("Reset", (Integer) 5);
 	}
 
 	/**
@@ -73,16 +73,17 @@ public class BouncePlate extends Actor {
 		int output = Convert.getInt(getProp("Output")) * 2 - 1;
 		mTimer += output;
 		int bods = 0;
+		int rate = Convert.getInt(getProp("Reset"));
 		for (Body b : bodies)
 			if (b.isActive())
 				bods++;
-		if (bods > 0 && output == -1 && mTimer <= -mRate) {
+		if (bods > 0 && output == -1 && mTimer <= -rate) {
 			setProp("Output", (Integer) 1);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mDefaultDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mActiveDrawable);
 			mBody.setLinearVelocity(new Vector2(0, stroke).rotate(Convert.getDegrees(mBody
 					.getAngle())));
-			mTimer = -mRate;
+			mTimer = -5;
 			AssetManager man = Game.get().getAssetManager();
 			Sound sound;
 			long soundID;
@@ -93,13 +94,13 @@ public class BouncePlate extends Actor {
 				sound.setVolume(soundID, .45f);
 
 			}
-		} else if (mTimer >= mRate && output == 1) {
+		} else if (mTimer >= 5 && output == 1) {
 			setProp("Output", (Integer) 0);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mActiveDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mDefaultDrawable);
 			mBody.setLinearVelocity(new Vector2(0, -stroke).rotate(Convert.getDegrees(mBody
 					.getAngle())));
-			mTimer = mRate;
+			mTimer = rate;
 		}
 	}
 

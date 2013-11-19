@@ -505,6 +505,7 @@ public class Level implements Iterable<Actor> {
 			}
 			if (a instanceof Dot) {
 				a.setProp("Active", 1);
+				a.setProp("Hollow", 0);
 			}
 			JSONObject jsonActor = new JSONObject();
 			// Save Actor class
