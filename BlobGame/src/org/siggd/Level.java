@@ -409,27 +409,8 @@ public class Level implements Iterable<Actor> {
 				actor.setProp(key, jsonProps.get(key));
 			}
 		}
-		File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
-		FileHandle handle;
-		if (!f.exists()) {
-
-			mLevelSave = new JSONObject();
-			handle = new FileHandle(f);
-		} else {
-			handle = Gdx.files.external(mSaveFileName);
-			String json = handle.readString();
-			if ("".equals(json))
-				json = "{}";
-			mLevelSave = new JSONObject(json);
-		}
-		if (!mLevelSave.has("HASH")) {
-			saveToLevelSave("HASH", "NT4R33LH45H");
-			saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
-		}
-		if (mLevelSave.has(getAssetKey())) {
-			JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-			loadDots(dots);
-		}
+		
+		loadFromLevelSave();
 		Game.get().getLevelView().setWorld(mWorld);
 	}
 
@@ -438,23 +419,34 @@ public class Level implements Iterable<Actor> {
 			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
 			FileHandle handle;
 			if (!f.exists()) {
-
 				mLevelSave = new JSONObject();
 				handle = new FileHandle(f);
 			} else {
 				handle = Gdx.files.external(mSaveFileName);
 				String json = handle.readString();
-				if ("".equals(json))
-					json = "{}";
-				mLevelSave = new JSONObject(json);
+				if ("".equals(json)){
+					mLevelSave = new JSONObject();
+				}else{
+					mLevelSave = new JSONObject(json);
+				}
 			}
 			if (!mLevelSave.has("HASH")) {
 				saveToLevelSave("HASH", "NT4R33LH45H");
-				saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
+				JSONObject startLevel;
+				if(mLevelSave.has(Game.get().mStartingLevel)){
+					startLevel = mLevelSave.getJSONObject(Game.get().mStartingLevel);
+				}else{
+					startLevel = new JSONObject();
+				}
+				startLevel.put("unlocked", true);
+				saveToLevelSave(Game.get().mStartingLevel, startLevel);
 			}
 			if (mLevelSave.has(getAssetKey())) {
-				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-				loadDots(dots);
+				JSONObject levelJson = mLevelSave.getJSONObject(getAssetKey());
+				if(levelJson.has("dots")){
+					JSONArray dots = levelJson.getJSONArray("dots");
+					loadDots(dots);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -755,9 +747,14 @@ public class Level implements Iterable<Actor> {
 			} else {
 				levels = new JSONObject(json);
 			}
+			boolean unlocked = false;
 			if (levels != null && levels.has(mAssetKey)) {
-				levels.remove(mAssetKey);
+				JSONObject level = (JSONObject)levels.remove(mAssetKey);
+				if(level.has("unlocked")){
+					unlocked = level.getBoolean("unlocked");
+				}
 			}
+			JSONObject currentLevel = new JSONObject();
 			ArrayList<Actor> actors = getActors();
 			JSONArray dotIds = new JSONArray();
 			int totalDots = 0;
@@ -772,8 +769,10 @@ public class Level implements Iterable<Actor> {
 				}
 			}
 			float percent = totalDots > 0 ? ((float) collectedDots) / totalDots : 1f;
-			levels.put(mAssetKey + "%", percent);
-			levels.put(mAssetKey, dotIds);
+			currentLevel.put("progress",percent);
+			currentLevel.put("dots", dotIds);
+			currentLevel.put("unlocked", unlocked);
+			levels.put(mAssetKey, currentLevel);
 			FileHandle handle = Gdx.files.external(mSaveFileName);
 			handle.writeString(levels.toString(), false);
 		} catch (JSONException e) {

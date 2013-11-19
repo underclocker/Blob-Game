@@ -415,11 +415,11 @@ public class MenuView {
 				float width = tmp.getWidth();
 				float progress = 0;
 				try {
-					String key = s + "%";
-					if (!levelSave.isNull(key)) {
-						progress = Convert.getFloat(levelSave.get(key));
-					}
+					JSONObject level = levelSave.getJSONObject(s);
+					progress = (float) level.getDouble("progress");
 				} catch (JSONException e) {
+					//Level or Progress does not exist, default to 0
+					progress = 0;
 				}
 				mShapeRenderer.begin(ShapeType.Filled);
 				mShapeRenderer.setColor(Color.BLACK);
@@ -925,15 +925,17 @@ public class MenuView {
 			mMenuController.setTable(mFakePauseTable);
 		} else if (LEVELS.equals(menu)) {
 			mStage.addActor(mLevelsTable);
-			JSONObject levelSave = Game.get().getLevel().getLevelSave();
 			if (!Game.UNLOCKED) {
+				JSONObject levelSave = Game.get().getLevel().getLevelSave();
 				for (String s : mLevel1.keySet()) {
 					ImageButton tmp = mLevel1.get(s).getButton();
-					String key = s + "Unlocked";
-					if (levelSave.isNull(key)) {
+					try {
+						JSONObject level = levelSave.getJSONObject(s);
+						boolean unlocked = level.getBoolean("unlocked");
+						tmp.setDisabled(!unlocked);
+					} catch (JSONException e) {
+						//Level or unlocked property not present
 						tmp.setDisabled(true);
-					} else {
-						tmp.setDisabled(false);
 					}
 				}
 			}

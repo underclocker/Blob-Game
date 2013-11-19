@@ -57,7 +57,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
+	public final static boolean UNLOCKED = false;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
 
@@ -225,6 +225,7 @@ public class Game implements ApplicationListener {
 				mHackishLoader.add("level7");
 				mHackishLoader.add("level8");
 				mHackishLoader.add("earth");
+				mHackishLoader.add("charselect");
 				mLoaderMax = mHackishLoader.size();
 			} else {
 				setState(Game.MENU);
