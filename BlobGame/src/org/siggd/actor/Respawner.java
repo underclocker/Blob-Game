@@ -47,7 +47,7 @@ public class Respawner extends Actor {
 		for (Body b : bodies) {
 			// only concerned with dynamic bodies (we don't want to respond
 			// background bodies)
-			if (b.getType() != BodyType.DynamicBody)
+			if (b.getType() != BodyType.DynamicBody || ((Actor)b.getUserData()) instanceof JiggleBall)
 				continue;
 			actor = (Actor) b.getUserData();
 
