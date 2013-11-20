@@ -64,7 +64,6 @@ public class Level implements Iterable<Actor> {
 	private float mAmbientLight;
 	private JSONObject mLevelSave;
 	private final String mSaveFileName = ".BlobGame/BlobSave.json";
-	private long mLastTime = Long.MAX_VALUE;
 	private static final Logger mLog = Logger.getLogger(Level.class.getName());
 
 	/**
@@ -217,13 +216,7 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public void update() {
-		long deltat = System.currentTimeMillis() - mLastTime;
-		mLastTime = System.currentTimeMillis();
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-			if (deltat > 25) {
-				mLastTime += 33;
-				update();
-			}
 			startMusic();
 			while (mBodiesToDestroy.size() > 0) {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));

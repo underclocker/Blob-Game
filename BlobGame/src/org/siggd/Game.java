@@ -92,6 +92,13 @@ public class Game implements ApplicationListener {
 	public ArrayList<String> mHackishLoader;
 	public int mLoaderMax;
 	private boolean mFlipper = true;
+	//Framerate profiler
+	private int mInitDelay=15;
+	private long mStartTime;
+	private long mEndTime;
+	private ArrayList<Long> mRenderTimeHistory;
+	private static int SAMPLE_SIZE = 600;
+	private boolean mProfileFinished = false;
 
 	/**
 	 * Constructor (private)
@@ -248,6 +255,8 @@ public class Game implements ApplicationListener {
 
 		// Finish loading all the resources
 		mAssetManager.finishLoading();
+		
+		mRenderTimeHistory = new ArrayList<Long>();
 	}
 
 	public String combineBodies() {
@@ -299,12 +308,13 @@ public class Game implements ApplicationListener {
 		// Destroy the asset manager
 		mAssetManager.dispose();
 	}
-
+	
 	/**
 	 * Render the game
 	 */
 	@Override
 	public void render() {
+		mStartTime = System.nanoTime();
 		if (!mHackishLoader.isEmpty()) {
 			if (mFlipper = !mFlipper) {
 				String level = mHackishLoader.remove(0);
@@ -345,8 +355,25 @@ public class Game implements ApplicationListener {
 		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
 		}
+		mEndTime = System.nanoTime();
+		if(mState!=LOAD && "earth".equals(mLevel.getAssetKey()) && !mProfileFinished){
+			if(mInitDelay<=0){
+				if(mRenderTimeHistory.size()<SAMPLE_SIZE){
+					mRenderTimeHistory.add(mEndTime-mStartTime);
+				}else{
+					asessFramerate();
+				}
+			}else{
+				mInitDelay--;
+			}
+		}
+		
 	}
-
+	private void asessFramerate(){
+		//TODO: Assess Framerate and handle force value accordingly
+		
+		mProfileFinished = true;
+	}
 	/**
 	 * Handle a window resize
 	 */
@@ -466,6 +493,9 @@ public class Game implements ApplicationListener {
 	 *            name of the file to be loaded
 	 */
 	public void setLevel(String fileName) {
+		if("earth".equals(mLevel.getAssetKey())&&!mProfileFinished){
+			asessFramerate();
+		}
 		Music music = null;
 		String song = null;
 		float vol = mLevel.mCurrentVolume;
