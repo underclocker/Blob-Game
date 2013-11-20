@@ -92,8 +92,8 @@ public class Game implements ApplicationListener {
 	public ArrayList<String> mHackishLoader;
 	public int mLoaderMax;
 	private boolean mFlipper = true;
-	//Framerate profiler
-	private int mInitDelay=15;
+	// Framerate profiler
+	private int mInitDelay = 15;
 	private long mStartTime;
 	private long mEndTime;
 	private ArrayList<Long> mRenderTimeHistory;
@@ -233,7 +233,7 @@ public class Game implements ApplicationListener {
 				mHackishLoader.add("level8");
 				mHackishLoader.add("charselect");
 				mHackishLoader.add("earth");
-				
+
 				mLoaderMax = mHackishLoader.size();
 			} else {
 				setState(Game.MENU);
@@ -255,7 +255,7 @@ public class Game implements ApplicationListener {
 
 		// Finish loading all the resources
 		mAssetManager.finishLoading();
-		
+
 		mRenderTimeHistory = new ArrayList<Long>();
 	}
 
@@ -308,13 +308,12 @@ public class Game implements ApplicationListener {
 		// Destroy the asset manager
 		mAssetManager.dispose();
 	}
-	
+
 	/**
 	 * Render the game
 	 */
 	@Override
 	public void render() {
-		mStartTime = System.nanoTime();
 		if (!mHackishLoader.isEmpty()) {
 			if (mFlipper = !mFlipper) {
 				String level = mHackishLoader.remove(0);
@@ -355,25 +354,28 @@ public class Game implements ApplicationListener {
 		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
 		}
-		mEndTime = System.nanoTime();
-		if(mState!=LOAD && "earth".equals(mLevel.getAssetKey()) && !mProfileFinished){
-			if(mInitDelay<=0){
-				if(mRenderTimeHistory.size()<SAMPLE_SIZE){
-					mRenderTimeHistory.add(mEndTime-mStartTime);
-				}else{
+		if (mState != LOAD && "earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
+			if (mInitDelay <= 0) {
+				if (mRenderTimeHistory.size() < SAMPLE_SIZE) {
+					long nano = System.nanoTime();
+					mRenderTimeHistory.add(nano - mStartTime);
+					mStartTime = nano;
+				} else {
 					assessFramerate();
 				}
-			}else{
+			} else {
 				mInitDelay--;
+				mStartTime = System.nanoTime();
 			}
 		}
-		
 	}
-	private void assessFramerate(){
-		//TODO: Assess Framerate and handle force value accordingly
-		
+
+	private void assessFramerate() {
+		// TODO: Assess Framerate and handle force value accordingly
+		System.out.println(mRenderTimeHistory);
 		mProfileFinished = true;
 	}
+
 	/**
 	 * Handle a window resize
 	 */
@@ -493,7 +495,7 @@ public class Game implements ApplicationListener {
 	 *            name of the file to be loaded
 	 */
 	public void setLevel(String fileName) {
-		if("earth".equals(mLevel.getAssetKey())&&!mProfileFinished){
+		if ("earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
 			assessFramerate();
 		}
 		Music music = null;
