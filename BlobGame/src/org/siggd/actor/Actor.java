@@ -57,12 +57,13 @@ public abstract class Actor {
 	private int mVisibleInd;
 	private int mSpawner;
 	private String mCollisionSound;
+	private float mCollisionThreshold;
 	private float mCollisionPitch;
 
 	public boolean isActive() {
 		return mActive;
 	}
-	
+
 	public void setActive(boolean active) {
 		this.mActive = active;
 		mBody.setActive(active);
@@ -107,9 +108,10 @@ public abstract class Actor {
 		mSpawner = -1;
 		mCollisionSound = "";
 		mCollisionPitch = 1.0f;
+		mCollisionThreshold = 3.0f;
 
 		mSoundTimer = new Timer();
-		mSoundTimer.setTimer(12);
+		mSoundTimer.setTimer(5);
 		mSoundTimer.unpause();
 
 		if (Game.get().getPropScanner() != null) {
@@ -121,47 +123,27 @@ public abstract class Actor {
 	 * Called to perform actor logic
 	 */
 	public void update() {
-		Vector2 vel;
-		float threshold = 1f;
-
-		vel = new Vector2(mBody.getLinearVelocity());
-		threshold = 2f;
-
-		vel.sub(mOldVCenter);
-		float velLength = vel.len();
-		// if(velLength > threshold && mSoundTimer.isTriggered())
-		// DebugOutput.fine(this, velLength + "");
-		// else { DebugOutput.fine(this, "Timer at " + mSoundTimer.mCurTime);}
-
-		if (velLength > threshold && mSoundTimer.isTriggered()) {
-
-			AssetManager man = Game.get().getAssetManager();
-			Sound sound;
-			long soundID;
-			String CollisionSound = "data/sfx/" + mCollisionSound;
-			if (!man.isLoaded(CollisionSound)) {
-				if (!CollisionSound.equals("data/sfx/")) {
-					try {
-						man.load(CollisionSound, Sound.class);
-					} catch (Exception e) {
-
-						DebugOutput.severe(this, "SOUND FILE NOT FOUND: " + CollisionSound);
-					}
+		if (!"".equals(mCollisionSound)) {
+			Vector2 vel;
+			vel = new Vector2(mBody.getLinearVelocity());
+			vel.sub(mOldVCenter);
+			float velLength = vel.len();
+			if (velLength > mCollisionThreshold && mSoundTimer.isTriggered()) {
+				AssetManager man = Game.get().getAssetManager();
+				Sound sound;
+				long soundID;
+				String soundstr = "data/sfx/" + mCollisionSound;
+				if (man.isLoaded(soundstr)) {
+					sound = man.get(soundstr, Sound.class);
+					soundID = sound.play();
+					sound.setPitch(soundID, mCollisionPitch + velLength * .005f);
+					sound.setVolume(soundID, Math.min(.7f, (velLength) * .05f));
+					mSoundTimer.reset();
 				}
 			}
-
-			else {
-				sound = man.get(CollisionSound, Sound.class);
-				soundID = sound.play();
-				sound.setPitch(soundID, mCollisionPitch + 0.4f);
-				sound.setVolume(soundID, Math.min(.7f, .4f + velLength * .002f));
-				mSoundTimer.reset();
-			}
-
+			mSoundTimer.update();
+			mOldVCenter = new Vector2(mBody.getLinearVelocity());
 		}
-
-		mSoundTimer.update();
-		mOldVCenter = new Vector2(mBody.getLinearVelocity());
 	}
 
 	/**
@@ -620,10 +602,10 @@ public abstract class Actor {
 		mSpawner = id;
 		Actor spawner = mLevel.getActorById(Convert.getInt(id));
 		if (spawner != null && spawner instanceof Spawner) {
-			((Spawner) spawner).addToSpawn(this,0);
+			((Spawner) spawner).addToSpawn(this, 0);
 		}
 	}
-	
+
 	@Prop(name = "Active")
 	public int getActive() {
 		return mActive ? 1 : 0;
@@ -637,7 +619,7 @@ public abstract class Actor {
 			setActive(false);
 		}
 	}
-	
+
 	@Prop(name = "Collision Sound")
 	public String getCollisionSound() {
 		return mCollisionSound;
@@ -646,14 +628,26 @@ public abstract class Actor {
 	@Prop(name = "Collision Sound")
 	public void setCollisionSound(String sound) {
 		mCollisionSound = sound;
+		if (!"".equals(sound))
+			Game.get().getAssetManager().load("data/sfx/" + sound, Sound.class);
 	}
-	
-	@Prop(name = "colPitch")
+
+	@Prop(name = "Collision Threshold")
+	public float getCollisionThreshold() {
+		return mCollisionThreshold;
+	}
+
+	@Prop(name = "Collision Threshold")
+	public void setCollisionThreshold(float p) {
+		mCollisionThreshold = p;
+	}
+
+	@Prop(name = "Collision Pitch")
 	public float getCollisionPitch() {
 		return mCollisionPitch;
 	}
 
-	@Prop(name = "colPitch")
+	@Prop(name = "Collision Pitch")
 	public void setCollisionPitch(float p) {
 		mCollisionPitch = p;
 	}

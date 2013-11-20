@@ -209,7 +209,7 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level4"));
 		mLevel1.put("level2", new SiggdImageButton("data/gfx/lvl2Down.png",
 				"data/gfx/buttonDisabled.png", "level2"));
-		mLevel1.put("level8", new SiggdImageButton("data/gfx/buttonDown.png",
+		mLevel1.put("level8", new SiggdImageButton("data/gfx/lvl8Down.png",
 				"data/gfx/buttonDisabled.png", "level8"));
 
 		SiggdImageButton button = mLevel1.get("level1");
@@ -376,8 +376,8 @@ public class MenuView {
 		Image baseImage = new Image(t);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
-		mBaseCustomizeTable.align(Align.top);
-		mCustomizeTable.align(Align.top);
+		//mBaseCustomizeTable.align(Align.top);
+		//mCustomizeTable.align(Align.top);
 	}
 
 	private void createControllerMenu() {

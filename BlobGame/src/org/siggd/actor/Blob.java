@@ -1183,7 +1183,9 @@ public class Blob extends Actor implements Controllable {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
-			sound.setPitch(soundID, 1 + mPointCombo * .333f);
+			float pitch = 1;
+			for (int i = 0;i< mPointCombo;i++) pitch *= 1.137;
+			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
 		mPointCombo++;
