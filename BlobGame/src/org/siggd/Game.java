@@ -372,7 +372,6 @@ public class Game implements ApplicationListener {
 
 	private void assessFramerate() {
 		// TODO: Assess Framerate and handle force value accordingly
-		System.out.println(mRenderTimeHistory);
 		mProfileFinished = true;
 	}
 
