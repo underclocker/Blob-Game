@@ -361,7 +361,7 @@ public class Game implements ApplicationListener {
 				if(mRenderTimeHistory.size()<SAMPLE_SIZE){
 					mRenderTimeHistory.add(mEndTime-mStartTime);
 				}else{
-					asessFramerate();
+					assessFramerate();
 				}
 			}else{
 				mInitDelay--;
@@ -369,7 +369,7 @@ public class Game implements ApplicationListener {
 		}
 		
 	}
-	private void asessFramerate(){
+	private void assessFramerate(){
 		//TODO: Assess Framerate and handle force value accordingly
 		
 		mProfileFinished = true;
@@ -494,7 +494,7 @@ public class Game implements ApplicationListener {
 	 */
 	public void setLevel(String fileName) {
 		if("earth".equals(mLevel.getAssetKey())&&!mProfileFinished){
-			asessFramerate();
+			assessFramerate();
 		}
 		Music music = null;
 		String song = null;
