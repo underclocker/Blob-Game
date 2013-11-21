@@ -137,7 +137,7 @@ public abstract class Actor {
 					sound = man.get(soundstr, Sound.class);
 					soundID = sound.play();
 					sound.setPitch(soundID, mCollisionPitch + velLength * .005f);
-					sound.setVolume(soundID, Math.min(.7f, (velLength) * .05f));
+					sound.setVolume(soundID, Math.min(.4f, (velLength) * .05f));
 					mSoundTimer.reset();
 				}
 			}

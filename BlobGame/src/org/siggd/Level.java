@@ -52,7 +52,7 @@ public class Level implements Iterable<Actor> {
 	private ArrayList<Body> mBodiesToDestroy;
 	private ContactHandler mContactHandler;
 	private String mAssetKey;
-	private float mVolume = 0.7f;
+	private float mVolume = 0.5f;
 
 	float mCurrentVolume = 0f;
 	private float mFadeRate = 0.03f;

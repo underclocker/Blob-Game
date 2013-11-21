@@ -55,7 +55,7 @@ public class LevelView {
 												// display,
 												// in meters. Only used in
 												// multiplayer
-	public static final float CAM_SMOOTH = .08f; // /< coefficient for how much
+	public static final float CAM_SMOOTH = .10f; // /< coefficient for how much
 													// closer the camera gets to
 													// its
 													// correct location per

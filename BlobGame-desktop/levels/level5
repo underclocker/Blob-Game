@@ -1,6 +1,16 @@
 {
     "actors": [
         {
+            "id": 3414,
+            "class": "org.siggd.actor.PoofSign",
+            "props": {
+                "Layer": 0,
+                "ID": 3414,
+                "Y": 14.363099,
+                "X": 17.705368
+            }
+        },
+        {
             "id": 3229,
             "class": "org.siggd.actor.NotGate",
             "props": {
@@ -89,7 +99,7 @@
             "props": {
                 "Angle": 340,
                 "Target Input": 2285,
-                "Wind Strength": "10",
+                "Wind Strength": "4",
                 "ID": 2287,
                 "Y": -6.869085,
                 "X": 18.962793
@@ -101,7 +111,7 @@
             "props": {
                 "Angle": 340,
                 "Target Input": 2284,
-                "Wind Strength": "10",
+                "Wind Strength": "4",
                 "ID": 2286,
                 "Y": -6.88978,
                 "X": 20.007895
@@ -113,7 +123,7 @@
             "props": {
                 "Angle": 350.00003,
                 "Target Input": 2283,
-                "Wind Strength": "10",
+                "Wind Strength": "6",
                 "ID": 2285,
                 "Y": -7.81071,
                 "X": 18.735151
@@ -125,7 +135,7 @@
             "props": {
                 "Angle": 350.00003,
                 "Target Input": 2282,
-                "Wind Strength": "10",
+                "Wind Strength": "6",
                 "ID": 2284,
                 "Y": -7.81071,
                 "X": 19.759556
@@ -136,7 +146,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Target Input": 2281,
-                "Wind Strength": "10",
+                "Wind Strength": "8",
                 "ID": 2283,
                 "Y": -8.752336,
                 "X": 18.65237
@@ -147,7 +157,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Target Input": 2280,
-                "Wind Strength": "10",
+                "Wind Strength": "8",
                 "ID": 2282,
                 "Y": -8.762683,
                 "X": 19.697472
@@ -158,7 +168,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Target Input": 3040,
-                "Wind Strength": "12",
+                "Wind Strength": "10",
                 "ID": 2281,
                 "Y": -9.818131,
                 "X": 18.65237
@@ -169,7 +179,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Target Input": 3040,
-                "Wind Strength": "12",
+                "Wind Strength": "10",
                 "ID": 2280,
                 "Y": -9.818131,
                 "X": 19.697472
@@ -567,8 +577,8 @@
             "id": 1833,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -702,7 +712,7 @@
             "id": 1723,
             "class": "org.siggd.actor.Redirector",
             "props": {
-                "Hold Time": "30",
+                "Hold Time": "120",
                 "ID": 1723,
                 "Y": 6.4506636,
                 "X": 9.587415
@@ -724,7 +734,7 @@
             "class": "org.siggd.actor.Platform",
             "props": {
                 "Angle": 90,
-                "DirectionX": "1.5",
+                "DirectionX": "1.75",
                 "Target Input": 1725,
                 "ID": 1721,
                 "Y": 6.5791607,
@@ -943,8 +953,8 @@
                 "ID": 1364,
                 "Grabbable": 0,
                 "Output": 1,
-                "Y": 0.6576836,
-                "X": 20.723186
+                "Y": 0.6676842,
+                "X": 21.043186
             }
         },
         {
@@ -1658,8 +1668,8 @@
             "id": 1835,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
@@ -1899,39 +1909,6 @@
                 "ID": 2310,
                 "Y": -15.089837,
                 "X": 9.389057
-            }
-        },
-        {
-            "id": 2497,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Box",
-                "Visible": 0,
-                "ID": 2497,
-                "Y": -19.2169,
-                "X": 4.0453568
-            }
-        },
-        {
-            "id": 2498,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Box",
-                "Visible": 0,
-                "ID": 2498,
-                "Y": -20.266912,
-                "X": 4.0553575
-            }
-        },
-        {
-            "id": 2499,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Box",
-                "Visible": 0,
-                "ID": 2499,
-                "Y": -19.7269,
-                "X": 8.775357
             }
         },
         {

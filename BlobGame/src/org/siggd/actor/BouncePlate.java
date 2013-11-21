@@ -24,7 +24,7 @@ public class BouncePlate extends Actor {
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private int mTimer = 0;
-	private String mBouncePlateFile = "data/sfx/bounceplate.wav";
+	private String mBouncePlateFile = "data/sfx/duwuwuh.wav";
 
 	public BouncePlate(Level level, long id) {
 		super(level, id);
@@ -90,8 +90,8 @@ public class BouncePlate extends Actor {
 			if (man.isLoaded(mBouncePlateFile)) {
 				sound = man.get(mBouncePlateFile, Sound.class);
 				soundID = sound.play();
-				sound.setPitch(soundID, 1.25f);
-				sound.setVolume(soundID, .45f);
+				//sound.setPitch(soundID, 1.25f);
+				sound.setVolume(soundID, .55f);
 
 			}
 		} else if (mTimer >= 5 && output == 1) {

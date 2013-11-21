@@ -12,11 +12,11 @@ import org.siggd.Player;
 import org.siggd.Timer;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
-import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -32,9 +32,10 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
-	//For Spawning Offset
-	//private Vector2 spawnOffset = new Vector2(0, 1.5f);
-	//private Vector2 rotatedOffset;
+	private String mSoundFile = "data/sfx/blep.wav";
+	// For Spawning Offset
+	// private Vector2 spawnOffset = new Vector2(0, 1.5f);
+	// private Vector2 rotatedOffset;
 	private int mInitDelay = 0;
 
 	public Spawner(Level level, long id) {
@@ -79,6 +80,7 @@ public class Spawner extends Actor implements IObservable {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
 		man.load(offTex, Texture.class);
+		man.load(mSoundFile, Sound.class);
 
 	}
 
@@ -92,6 +94,14 @@ public class Spawner extends Actor implements IObservable {
 		if (mSpawnees.size() > 0) {
 			setState(true);
 			if (mSpawnTimer.isTriggered()) {
+				AssetManager man = Game.get().getAssetManager();
+				Sound sound;
+				long soundID;
+				if (man.isLoaded(mSoundFile) && !"earth".equals(Game.get().getLevel().getAssetKey())) {
+					sound = man.get(mSoundFile, Sound.class);
+					soundID = sound.play();
+					sound.setVolume(soundID, .75f);
+				}
 				spawnActor();
 				mSpawnTimer.reset();
 				mTexTimer.reset();
@@ -183,9 +193,10 @@ public class Spawner extends Actor implements IObservable {
 				this.getLevel().addActor(spawnee);
 			}
 		}
-		
-		//For Spawning Offset
-		//Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() + rotatedOffset.y);
+
+		// For Spawning Offset
+		// Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() +
+		// rotatedOffset.y);
 		Vector2 pos = mBody.getPosition().cpy();
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
@@ -251,11 +262,11 @@ public class Spawner extends Actor implements IObservable {
 		if (name.equals("Rate")) {
 			mSpawnTimer.setTimer(Convert.getInt(val));
 		}
-		
-		//For Spawning Offset
-		//if (name.equals("Angle")) {
-		//	rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
-		//}
+
+		// For Spawning Offset
+		// if (name.equals("Angle")) {
+		// rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
+		// }
 
 		super.setProp(name, val);
 	}
