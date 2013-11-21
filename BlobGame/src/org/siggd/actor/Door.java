@@ -7,12 +7,12 @@ import org.siggd.Level;
 import org.siggd.StableContact;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.actor.meta.IObserver;
-import org.siggd.actor.meta.Prop;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
 import org.siggd.view.DebugActorLinkDrawable;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -31,6 +31,9 @@ public class Door extends Actor implements IObserver {
 	private String mTex;
 	private int mCamDelayMax = 120;
 	private int mCamDelay = 0;
+	private String mSoundFile = "data/sfx/blublubluh.wav";
+	private int mSoundDelay = 18;
+	private int mSoundCount = -300;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -68,10 +71,12 @@ public class Door extends Actor implements IObserver {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load(mSoundFile, Sound.class);
 	}
 
 	@Override
 	public void update() {
+		mSoundCount++;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		Iterable<Body> bodies = ContactHandler.getBodies(contacts);
@@ -101,8 +106,24 @@ public class Door extends Actor implements IObserver {
 			mCamDelay--;
 		}
 		if (mCamDelay > 5 && Convert.getInt(getProp("Camera Tracked")) != 0) {
-			// TODO: figure out how to move camera less violently and we can reenable this.
-			//Game.get().getLevelView().setCameraPosition(mBody.getPosition());
+			// TODO: figure out how to move camera less violently and we can
+			// reenable this.
+			// Game.get().getLevelView().setCameraPosition(mBody.getPosition());
+		}
+		if (mBody.getLinearVelocity().len2() > 0) {
+			if (mSoundCount >= mSoundDelay) {
+				mSoundCount = 0;
+				AssetManager man = Game.get().getAssetManager();
+				Sound sound;
+				long soundID;
+				if (man.isLoaded(mSoundFile)) {
+					sound = man.get(mSoundFile, Sound.class);
+					soundID = sound.play();
+					sound.setVolume(soundID, .55f);
+					if (!active) sound.setPitch(soundID, 1.5f);
+				}
+
+			}
 		}
 	}
 
