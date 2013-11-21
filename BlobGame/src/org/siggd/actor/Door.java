@@ -32,8 +32,7 @@ public class Door extends Actor implements IObserver {
 	private int mCamDelayMax = 120;
 	private int mCamDelay = 0;
 	private String mSoundFile = "data/sfx/blublubluh.wav";
-	private int mSoundDelay = 18;
-	private int mSoundCount = -300;
+	private int mSoundDelay = -300;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -76,7 +75,7 @@ public class Door extends Actor implements IObserver {
 
 	@Override
 	public void update() {
-		mSoundCount++;
+		mSoundDelay++;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		Iterable<Body> bodies = ContactHandler.getBodies(contacts);
@@ -111,7 +110,7 @@ public class Door extends Actor implements IObserver {
 			// Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
 		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick()) {
-			if (mSoundCount >= mSoundDelay) {
+			if (mSoundDelay >= 0) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;

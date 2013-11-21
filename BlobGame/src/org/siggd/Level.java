@@ -789,6 +789,11 @@ public class Level implements Iterable<Actor> {
 		return mMusicTick % 18 == 0;
 	}
 
+	public boolean musicOffTick() {
+		return (mMusicTick+9) % 18 == 0;
+	}
+
+
 	// ITERABLE INTERFACE
 
 	/**
