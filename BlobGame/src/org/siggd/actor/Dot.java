@@ -130,7 +130,7 @@ public class Dot extends Actor {
 					ONTIME_EAT = 0;
 				}
 				SLURP_DOT = true;
-				mBody.getFixtureList().get(0).setSensor(true);
+				mBody.getFixtureList().get(0).setFilterData(mTargetBlob.getEyeFilter());
 			}
 			if (mEatTimer <= -5 && (l.musicTick() || (l.musicOffTick() && ONTIME_EAT < 36))
 					&& !ATE_DOT) {

@@ -573,6 +573,7 @@ public class Blob extends Actor implements Controllable {
 	public boolean mSpawning = false;
 	private Body mLeftEye;
 	private Body mRightEye;
+	private Filter mEyeFilter;
 	private Vector2 mEyeOffset = new Vector2(.15f, .05f);
 	private boolean mLastKnownDir = true;
 	private int mDirection = 0;
@@ -1183,8 +1184,9 @@ public class Blob extends Actor implements Controllable {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
-			float pitch = 1;
+			float pitch = 1f;
 			for (int i = 0;i< mPointCombo;i++) pitch *= 1.137;
+			if (pitch > 4) pitch = 4;
 			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
@@ -1296,7 +1298,7 @@ public class Blob extends Actor implements Controllable {
 			filter.categoryBits = (short) (2 << (int) value);
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
 			mRightEye.getFixtureList().get(0).setFilterData(filter);
-
+			mEyeFilter = filter;
 			Color squishColor;
 			if (value >= 0) {
 				squishColor = COLORS[(int) (value % COLORS.length)];
@@ -1644,6 +1646,10 @@ public class Blob extends Actor implements Controllable {
 		return mJoints;
 	}
 
+	public Filter getEyeFilter(){
+		return mEyeFilter;
+	}
+	
 	/*
 	 * Makes the blob's body
 	 */
