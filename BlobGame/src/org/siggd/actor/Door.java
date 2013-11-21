@@ -110,9 +110,8 @@ public class Door extends Actor implements IObserver {
 			// reenable this.
 			// Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
-		if (mBody.getLinearVelocity().len2() > 0) {
+		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick()) {
 			if (mSoundCount >= mSoundDelay) {
-				mSoundCount = 0;
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -122,7 +121,6 @@ public class Door extends Actor implements IObserver {
 					sound.setVolume(soundID, .55f);
 					if (!active) sound.setPitch(soundID, 1.5f);
 				}
-
 			}
 		}
 	}

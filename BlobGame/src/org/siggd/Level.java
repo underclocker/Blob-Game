@@ -56,6 +56,7 @@ public class Level implements Iterable<Actor> {
 
 	float mCurrentVolume = 0f;
 	private float mFadeRate = 0.03f;
+	private int mMusicTick = 0;
 
 	Music mMusic;
 	Music nMusic = null;
@@ -136,7 +137,7 @@ public class Level implements Iterable<Actor> {
 		 */
 
 		// Music nMusic = null;
-
+		mMusicTick++;
 		// Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
@@ -191,8 +192,10 @@ public class Level implements Iterable<Actor> {
 		if (nMusic != null && mMusic.hashCode() != nMusic.hashCode() && !nMusic.isPlaying()) {
 			mCurrentVolume -= mFadeRate;
 			if (mCurrentVolume >= 0f) {
-				if (!mMusic.isPlaying())
+				if (!mMusic.isPlaying()) {
 					mMusic.play();
+					mMusicTick = 0;
+				}
 				mMusic.setVolume(mCurrentVolume);
 			} else {
 				mMusic.stop();
@@ -203,10 +206,16 @@ public class Level implements Iterable<Actor> {
 			mCurrentVolume += mFadeRate;
 			if (mCurrentVolume > mVolume)
 				mCurrentVolume = mVolume;
-			if (!mMusic.isPlaying())
+			if (!mMusic.isPlaying()) {
 				mMusic.play();
+				mMusicTick = 0;
+			}
 			mMusic.setVolume(mCurrentVolume);
 		}
+		int mill = Math.round(mMusic.getPosition() * 100);
+		int error = ((mill) % 240);
+		if (error == 0)
+			mMusicTick = 0;
 	}
 
 	public void stopMusic() {
@@ -402,7 +411,7 @@ public class Level implements Iterable<Actor> {
 				actor.setProp(key, jsonProps.get(key));
 			}
 		}
-		
+
 		loadFromLevelSave();
 		Game.get().getLevelView().setWorld(mWorld);
 	}
@@ -417,18 +426,18 @@ public class Level implements Iterable<Actor> {
 			} else {
 				handle = Gdx.files.external(mSaveFileName);
 				String json = handle.readString();
-				if ("".equals(json)){
+				if ("".equals(json)) {
 					mLevelSave = new JSONObject();
-				}else{
+				} else {
 					mLevelSave = new JSONObject(json);
 				}
 			}
 			if (!mLevelSave.has("HASH")) {
 				saveToLevelSave("HASH", "NT4R33LH45H");
 				JSONObject startLevel;
-				if(mLevelSave.has(Game.get().mStartingLevel)){
+				if (mLevelSave.has(Game.get().mStartingLevel)) {
 					startLevel = mLevelSave.getJSONObject(Game.get().mStartingLevel);
-				}else{
+				} else {
 					startLevel = new JSONObject();
 				}
 				startLevel.put("unlocked", true);
@@ -436,7 +445,7 @@ public class Level implements Iterable<Actor> {
 			}
 			if (mLevelSave.has(getAssetKey())) {
 				JSONObject levelJson = mLevelSave.getJSONObject(getAssetKey());
-				if(levelJson.has("dots")){
+				if (levelJson.has("dots")) {
 					JSONArray dots = levelJson.getJSONArray("dots");
 					loadDots(dots);
 				}
@@ -743,8 +752,8 @@ public class Level implements Iterable<Actor> {
 			}
 			boolean unlocked = false;
 			if (levels != null && levels.has(mAssetKey)) {
-				JSONObject level = (JSONObject)levels.remove(mAssetKey);
-				if(level.has("unlocked")){
+				JSONObject level = (JSONObject) levels.remove(mAssetKey);
+				if (level.has("unlocked")) {
 					unlocked = level.getBoolean("unlocked");
 				}
 			}
@@ -756,14 +765,15 @@ public class Level implements Iterable<Actor> {
 			for (Actor a : actors) {
 				if (a instanceof Dot) {
 					totalDots++;
-					if (!a.isActive() || ((Dot) a).mTargetBlob != null || ((Dot) a).getHollow() == 1) {
+					if (!a.isActive() || ((Dot) a).mTargetBlob != null
+							|| ((Dot) a).getHollow() == 1) {
 						collectedDots++;
 						dotIds.put(a.getId());
 					}
 				}
 			}
 			float percent = totalDots > 0 ? ((float) collectedDots) / totalDots : 1f;
-			currentLevel.put("progress",percent);
+			currentLevel.put("progress", percent);
 			currentLevel.put("dots", dotIds);
 			currentLevel.put("unlocked", unlocked);
 			levels.put(mAssetKey, currentLevel);
@@ -773,6 +783,10 @@ public class Level implements Iterable<Actor> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public boolean musicTick() {
+		return mMusicTick % 18 == 0;
 	}
 
 	// ITERABLE INTERFACE
