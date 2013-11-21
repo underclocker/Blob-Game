@@ -203,9 +203,7 @@ public class Level implements Iterable<Actor> {
 				nMusic = null;
 			}
 		} else if (mMusic != null) {
-			mCurrentVolume += mFadeRate;
-			if (mCurrentVolume > mVolume)
-				mCurrentVolume = mVolume;
+			mCurrentVolume = mVolume;
 			if (!mMusic.isPlaying()) {
 				mMusic.play();
 				mMusicTick = 0;
@@ -790,9 +788,8 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public boolean musicOffTick() {
-		return (mMusicTick+9) % 18 == 0;
+		return (mMusicTick + 9) % 18 == 0;
 	}
-
 
 	// ITERABLE INTERFACE
 
