@@ -37,6 +37,9 @@ public class Dot extends Actor {
 	private int mEatTimer = 10;
 	private PointLight mPointLight;
 	private int mHollowFlag;
+	public static boolean ATE_DOT = false;
+	public static boolean SLURP_DOT = false;
+	public static int ONTIME_EAT = 0;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -54,7 +57,7 @@ public class Dot extends Actor {
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		mOrigin = new Vector2();
 		mBody = makeBody(mName, 32, BodyType.DynamicBody, mOrigin, false);
-		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,mTex));
+		((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin, mTex));
 
 		setProp("Density", (Float) .3f);
 		setProp("Friction", (Float) .1f);
@@ -85,7 +88,7 @@ public class Dot extends Actor {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
-		man.load("data/gfx/"+HOLLOW_GFX, Texture.class);
+		man.load("data/gfx/" + HOLLOW_GFX, Texture.class);
 	}
 
 	/**
@@ -106,20 +109,32 @@ public class Dot extends Actor {
 					mTargetBlob = (Blob) a;
 					break;
 				} else {
+					if (a instanceof Dot && ((Dot) a).mTargetBlob != null) {
+						mTargetBlob = ((Dot) a).mTargetBlob;
+					}
 					mBody.setGravityScale(1);
 				}
 			}
 		} else {
 			Vector2 offset = new Vector2(mTargetBlob.getX(), mTargetBlob.getY());
 			offset.sub(mBody.getPosition());
-			offset.scl(5);
+			float delay = (10-mEatTimer)/20f;
+			offset.scl(4.5f+delay);
 			mBody.applyForceToCenter(offset, true);
 			mTargetBlob.applyForce(offset.scl(-1));
 			mEatTimer--;
-			if (mEatTimer < 0) {
+			Level l = Game.get().getLevel();
+			if (mEatTimer < 0 && (l.musicTime() == 13 || (l.musicTime() == 5 && ONTIME_EAT < 36))
+					&& !SLURP_DOT) {
+				if (l.musicTime() == 13) {
+					ONTIME_EAT = 0;
+				}
+				SLURP_DOT = true;
 				mBody.getFixtureList().get(0).setSensor(true);
 			}
-			if (mEatTimer < -5) {
+			if (mEatTimer <= -5 && (l.musicTick() || (l.musicOffTick() && ONTIME_EAT < 36))
+					&& !ATE_DOT) {
+				ATE_DOT = true;
 				setProp("Active", 0);
 				mTargetBlob.eatDot();
 			}
@@ -146,6 +161,7 @@ public class Dot extends Actor {
 			man.unload(mTex);
 		}
 	}
+
 	@Prop(name = "Hollow")
 	public int getHollow() {
 		return mHollowFlag;
@@ -158,11 +174,13 @@ public class Dot extends Actor {
 	public void setHollow(int flag) {
 		mHollowFlag = flag;
 		((CompositeDrawable) mDrawable).mDrawables.clear();
-		if(flag==1){
-			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin, "data/gfx/"+HOLLOW_GFX));
+		if (flag == 1) {
+			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,
+					"data/gfx/" + HOLLOW_GFX));
 			mPointLight.setDistance(.75f);
-		}else{
-			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin, "data/gfx/"+STANDARD_GFX));
+		} else {
+			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,
+					"data/gfx/" + STANDARD_GFX));
 		}
 	}
 

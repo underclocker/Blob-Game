@@ -130,7 +130,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 							for (int i = 0; i < mDetectedBlobs.size(); i++)
 								pitch *= .8795;
 							sound.setPitch(soundID, pitch);
-							sound.setVolume(soundID, .35f);
+							sound.setVolume(soundID, .25f);
 						}
 					}
 					return fraction;

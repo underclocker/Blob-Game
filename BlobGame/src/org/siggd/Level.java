@@ -224,6 +224,9 @@ public class Level implements Iterable<Actor> {
 
 	public void update() {
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
+			Dot.ATE_DOT = false;
+			Dot.SLURP_DOT = false;
+			Dot.ONTIME_EAT++;
 			startMusic();
 			while (mBodiesToDestroy.size() > 0) {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
@@ -242,6 +245,7 @@ public class Level implements Iterable<Actor> {
 					}
 				}
 			}
+
 		} else {
 			stopMusic();
 		}
@@ -789,6 +793,10 @@ public class Level implements Iterable<Actor> {
 
 	public boolean musicOffTick() {
 		return (mMusicTick + 9) % 18 == 0;
+	}
+
+	public int musicTime() {
+		return (mMusicTick % 18);
 	}
 
 	// ITERABLE INTERFACE
