@@ -1,0 +1,11 @@
+.dl-details{
+	position:absolute;
+}
+.dl-btns li{
+	position:relative;
+}
+.dl-btns li div{
+	position:absolute;
+	width:138px;
+	text-align:center;
+}
