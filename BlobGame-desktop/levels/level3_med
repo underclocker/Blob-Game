@@ -415,26 +415,6 @@
             }
         },
         {
-            "id": 909,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "Angle": 74.00639,
-                "ID": 909,
-                "Y": -4.400957,
-                "X": 22.026947
-            }
-        },
-        {
-            "id": 908,
-            "class": "org.siggd.actor.Dot",
-            "props": {
-                "Angle": 74.00639,
-                "ID": 908,
-                "Y": -4.381421,
-                "X": 20.503153
-            }
-        },
-        {
             "id": 907,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -595,8 +575,8 @@
             "class": "org.siggd.actor.PressurePlate",
             "props": {
                 "ID": 794,
-                "Y": -9.444786,
-                "X": 21.488703
+                "Y": -9.437407,
+                "X": 21.426716
             }
         },
         {
@@ -622,8 +602,8 @@
             "class": "org.siggd.actor.PressurePlate",
             "props": {
                 "ID": 695,
-                "Y": -8.658721,
-                "X": 16.224716
+                "Y": -8.642331,
+                "X": 16.23228
             }
         },
         {
