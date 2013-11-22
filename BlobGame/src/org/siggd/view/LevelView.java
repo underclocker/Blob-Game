@@ -304,7 +304,7 @@ public class LevelView {
 			// End clipping
 			ScissorStack.popScissors();
 		}
-		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0) {
+		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0 && Game.FPSREC > 30) {
 			mRayHandler.updateAndRender();
 		}
 
