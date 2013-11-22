@@ -17,7 +17,6 @@ import pong.client.core.BodyEditorLoader;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -57,9 +56,10 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
+	public final static boolean UNLOCKED = false;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
+	public static float FPSREC = 60;
 
 	public final String mStartingLevel = "level1";
 
@@ -284,7 +284,6 @@ public class Game implements ApplicationListener {
 		FileHandle output = new FileHandle(
 				"../../Blob-Game/BlobGame-android/assets/data/bodies.json");
 		output.writeString(sbOut.toString(), false);
-		// System.out.println(sbOut.toString());
 		return sbOut.toString();
 	}
 
@@ -372,6 +371,14 @@ public class Game implements ApplicationListener {
 
 	private void assessFramerate() {
 		// TODO: Assess Framerate and handle force value accordingly
+		long total = 0;
+		for (long i : mRenderTimeHistory) {
+			total += i;
+		}
+		float avg = total / (mRenderTimeHistory.size() * 1000.0f);
+		avg /= 1000000.0f;
+		System.out.println(1 / avg);
+		FPSREC = 1 / avg;
 		mProfileFinished = true;
 	}
 

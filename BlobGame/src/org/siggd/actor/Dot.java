@@ -118,8 +118,8 @@ public class Dot extends Actor {
 		} else {
 			Vector2 offset = new Vector2(mTargetBlob.getX(), mTargetBlob.getY());
 			offset.sub(mBody.getPosition());
-			float delay = (10-mEatTimer)/20f;
-			offset.scl(4.5f+delay);
+			float delay = (10 - mEatTimer) / 20f;
+			offset.scl(4.5f + delay);
 			mBody.applyForceToCenter(offset, true);
 			mTargetBlob.applyForce(offset.scl(-1));
 			mEatTimer--;
@@ -177,7 +177,8 @@ public class Dot extends Actor {
 		if (flag == 1) {
 			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,
 					"data/gfx/" + HOLLOW_GFX));
-			mPointLight.setDistance(.75f);
+			if (LevelView.mUseLights)
+				mPointLight.setDistance(.75f);
 		} else {
 			((CompositeDrawable) mDrawable).mDrawables.add(new BodySprite(mBody, mOrigin,
 					"data/gfx/" + STANDARD_GFX));
