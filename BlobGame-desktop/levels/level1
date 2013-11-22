@@ -1,6 +1,18 @@
 {
     "actors": [
         {
+            "id": 1397,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 6,
+                "Angle": 180,
+                "ID": 1397,
+                "Y": 5.3603716,
+                "X": 33.96568,
+                "Rate": "60"
+            }
+        },
+        {
             "id": 1296,
             "class": "org.siggd.actor.Parallax",
             "props": {
@@ -172,25 +184,6 @@
                 "CollisionSound": "",
                 "Y": 7.227876,
                 "X": 31.302668
-            }
-        },
-        {
-            "id": 67,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Layer": 3,
-                "Collision Sound": "barrel.wav",
-                "BodyType": 2,
-                "Angle": 90.257774,
-                "Body": "BarrelTopView",
-                "Collision Threshold": 3.5,
-                "Friction": 0.6,
-                "ID": 67,
-                "Grabbable": 1,
-                "CollisionSound": "",
-                "Y": 2.5168226,
-                "X": 39.17864,
-                "Collision Pitch": 1.25
             }
         },
         {
@@ -1141,8 +1134,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 1300,
-                "Y": 0.88488346,
-                "X": 39.979027
+                "Y": 1.6252447,
+                "X": 40.67262
             }
         },
         {
@@ -1150,8 +1143,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 1301,
-                "Y": 0.8782213,
-                "X": 41.104942
+                "Y": 1.6314056,
+                "X": 42.021275
             }
         },
         {
@@ -1159,17 +1152,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 1302,
-                "Y": 0.88488346,
-                "X": 42.26417
-            }
-        },
-        {
-            "id": 1303,
-            "class": "org.siggd.actor.JiggleBall",
-            "props": {
-                "ID": 1303,
-                "Y": 0.89820796,
-                "X": 43.45005
+                "Y": 1.6185111,
+                "X": 43.35583
             }
         }
     ],
