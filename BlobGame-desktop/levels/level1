@@ -1,6 +1,27 @@
 {
     "actors": [
         {
+            "id": 1498,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "1397",
+                "ID": 1498,
+                "Ignore Non-Blobs": "0",
+                "Y": -2.892795,
+                "X": 43.715294
+            }
+        },
+        {
+            "id": 1497,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "1397",
+                "ID": 1497,
+                "Y": -2.8927953,
+                "X": 39.449165
+            }
+        },
+        {
             "id": 1397,
             "class": "org.siggd.actor.Spawner",
             "props": {
@@ -453,6 +474,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Wind Strength": "13",
+                "ID": 38,
                 "CollisionSound": "",
                 "Y": 6.0874963,
                 "X": 49.587498
@@ -681,6 +703,7 @@
             "props": {
                 "Angle": 90.00005,
                 "Body": "Outpipe colored",
+                "ID": 11,
                 "CollisionSound": "",
                 "Y": 1.8249934,
                 "X": 46.09999
@@ -902,8 +925,8 @@
             "props": {
                 "ID": 406,
                 "CollisionSound": "",
-                "Y": 13.080031,
-                "X": 32.432304
+                "Y": 2.55,
+                "X": 40.661686
             }
         },
         {
@@ -922,8 +945,8 @@
             "props": {
                 "ID": 408,
                 "CollisionSound": "",
-                "Y": 13.065644,
-                "X": 34.181835
+                "Y": 2.55,
+                "X": 42.027355
             }
         },
         {
@@ -1154,6 +1177,16 @@
                 "ID": 1302,
                 "Y": 1.6185111,
                 "X": 43.35583
+            }
+        },
+        {
+            "id": 1500,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 1500,
+                "CollisionSound": "",
+                "Y": 2.55,
+                "X": 43.35953
             }
         }
     ],
