@@ -1,6 +1,61 @@
 {
     "actors": [
         {
+            "id": 5445,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "centerY": "7.13",
+                "centerX": "32.14",
+                "ID": 5445,
+                "Y": 6.8391695,
+                "X": 30.88078
+            }
+        },
+        {
+            "id": 5444,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "centerY": "7.13",
+                "centerX": "32.14",
+                "ID": 5444,
+                "Y": 8.126669,
+                "X": 31.33078
+            }
+        },
+        {
+            "id": 5443,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "centerY": "7.13",
+                "centerX": "32.14",
+                "ID": 5443,
+                "Y": 8.114169,
+                "X": 32.755783
+            }
+        },
+        {
+            "id": 5442,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "centerY": "7.13",
+                "centerX": "32.14",
+                "ID": 5442,
+                "Y": 6.82667,
+                "X": 33.180775
+            }
+        },
+        {
+            "id": 5441,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "centerY": "7.13",
+                "centerX": "32.14",
+                "ID": 5441,
+                "Y": 5.9641685,
+                "X": 32.055782
+            }
+        },
+        {
             "id": 5310,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -1505,11 +1560,14 @@
             "id": 5313,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
+                "Collision Threshold": 3.5,
                 "ID": 5313,
                 "Y": -15.798331,
-                "X": 7.7182713
+                "X": 7.7182713,
+                "Collision Pitch": 1.25
             }
         }
     ],

@@ -23,7 +23,7 @@ public class JiggleBall extends Actor implements IObserver, IObservable {
 	private int delay = DELAY;
 	private static int DELAY = 30;
 	private String mTex;
-	private Vector2 mStartPosition;
+	protected Vector2 mStartPosition;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
