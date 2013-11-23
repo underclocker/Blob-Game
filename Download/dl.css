@@ -1,17 +1,32 @@
-.dl-details{
-	position:absolute;
-}
-.dl-btns li{
-	position:relative;
-}
-.dl-btns li div{
-	position:absolute;
-	width:138px;
+.dl-links a{
+	background-color: #00CB00;
+	color: white;
+	border-radius: 5px;
+	text-decoration:none;
 	text-align:center;
+	width:50px;
+	display:inline-block;
+	margin: 0 5px;
+	padding: 10px 5px;
+}
+.dl-links a:hover{
+background-color: #00AB00;
+}
+.dl-links{
+	margin: 30px 0;
+}
+.caption{
+	position:absolute;
 	margin-top:-15px;
+	margin-left:85px;
+	font-size:8pt;
+}
+.dl-links span{
+	width:80px;
+	display:inline-block;
 }
 .box{
-	padding:20px;
+	padding:50px;
 }
 h3{
 	margin-bottom:5px;
