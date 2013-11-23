@@ -1184,11 +1184,14 @@ public class Blob extends Actor implements Controllable {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
-			float pitch = 1f;
+			
+			float pitch = 0.5f;
 			for (int i = 0; i < mPointCombo; i++)
-				pitch *= 1.137;
-			if (pitch > 2)
-				pitch = 2;
+			{
+				pitch *= 1.05946*1.05946;
+				if(i == 3 || i == 7) pitch /= 1.05946; //This makes it increase along a Major scale, the happiest scale in the universe
+			}
+			if (pitch > 1) pitch = 1;
 			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
