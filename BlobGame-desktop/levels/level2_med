@@ -1,6 +1,26 @@
 {
     "actors": [
         {
+            "id": 5310,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "PlatformSmall",
+                "ID": 5310,
+                "Y": -8.688827,
+                "X": 8.968457
+            }
+        },
+        {
+            "id": 5309,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "Angle": 180,
+                "ID": 5309,
+                "Y": -7.273331,
+                "X": 8.305771
+            }
+        },
+        {
             "id": 5180,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -1075,7 +1095,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 349,
-                "Wind Strength": "15",
+                "Wind Strength": "25",
                 "ID": 2618,
                 "Y": -15.3102,
                 "X": 11.413815
@@ -1087,7 +1107,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 2618,
-                "Wind Strength": "13",
+                "Wind Strength": "22",
                 "ID": 2619,
                 "Y": -14.213414,
                 "X": 11.415422
@@ -1099,7 +1119,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 2619,
-                "Wind Strength": "11",
+                "Wind Strength": "18",
                 "ID": 2620,
                 "Y": -13.088417,
                 "X": 11.412207
@@ -1111,7 +1131,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 2620,
-                "Wind Strength": "9",
+                "Wind Strength": "15",
                 "ID": 2621,
                 "Y": -11.950916,
                 "X": 11.465423
@@ -1123,7 +1143,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 2621,
-                "Wind Strength": "7",
+                "Wind Strength": "11",
                 "ID": 2622,
                 "Y": -10.838417,
                 "X": 11.465424
@@ -1135,7 +1155,7 @@
             "props": {
                 "Visible": 0,
                 "Target Input": 2622,
-                "Wind Strength": "5",
+                "Wind Strength": "8",
                 "ID": 2623,
                 "Y": -9.713416,
                 "X": 11.452924
@@ -1479,6 +1499,17 @@
                 "ID": 5183,
                 "Y": -0.82333004,
                 "X": 32.705772
+            }
+        },
+        {
+            "id": 5313,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Body": "BarrelTopView",
+                "ID": 5313,
+                "Y": -15.798331,
+                "X": 7.7182713
             }
         }
     ],
