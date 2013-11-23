@@ -1,4 +1,4 @@
-.dl-links a{
+.os-links a{
 	background-color: #00CB00;
 	color: white;
 	border-radius: 5px;
@@ -9,19 +9,21 @@
 	margin: 0 5px;
 	padding: 10px 5px;
 }
-.dl-links a:hover{
+.os-links a:hover{
 background-color: #00AB00;
 }
-.dl-links{
+.os-links{
 	margin: 30px 0;
+	text-align:center;
 }
 .caption{
 	position:absolute;
 	margin-top:-15px;
-	margin-left:85px;
+	margin-left:-25px;
 	font-size:8pt;
+	display:inline-block;
 }
-.dl-links span{
+.os-links span{
 	width:80px;
 	display:inline-block;
 }
