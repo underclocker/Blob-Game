@@ -884,8 +884,8 @@
             "id": 1502,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1027,9 +1027,11 @@
             "props": {
                 "Layer": 6,
                 "Angle": 180,
+                "Exit Velocity": "6",
                 "ID": 1986,
                 "Y": 5.319704,
-                "X": 33.975945
+                "X": 33.975945,
+                "Rate": "36"
             }
         },
         {
@@ -1037,16 +1039,18 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 1987,
-                "Y": 1.4042447,
-                "X": 42.087967
+                "Y": 1.7542444,
+                "X": 42.050465
             }
         },
         {
             "id": 1988,
             "class": "org.siggd.actor.Respawner",
             "props": {
+                "Ignore Blobs": "0",
                 "Target Spawner": "1986",
                 "ID": 1988,
+                "Ignore Non-Blobs": "1",
                 "Y": -3.215773,
                 "X": 39.381435
             }
@@ -1057,8 +1061,18 @@
             "props": {
                 "Target Spawner": "1986",
                 "ID": 1989,
+                "Ignore Non-Blobs": "1",
                 "Y": -3.215773,
                 "X": 43.632652
+            }
+        },
+        {
+            "id": 2082,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 2082,
+                "Y": 3.1498027,
+                "X": 46.065254
             }
         }
     ],

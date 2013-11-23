@@ -917,7 +917,7 @@ public class Blob extends Actor implements Controllable {
 			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
 			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
 			diff *= diff;
-			brightness += .075f*diff;
+			brightness += .075f * diff;
 			if (brightness < 0) {
 				brightness = 0;
 			}
@@ -1185,8 +1185,10 @@ public class Blob extends Actor implements Controllable {
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
 			float pitch = 1f;
-			for (int i = 0;i< mPointCombo;i++) pitch *= 1.137;
-			if (pitch > 4) pitch = 4;
+			for (int i = 0; i < mPointCombo; i++)
+				pitch *= 1.137;
+			if (pitch > 2)
+				pitch = 2;
 			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
@@ -1646,10 +1648,10 @@ public class Blob extends Actor implements Controllable {
 		return mJoints;
 	}
 
-	public Filter getEyeFilter(){
+	public Filter getEyeFilter() {
 		return mEyeFilter;
 	}
-	
+
 	/*
 	 * Makes the blob's body
 	 */
