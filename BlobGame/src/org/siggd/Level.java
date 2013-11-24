@@ -210,10 +210,12 @@ public class Level implements Iterable<Actor> {
 			}
 			mMusic.setVolume(mCurrentVolume);
 		}
-		int mill = Math.round(mMusic.getPosition() * 100);
-		int error = ((mill) % 240);
-		if (error == 0)
-			mMusicTick = 0;
+		if (mMusic != null) {
+			int mill = Math.round(mMusic.getPosition() * 100);
+			int error = ((mill) % 240);
+			if (error == 0)
+				mMusicTick = 0;
+		}
 	}
 
 	public void stopMusic() {

@@ -94,13 +94,17 @@ public class Spawner extends Actor implements IObservable {
 		if (mSpawnees.size() > 0 && Game.get().getLevel().musicTick()) {
 			setState(true);
 			if (mSpawnTimer.isTriggered()) {
-				AssetManager man = Game.get().getAssetManager();
-				Sound sound;
-				long soundID;
-				if (man.isLoaded(mSoundFile) && !"earth".equals(Game.get().getLevel().getAssetKey())) {
-					sound = man.get(mSoundFile, Sound.class);
-					soundID = sound.play();
-					sound.setVolume(soundID, .45f);
+				String curmap = Game.get().getLevel().getAssetKey();
+				if (!"earth".equals(curmap) && !"opening".equals(curmap)) {
+					AssetManager man = Game.get().getAssetManager();
+					Sound sound;
+					long soundID;
+					if (man.isLoaded(mSoundFile)
+							&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
+						sound = man.get(mSoundFile, Sound.class);
+						soundID = sound.play();
+						sound.setVolume(soundID, .45f);
+					}
 				}
 				spawnActor();
 				mSpawnTimer.reset();
