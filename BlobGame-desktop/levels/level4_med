@@ -1,6 +1,16 @@
 {
     "actors": [
         {
+            "id": 4813,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "Layer": 3,
+                "ID": 4813,
+                "Y": -9.9219055,
+                "X": 19.517857
+            }
+        },
+        {
             "id": 4668,
             "class": "org.siggd.actor.Outpipe",
             "props": {
@@ -632,8 +642,8 @@
             "id": 52,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -650,8 +660,8 @@
             "id": 53,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -669,8 +679,8 @@
             "id": 54,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1233,8 +1243,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 2406,
-                "Y": -11.484915,
-                "X": 16.405195
+                "Y": -11.125965,
+                "X": 15.897412
             }
         },
         {
@@ -1305,9 +1315,10 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3293,
-                "Y": -10.75,
-                "X": 16.410683
+                "Y": -10.321011,
+                "X": 15.911654
             }
         },
         {
@@ -1315,6 +1326,7 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3294,
                 "Y": -10.351922,
                 "X": 10.147013
@@ -1325,9 +1337,10 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3295,
-                "Y": -10.75,
-                "X": 12.179118
+                "Y": -10.76751,
+                "X": 12.030286
             }
         },
         {
@@ -1335,9 +1348,10 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3296,
-                "Y": -10.481797,
-                "X": 14.27735
+                "Y": -10.3067,
+                "X": 13.865873
             }
         },
         {
@@ -1345,9 +1359,10 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3298,
-                "Y": -10.054589,
-                "X": 18.52574
+                "Y": -9.932021,
+                "X": 17.956673
             }
         },
         {
@@ -1355,6 +1370,7 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "PlatformSmall",
+                "Friction": 0.15,
                 "ID": 3309,
                 "Y": -6.389427,
                 "X": 12.409518
@@ -1543,8 +1559,8 @@
             "props": {
                 "Layer": 3,
                 "ID": 4343,
-                "Y": -12.399531,
-                "X": 15.27175
+                "Y": -12.16315,
+                "X": 14.895291
             }
         },
         {

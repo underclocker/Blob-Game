@@ -60,7 +60,8 @@ public class Parallax extends Actor {
 			Vector2 pos = lv.getCameraPosition();
 			Vector2 offset = center.cpy().sub(pos);
 
-			float distFromMainLayer = lv.getVScale() / lv.getScale();
+			float distFromMainLayer = lv.getScale()*100.0f;
+			System.out.println(distFromMainLayer);
 
 			float scale = distFromMainLayer
 					/ (distFromMainLayer + Convert.getFloat(getProp("Distance")));

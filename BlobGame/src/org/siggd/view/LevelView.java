@@ -174,8 +174,8 @@ public class LevelView {
 			float maxX = Convert.getFloat(level.getProp("Max Camera X"));
 			float maxY = Convert.getFloat(level.getProp("Max Camera Y"));
 			Rectangle worldClip = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-			ScissorStack.calculateScissors(mCamera, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Matrix4(),
-					worldClip, mClip);
+			ScissorStack.calculateScissors(mCamera, 0, 0, Gdx.graphics.getWidth(),
+					Gdx.graphics.getHeight(), new Matrix4(), worldClip, mClip);
 
 			// Apply clipping
 			ScissorStack.pushScissors(mClip);
@@ -303,8 +303,10 @@ public class LevelView {
 		if (state == Game.PLAY || state == Game.MENU) {
 			// End clipping
 			ScissorStack.popScissors();
-		}
-		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0 && Game.FPSREC > 25) {
+		}
+
+		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0
+				&& Game.FPSREC > 25) {
 			mRayHandler.updateAndRender();
 		}
 
@@ -367,20 +369,23 @@ public class LevelView {
 		if (scalecache > scale)
 			scale = scalecache;
 
+		if (deltax < 0)
+			scale *= .3f;
+
 		deltax *= scale;
 		deltay *= scale;
 
 		mCamera.viewportHeight = mOldCamera.viewportHeight + deltay;
 		mCamera.viewportWidth = mOldCamera.viewportWidth + deltax;
 
-		mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
+		//mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
 		mOldScale = mScale;
 
 	}
 
 	public float scaleSmooth(float delta) {
 		float abs = Math.abs(delta);
-		return (40f / (200f + 10f * abs + 250f * (float) Math.sqrt(abs)));
+		return (50f / (200f + 10f * abs + 250f * (float) Math.sqrt(abs)));
 	}
 
 	public void setWorld(World world) {
@@ -544,7 +549,7 @@ public class LevelView {
 	 * @return the Scale
 	 */
 	public float getScale() {
-		return mScale;
+		return mCamera.viewportWidth / vWIDTH;
 	}
 
 	/**
