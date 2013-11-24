@@ -12,7 +12,7 @@
 
   ;Name and file
   Name "Blob Game"
-  OutFile "BlobInstall.exe"
+  OutFile "Blob Game Setup.exe"
 
   ;Default installation folder
   InstallDir "C:\Blob Game"
@@ -78,7 +78,7 @@ Section "Blob Game" SecBlobGame
 
   ; Add/Remove Programs entry
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blob Game" \
-                   "DisplayName" "Blob Game -- It's a game! With Blobs!"
+                   "DisplayName" "Blob Game"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blob Game" \
                    "DisplayIcon" "$\"$INSTDIR\blob.ico$\""
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blob Game" \
