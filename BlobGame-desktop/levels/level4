@@ -1,6 +1,18 @@
 {
     "actors": [
         {
+            "id": 2483,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 90,
+                "Speed": "1.25",
+                "ID": 2483,
+                "Y": 11.518076,
+                "X": 18.752014,
+                "Anticlockwise": "0"
+            }
+        },
+        {
             "id": 2353,
             "class": "org.siggd.actor.Teleport",
             "props": {

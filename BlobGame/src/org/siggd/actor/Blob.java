@@ -350,7 +350,8 @@ public class Blob extends Actor implements Controllable {
 			// set black outline for blobs
 			shapeRender.begin(ShapeType.Line);
 			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
-			float lineWidth = 3 * Game.get().getLevelView().getScale() * 100.0f;
+
+			float lineWidth = 3 / (120*Game.get().getLevelView().getScale());
 
 			for (int i = 0; i < vertices.size(); i++) {
 				Vector2 v1;
