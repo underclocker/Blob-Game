@@ -350,8 +350,7 @@ public class Blob extends Actor implements Controllable {
 			// set black outline for blobs
 			shapeRender.begin(ShapeType.Line);
 			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
-			float lineWidth = 3 * Game.get().getLevelView().getScale()
-					/ Game.get().getLevelView().getVScale();
+			float lineWidth = 3 * Game.get().getLevelView().getScale() * 100.0f;
 
 			for (int i = 0; i < vertices.size(); i++) {
 				Vector2 v1;
@@ -586,7 +585,7 @@ public class Blob extends Actor implements Controllable {
 	// density
 	private float mAccAprox = 0; // < approximates acceleration of squishy blob
 	private PointLight mLight;
-	private float mExtraGlow = -100;
+	float mExtraGlow = -100;
 	private Color mLightColor;
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;

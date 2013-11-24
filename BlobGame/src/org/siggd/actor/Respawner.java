@@ -58,6 +58,9 @@ public class Respawner extends Actor {
 			if (Convert.getInt(getProp("Ignore Non-Blobs")) == 1 && !(actor instanceof Blob))
 				continue;
 
+			if (actor instanceof Blob){
+				((Blob)actor).mExtraGlow = -100;
+			}
 			int targetId = Convert.getInt(getProp("Target Spawner"));
 			// there is a targeted spawner to send actors to
 			if (targetId != -1) {

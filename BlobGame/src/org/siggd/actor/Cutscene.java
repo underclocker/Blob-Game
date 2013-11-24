@@ -80,7 +80,7 @@ public class Cutscene extends Actor {
 				xpan += Convert.getFloat(getProp("X Pan"));
 			}
 			pos.x += xpan;
-			float distFromMainLayer = lv.getVScale() / lv.getScale();
+			float distFromMainLayer = lv.getScale() * 100.0f;
 
 			float scale = distFromMainLayer
 					/ (distFromMainLayer + Convert.getFloat(getProp("Distance")));
