@@ -1,16 +1,168 @@
 {
-    "actors": [{
-        "id": 0,
-        "class": "org.siggd.actor.Background",
-        "props": {
-            "Body": "charSelect",
-            "ID": 0,
-            "Y": -8.533,
-            "X": -8.533
+    "actors": [
+        {
+            "id": 33,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "BodyType": 2,
+                "Angle": -14.448793,
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "Density": 1,
+                "ID": 33,
+                "Y": 1.0973871,
+                "X": -0.7070042
+            }
+        },
+        {
+            "id": 32,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 0,
+                "Angle": -119.71371,
+                "Body": "CanDark",
+                "Friction": 0.2,
+                "ID": 32,
+                "Y": 0.6054629,
+                "X": 2.080506
+            }
+        },
+        {
+            "id": 31,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 13.194362,
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 31,
+                "Y": -0.749504,
+                "X": 4.315504
+            }
+        },
+        {
+            "id": 19,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 235,
+                "Distance": "30.0",
+                "ID": 19,
+                "Y": 6.244434,
+                "X": 5.9384584,
+                "Cone Angle": "35"
+            }
+        },
+        {
+            "id": 18,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": 100,
+                "X Wave Speed": ".003",
+                "Y Offset": "0",
+                "Y Wave Angle": 13.306747,
+                "X Wave Angle": 39.91246,
+                "ID": 18,
+                "X Wave Amplitude": "1.2",
+                "Y": 3.7935002,
+                "Y Wave Speed": ".001",
+                "Y Wave Amplitude": ".4",
+                "X": -6.176501,
+                "X Offset": "0"
+            }
+        },
+        {
+            "id": 16,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Lightness": ".05",
+                "Y Offset": "2.3",
+                "Y Wave Angle": 0,
+                "X Wave Angle": 0,
+                "Texture": "level3_1_0.png",
+                "X Offset": "",
+                "Layer": -2,
+                "Angle": -90,
+                "Rotation Speed": "0.0",
+                "ID": 16,
+                "Scale": "3",
+                "Y": 3.7710009,
+                "X": -4.9649987
+            }
+        },
+        {
+            "id": 20,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 180.00003,
+                "Body": "Level2_0_1",
+                "ID": 20,
+                "Y": 7.99,
+                "X": 8.06
+            }
+        },
+        {
+            "id": 24,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 0,
+                "Angle": -60.125744,
+                "Body": "CanDark",
+                "Friction": 0.2,
+                "ID": 24,
+                "Y": -3.0916378,
+                "X": 4.319511
+            }
+        },
+        {
+            "id": 25,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 1.0571594,
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 25,
+                "Y": -1.874971,
+                "X": 2.493302
+            }
+        },
+        {
+            "id": 26,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": -3.161668,
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 26,
+                "Y": -0.8069285,
+                "X": 0.55038464
+            }
+        },
+        {
+            "id": 27,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "DarkBarrel",
+                "Friction": 0.2,
+                "ID": 27,
+                "Y": -1.58,
+                "X": -6.0599995
+            }
+        },
+        {
+            "id": 28,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 0,
+                "Angle": 80.479294,
+                "Body": "CanDark",
+                "Friction": 0.2,
+                "ID": 28,
+                "Y": -0.68278456,
+                "X": -2.0694046
+            }
         }
-    }],
+    ],
     "props": {
-        "Ambient Light": 0.3,
+        "Ambient Light": 0.6,
         "Min Camera Y": "-4.5",
         "Gravity X": 0,
         "Gravity Y": -9.8,
@@ -20,7 +172,8 @@
         "Min Camera X": "-8",
         "Max Camera X": "8",
         "SongName": "pop.ogg",
-        "Use Light": "0",
+        "Difficulty": 0,
+        "Use Light": "1",
         "Solidity Enabled": 1
     }
 }

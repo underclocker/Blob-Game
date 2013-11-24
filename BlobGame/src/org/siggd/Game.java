@@ -1,5 +1,6 @@
 package org.siggd;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -24,8 +25,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * This class dispatches the main game loop (the Controller in MVC).
@@ -48,9 +52,14 @@ public class Game implements ApplicationListener {
 	public final static int EDIT = 0;
 	public final static int PLAY = 1;
 	public final static int MENU = 2;
+	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
+	public final static boolean UNLOCKED = true;
+	public static boolean PRELOAD = false; // only preloads in release and reads
+											// from config file
+	public static float FPSREC = 60;
 
 	public final String mStartingLevel = "level1";
 
@@ -80,6 +89,16 @@ public class Game implements ApplicationListener {
 	private String mNextLevel;
 	private String mTickSound = "data/sfx/tick.ogg";
 	private String mNomSound = "data/sfx/nom.wav";
+	public ArrayList<String> mHackishLoader;
+	public int mLoaderMax;
+	private boolean mFlipper = true;
+	// Framerate profiler
+	private int mInitDelay = 15;
+	private long mStartTime;
+	private long mEndTime;
+	private ArrayList<Long> mRenderTimeHistory;
+	private static int SAMPLE_SIZE = 600;
+	private boolean mProfileFinished = false;
 
 	/**
 	 * Constructor (private)
@@ -115,6 +134,8 @@ public class Game implements ApplicationListener {
 	 */
 	@Override
 	public void create() {
+		mHackishLoader = new ArrayList<String>();
+
 		mPropScanner = new PropScanner("org.siggd.actor");
 
 		// Create the asset manager
@@ -176,11 +197,10 @@ public class Game implements ApplicationListener {
 
 		// Load physics bodies
 
-		if (RELEASE && false) {
+		if (RELEASE) {
 			mBodyLoader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
 		} else {
 			mBodyLoader = new BodyEditorLoader(combineBodies());
-
 		}
 
 		// BEGIN: EDITOR
@@ -200,10 +220,26 @@ public class Game implements ApplicationListener {
 			// load the select/point image
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
-			setState(Game.MENU);
-			setLevel("earth");
-			mLevelView.setCameraPosition(new Vector2());
+			if (PRELOAD) {
+				setState(Game.LOAD);
+				setLevel("emptylevel");
+				mMenuView.setMenu(MenuView.LOADING);
+				mHackishLoader.add("level1");
+				mHackishLoader.add("level2");
+				mHackishLoader.add("level3");
+				mHackishLoader.add("level4");
+				mHackishLoader.add("level5");
+				mHackishLoader.add("level7");
+				mHackishLoader.add("level8");
+				mHackishLoader.add("charselect");
+				mHackishLoader.add("earth");
 
+				mLoaderMax = mHackishLoader.size();
+			} else {
+				setState(Game.MENU);
+				setLevel("earth");
+				mLevelView.resetCamera();
+			}
 		}
 		// END: EDITOR
 
@@ -219,6 +255,8 @@ public class Game implements ApplicationListener {
 
 		// Finish loading all the resources
 		mAssetManager.finishLoading();
+
+		mRenderTimeHistory = new ArrayList<Long>();
 	}
 
 	public String combineBodies() {
@@ -243,7 +281,9 @@ public class Game implements ApplicationListener {
 		}
 		sbOut.delete(sbOut.length() - 1, sbOut.length());
 		sbOut.append("],\"dynamicObjects\":[]}");
-		// System.out.println(sbOut.toString());
+		FileHandle output = new FileHandle(
+				"../../Blob-Game/BlobGame-android/assets/data/bodies.json");
+		output.writeString(sbOut.toString(), false);
 		return sbOut.toString();
 	}
 
@@ -273,6 +313,18 @@ public class Game implements ApplicationListener {
 	 */
 	@Override
 	public void render() {
+		if (!mHackishLoader.isEmpty()) {
+			if (mFlipper = !mFlipper) {
+				String level = mHackishLoader.remove(0);
+				setLevel(level);
+				if (mHackishLoader.isEmpty()) {
+					setState(MENU);
+					Game.get().getLevelView().resetCamera();
+					mMenuView.setMenu(MenuView.MAIN);
+				}
+			}
+		}
+
 		// Load any necessary resources
 		if (!mAssetManager.update()) {
 			// Show loading screen if not done loading
@@ -293,12 +345,41 @@ public class Game implements ApplicationListener {
 			mEditor.update();
 		}
 
-		if (mNextLevel == null) {
+		if (mState != LOAD && mNextLevel == null) {
+			mLevelView.update();
 			mLevelView.render();
 		}
-		if (mState == MENU) {
+
+		if (mState == MENU || mState == LOAD) {
 			mMenuView.render();
 		}
+		if (mState != LOAD && "earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
+			if (mInitDelay <= 0) {
+				if (mRenderTimeHistory.size() < SAMPLE_SIZE) {
+					long nano = System.nanoTime();
+					mRenderTimeHistory.add(nano - mStartTime);
+					mStartTime = nano;
+				} else {
+					assessFramerate();
+				}
+			} else {
+				mInitDelay--;
+				mStartTime = System.nanoTime();
+			}
+		}
+	}
+
+	private void assessFramerate() {
+		// TODO: Assess Framerate and handle force value accordingly
+		long total = 0;
+		for (long i : mRenderTimeHistory) {
+			total += i;
+		}
+		float avg = total / (mRenderTimeHistory.size() * 1000.0f);
+		avg /= 1000000.0f;
+		System.out.println(1 / avg);
+		FPSREC = 1 / avg;
+		mProfileFinished = true;
 	}
 
 	/**
@@ -420,8 +501,12 @@ public class Game implements ApplicationListener {
 	 *            name of the file to be loaded
 	 */
 	public void setLevel(String fileName) {
+		if ("earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
+			assessFramerate();
+		}
 		Music music = null;
 		String song = null;
+		float vol = mLevel.mCurrentVolume;
 		Level oldLevel = mLevel;
 		if (mLevel != null) {
 			mLevel.dispose();
@@ -445,11 +530,11 @@ public class Game implements ApplicationListener {
 
 		// Load all level resources
 		String newSong = (String) mLevel.mProps.get("SongName");
-		if (newSong.equals(song)) {
-			mLevel.mMusic = music;
-		}
+
+		mLevel.mMusic = music;
+		mLevel.mCurrentVolume = vol;
 		mLevel.loadResources();
-		
+
 		if (oldLevel != null) {
 			oldLevel.stopMusic();
 		}
@@ -605,8 +690,8 @@ public class Game implements ApplicationListener {
 	public void setNextLevel(String nextLevel) {
 		mNextLevel = nextLevel;
 	}
-	
-//TODO: move these functions somewhere more appropriate
+
+	// TODO: move these functions somewhere more appropriate
 	public void playTickSound() {
 		Sound sound;
 		long soundID;
@@ -614,9 +699,10 @@ public class Game implements ApplicationListener {
 			sound = mAssetManager.get(mTickSound, Sound.class);
 			soundID = sound.play();
 			sound.setPitch(soundID, 1);
-			sound.setVolume(soundID, .2f);
+			sound.setVolume(soundID, .5f);
 		}
 	}
+
 	public void playNomSound() {
 		Sound sound;
 		long soundID;
@@ -624,11 +710,39 @@ public class Game implements ApplicationListener {
 			sound = mAssetManager.get(mNomSound, Sound.class);
 			soundID = sound.play();
 			sound.setPitch(soundID, 1);
-			sound.setVolume(soundID, .2f);
+			sound.setVolume(soundID, .5f);
 		}
 	}
-	
-	
+
+	public void saveScreenshot(FileHandle file) {
+		Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		PixmapIO.writePNG(file, pixmap);
+	}
+
+	public Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {
+		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+
+		final Pixmap pixmap = new Pixmap(w, h, Format.RGBA8888);
+		ByteBuffer pixels = pixmap.getPixels();
+		Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
+
+		final int numBytes = w * h * 4;
+		byte[] lines = new byte[numBytes];
+		if (flipY) {
+			final int numBytesPerLine = w * 4;
+			for (int i = 0; i < h; i++) {
+				pixels.position((h - i - 1) * numBytesPerLine);
+				pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+			}
+			pixels.clear();
+			pixels.put(lines);
+		} else {
+			pixels.clear();
+			pixels.get(lines);
+		}
+
+		return pixmap;
+	}
 
 	// I can't believe we didn't have a function for this before
 	public void exit() {

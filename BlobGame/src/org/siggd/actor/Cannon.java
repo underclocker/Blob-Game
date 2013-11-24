@@ -72,7 +72,7 @@ public class Cannon extends Actor implements RayCastCallback {
 
 	public Cannon(Level level, long id) {
 		super(level, id);
-		mName = "Cannon";
+		mName = "lightbulb";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 128, BodyType.KinematicBody, origin, true);

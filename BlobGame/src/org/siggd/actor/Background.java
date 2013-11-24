@@ -94,6 +94,16 @@ public class Background extends Actor {
 		setProp("Restitution", restitution);
 		setProp("Collision Group", collisiongrp);
 
+		if ("BarrelTopView".equals(getProp("Body")) && !mIsInEditor) {
+			setProp("Collision Sound", "barrel.wav");
+			setProp("Collision Pitch", 1.25f);
+			setProp("Collision Threshold", 3.5f);
+		} else if ("BigBarrelTopView".equals(getProp("Body")) && !mIsInEditor) {
+			setProp("Collision Sound", "barrel.wav");
+			setProp("Collision Pitch", 1.15f);
+			setProp("Collision Threshold", 3.25f);
+		}
+
 		int size = ((CompositeDrawable) mDrawable).mDrawables.size();
 
 		// remove old bodysprite
@@ -112,8 +122,8 @@ public class Background extends Actor {
 	 */
 	@Override
 	public void dispose() {
-		AssetManager man = Game.get().getAssetManager();
-		if (man.containsAsset(mTex)) {
+		if (!Game.PRELOAD) {
+			AssetManager man = Game.get().getAssetManager();
 			man.unload(mTex);
 		}
 	}

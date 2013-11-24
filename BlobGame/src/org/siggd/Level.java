@@ -14,18 +14,19 @@ import org.json.JSONObject;
 import org.siggd.actor.Actor;
 import org.siggd.actor.Blob;
 import org.siggd.actor.Dot;
+import org.siggd.actor.FadeIn;
 import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
+import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * This class represents a game world, or map.
@@ -51,7 +52,14 @@ public class Level implements Iterable<Actor> {
 	private ArrayList<Body> mBodiesToDestroy;
 	private ContactHandler mContactHandler;
 	private String mAssetKey;
+	private float mVolume = 0.5f;
+
+	float mCurrentVolume = 0f;
+	private float mFadeRate = 0.03f;
+	private int mMusicTick = 0;
+
 	Music mMusic;
+	Music nMusic = null;
 	private LinkedList<Actor> mAddQueue;
 	public Blob mFirstBlobFinished = null;
 	private float mAmbientLight;
@@ -100,6 +108,9 @@ public class Level implements Iterable<Actor> {
 		mProps.put("Parallax", "");
 
 		mProps.put("Use Light", 1);
+
+		mProps.put("Difficulty", 0);
+
 		setProp("Ambient Light", .3f);
 		mNextId = 0;
 
@@ -110,18 +121,50 @@ public class Level implements Iterable<Actor> {
 		mContactHandler.addListener(new BlobDetangler());
 	}
 
+	public void killFade() {
+		for (Actor a : mActors) {
+			if (a instanceof FadeIn) {
+				FadeIn fi = (FadeIn) a;
+				fi.setVisible(0);
+			}
+		}
+	}
+
 	public void startMusic() {
+		/*
+		 * for (Actor a : mActors) { if (a instanceof FadeIn &&
+		 * !((FadeIn)a).fadedOut()) { return; } }
+		 */
+
+		// Music nMusic = null;
+		mMusicTick++;
+		// Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
 
 			String musicPath = "data/mus/" + (String) getProp("SongName");
+			try {
+				if (nMusic == null) {
+					String extension = musicPath.substring(musicPath.length() - 4,
+							musicPath.length());
+					if (".wav".equals(extension) || ".mp3".equals(extension)
+							|| ".ogg".equals(extension)) {
+						man.load(musicPath, Music.class);
+						man.finishLoading();
+						nMusic = man.get(musicPath, Music.class);
 
+					}
+				}
+			} catch (Exception e) {
+			}
 			// If the music was changed to a nonexistent song in realtime, stop
 			// the music
 			if (!man.isLoaded(musicPath)) {
 				mMusic = null;
 			}
 		}
+
+		// Didn't inherit a song
 		if (mMusic == null) {
 			AssetManager man = Game.get().getAssetManager();
 			String musicPath = "data/mus/" + (String) getProp("SongName");
@@ -138,7 +181,6 @@ public class Level implements Iterable<Actor> {
 						mMusic.stop();
 					}
 				} catch (Exception e) {
-
 					mMusic = null;
 					// e.printStackTrace();
 					DebugOutput.info(new Object(), (String) getProp("SongName"));
@@ -146,10 +188,32 @@ public class Level implements Iterable<Actor> {
 			}
 		}
 
-		if (mMusic != null && !mMusic.isPlaying()) {
-			mMusic.play();
-			mMusic.setVolume(.5f);
+		// Inherited a song, need to switch to new one
+		if (nMusic != null && mMusic.hashCode() != nMusic.hashCode() && !nMusic.isPlaying()) {
+			mCurrentVolume -= mFadeRate;
+			if (mCurrentVolume >= 0f) {
+				if (!mMusic.isPlaying()) {
+					mMusic.play();
+					mMusicTick = 0;
+				}
+				mMusic.setVolume(mCurrentVolume);
+			} else {
+				mMusic.stop();
+				mMusic = nMusic;
+				nMusic = null;
+			}
+		} else if (mMusic != null) {
+			mCurrentVolume = mVolume;
+			if (!mMusic.isPlaying()) {
+				mMusic.play();
+				mMusicTick = 0;
+			}
+			mMusic.setVolume(mCurrentVolume);
 		}
+		int mill = Math.round(mMusic.getPosition() * 100);
+		int error = ((mill) % 240);
+		if (error == 0)
+			mMusicTick = 0;
 	}
 
 	public void stopMusic() {
@@ -160,27 +224,30 @@ public class Level implements Iterable<Actor> {
 
 	public void update() {
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
+			Dot.ATE_DOT = false;
+			Dot.SLURP_DOT = false;
+			Dot.ONTIME_EAT++;
 			startMusic();
 			while (mBodiesToDestroy.size() > 0) {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
 			// Begin the step.
-			mWorld.step(1 / 60f, 6, 2);
-		} else {
-			stopMusic();
-		}
-		Actor a;
-
-		for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
-			a = actor.next();
-			if (a.isActive()) {
-				try {
-					a.update();
-				} catch (Exception e) {
-					mLog.severe("Exception when updating actor no " + a.getId() + ": "
-							+ e.toString());
+			mWorld.step(1 / 60f, 12, 6);
+			Actor a;
+			for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
+				a = actor.next();
+				if (a.isActive()) {
+					try {
+						a.update();
+					} catch (Exception e) {
+						mLog.severe("Exception when updating actor no " + a.getId() + ": "
+								+ e.toString());
+					}
 				}
 			}
+
+		} else {
+			stopMusic();
 		}
 		flushActorQueue();
 	}
@@ -346,33 +413,8 @@ public class Level implements Iterable<Actor> {
 				actor.setProp(key, jsonProps.get(key));
 			}
 		}
-		File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
-		FileHandle handle;
-		if (!f.exists()) {
 
-			mLevelSave = new JSONObject();
-			handle = new FileHandle(f);
-		} else {
-			handle = Gdx.files.external(mSaveFileName);
-			String json = handle.readString();
-			if ("".equals(json))
-				json = "{}";
-			mLevelSave = new JSONObject(json);
-		}
-		if (!mLevelSave.has("HASH")) {
-			saveToLevelSave("HASH", "NT4R33LH45H");
-			saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
-		}
-		if (mLevelSave.has(getAssetKey())) {
-			JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-			for (int i = 0; i < dots.length(); i++) {
-				Actor actor = getActorById(dots.getInt(i));
-				if (actor instanceof Dot) {
-					Dot d = (Dot) actor;
-					getActorById(d.getId()).setProp("Active", 0);
-				}
-			}
-		}
+		loadFromLevelSave();
 		Game.get().getLevelView().setWorld(mWorld);
 	}
 
@@ -381,32 +423,47 @@ public class Level implements Iterable<Actor> {
 			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
 			FileHandle handle;
 			if (!f.exists()) {
-
 				mLevelSave = new JSONObject();
 				handle = new FileHandle(f);
 			} else {
 				handle = Gdx.files.external(mSaveFileName);
 				String json = handle.readString();
-				if ("".equals(json))
-					json = "{}";
-				mLevelSave = new JSONObject(json);
+				if ("".equals(json)) {
+					mLevelSave = new JSONObject();
+				} else {
+					mLevelSave = new JSONObject(json);
+				}
 			}
 			if (!mLevelSave.has("HASH")) {
 				saveToLevelSave("HASH", "NT4R33LH45H");
-				saveToLevelSave(Game.get().mStartingLevel + "Unlocked", 1);
+				JSONObject startLevel;
+				if (mLevelSave.has(Game.get().mStartingLevel)) {
+					startLevel = mLevelSave.getJSONObject(Game.get().mStartingLevel);
+				} else {
+					startLevel = new JSONObject();
+				}
+				startLevel.put("unlocked", true);
+				saveToLevelSave(Game.get().mStartingLevel, startLevel);
 			}
 			if (mLevelSave.has(getAssetKey())) {
-				JSONArray dots = mLevelSave.getJSONArray(getAssetKey());
-				for (int i = 0; i < dots.length(); i++) {
-					Actor actor = getActorById(dots.getInt(i));
-					if (actor instanceof Dot) {
-						Dot d = (Dot) actor;
-						getActorById(d.getId()).setProp("Active", 0);
-					}
+				JSONObject levelJson = mLevelSave.getJSONObject(getAssetKey());
+				if (levelJson.has("dots")) {
+					JSONArray dots = levelJson.getJSONArray("dots");
+					loadDots(dots);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}
+
+	private void loadDots(JSONArray dots) throws JSONException {
+		for (int i = 0; i < dots.length(); i++) {
+			Actor actor = getActorById(dots.getInt(i));
+			if (actor instanceof Dot) {
+				Dot d = (Dot) actor;
+				getActorById(d.getId()).setProp("Hollow", 1);
+			}
 		}
 	}
 
@@ -452,6 +509,7 @@ public class Level implements Iterable<Actor> {
 			}
 			if (a instanceof Dot) {
 				a.setProp("Active", 1);
+				a.setProp("Hollow", 0);
 			}
 			JSONObject jsonActor = new JSONObject();
 			// Save Actor class
@@ -667,11 +725,12 @@ public class Level implements Iterable<Actor> {
 	 */
 	public void dispose() {
 		saveProgress();
-		Game.get().getLevelView().getRayHandler().removeAll();
+		if (LevelView.mUseLights)
+			Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
 			a.dispose();
 		}
-	Gdx.input.setInputProcessor(Game.get().getInput());
+		Gdx.input.setInputProcessor(Game.get().getInput());
 		if (Game.get().getState() == Game.EDIT) {
 			stopMusic();
 		}
@@ -693,9 +752,14 @@ public class Level implements Iterable<Actor> {
 			} else {
 				levels = new JSONObject(json);
 			}
+			boolean unlocked = false;
 			if (levels != null && levels.has(mAssetKey)) {
-				levels.remove(mAssetKey);
+				JSONObject level = (JSONObject) levels.remove(mAssetKey);
+				if (level.has("unlocked")) {
+					unlocked = level.getBoolean("unlocked");
+				}
 			}
+			JSONObject currentLevel = new JSONObject();
 			ArrayList<Actor> actors = getActors();
 			JSONArray dotIds = new JSONArray();
 			int totalDots = 0;
@@ -703,21 +767,36 @@ public class Level implements Iterable<Actor> {
 			for (Actor a : actors) {
 				if (a instanceof Dot) {
 					totalDots++;
-					if (!a.isActive() || ((Dot) a).mTargetBlob != null) {
+					if (!a.isActive() || ((Dot) a).mTargetBlob != null
+							|| ((Dot) a).getHollow() == 1) {
 						collectedDots++;
 						dotIds.put(a.getId());
 					}
 				}
 			}
 			float percent = totalDots > 0 ? ((float) collectedDots) / totalDots : 1f;
-			levels.put(mAssetKey + "%", percent);
-			levels.put(mAssetKey, dotIds);
+			currentLevel.put("progress", percent);
+			currentLevel.put("dots", dotIds);
+			currentLevel.put("unlocked", unlocked);
+			levels.put(mAssetKey, currentLevel);
 			FileHandle handle = Gdx.files.external(mSaveFileName);
 			handle.writeString(levels.toString(), false);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public boolean musicTick() {
+		return mMusicTick % 18 == 0;
+	}
+
+	public boolean musicOffTick() {
+		return (mMusicTick + 9) % 18 == 0;
+	}
+
+	public int musicTime() {
+		return (mMusicTick % 18);
 	}
 
 	// ITERABLE INTERFACE

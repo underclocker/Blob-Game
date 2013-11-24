@@ -511,7 +511,7 @@
                 "Scale Y": "1.0",
                 "X": -0.74999905,
                 "Scale X": ".5",
-                "Texture": "hell.png"
+                "Texture": "clouds.png"
             }
         },
         {
@@ -716,7 +716,7 @@
         }
     ],
     "props": {
-        "Ambient Light": 0.3,
+        "Ambient Light": 0.2,
         "Min Camera Y": -17.066,
         "Gravity X": 0,
         "Gravity Y": -9.8,

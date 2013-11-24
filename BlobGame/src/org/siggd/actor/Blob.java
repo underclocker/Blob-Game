@@ -20,6 +20,7 @@ import org.siggd.StableContact;
 import org.siggd.Timer;
 import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
+import org.siggd.view.LevelView;
 import org.siggd.view.Sprite;
 
 import com.badlogic.gdx.Gdx;
@@ -83,8 +84,11 @@ public class Blob extends Actor implements Controllable {
 		private boolean mDrawTop = false;
 
 		public final String mCrown = "data/gfx/crown.png";
+		public final String mCatHat = "data/gfx/cat_hat.png";
+		public final String mGloveHat = "data/gfx/rubberglovehat.png";
 		public final String mHandlebarMustache = "data/gfx/handlebarmustache.png";
-		public final String mMouth = "data/gfx/mouth.png";
+
+		public ArrayList<Sprite> mHats;
 
 		public BlobDrawable(Color squishColor, Color solidColor) {
 			mSquishColor = squishColor;
@@ -92,7 +96,11 @@ public class Blob extends Actor implements Controllable {
 			mCurrentColor = new Color(mSquishColor);
 			mDestColor = new Color(mSquishColor);
 			float scale = Game.get().getLevelView().getVScale();
-			mAccessoryHat = new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown);
+			mHats = new ArrayList<Sprite>();
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mGloveHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCatHat));
+			mAccessoryHat = mHats.get(0);
 			mAccessoryMouth = new Sprite(new Vector2(), new Vector2(16 / scale, 16 / scale),
 					mHandlebarMustache);
 		}
@@ -410,7 +418,7 @@ public class Blob extends Actor implements Controllable {
 					}
 				}
 			}
-			if (mTop != null && mDrawTop) {
+			if (mTop != null && mDrawTop && mAccessoryHat != null) {
 				mAccessoryHat.mPosition = mTop;
 				mAccessoryHat.mAngle = mTopNormal.angle();
 				mAccessoryHat.drawSprite(mBatch);
@@ -565,6 +573,7 @@ public class Blob extends Actor implements Controllable {
 	public boolean mSpawning = false;
 	private Body mLeftEye;
 	private Body mRightEye;
+	private Filter mEyeFilter;
 	private Vector2 mEyeOffset = new Vector2(.15f, .05f);
 	private boolean mLastKnownDir = true;
 	private int mDirection = 0;
@@ -577,7 +586,7 @@ public class Blob extends Actor implements Controllable {
 	// density
 	private float mAccAprox = 0; // < approximates acceleration of squishy blob
 	private PointLight mLight;
-	private float mExtraGlow = 0;
+	private float mExtraGlow = -100;
 	private Color mLightColor;
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;
@@ -611,10 +620,7 @@ public class Blob extends Actor implements Controllable {
 		mOldVCenter = new Vector2();
 		mLeftEyeDest = new Vector2(0, 0);
 		mRightEyeDest = new Vector2(0, 0);
-		mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(.1f, .1f,
-				.1f, 1f), 7, -10000, -10000);
-		mLight.setSoft(true);
-		mLight.setSoftnessLenght(.5f);
+
 		mPoof = 1;
 
 		if (getLevel().getAssetKey() != null) {
@@ -625,8 +631,14 @@ public class Blob extends Actor implements Controllable {
 			((CompositeDrawable) mDrawable).mDrawables.add(mBlobDrawable);
 		}
 		makeBlobBody();
-		mLight.setActive(false);
-		mLight.attachToBody(mLeftEye, 0f, 0f);
+		if (LevelView.mUseLights) {
+			mLight = new PointLight(Game.get().getLevelView().getRayHandler(), 256, new Color(0f,
+					0f, 0f, 1f), 7, -10000, -10000);
+			mLight.setSoft(true);
+			mLight.setSoftnessLenght(.5f);
+			mLight.setActive(false);
+			mLight.attachToBody(mLeftEye, 0f, 0f);
+		}
 		mSoundTimer = new Timer();
 		mSoundTimer.setTimer(12);
 		mSoundTimer.unpause();
@@ -653,6 +665,8 @@ public class Blob extends Actor implements Controllable {
 
 		if (getLevel().getAssetKey() != null) {
 			man.load(mBlobDrawable.mCrown, Texture.class);
+			man.load(mBlobDrawable.mCatHat, Texture.class);
+			man.load(mBlobDrawable.mGloveHat, Texture.class);
 			man.load(mBlobDrawable.mHandlebarMustache, Texture.class);
 			// man.load(mBlobDrawable.mMouth, Texture.class);
 		}
@@ -890,18 +904,27 @@ public class Blob extends Actor implements Controllable {
 		eyeDelta = new Vector2(mRightEyeDest);
 		eyeDelta.sub(mRightEye.getPosition());
 		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
-
-		mLightColor.set(mBlobDrawable.mSquishColor);
 		if (mExtraGlow > 0) {
-			mExtraGlow -= .75f;
+			mExtraGlow -= .5f;
 		} else {
+			if (mExtraGlow < -.5f)
+				mExtraGlow += .5f;
 			mPointCombo = 0;
 		}
-		float brightness = .1f + (mExtraGlow / (2 * (200 + mExtraGlow)));
-		mLightColor.mul(brightness, brightness, brightness, 1f);
-		mLight.setColor(mLightColor);
-		mLight.setDistance(3f + 10f * brightness);
+		if (mLight != null) {
+			mLightColor.set(mBlobDrawable.mSquishColor);
 
+			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
+			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
+			diff *= diff;
+			brightness += .075f * diff;
+			if (brightness < 0) {
+				brightness = 0;
+			}
+			mLightColor.mul(brightness, brightness, brightness, 1f);
+			mLight.setColor(mLightColor);
+			mLight.setDistance(3f + 10f * brightness);
+		}
 		Vector2 center;
 		float rotation;
 		if (mState == SQUISH_STATE) {
@@ -1081,19 +1104,20 @@ public class Blob extends Actor implements Controllable {
 
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 			Vector2 vel;
-			float threshold = 2.8f;
+			float threshold = 3f;
 			if (mState == SQUISH_STATE) {
 				calcCenters();
 				vel = new Vector2(mVCenter);
 			} else {
-				threshold = 4f;
+				threshold = 6f;
 				vel = new Vector2(mBody.getLinearVelocity());
 			}
 			vel.sub(mOldVCenter);
 			float velLength = vel.len();
 			mAccAprox += velLength / 10f;
 			mAccAprox *= .9f;
-			if (velLength > threshold && mSoundTimer.isTriggered()) {
+			if (velLength > threshold && mSoundTimer.isTriggered()
+					&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -1102,16 +1126,15 @@ public class Blob extends Actor implements Controllable {
 					if (mState == SOLID_STATE) {
 						soundID = sound.play();
 						sound.setPitch(soundID, .5f + velLength * .0001f);
-						sound.setVolume(soundID, Math.min(1f, .7f + velLength * .002f));
+						sound.setVolume(soundID, Math.min(1f, .6f + velLength * .002f));
 					} else {
 						if (!mSpawning) {
 							soundID = sound.play();
 							sound.setPitch(soundID, 1f + velLength * .005f);
-							sound.setVolume(soundID, Math.min(1f, .7f + velLength * .005f));
+							sound.setVolume(soundID, Math.min(1f, .6f + velLength * .005f));
 						}
 					}
 				}
-
 				mSoundTimer.reset();
 			}
 			mSpawning = false;
@@ -1161,7 +1184,15 @@ public class Blob extends Actor implements Controllable {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
-			sound.setPitch(soundID, 1 + mPointCombo * .333f);
+			
+			float pitch = 0.5f;
+			for (int i = 0; i < mPointCombo; i++)
+			{
+				pitch *= 1.05946*1.05946;
+				if(i == 3 || i == 7) pitch /= 1.05946; //This makes it increase along a Major scale, the happiest scale in the universe
+			}
+			if (pitch > 1) pitch = 1;
+			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
 		mPointCombo++;
@@ -1187,7 +1218,8 @@ public class Blob extends Actor implements Controllable {
 			for (Body b : mParticles) {
 				b.setActive(false);
 			}
-			mLight.setActive(false);
+			if (mLight != null)
+				mLight.setActive(false);
 			mLeftEye.setActive(false);
 			mRightEye.setActive(false);
 		} else {
@@ -1198,7 +1230,8 @@ public class Blob extends Actor implements Controllable {
 					b.setActive(true);
 				}
 			}
-			mLight.setActive(true);
+			if (mLight != null)
+				mLight.setActive(true);
 			mLeftEye.setActive(true);
 			mRightEye.setActive(true);
 		}
@@ -1264,12 +1297,13 @@ public class Blob extends Actor implements Controllable {
 				f = b.getFixtureList().get(0);
 				f.setFilterData(filter);
 			}
-			mLight.setContactFilter((short) (2 << (int) value), (short) 0, filter.maskBits);
+			if (mLight != null)
+				mLight.setContactFilter((short) (2 << (int) value), (short) 0, filter.maskBits);
 			filter = new Filter();
 			filter.categoryBits = (short) (2 << (int) value);
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
 			mRightEye.getFixtureList().get(0).setFilterData(filter);
-
+			mEyeFilter = filter;
 			Color squishColor;
 			if (value >= 0) {
 				squishColor = COLORS[(int) (value % COLORS.length)];
@@ -1277,12 +1311,12 @@ public class Blob extends Actor implements Controllable {
 				squishColor = COLORS[0];
 			}
 
-			mLightColor = new Color();
-
-			mLightColor.set(squishColor);
-			mLightColor.mul(.1f, .1f, .1f, 1f);
-			mLight.setColor(mLightColor);
-
+			if (mLight != null) {
+				mLightColor = new Color();
+				mLightColor.set(squishColor);
+				mLight.setColor(mLightColor);
+				mLight.setDistance(0);
+			}
 			Color solidColor = new Color(squishColor);
 			solidColor.mul(.65f, .65f, .65f, 1f);
 			Drawable bd = null;
@@ -1300,7 +1334,8 @@ public class Blob extends Actor implements Controllable {
 			}
 		}
 		if (name.equals("Active")) {
-			mLight.setActive(value != 0);
+			if (mLight != null)
+				mLight.setActive(value != 0);
 		}
 		if (name.equals("Velocity X")) {
 			float yVel = mBody.getLinearVelocity().y;
@@ -1361,7 +1396,8 @@ public class Blob extends Actor implements Controllable {
 		fd.density = 1.75f;
 		fd.friction = 1f;
 		fd.filter.maskBits = (short) (0x7FFF - (2 << getmPlayerID()));
-		mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0, fd.filter.maskBits);
+		if (mLight != null)
+			mLight.setContactFilter((short) (2 << getmPlayerID()), (short) 0, fd.filter.maskBits);
 		return fd;
 	}
 
@@ -1615,6 +1651,10 @@ public class Blob extends Actor implements Controllable {
 		return mJoints;
 	}
 
+	public Filter getEyeFilter() {
+		return mEyeFilter;
+	}
+
 	/*
 	 * Makes the blob's body
 	 */
@@ -1783,8 +1823,16 @@ public class Blob extends Actor implements Controllable {
 
 	@Override
 	public void postLoad() {
-		// TODO Auto-generated method stub
-
+		if (getLevel().getAssetKey() == null)
+			return;
+		int difficulty = Convert.getInt(Game.get().getLevel().getProp("Difficulty"));
+		if (difficulty == 0) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(0);
+		} else if (difficulty == 1) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(1);
+		} else if (difficulty == 2) {
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(2);
+		}
 	}
 
 	/**

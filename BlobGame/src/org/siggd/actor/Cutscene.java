@@ -112,7 +112,7 @@ public class Cutscene extends Actor {
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 128, BodyType.StaticBody, origin, true);
 		mBody.setActive(false);
-		setProp("Texture", "blueclouds.png");
+		setProp("Texture", "intro.png");
 		setProp("Distance", (Float) 0f);
 		setProp("Scale", (Float) 1f);
 		setProp("Rotation Speed", (Float) 0f);

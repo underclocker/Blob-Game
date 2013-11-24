@@ -1,135 +1,257 @@
 {
     "actors": [
         {
-            "id": 313,
+            "id": 407,
             "class": "org.siggd.actor.Earth",
             "props": {
-                "Friction": 0.4,
+                "Angle": 78.6497,
                 "Density": 0,
-                "ID": 313,
+                "ID": 407,
                 "CollisionSound": "",
-                "Y": -9.812679
+                "Y": -15.8
             }
         },
         {
-            "id": 22,
-            "class": "org.siggd.actor.Blob",
+            "id": 406,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Active": 0,
-                "Density": 0.35,
-                "ID": 22,
+                "Angle": 348.6497,
+                "Density": 0,
+                "ID": 406,
                 "CollisionSound": "",
-                "Y": 7.2150574,
-                "X": -7.1783366
+                "Y": -15.800007
             }
         },
         {
-            "id": 23,
-            "class": "org.siggd.actor.Spawner",
+            "id": 405,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Layer": 4,
-                "Angle": 195.00003,
-                "Exit Velocity": "5",
-                "Visible": 0,
-                "ID": 23,
+                "Angle": 318.6497,
+                "Density": 0,
+                "ID": 405,
                 "CollisionSound": "",
-                "Blob Spawner": "1",
-                "Y": 6.4922233,
-                "X": -3.4886365,
-                "Rate": "45"
+                "Y": -15.800007
             }
         },
         {
-            "id": 106,
-            "class": "org.siggd.actor.Respawner",
+            "id": 404,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Target Spawner": "23",
-                "ID": 106,
+                "Angle": 288.6497,
+                "Density": 0,
+                "ID": 404,
                 "CollisionSound": "",
-                "Y": -16.92321,
-                "X": -8.782248
+                "Y": -15.800007
             }
         },
         {
-            "id": 135,
-            "class": "org.siggd.actor.Respawner",
+            "id": 403,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Target Spawner": "23",
-                "ID": 135,
+                "Angle": 228.6497,
+                "Density": 0,
+                "ID": 403,
                 "CollisionSound": "",
-                "Y": -16.867714,
-                "X": -4.7113686
+                "Y": -15.800007
             }
         },
         {
-            "id": 136,
-            "class": "org.siggd.actor.Respawner",
+            "id": 402,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Target Spawner": "23",
-                "ID": 136,
+                "Angle": 168.64969,
+                "Density": 0,
+                "ID": 402,
                 "CollisionSound": "",
-                "Y": -16.766342,
-                "X": -0.3959818
+                "Y": -15.800007
             }
         },
         {
-            "id": 137,
-            "class": "org.siggd.actor.Respawner",
+            "id": 401,
+            "class": "org.siggd.actor.Earth",
             "props": {
-                "Target Spawner": "23",
-                "ID": 137,
+                "Angle": 138.6497,
+                "Density": 0,
+                "ID": 401,
                 "CollisionSound": "",
-                "Y": -16.79409,
-                "X": 3.3236618
+                "Y": -15.800007
             }
         },
         {
-            "id": 138,
+            "id": 400,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 108.6497,
+                "Density": 0,
+                "ID": 400,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 399,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 18.649794,
+                "Density": 0,
+                "ID": 399,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 398,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 48.649696,
+                "Density": 0,
+                "ID": 398,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 397,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 198.64969,
+                "Density": 0,
+                "ID": 397,
+                "CollisionSound": "",
+                "Y": -15.799995
+            }
+        },
+        {
+            "id": 345,
+            "class": "org.siggd.actor.FadeIn",
+            "props": {
+                "ID": 345,
+                "Y": -1.9057381,
+                "X": -4.355793,
+                "Stop": "0.0"
+            }
+        },
+        {
+            "id": 315,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Lightness": ".1",
+                "Y Offset": "-3",
+                "Y Wave Angle": 0,
+                "Distance": 3,
+                "X Wave Angle": 0,
+                "Texture": "level4_1_0.png",
+                "Angle": 30,
+                "Rotation Speed": ".03",
+                "Friction": 0,
+                "ID": 315,
+                "CollisionSound": "",
+                "Scale": "6",
+                "Y": -1.8073734,
+                "Rotation": -17.209936,
+                "X": -0.030850202
+            }
+        },
+        {
+            "id": 245,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 138,
+                "ID": 245,
                 "CollisionSound": "",
-                "Y": -11.135468,
-                "X": 16.081482
+                "Y": 0.49254417,
+                "X": 17.755142
             }
         },
         {
-            "id": 139,
+            "id": 244,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 139,
+                "ID": 244,
                 "CollisionSound": "",
-                "Y": -7.165929,
-                "X": 17.191557
+                "Y": -7.612236,
+                "X": -15.274822
             }
         },
         {
-            "id": 140,
+            "id": 149,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 149,
+                "CollisionSound": "",
+                "Y": -16.861755,
+                "X": -16.557343
+            }
+        },
+        {
+            "id": 148,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 148,
+                "CollisionSound": "",
+                "Y": -10.281485,
+                "X": -13.643221
+            }
+        },
+        {
+            "id": 147,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 147,
+                "CollisionSound": "",
+                "Y": -12.316429,
+                "X": 14.568895
+            }
+        },
+        {
+            "id": 146,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 146,
+                "CollisionSound": "",
+                "Y": -16.97747,
+                "X": 13.183999
+            }
+        },
+        {
+            "id": 145,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 145,
+                "CollisionSound": "",
+                "Y": -16.831038,
+                "X": 8.779193
+            }
+        },
+        {
+            "id": 144,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 144,
+                "CollisionSound": "",
+                "Y": -16.96483,
+                "X": -12.467137
+            }
+        },
+        {
+            "id": 143,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 140,
+                "ID": 143,
                 "CollisionSound": "",
-                "Y": -3.2794113,
-                "X": 17.72384
-            }
-        },
-        {
-            "id": 141,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Angle": 90,
-                "Target Spawner": "23",
-                "ID": 141,
-                "CollisionSound": "",
-                "Ignore Non-Blobs": "1",
-                "Y": -14.978706,
-                "X": -20.586369
+                "Y": -3.445219,
+                "X": -15.353597
             }
         },
         {
@@ -146,140 +268,173 @@
             }
         },
         {
-            "id": 143,
+            "id": 141,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 143,
+                "ID": 141,
                 "CollisionSound": "",
-                "Y": -3.445219,
-                "X": -15.353597
+                "Ignore Non-Blobs": "1",
+                "Y": -15.386069,
+                "X": 16.12718
             }
         },
         {
-            "id": 144,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 144,
-                "CollisionSound": "",
-                "Y": -16.96483,
-                "X": -12.467137
-            }
-        },
-        {
-            "id": 145,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 145,
-                "CollisionSound": "",
-                "Y": -16.831038,
-                "X": 8.779193
-            }
-        },
-        {
-            "id": 146,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 146,
-                "CollisionSound": "",
-                "Y": -16.97747,
-                "X": 13.183999
-            }
-        },
-        {
-            "id": 147,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 147,
-                "CollisionSound": "",
-                "Y": -12.316429,
-                "X": 14.568895
-            }
-        },
-        {
-            "id": 148,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 148,
-                "CollisionSound": "",
-                "Y": -10.281485,
-                "X": -13.643221
-            }
-        },
-        {
-            "id": 149,
-            "class": "org.siggd.actor.Respawner",
-            "props": {
-                "Target Spawner": "23",
-                "ID": 149,
-                "CollisionSound": "",
-                "Y": -16.963594,
-                "X": -18.03403
-            }
-        },
-        {
-            "id": 244,
+            "id": 140,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 244,
+                "ID": 140,
                 "CollisionSound": "",
-                "Y": -7.612236,
-                "X": -15.274822
+                "Y": -3.2794113,
+                "X": 17.72384
             }
         },
         {
-            "id": 245,
+            "id": 139,
             "class": "org.siggd.actor.Respawner",
             "props": {
                 "Angle": 90,
                 "Target Spawner": "23",
-                "ID": 245,
+                "ID": 139,
                 "CollisionSound": "",
-                "Y": 0.49254417,
-                "X": 17.755142
+                "Y": -7.165929,
+                "X": 17.191557
             }
         },
         {
-            "id": 315,
+            "id": 138,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Angle": 90,
+                "Target Spawner": "23",
+                "ID": 138,
+                "CollisionSound": "",
+                "Y": -11.135468,
+                "X": 16.081482
+            }
+        },
+        {
+            "id": 137,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 137,
+                "CollisionSound": "",
+                "Y": -16.84501,
+                "X": 4.1893096
+            }
+        },
+        {
+            "id": 136,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 136,
+                "CollisionSound": "",
+                "Y": -16.970024,
+                "X": -0.29414082
+            }
+        },
+        {
+            "id": 135,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 135,
+                "CollisionSound": "",
+                "Y": -16.867714,
+                "X": -4.7113686
+            }
+        },
+        {
+            "id": 106,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "23",
+                "ID": 106,
+                "CollisionSound": "",
+                "Y": -16.92321,
+                "X": -8.782248
+            }
+        },
+        {
+            "id": 23,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 4,
+                "Angle": 285.00006,
+                "Exit Velocity": "4",
+                "Visible": 0,
+                "ID": 23,
+                "CollisionSound": "",
+                "Blob Spawner": "1",
+                "Y": -1.1383507,
+                "Initial Delay": "0",
+                "X": -11.9167795,
+                "Rate": "40"
+            }
+        },
+        {
+            "id": 22,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Active": 0,
+                "Density": 0.35,
+                "ID": 22,
+                "CollisionSound": "",
+                "Y": 7.2150574,
+                "X": -7.1783366
+            }
+        },
+        {
+            "id": 313,
+            "class": "org.siggd.actor.Earth",
+            "props": {
+                "Angle": 258.64972,
+                "Density": 0,
+                "ID": 313,
+                "CollisionSound": "",
+                "Y": -15.800007
+            }
+        },
+        {
+            "id": 354,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Y Offset": "-4",
+                "Lightness": ".2",
+                "Y Offset": "-3",
                 "Y Wave Angle": 0,
                 "Distance": 3,
                 "X Wave Angle": 0,
-                "Texture": "blueclouds.png",
+                "Texture": "Level1_1_0.png",
                 "Layer": 0,
                 "Rotation Speed": ".05",
                 "Friction": 0,
-                "ID": 315,
+                "ID": 354,
                 "CollisionSound": "",
-                "Scale": "8",
-                "Y": 7.487246,
-                "Rotation": 309.09805,
-                "X": -12.167363
+                "Scale": "6",
+                "Y": -1.9129425,
+                "Rotation": 194.65028,
+                "X": -2.2225864
             }
         }
     ],
     "props": {
-        "Ambient Light": 0.7,
+        "Ambient Light": 0.5,
         "Min Camera Y": "-10",
-        "Gravity X": -3,
-        "Gravity Y": -9.8,
+        "Gravity X": -2,
+        "Gravity Y": -8,
         "Puff Enabled": 1,
         "Max Camera Y": "10",
         "Parallax": "",
         "Min Camera X": "-10",
         "Max Camera X": "10",
         "SongName": "pop.ogg",
-        "Use Light": "0",
+        "Difficulty": 0,
+        "Use Light": "1",
         "Solidity Enabled": 1
     }
 }

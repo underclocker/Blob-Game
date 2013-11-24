@@ -12,6 +12,7 @@ import org.siggd.view.BodySprite;
 import org.siggd.view.DebugActorLinkDrawable;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -30,6 +31,8 @@ public class Platform extends Actor implements IObserver {
 	public int mHold;
 	public Redirector mRedirector;
 	private int mUncrushDelay;
+	private String mSoundFile = "data/sfx/blublubluh.wav";
+	private int mSoundDelay = -300;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -73,6 +76,7 @@ public class Platform extends Actor implements IObserver {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load(mSoundFile, Sound.class);
 	}
 
 	/**
@@ -84,6 +88,7 @@ public class Platform extends Actor implements IObserver {
 
 	@Override
 	public void update() {
+		mSoundDelay++;
 		// if there is input, poll it for permission to update
 		if ((mInputSrc == null || inputActive()) && mHold >= Convert.getInt(getProp("Hold Time"))) {
 			super.update();
@@ -142,6 +147,19 @@ public class Platform extends Actor implements IObserver {
 		if (mRedirector != null && mRedirector != mOldRedir) {
 			mHold = 0;
 			setProp("Hold Time", (Integer) 0);
+		}
+		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick()) {
+			if (mSoundDelay >= 0) {
+				AssetManager man = Game.get().getAssetManager();
+				Sound sound;
+				long soundID;
+				if (man.isLoaded(mSoundFile)) {
+					sound = man.get(mSoundFile, Sound.class);
+					soundID = sound.play();
+					sound.setVolume(soundID, .35f);
+					sound.setPitch(soundID, 1f);
+				}
+			}
 		}
 	}
 

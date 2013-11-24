@@ -12,11 +12,11 @@ import org.siggd.Player;
 import org.siggd.Timer;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
-import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -32,6 +32,11 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
+	private String mSoundFile = "data/sfx/blep.wav";
+	// For Spawning Offset
+	// private Vector2 spawnOffset = new Vector2(0, 1.5f);
+	// private Vector2 rotatedOffset;
+	private int mInitDelay = 0;
 
 	public Spawner(Level level, long id) {
 		super(level, id);
@@ -45,10 +50,10 @@ public class Spawner extends Actor implements IObservable {
 		mOffDrawable = (new BodySprite(mBody, origin, offTex));
 		mDrawable.mDrawables.add(mOffDrawable);
 		maxBlobs = Game.get().getNumberOfPlayers();
-		
+
 		mSpawnTimer = new Timer();
 		mSpawnTimer.unpause();
-		
+
 		mTexTimer = new Timer();
 		mTexTimer.setTimer(texChangeTime);
 		mTexTimer.unpause();
@@ -56,13 +61,17 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Blob Spawner", 0);
 		this.setProp("Rate", 60);
 		this.setProp("Exit Velocity", 2);
-		
-		mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
-		mPointLight.setDistance(1.5f);
-		mPointLight.attachToBody(mBody, 0, 0);
-		mPointLight.setSoftnessLenght(1f);
-		mPointLight.setXray(true);
-		
+		this.setProp("Initial Delay", 0);
+		this.setFriction(.1f);
+
+		if (LevelView.mUseLights) {
+			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
+			mPointLight.setDistance(1.5f);
+			mPointLight.attachToBody(mBody, 0, 0);
+			mPointLight.setSoftnessLenght(1f);
+			mPointLight.setXray(true);
+		}
+
 		setState(true);
 	}
 
@@ -71,17 +80,28 @@ public class Spawner extends Actor implements IObservable {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
 		man.load(offTex, Texture.class);
+		man.load(mSoundFile, Sound.class);
 
 	}
 
 	@Override
 	public void update() {
 		super.update();
+		if (--mInitDelay > 0)
+			return;
 		mSpawnTimer.update();
 		mTexTimer.update();
-		if (mSpawnees.size() > 0){
+		if (mSpawnees.size() > 0 && Game.get().getLevel().musicTick()) {
 			setState(true);
 			if (mSpawnTimer.isTriggered()) {
+				AssetManager man = Game.get().getAssetManager();
+				Sound sound;
+				long soundID;
+				if (man.isLoaded(mSoundFile) && !"earth".equals(Game.get().getLevel().getAssetKey())) {
+					sound = man.get(mSoundFile, Sound.class);
+					soundID = sound.play();
+					sound.setVolume(soundID, .75f);
+				}
 				spawnActor();
 				mSpawnTimer.reset();
 				mTexTimer.reset();
@@ -97,6 +117,7 @@ public class Spawner extends Actor implements IObservable {
 
 	@Override
 	public void postLoad() {
+		mInitDelay = Convert.getInt(getProp("Initial Delay"));
 		if ("earth".equals(Game.get().getLevel().getAssetKey())) {
 			maxBlobs = 8;
 		}
@@ -127,15 +148,11 @@ public class Spawner extends Actor implements IObservable {
 					}
 				}
 			}
-			if (mSpawnees.size() > 0 && mSpawnees.get(0) instanceof Blob) {
-				spawnActor();
-			}
 		}
 
 		LevelView lv = Game.get().getLevelView();
 
-		if (mLevel.getAssetKey() != null
-				&& Convert.getInt(this.getProp("Blob Spawner")) == 1) {
+		if (mLevel.getAssetKey() != null && Convert.getInt(this.getProp("Blob Spawner")) == 1) {
 			lv.setCameraPosition(mBody.getPosition());
 			if (Game.get().getState() != Game.MENU) {
 				lv.positionCamera(false);
@@ -146,23 +163,24 @@ public class Spawner extends Actor implements IObservable {
 	private Blob spawnBlob(int id) {
 		Blob blob = new Blob(this.getLevel(), this.getLevel().getId());
 		blob.setProp("Player ID", id);
+		blob.postLoad();
 		// assign blob to player
 		blob.setActive(false);
 		// set the layer to the layer of the placeholder blob
-		int layer = Convert.getInt(mLevel.getBlobs(false).get(0)
-				.getProp("Layer"));
+		int layer = Convert.getInt(mLevel.getBlobs(false).get(0).getProp("Layer"));
 		blob.setProp("Layer", (Integer) layer);
 		mSpawnees.add((int) Math.floor(Math.random() * mSpawnees.size()), blob);
 		return blob;
 	}
 
-	public void addToSpawn(Actor a) {
+	public void addToSpawn(Actor a, int delay) {
 		if (!mSpawnees.contains(a)) {
 			if (a.isActive()) {
 				a.setActive(false);
 			}
 			if (mSpawnees.size() == 0) {
-				mSpawnTimer.reset();
+				mSpawnTimer.unpause();
+				mSpawnTimer.mCurTime = -delay;
 			}
 			mSpawnees.add(a);
 		}
@@ -175,7 +193,11 @@ public class Spawner extends Actor implements IObservable {
 				this.getLevel().addActor(spawnee);
 			}
 		}
-		Vector2 pos = mBody.getPosition();
+
+		// For Spawning Offset
+		// Vector2 pos = new Vector2(getX() + rotatedOffset.x, getY() +
+		// rotatedOffset.y);
+		Vector2 pos = mBody.getPosition().cpy();
 		spawnee.setProp("X", pos.x);
 		spawnee.setProp("Y", pos.y);
 		spawnee.setProp("Angle", mBody.getAngle());
@@ -186,7 +208,7 @@ public class Spawner extends Actor implements IObservable {
 		spawnee.setActive(true);
 		// spawner defaults facing up, hence: (0,1)
 		Vector2 vel = new Vector2(0, Convert.getInt(getProp("Exit Velocity")));
-		vel.rotate(Convert.getDegrees(mBody.getAngle())+(float)(10f*Math.random()-5f));
+		vel.rotate(Convert.getDegrees(mBody.getAngle()) + (float) (10f * Math.random() - 5f));
 		spawnee.setVelocityX(vel.x);
 		spawnee.setVelocityY(vel.y);
 		if (spawnee instanceof Blob) {
@@ -217,7 +239,8 @@ public class Spawner extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
-		mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, 0.8f);
+		if (mPointLight != null)
+			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, 0.8f);
 		if (state == mState)
 			return;
 		if (state) {
@@ -239,6 +262,12 @@ public class Spawner extends Actor implements IObservable {
 		if (name.equals("Rate")) {
 			mSpawnTimer.setTimer(Convert.getInt(val));
 		}
+
+		// For Spawning Offset
+		// if (name.equals("Angle")) {
+		// rotatedOffset = spawnOffset.cpy().rotate(Convert.getFloat(val));
+		// }
+
 		super.setProp(name, val);
 	}
 }

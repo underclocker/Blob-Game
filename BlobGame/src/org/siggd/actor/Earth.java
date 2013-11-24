@@ -44,10 +44,10 @@ public class Earth extends Actor implements IObserver {
 		mName = "earth";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
-		mBody = makeBody(mName, 4096, BodyType.KinematicBody, origin, false);
+		mBody = makeBody(mName, 512, BodyType.KinematicBody, origin, false);
 		mDrawable.mDrawables.add(new BodySprite(mBody, origin, mTex));
-		setProp("Friction", (Float) .5f);
-		mBody.setAngularVelocity(.23f);
+		setProp("Friction", (Float) .4f);
+		mBody.setAngularVelocity(.21f);
 	}
 
 	public boolean inputActive() {

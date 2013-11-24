@@ -86,10 +86,6 @@ public class ConveyorBelt extends Actor {
 
 		mBox = mBody.createFixture(fd);
 
-		setProp("Friction", 0f);
-
-		setProp("Speed", (Float) .5f);
-
 		frame = new BodySprite(mBody, origin, mTex);
 		((CompositeDrawable) mDrawable).mDrawables.add(frame);
 		mAnimation = new Animation(mBody, origin);
@@ -97,7 +93,8 @@ public class ConveyorBelt extends Actor {
 
 		mAnimation.setCurFrame(((Double) (Math.random() * 4)).intValue());
 		setProp("Anticlockwise", (Integer) 1);
-
+		setProp("Speed", (Float) .5f);
+		setProp("Friction", 0f);
 	}
 
 	/**
@@ -178,11 +175,10 @@ public class ConveyorBelt extends Actor {
 		}
 	}
 
-	
 	@Override
 	public void setProp(String name, Object val) {
-		if ("Anticlockwise".equals(name)){
-			if ((Convert.getInt(val)) == 0){
+		if ("Anticlockwise".equals(name)) {
+			if ((Convert.getInt(val)) == 0) {
 				mAnimation.clearFrames();
 				mAnimation.addFrame("data/gfx/conveyor0000.png");
 				mAnimation.addFrame("data/gfx/conveyor0001.png");
@@ -195,9 +191,12 @@ public class ConveyorBelt extends Actor {
 				mAnimation.addFrame("data/gfx/conveyor0001.png");
 				mAnimation.addFrame("data/gfx/conveyor0000.png");
 			}
+		} else if ("Speed".equals(name)) {
+			mAnimation.mTicksPerFrame = (int) Math.round(3 / Convert.getFloat(val));
 		}
 		super.setProp(name, val);
 	}
+
 	/**
 	 * Dispose of the actor's resources
 	 */

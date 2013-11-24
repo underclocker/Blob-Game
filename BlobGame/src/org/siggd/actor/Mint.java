@@ -34,7 +34,7 @@ public class Mint extends Actor {
 	 */
 	public Mint(Level level, long id) {
 		super(level, id);
-		mName = "Mint";
+		mName = "lightbulb";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 32, BodyType.DynamicBody, origin, true);

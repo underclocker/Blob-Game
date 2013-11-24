@@ -91,7 +91,6 @@ public class Timer {
 	 * Updates the timer
 	 */
 	public void update() {
-
 		if (!mIsPaused && ++mCurTime >= mTrigTime && mTrig != null) {
 			mTrig.trigger();
 		}

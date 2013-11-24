@@ -3,6 +3,7 @@ package org.siggd.actor;
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
+import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
 import org.siggd.view.DebugActorLinkDrawable;
 
@@ -12,7 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class AndGate extends Actor {
+public class AndGate extends Actor implements IObservable {
 	private String mTex;
 	private boolean mPropagate;
 	private int mPropagateVal;
@@ -47,14 +48,14 @@ public class AndGate extends Actor {
 		Actor A = mLevel.getActorById(Convert.getInt(getProp("Input A")));
 		Actor B = mLevel.getActorById(Convert.getInt(getProp("Input B")));
 		if (A != null) {
-			out &= Convert.getInt(A.getProp("Output")) == 1;
+			out &= (Boolean)((IObservable)A).observe();
 		}
 		if (B != null) {
-			out &= Convert.getInt(B.getProp("Output")) == 1;
+			out &= (Boolean)((IObservable)B).observe();
 		}
+		mPropagate = out;
 		int tempVal = out ? 1 : 0;
 		if (mPropagateVal != tempVal) {
-			mPropagate = true;
 			mPropagateVal = tempVal;
 		}
 
@@ -62,11 +63,6 @@ public class AndGate extends Actor {
 
 	@Override
 	public void update() {
-		if (mPropagate) {
-			// creates a propagation delay
-			setProp("Output", (Integer) mPropagateVal);
-			mPropagate = false;
-		}
 		andInput();
 	}
 
@@ -86,6 +82,12 @@ public class AndGate extends Actor {
 	public void postLoad() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Object observe() {
+		// TODO Auto-generated method stub
+		return mPropagate;
 	}
 
 }

@@ -41,7 +41,7 @@ public class BattleBall extends Actor {
 	 */
 	public BattleBall(Level level, long id) {
 		super(level, id);
-		mName = "BattleBall";
+		mName = "lightbulb";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 256, BodyType.DynamicBody, origin, false);
