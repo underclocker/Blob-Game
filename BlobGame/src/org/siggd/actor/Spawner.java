@@ -32,7 +32,7 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
-	private String mSoundFile = "data/sfx/blep.wav";
+	private String mSoundFile = "data/sfx/spawn.wav";
 	// For Spawning Offset
 	// private Vector2 spawnOffset = new Vector2(0, 1.5f);
 	// private Vector2 rotatedOffset;
@@ -100,7 +100,7 @@ public class Spawner extends Actor implements IObservable {
 				if (man.isLoaded(mSoundFile) && !"earth".equals(Game.get().getLevel().getAssetKey())) {
 					sound = man.get(mSoundFile, Sound.class);
 					soundID = sound.play();
-					sound.setVolume(soundID, .75f);
+					sound.setVolume(soundID, .45f);
 				}
 				spawnActor();
 				mSpawnTimer.reset();
