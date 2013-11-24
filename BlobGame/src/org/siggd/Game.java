@@ -56,7 +56,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
+	public final static boolean UNLOCKED = false;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
 	public static float FPSREC = 60;
@@ -377,7 +377,7 @@ public class Game implements ApplicationListener {
 		}
 		float avg = total / (mRenderTimeHistory.size() * 1000.0f);
 		avg /= 1000000.0f;
-		System.out.println(1 / avg);
+		System.out.println("fps: " + (1.0f / avg));
 		FPSREC = 1 / avg;
 		mProfileFinished = true;
 	}
