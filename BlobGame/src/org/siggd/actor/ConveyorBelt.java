@@ -93,7 +93,7 @@ public class ConveyorBelt extends Actor {
 		frame = new BodySprite(mBody, origin, mTex);
 		((CompositeDrawable) mDrawable).mDrawables.add(frame);
 		mAnimation = new Animation(mBody, origin);
-		mAnimation.mTicksPerFrame = 4;
+		mAnimation.mTicksPerFrame = 5;
 
 		mAnimation.setCurFrame(((Double) (Math.random() * 4)).intValue());
 		setProp("Anticlockwise", (Integer) 1);
