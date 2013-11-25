@@ -351,7 +351,7 @@ public class Blob extends Actor implements Controllable {
 			shapeRender.begin(ShapeType.Line);
 			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
 
-			float lineWidth = 4 / (120 * Game.get().getLevelView().getScale());
+			float lineWidth = 3 / (120 * Game.get().getLevelView().getScale());
 
 			lineWidth *= Math.min(Gdx.graphics.getWidth() / LevelView.vWIDTH,
 					Gdx.graphics.getHeight() / LevelView.vHEIGHT);
