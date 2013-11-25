@@ -1122,7 +1122,9 @@ public class Blob extends Actor implements Controllable {
 			mAccAprox += velLength / 10f;
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()
-					&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
+					&& !"earth".equals(Game.get().getLevel().getAssetKey())
+					
+					) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -1425,6 +1427,9 @@ public class Blob extends Actor implements Controllable {
 
 	public void transform() {
 		AssetManager man = Game.get().getAssetManager();
+		if("earth".equals(Game.get().getLevel().getAssetKey())
+		|| "opening".equals(Game.get().getLevel().getAssetKey())) return; //TODO add cutscenes here
+		
 		Sound sound;
 		long soundID;
 		if (mState == SQUISH_STATE) {

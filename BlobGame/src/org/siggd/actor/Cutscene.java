@@ -66,22 +66,27 @@ public class Cutscene extends Actor {
 			Vector2 pos = lv.getCameraPosition();
 			Vector2 offset = center.cpy().sub(pos);
 
-			if (frame > Convert.getFloat(getProp("Start"))
-					&& frame < Convert.getFloat(getProp("End"))) {
-				alpha += .0075f;
-				if (alpha > 1) {
-					alpha = 1;
+			
+			if(Game.get().getState() == Game.PLAY)
+			{
+				if (frame > Convert.getFloat(getProp("Start"))
+						&& frame < Convert.getFloat(getProp("End"))) {
+					alpha += .0075f;
+					if (alpha > 1) {
+						alpha = 1;
+					}
+				} else {
+					alpha -= .0075f;
+					if (alpha < 0) {
+						alpha = 0;
+					}
 				}
-			} else {
-				alpha -= .0075f;
-				if (alpha < 0) {
-					alpha = 0;
+				if (frame > Convert.getFloat(getProp("Start"))) {
+					xpan += Convert.getFloat(getProp("X Pan"));
+					ypan += Convert.getFloat(getProp("Y Pan"));
+					zpan += Convert.getFloat(getProp("Z Pan"));
 				}
-			}
-			if (frame > Convert.getFloat(getProp("Start"))) {
-				xpan += Convert.getFloat(getProp("X Pan"));
-				ypan += Convert.getFloat(getProp("Y Pan"));
-				zpan += Convert.getFloat(getProp("Z Pan"));
+				
 			}
 			pos.x += xpan;
 			pos.y += ypan;
