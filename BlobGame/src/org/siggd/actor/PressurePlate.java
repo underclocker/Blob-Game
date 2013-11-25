@@ -74,7 +74,6 @@ public class PressurePlate extends Actor implements IObservable {
 
 	@Override
 	public void update() {
-		if(mRestTime > 0) mRestTime--;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		ArrayList<Body> bodies = (ArrayList<Body>) ContactHandler.getBodies(contacts);
@@ -99,7 +98,6 @@ public class PressurePlate extends Actor implements IObservable {
 				break;
 			}
 		}
-
 		setState(active);
 	}
 
@@ -126,17 +124,18 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	public boolean getState() {
-		return mState;
+		return mState && mRestTime <= 0;
 	}
 
 	private void setState(boolean state) {
-		
-		if(mRestTime > 0) return;
-		mRestTime = mDelay;
 		if (mPointLight != null)
 			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
-		if (state == mState)
+		if (state == mState) {
+			mRestTime--;
 			return;
+		} else {
+			mRestTime = mDelay;
+		}
 		if (state) {
 			mDrawable.mDrawables.remove(mDefaultDrawable);
 			mDrawable.mDrawables.add(mActiveDrawable);
@@ -145,6 +144,7 @@ public class PressurePlate extends Actor implements IObservable {
 			mDrawable.mDrawables.add(mDefaultDrawable);
 		}
 		mState = state;
+
 	}
 
 	private boolean mState = false; // This value MUST only be modified through

@@ -306,7 +306,7 @@ public class LevelView {
 		}
 
 		if (mRayHandler != null && Convert.getInt(Game.get().getLevel().getProp("Use Light")) != 0
-				&& Game.FPSREC > 25) {
+				&& Game.FPSREC > 40) {
 			mRayHandler.updateAndRender();
 		}
 

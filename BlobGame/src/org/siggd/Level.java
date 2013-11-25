@@ -20,7 +20,6 @@ import org.siggd.actor.meta.ActorEnum;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -55,7 +54,7 @@ public class Level implements Iterable<Actor> {
 	private float mVolume = 0.5f;
 
 	float mCurrentVolume = 0f;
-	private float mFadeRate = 0.01f;
+	private float mFadeRate = 0.03f;
 	private int mMusicTick = 0;
 
 	Music mMusic;
@@ -141,7 +140,6 @@ public class Level implements Iterable<Actor> {
 		// Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
-
 			String musicPath = "data/mus/" + (String) getProp("SongName");
 			try {
 				if (nMusic == null) {
@@ -203,8 +201,8 @@ public class Level implements Iterable<Actor> {
 				nMusic = null;
 			}
 		} else if (mMusic != null) {
-			//mCurrentVolume = mVolume;
-			mCurrentVolume += mFadeRate;
+			mCurrentVolume = mVolume;
+			//mCurrentVolume += mFadeRate;
 			if(mCurrentVolume >= mVolume) mCurrentVolume = mVolume;
 			if (!mMusic.isPlaying()) {
 				mMusic.play();
