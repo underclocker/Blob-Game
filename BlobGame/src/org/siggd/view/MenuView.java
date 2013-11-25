@@ -132,6 +132,11 @@ public class MenuView {
 
 		mStage.addActor(mMainTable);
 
+		final TextButton raceButton = new TextButton(" Race Mode ", mSkin);
+		mMainTable.add(raceButton);
+		raceButton.addListener(mRaceMode);
+		raceButton.addListener(mClickListener);
+
 		final TextButton campaignButton = new TextButton(" Campaign ", mSkin);
 		mMainTable.add(campaignButton);
 		campaignButton.addListener(mStartCampaign);
@@ -229,7 +234,8 @@ public class MenuView {
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		button.getButton().addListener(mClickListener);
+		button.getButton().addListener(mClickListener);
+
 		button = mLevel1.get("level3");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
@@ -376,8 +382,8 @@ public class MenuView {
 		Image baseImage = new Image(t);
 		baseImage.setColor(1, 1, 1, 0.75f);
 		mBaseCustomizeTable.add(baseImage);
-		//mBaseCustomizeTable.align(Align.top);
-		//mCustomizeTable.align(Align.top);
+		// mBaseCustomizeTable.align(Align.top);
+		// mCustomizeTable.align(Align.top);
 	}
 
 	private void createControllerMenu() {
@@ -886,6 +892,13 @@ public class MenuView {
 		}
 	};
 
+	private final ChangeListener mRaceMode = new ChangeListener() {
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			mSelectedLevel = "gen";
+			setMenu(CUSTOMIZE);		}
+	};
+
 	private final ChangeListener mExit = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
@@ -954,7 +967,6 @@ public class MenuView {
 			mMenuController.setTable(mLevelsTable);
 			mMenuController.setIndex(1);
 		} else if (CUSTOMIZE.equals(menu)) {
-
 			mSpawnPos.clear();
 
 			mSpawnPos.add(new Vector2(-6.0547f, -2.0357f));
