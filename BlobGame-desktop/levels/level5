@@ -1,12 +1,51 @@
 {
     "actors": [
         {
-            "id": 3757,
-            "class": "org.siggd.actor.JiggleBall",
+            "id": 4255,
+            "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "ID": 3757,
-                "Y": 13.133097,
-                "X": 14.365369
+                "Orbit X": "20.5",
+                "ID": 4255,
+                "Orbit Y": "12.5",
+                "Rotation Speed (deg)": "-.5",
+                "Y": 15.00014,
+                "X": 19.793913
+            }
+        },
+        {
+            "id": 4254,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "20.5",
+                "ID": 4254,
+                "Orbit Y": "12.5",
+                "Rotation Speed (deg)": "-.5",
+                "Y": 14.183103,
+                "X": 22.634144
+            }
+        },
+        {
+            "id": 4253,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "20.5",
+                "ID": 4253,
+                "Orbit Y": "12.5",
+                "Rotation Speed (deg)": "-.5",
+                "Y": 12.796833,
+                "X": 17.902876
+            }
+        },
+        {
+            "id": 4095,
+            "class": "org.siggd.actor.ConveyorBelt",
+            "props": {
+                "Angle": 5,
+                "Speed": "1.75",
+                "ID": 4095,
+                "Y": 12.233096,
+                "X": 14.805364,
+                "Anticlockwise": "0"
             }
         },
         {
@@ -121,16 +160,6 @@
                 "ID": 3593,
                 "Y": -12.542132,
                 "X": 17.245377
-            }
-        },
-        {
-            "id": 3414,
-            "class": "org.siggd.actor.PoofSign",
-            "props": {
-                "Layer": 0,
-                "ID": 3414,
-                "Y": 13.579521,
-                "X": 8.839725
             }
         },
         {
@@ -423,8 +452,8 @@
             "id": 1964,
             "class": "org.siggd.actor.BlobLaser",
             "props": {
-                "Angle": 180,
                 "Active": 1,
+                "Angle": 180,
                 "Visible": 1,
                 "ID": 1964,
                 "Y": -7.3255067,
@@ -628,8 +657,8 @@
             "id": 1833,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -792,19 +821,6 @@
                 "Y": 6.529161,
                 "Return Target": "1722",
                 "X": 20.170952
-            }
-        },
-        {
-            "id": 1444,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Collision Sound": "barrel.wav",
-                "Body": "BigBarrelTopView",
-                "Collision Threshold": 3.25,
-                "ID": 1444,
-                "Y": 10.282439,
-                "X": 19.202967,
-                "Collision Pitch": 1.15
             }
         },
         {
@@ -1320,8 +1336,8 @@
             "id": 1835,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
@@ -1689,22 +1705,10 @@
             "class": "org.siggd.actor.SpotLight",
             "props": {
                 "Angle": -45,
-                "Distance": "8",
+                "Distance": "12",
                 "ID": 3759,
-                "Y": 17.423098,
-                "X": 5.095369,
-                "Cone Angle": "30"
-            }
-        },
-        {
-            "id": 3760,
-            "class": "org.siggd.actor.SpotLight",
-            "props": {
-                "Angle": 225,
-                "Distance": "8",
-                "ID": 3760,
-                "Y": 17.263098,
-                "X": 12.655369,
+                "Y": 17.043093,
+                "X": 14.765368,
                 "Cone Angle": "30"
             }
         },
@@ -1762,6 +1766,39 @@
                 "Orbit Y": "-15.8",
                 "Y": -14.944913,
                 "X": 22.230633
+            }
+        },
+        {
+            "id": 4257,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 4257,
+                "Y": 12.5,
+                "X": 20.5
+            }
+        },
+        {
+            "id": 4258,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "20.5",
+                "ID": 4258,
+                "Orbit Y": "12.5",
+                "Rotation Speed (deg)": "-.5",
+                "Y": 10.326834,
+                "X": 19.432877
+            }
+        },
+        {
+            "id": 4259,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "20.5",
+                "ID": 4259,
+                "Orbit Y": "12.5",
+                "Rotation Speed (deg)": "-.5",
+                "Y": 10.926833,
+                "X": 22.362875
             }
         }
     ],
