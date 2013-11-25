@@ -33,6 +33,7 @@
             "class": "org.siggd.actor.BouncePlate",
             "props": {
                 "ID": 5736,
+                "Stroke Length": "9.0",
                 "Y": -2.9937174,
                 "X": 29.531214
             }
@@ -949,7 +950,6 @@
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
                 "Speed": "1",
-                "ID": 11,
                 "CollisionSound": "",
                 "Y": 11.468357,
                 "X": 1.8379202,
@@ -1563,35 +1563,35 @@
             "id": 5601,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "30.7",
+                "Orbit X": "31",
                 "ID": 5601,
-                "Orbit Y": "-1.2",
+                "Orbit Y": "-0.74",
                 "Rotation Speed (deg)": "0.6",
-                "Y": -2.1180356,
-                "X": 30.696743
+                "Y": -1.6055354,
+                "X": 31.009243
             }
         },
         {
             "id": 5602,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "30.7",
+                "Orbit X": "31",
                 "ID": 5602,
-                "Orbit Y": "-1.2",
-                "Y": -1.2,
-                "X": 30.7
+                "Orbit Y": "-0.74",
+                "Y": -0.74,
+                "X": 31
             }
         },
         {
             "id": 5603,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "30.7",
+                "Orbit X": "31",
                 "ID": 5603,
-                "Orbit Y": "-1.2",
+                "Orbit Y": "-0.74",
                 "Rotation Speed (deg)": "0.6",
-                "Y": -0.3046327,
-                "X": 30.682903
+                "Y": 0.19536754,
+                "X": 31.007902
             }
         },
         {
@@ -1599,8 +1599,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 5746,
-                "Y": 0.5266696,
-                "X": 30.668272
+                "Y": 0.9266696,
+                "X": 30.993273
             }
         },
         {
