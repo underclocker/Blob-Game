@@ -351,7 +351,7 @@ public class Blob extends Actor implements Controllable {
 			shapeRender.begin(ShapeType.Line);
 			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
 
-			float lineWidth = 3 / (120*Game.get().getLevelView().getScale());
+			float lineWidth = 3 / (120 * Game.get().getLevelView().getScale());
 
 			for (int i = 0; i < vertices.size(); i++) {
 				Vector2 v1;
@@ -432,7 +432,9 @@ public class Blob extends Actor implements Controllable {
 				} else {
 					mAccessoryMouth.mAngle = rotation;
 				}
-				// mAccessoryMouth.drawSprite(mBatch);
+				Player p = Game.get().getPlayer(getmPlayerID());
+				if (p != null && p.mustache)
+					mAccessoryMouth.drawSprite(mBatch);
 			}
 		}
 
@@ -1184,14 +1186,17 @@ public class Blob extends Actor implements Controllable {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
 			sound.setVolume(soundID, .5f);
-			
+
 			float pitch = 1.0f;
-			for (int i = 0; i < mPointCombo; i++)
-			{
-				pitch *= 1.05946*1.05946;
-				if(i == 3 || i == 7) pitch /= 1.05946; //This makes it increase along a Major scale, the happiest scale in the universe
+			for (int i = 0; i < mPointCombo; i++) {
+				pitch *= 1.05946 * 1.05946;
+				if (i == 3 || i == 7)
+					pitch /= 1.05946; // This makes it increase along a Major
+										// scale, the happiest scale in the
+										// universe
 			}
-			if (pitch > 2) pitch = 2;
+			if (pitch > 2)
+				pitch = 2;
 			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
