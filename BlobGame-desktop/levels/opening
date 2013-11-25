@@ -1,31 +1,14 @@
 {
     "actors": [
         {
-            "id": 3,
-            "class": "org.siggd.actor.Blob",
+            "id": 11,
+            "class": "org.siggd.actor.Teleport",
             "props": {
-                "Active": 0,
-                "Density": 0.35,
-                "ID": 3,
-                "CollisionSound": "",
-                "Y": 15.514525,
-                "X": 18.048384
-            }
-        },
-        {
-            "id": 2,
-            "class": "org.siggd.actor.Spawner",
-            "props": {
-                "Layer": 4,
-                "Exit Velocity": "10",
-                "Angle": 180,
-                "Friction": 0.2,
-                "ID": 2,
-                "Blob Spawner": "1",
-                "CollisionSound": "",
-                "Y": 6.7330284,
-                "X": 19.470474,
-                "Rate": 30
+                "ID": 11,
+                "Timer": "810",
+                "Level": "level1",
+                "Y": 4.8766103,
+                "X": 22.317835
             }
         },
         {
@@ -47,14 +30,31 @@
             }
         },
         {
-            "id": 11,
-            "class": "org.siggd.actor.Teleport",
+            "id": 2,
+            "class": "org.siggd.actor.Spawner",
             "props": {
-                "ID": 11,
-                "Timer": "810",
-                "Level": "level1",
-                "Y": 4.8766103,
-                "X": 22.317835
+                "Layer": 4,
+                "Exit Velocity": "10",
+                "Angle": 180,
+                "Friction": 0.2,
+                "ID": 2,
+                "Blob Spawner": "1",
+                "CollisionSound": "",
+                "Y": 6.7330284,
+                "X": 19.470474,
+                "Rate": 30
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Active": 0,
+                "Density": 0.35,
+                "ID": 3,
+                "CollisionSound": "",
+                "Y": 15.514525,
+                "X": 18.048384
             }
         }
     ],
@@ -68,7 +68,7 @@
         "Parallax": "",
         "Min Camera X": "-8",
         "Max Camera X": "8",
-        "SongName": "",
+        "SongName": "drumdrum.ogg",
         "Difficulty": 0,
         "Use Light": "0",
         "Solidity Enabled": "0"
