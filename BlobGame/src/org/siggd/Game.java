@@ -226,12 +226,13 @@ public class Game implements ApplicationListener {
 				mMenuView.setMenu(MenuView.LOADING);
 				mHackishLoader.add("level1");
 				mHackishLoader.add("level2");
+				mHackishLoader.add("charselect");
 				mHackishLoader.add("level3");
 				mHackishLoader.add("level4");
 				mHackishLoader.add("level5");
+				mHackishLoader.add("opening");
 				mHackishLoader.add("level7");
 				mHackishLoader.add("level8");
-				mHackishLoader.add("charselect");
 				mHackishLoader.add("earth");
 
 				mLoaderMax = mHackishLoader.size();
