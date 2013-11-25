@@ -27,6 +27,8 @@ public class PressurePlate extends Actor implements IObservable {
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private PointLight mPointLight;
+	private int mRestTime = 0;
+	private int mDelay = 8;
 
 	public PressurePlate(Level level, long id) {
 		super(level, id);
@@ -72,6 +74,7 @@ public class PressurePlate extends Actor implements IObservable {
 
 	@Override
 	public void update() {
+		if(mRestTime > 0) mRestTime--;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		ArrayList<Body> bodies = (ArrayList<Body>) ContactHandler.getBodies(contacts);
@@ -127,6 +130,9 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
+		
+		if(mRestTime > 0) return;
+		mRestTime = mDelay;
 		if (mPointLight != null)
 			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
 		if (state == mState)
