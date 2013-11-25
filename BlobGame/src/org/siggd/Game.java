@@ -505,6 +505,9 @@ public class Game implements ApplicationListener {
 		if ("earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
 			assessFramerate();
 		}
+		boolean genMap = "gen".equals(fileName);
+		if (genMap)
+			fileName = "base";
 		Music music = null;
 		String song = null;
 		float vol = mLevel.mCurrentVolume;
@@ -514,7 +517,6 @@ public class Game implements ApplicationListener {
 			music = mLevel.mMusic;
 			song = (String) mLevel.mProps.get("SongName");
 		}
-
 		if (mLevel != null && mLevel.getAssetKey() != null) {
 			mAssetManager.unload(mLevel.getAssetKey());
 		}
@@ -525,7 +527,6 @@ public class Game implements ApplicationListener {
 		if (Game.get().getEditor() != null) {
 			getEditor().updateWorldProperties();
 		}
-
 		// Finish loading the map
 		mAssetManager.finishLoading();
 
