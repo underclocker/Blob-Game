@@ -1,6 +1,169 @@
 {
     "actors": [
         {
+            "id": 220,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 220,
+                "Level": "gen",
+                "Y": 13.7056265,
+                "X": 66.570465
+            }
+        },
+        {
+            "id": 219,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 219,
+                "Level": "gen",
+                "Y": 12.6609335,
+                "X": 66.61225
+            }
+        },
+        {
+            "id": 218,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 218,
+                "Level": "gen",
+                "Y": 11.588383,
+                "X": 66.66797
+            }
+        },
+        {
+            "id": 217,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 217,
+                "Level": "gen",
+                "Y": 10.55762,
+                "X": 66.66797
+            }
+        },
+        {
+            "id": 216,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 216,
+                "Level": "gen",
+                "Y": 9.538433,
+                "X": 66.67942
+            }
+        },
+        {
+            "id": 215,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 215,
+                "Level": "gen",
+                "Y": 8.47344,
+                "X": 66.66797
+            }
+        },
+        {
+            "id": 214,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 214,
+                "Level": "gen",
+                "Y": 7.454253,
+                "X": 66.69087
+            }
+        },
+        {
+            "id": 213,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 213,
+                "Level": "gen",
+                "Y": 6.4236145,
+                "X": 66.702324
+            }
+        },
+        {
+            "id": 212,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 212,
+                "Level": "gen",
+                "Y": 5.34717,
+                "X": 66.73668
+            }
+        },
+        {
+            "id": 211,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 211,
+                "Level": "gen",
+                "Y": 4.3394346,
+                "X": 66.72523
+            }
+        },
+        {
+            "id": 210,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 210,
+                "Level": "gen",
+                "Y": 3.3344293,
+                "X": 66.75818
+            }
+        },
+        {
+            "id": 209,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 209,
+                "Level": "gen",
+                "Y": 2.3376617,
+                "X": 66.766426
+            }
+        },
+        {
+            "id": 208,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 208,
+                "Level": "gen",
+                "Y": 1.3244189,
+                "X": 66.79114
+            }
+        },
+        {
+            "id": 207,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 207,
+                "Level": "gen",
+                "Y": 0.3194138,
+                "X": 66.79114
+            }
+        },
+        {
+            "id": 206,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 206,
+                "Level": "gen",
+                "Y": -0.6938291,
+                "X": 66.81585
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Active": 0,
+                "Player ID": "-1",
+                "Density": 0.35,
+                "ID": 3,
+                "CollisionSound": "",
+                "Y": 8.586906,
+                "X": -3.2155564
+            }
+        },
+        {
             "id": 2,
             "class": "org.siggd.actor.Spawner",
             "props": {
@@ -11,20 +174,470 @@
                 "ID": 2,
                 "Blob Spawner": "1",
                 "CollisionSound": "",
-                "Y": 8,
+                "Y": 8.008755,
                 "Rate": "18"
             }
         },
         {
-            "id": 3,
-            "class": "org.siggd.actor.Blob",
+            "id": 5,
+            "class": "org.siggd.actor.Background",
             "props": {
-                "Active": 0,
-                "Density": 0.35,
-                "ID": 3,
-                "CollisionSound": "",
-                "Y": 15.514525,
-                "X": 18.048384
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 5,
+                "Y": 9,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 8,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 8,
+                "Y": 8.3,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 9,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 9,
+                "Y": 7.6,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 10,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 10,
+                "Y": 6.9,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 11,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 11,
+                "Y": 6.2,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 12,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 12,
+                "Y": 5.5,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 13,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 13,
+                "Y": 4.8,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 14,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 14,
+                "Y": 4.1,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 15,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 15,
+                "Y": 3.4,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 16,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 16,
+                "Y": 2.7,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 17,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 17,
+                "Y": 2,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 18,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 18,
+                "Y": 1.3,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 19,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 19,
+                "Y": 0.6,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 20,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 20,
+                "Y": -0.1,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 21,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 21
+            }
+        },
+        {
+            "id": 39,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 39,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.7947469,
+                "X": 0.45525408
+            }
+        },
+        {
+            "id": 40,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 40,
+                "Y": -0.78287923,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 41,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 41,
+                "Y": -1.3869653,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 42,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 42,
+                "Y": -2.0523348,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 43,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 43,
+                "Y": -2.7001946,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 44,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "Friction": 0.3,
+                "ID": 44,
+                "Y": -3.3568094,
+                "X": -1.5
+            }
+        },
+        {
+            "id": 45,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 45,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.8161736,
+                "X": 4.783407
+            }
+        },
+        {
+            "id": 46,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 46,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.8375998,
+                "X": 9.0687065
+            }
+        },
+        {
+            "id": 47,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 47,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.8590264,
+                "X": 13.375435
+            }
+        },
+        {
+            "id": 48,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 48,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.880453,
+                "X": 17.725014
+            }
+        },
+        {
+            "id": 49,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 49,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9018793,
+                "X": 22.031742
+            }
+        },
+        {
+            "id": 50,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 50,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9233065,
+                "X": 26.317041
+            }
+        },
+        {
+            "id": 51,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 51,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9233065,
+                "X": 30.60234
+            }
+        },
+        {
+            "id": 52,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 52,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9447327,
+                "X": 34.930496
+            }
+        },
+        {
+            "id": 53,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 53,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9447327,
+                "X": 39.215797
+            }
+        },
+        {
+            "id": 54,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 54,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9661593,
+                "X": 43.522522
+            }
+        },
+        {
+            "id": 55,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 55,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9661593,
+                "X": 47.850674
+            }
+        },
+        {
+            "id": 56,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 56,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9661593,
+                "X": 52.17883
+            }
+        },
+        {
+            "id": 57,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 57,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9661593,
+                "X": 56.485558
+            }
+        },
+        {
+            "id": 96,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Thin Block",
+                "ID": 96,
+                "Y": 5.430227,
+                "X": -14.625498
+            }
+        },
+        {
+            "id": 97,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar Mid",
+                "ID": 97,
+                "Y": 3.4446557,
+                "X": -18.845816
+            }
+        },
+        {
+            "id": 98,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "PlatformSmall",
+                "ID": 98,
+                "Y": 3.39015,
+                "X": -16.788216
+            }
+        },
+        {
+            "id": 99,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Pillar",
+                "ID": 99,
+                "Y": 5.447748,
+                "X": -19.077463
+            }
+        },
+        {
+            "id": 100,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 100,
+                "Y": 5.406869,
+                "X": -16.760963
+            }
+        },
+        {
+            "id": 201,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "ID": 201,
+                "Ignore Non-Blobs": "1",
+                "Y": -2.9661593,
+                "X": 60.79055
+            }
+        },
+        {
+            "id": 202,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 202,
+                "Y": -3.1435342,
+                "X": 63.849422
+            }
+        },
+        {
+            "id": 203,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 203,
+                "Y": -3.1509726,
+                "X": 65.65702
+            }
+        },
+        {
+            "id": 204,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "ID": 204,
+                "Level": "gen",
+                "Y": -1.7153095,
+                "X": 66.83233
             }
         }
     ],
@@ -33,14 +646,14 @@
         "Min Camera Y": "0",
         "Gravity X": 0,
         "Gravity Y": -9.8,
-        "Puff Enabled": "0",
+        "Puff Enabled": "1",
         "Max Camera Y": "9",
         "Parallax": "",
         "Min Camera X": "-2",
-        "Max Camera X": "80",
+        "Max Camera X": "63",
         "SongName": "drumdrum.ogg",
         "Difficulty": 0,
         "Use Light": "1",
-        "Solidity Enabled": "0"
+        "Solidity Enabled": "1"
     }
 }

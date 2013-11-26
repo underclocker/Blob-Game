@@ -54,7 +54,7 @@ public class Game implements ApplicationListener {
 	public final static int MENU = 2;
 	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = true;
+	public final static boolean RELEASE = false;
 	public final static boolean DEBUG = false;
 	public final static boolean UNLOCKED = true;
 	public static boolean PRELOAD = false; // only preloads in release and reads
@@ -524,9 +524,11 @@ public class Game implements ApplicationListener {
 		mAssetManager.load(fileName, Level.class);
 		mAssetManager.finishLoading();
 		mLevel = mAssetManager.get(fileName, Level.class);
+
 		if (Game.get().getEditor() != null) {
 			getEditor().updateWorldProperties();
 		}
+
 		// Finish loading the map
 		mAssetManager.finishLoading();
 
@@ -543,6 +545,11 @@ public class Game implements ApplicationListener {
 
 		// Finish loading the level resources
 		mAssetManager.finishLoading();
+		if (genMap) {
+			mAssetManager.finishLoading();
+			new LevelGen();
+		}
+
 	}
 
 	/**
