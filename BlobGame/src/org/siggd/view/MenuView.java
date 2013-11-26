@@ -375,13 +375,13 @@ public class MenuView {
 		 * button.getButton().addListener(mClickListener);
 		 */
 
-		/*
-		 * button = mLevel1.get("level2_hard");
-		 * mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
-		 * mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
-		 * button.getButton().addListener(mStartLevel);
-		 * button.getButton().addListener(mClickListener);
-		 */
+		
+		  button = mLevel1.get("level2_hard");
+		  mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
+		  mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
+		  button.getButton().addListener(mStartLevel);
+		  button.getButton().addListener(mClickListener);
+		 
 
 		// TODO: scale if < screen resolution
 		// mLevelsTable.setTransform(true);
