@@ -1,13 +1,11 @@
 package org.siggd;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.siggd.slab.Block0;
 import org.siggd.slab.Slab;
 import org.siggd.slab.SlabStock;
 
 public class LevelGen {
-	private int mCurrentSlab = 0;
+	public static int Difficulty = 0;
 
 	public LevelGen() {
 		Level l = Game.get().getLevel();
@@ -16,7 +14,7 @@ public class LevelGen {
 
 	public void createSlabs(Level l) {
 		Slab slab;
-		SlabStock slabStock = new SlabStock(Block0.class, 0);
+		SlabStock slabStock = new SlabStock(Block0.class, 0, 0);
 		for (int i = 0; i < 32; i++) {
 			try {
 				slab = (Slab) slabStock.mName.getConstructor().newInstance();
