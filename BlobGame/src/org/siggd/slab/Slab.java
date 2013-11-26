@@ -3,6 +3,7 @@ package org.siggd.slab;
 import java.util.ArrayList;
 
 import org.siggd.Level;
+import org.siggd.LevelGen;
 import org.siggd.actor.Background;
 
 import com.badlogic.gdx.math.Vector2;
@@ -40,11 +41,12 @@ public abstract class Slab {
 	public SlabStock getNextSlab() {
 		float total = 0;
 		for (SlabStock s : nextSlabs) {
-			total += s.mWeight;
+			total += s.getWeight();
 		}
 		float rand = (float) Math.random() * total;
 		for (SlabStock s : nextSlabs) {
-			rand -= s.mWeight;
+			float delta = (s.mDifficulty - LevelGen.Difficulty);
+			rand -= s.getWeight();
 			if (rand <= 0) {
 				return s;
 			}

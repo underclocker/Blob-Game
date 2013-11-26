@@ -61,7 +61,7 @@ public class Game implements ApplicationListener {
 											// from config file
 	public static float FPSREC = 60;
 
-	public final String mStartingLevel = "level1";
+	public final String mStartingLevel = "";
 
 	// The game's current state
 	private int mState;
@@ -376,10 +376,12 @@ public class Game implements ApplicationListener {
 		for (long i : mRenderTimeHistory) {
 			total += i;
 		}
-		float avg = total / (mRenderTimeHistory.size() * 1000.0f);
-		avg /= 1000000.0f;
-		System.out.println("fps: " + (1.0f / avg));
-		FPSREC = 1 / avg;
+		if (mRenderTimeHistory.size() > 0) {
+			float avg = total / (mRenderTimeHistory.size() * 1000.0f);
+			avg /= 1000000.0f;
+			System.out.println("fps: " + (1.0f / avg));
+			FPSREC = 1 / avg;
+		}
 		mProfileFinished = true;
 	}
 

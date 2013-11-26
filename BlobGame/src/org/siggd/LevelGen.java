@@ -5,7 +5,7 @@ import org.siggd.slab.Slab;
 import org.siggd.slab.SlabStock;
 
 public class LevelGen {
-	public static int Difficulty = 0;
+	public static float Difficulty = 0;
 
 	public LevelGen() {
 		Level l = Game.get().getLevel();
