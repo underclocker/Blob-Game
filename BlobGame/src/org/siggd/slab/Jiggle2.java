@@ -9,7 +9,7 @@ public class Jiggle2 extends Slab {
 
 	public Jiggle2() {
 		super();
-		nextSlabs.add(new SlabStock(Block2.class, 3f, 2f));
+		nextSlabs.add(new SlabStock(Block2.class, 3f, 5f));
 		nextSlabs.add(new SlabStock(Block0.class, 1f, 0f));
 		nextSlabs.add(new SlabStock(Jiggle2.class, 4f, 2f));
 		nextSlabs.add(new SlabStock(Jiggle1.class, 4f, 5f));
