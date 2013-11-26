@@ -9,9 +9,9 @@ public class Blockpoint5 extends Slab {
 
 	public Blockpoint5() {
 		super();
-		nextSlabs.add(new SlabStock(Air0.class, 1f));
-		nextSlabs.add(new SlabStock(Blockpoint5.class, 1f));
-		nextSlabs.add(new SlabStock(Block0.class, 1f));
+		nextSlabs.add(new SlabStock(Air0.class, 1f, 2f));
+		nextSlabs.add(new SlabStock(Blockpoint5.class, 1f, 0f));
+		nextSlabs.add(new SlabStock(Block0.class, 1f, 0f));
 	}
 
 	@Override

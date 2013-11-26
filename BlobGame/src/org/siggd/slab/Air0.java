@@ -9,7 +9,7 @@ public class Air0 extends Slab {
 
 	public Air0() {
 		super();
-		nextSlabs.add(new SlabStock(Block0.class, 1f));
+		nextSlabs.add(new SlabStock(Block0.class, 1f, 0f));
 	}
 
 	@Override
