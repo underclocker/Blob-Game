@@ -1,6 +1,10 @@
 package org.siggd;
 
-import org.siggd.slab.LowBlock;
+import java.lang.reflect.InvocationTargetException;
+
+import org.siggd.slab.Block0;
+import org.siggd.slab.Slab;
+import org.siggd.slab.SlabStock;
 
 public class LevelGen {
 	private int mCurrentSlab = 0;
@@ -11,8 +15,18 @@ public class LevelGen {
 	}
 
 	public void createSlabs(Level l) {
+		Slab slab;
+		SlabStock slabStock = new SlabStock(Block0.class, 0);
 		for (int i = 0; i < 32; i++) {
-			new LowBlock(i).gen(l);
+			try {
+				slab = (Slab) slabStock.mName.getConstructor().newInstance();
+				slab.setNumber(i);
+				slab.gen(l);
+				slabStock = slab.getNextSlab();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return;
+			}
 		}
 	}
 }
