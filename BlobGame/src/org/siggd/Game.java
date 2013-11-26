@@ -61,7 +61,7 @@ public class Game implements ApplicationListener {
 											// from config file
 	public static float FPSREC = 60;
 
-	public final String mStartingLevel = "";
+	public final String mStartingLevel = "level1";
 
 	// The game's current state
 	private int mState;
