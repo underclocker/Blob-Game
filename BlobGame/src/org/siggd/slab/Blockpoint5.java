@@ -5,19 +5,19 @@ import org.siggd.actor.Background;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Block1 extends Slab {
+public class Blockpoint5 extends Slab {
 
-	public Block1() {
+	public Blockpoint5() {
 		super();
 		nextSlabs.add(new SlabStock(Air0.class, 1f));
-		nextSlabs.add(new SlabStock(Block1.class, 1f));
+		nextSlabs.add(new SlabStock(Blockpoint5.class, 1f));
 		nextSlabs.add(new SlabStock(Block0.class, 1f));
 	}
 
 	@Override
 	public void gen(Level l) {
 		Vector2 pos = getOrigin();
-		pos.y += 1;
+		pos.y += .5f;
 		Background b = makeBackground("Block", l, pos);
 	}
 
