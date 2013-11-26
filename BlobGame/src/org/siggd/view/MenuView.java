@@ -275,12 +275,16 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level1_med"));
 		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/lvl7Down.png",
 				"data/gfx/buttonDisabled.png", "level7_med"));
+		mLevel1.put("level5_med", new SiggdImageButton("data/gfx/buttonDown.png",
+				"data/gfx/buttonDisabled.png", "level5_med"));
 		mLevel1.put("level3_med", new SiggdImageButton("data/gfx/lvl3Down.png",
 				"data/gfx/buttonDisabled.png", "level3_med"));
 		mLevel1.put("level4_med", new SiggdImageButton("data/gfx/lvl4Down.png",
 				"data/gfx/buttonDisabled.png", "level4_med"));
 		mLevel1.put("level2_med", new SiggdImageButton("data/gfx/lvl2Down.png",
 				"data/gfx/buttonDisabled.png", "level2_med"));
+		mLevel1.put("level8_med", new SiggdImageButton("data/gfx/lvl8Down.png",
+				"data/gfx/buttonDisabled.png", "level8_med"));
 
 		button = mLevel1.get("level1_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -289,6 +293,12 @@ public class MenuView {
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level7_med");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
+		
+		button = mLevel1.get("level5_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -311,6 +321,13 @@ public class MenuView {
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
+		
+		button = mLevel1.get("level8_med");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
+
 
 		mLevelsTable.row();
 
