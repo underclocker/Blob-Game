@@ -42,8 +42,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 	private int mControllerFilter;
 	private int mFilteredKey;
 	private int mRepeats = 0;
-	
-	public boolean ignore; //> Flag whether to ignore any further inputs;
+
+	public boolean ignore; // > Flag whether to ignore any further inputs;
 
 	private static float sLineWidth = 3;
 
@@ -145,14 +145,17 @@ public class MenuController implements InputProcessor, ControllerListener {
 					down = down || upDown > 0.5;
 					r = r || leftRight > 0.5;
 					l = l || leftRight < -0.5;
-					
-					if(mController.getPov(0) == PovDirection.east) r = true;
-					if(mController.getPov(0) == PovDirection.west) l = true;
-					if(mController.getPov(0) == PovDirection.north) up = true;
-					if(mController.getPov(0) == PovDirection.south) down = true;
+
+					if (mController.getPov(0) == PovDirection.east)
+						r = true;
+					if (mController.getPov(0) == PovDirection.west)
+						l = true;
+					if (mController.getPov(0) == PovDirection.north)
+						up = true;
+					if (mController.getPov(0) == PovDirection.south)
+						down = true;
 				}
-				
-				
+
 				if (NAV_KEYS.contains(mFilteredKey)) {
 					if (Gdx.input.isKeyPressed(mFilteredKey)) {
 						switch (mFilteredKey) {
@@ -291,12 +294,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 			} else if (MenuView.CONTROLLER.equals(Game.get().getMenuView().getCurrentMenu())) {
 				Game.get().getMenuView().setMenu(MenuView.MAIN);
 			} else if (MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu())) {
+				boolean inRace = Game.get().getMenuView().mSelectedLevel.equals("gen");
 				// Customize Menu
 				// deactivate any players that may have joined
 				Game.get().deactivatePlayers();
 				Game.get().setLevel("earth");
 				Game.get().getLevel().killFade();
-				Game.get().getMenuView().setMenu(MenuView.LEVELS);
+				Game.get().getMenuView().setMenu(inRace ? MenuView.MAIN : MenuView.LEVELS);
 				mControllerFilter = 0;
 			}
 		}
@@ -318,7 +322,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 	}
 
 	private boolean controllerPermission(Controller c, int button) {
-		if(ignore){
+		if (ignore) {
 			return false;
 		}
 		int gameState = Game.get().getState();

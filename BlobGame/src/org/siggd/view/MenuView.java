@@ -77,7 +77,7 @@ public class MenuView {
 	private ShapeRenderer mShapeRenderer;
 	private HashMap<String, SiggdImageButton> mLevel1;
 	private String mCurrentMenu;
-	private String mSelectedLevel;
+	public String mSelectedLevel;
 	private final float mHorizontalSpacing = 10f;
 	private final float mVerticalSpacing = 30f;
 	private float mRollingAlpha = 0f;
@@ -846,7 +846,9 @@ public class MenuView {
 				textButton.setChecked(false);
 			}
 			Game.get().setState(Game.PLAY);
-			Game.get().setLevel(Game.get().getLevel().getAssetKey());
+			String level = Game.get().getLevel().getAssetKey();
+			if ("base".equals(level)) level = "gen";
+			Game.get().setLevel(level);
 			Game.get().getLevel().killFade();
 		}
 	};
