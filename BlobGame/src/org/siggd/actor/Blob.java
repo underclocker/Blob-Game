@@ -921,7 +921,6 @@ public class Blob extends Actor implements Controllable {
 
 			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
 			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
-			diff *= diff;
 			brightness += .075f * diff;
 			if (brightness < 0) {
 				brightness = 0;

@@ -93,7 +93,7 @@ public class Game implements ApplicationListener {
 	public int mLoaderMax;
 	private boolean mFlipper = true;
 	// Framerate profiler
-	private int mInitDelay = 15;
+	private int mInitDelay = 30;
 	private long mStartTime;
 	private long mEndTime;
 	private ArrayList<Long> mRenderTimeHistory;
