@@ -183,7 +183,7 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 		}else if (e.getSource().equals(rotate)){
 			Actor a = Game.get().getEditor().getSelectedActor();
 			if(a!=null){
-				Game.get().getEditor().performEdit(new RotateCommand(a, 10));
+				Game.get().getEditor().performEdit(new RotateCommand(a, 15));
 			}
 		}else{
 			int action = Integer.parseInt(e.getActionCommand());
