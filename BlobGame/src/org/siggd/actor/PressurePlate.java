@@ -28,7 +28,7 @@ public class PressurePlate extends Actor implements IObservable {
 	private Drawable mDefaultDrawable;
 	private PointLight mPointLight;
 	private int mRestTime = 0;
-	private int mDelay = 8;
+	private int mDelay = 12;
 
 	public PressurePlate(Level level, long id) {
 		super(level, id);
