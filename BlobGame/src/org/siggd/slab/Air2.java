@@ -11,8 +11,8 @@ public class Air2 extends Slab {
 		super();
 		nextSlabs.add(new SlabStock(Pillar0.class, 1f, 0f));
 		nextSlabs.add(new SlabStock(Bounce0.class, 3f, 0f));
-		nextSlabs.add(new SlabStock(Jiggle2.class, 4f, 1f));
-		nextSlabs.add(new SlabStock(Jiggle1.class, 4f, 3f));
+		nextSlabs.add(new SlabStock(Jiggle2.class, 4f, 4f));
+		nextSlabs.add(new SlabStock(Jiggle1.class, 4f, 5f));
 		nextSlabs.add(new SlabStock(Air0.class, 8f, 0f));
 		nextSlabs.add(new SlabStock(Wind0.class, 4f, 0f));
 	}

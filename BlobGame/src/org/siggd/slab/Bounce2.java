@@ -10,12 +10,12 @@ public class Bounce2 extends Slab {
 
 	public Bounce2() {
 		super();
-		nextSlabs.add(new SlabStock(Air4.class, 8f, 4f));
-		nextSlabs.add(new SlabStock(Air2.class, 8f, 4f));
+		nextSlabs.add(new SlabStock(Air4.class, 8f, 3f));
+		nextSlabs.add(new SlabStock(Air2.class, 8f, 0f));
 		nextSlabs.add(new SlabStock(Block2.class, 4f, 1f));
-		nextSlabs.add(new SlabStock(Jiggle3.class, 2f, 7f));
-		nextSlabs.add(new SlabStock(Block4.class, 4f, 3f));
-		nextSlabs.add(new SlabStock(Wind2.class, 3f, 3f));
+		nextSlabs.add(new SlabStock(Jiggle3.class, 2f, 5f));
+		nextSlabs.add(new SlabStock(Block4.class, 4f, 0f));
+		nextSlabs.add(new SlabStock(Gear4.class, 4f, 3f));
 	}
 
 	@Override

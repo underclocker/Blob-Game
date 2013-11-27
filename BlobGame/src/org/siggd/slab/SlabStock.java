@@ -14,10 +14,11 @@ public class SlabStock {
 	}
 
 	public float getWeight() {
-		float delta = (mDifficulty - LevelGen.Difficulty);
-		float weight = mWeight * (1 / (1 + delta * delta));
-		if (mDifficulty - LevelGen.Difficulty > 3)
-			weight = 0;
-		return weight;
+		/*
+		 * float delta = (mDifficulty - LevelGen.Difficulty); float weight =
+		 * mWeight * (1 / (1 + delta * delta)); if (mDifficulty -
+		 * LevelGen.Difficulty > 3) weight = 0; return weight;
+		 */
+		return mDifficulty <= LevelGen.Difficulty ? mWeight : 0;
 	}
 }

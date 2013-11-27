@@ -10,9 +10,9 @@ public class Wind2 extends Slab {
 
 	public Wind2() {
 		super();
-		nextSlabs.add(new SlabStock(Jiggle3.class, 1f, 1f));
-		nextSlabs.add(new SlabStock(Air4.class, 1f, 1f));
-		nextSlabs.add(new SlabStock(Block4.class, 4f, 3f));
+		nextSlabs.add(new SlabStock(Jiggle3.class, 1f, 4f));
+		nextSlabs.add(new SlabStock(Air4.class, 2f, 3f));
+		nextSlabs.add(new SlabStock(Block4.class, 4f, 0f));
 	}
 
 	@Override

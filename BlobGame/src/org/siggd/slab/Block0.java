@@ -10,10 +10,10 @@ public class Block0 extends Slab {
 	public Block0() {
 		super();
 		nextSlabs.add(new SlabStock(Block0.class, 1f, 0f));
-		nextSlabs.add(new SlabStock(Blockpoint5.class, 4f, 0f));
-		nextSlabs.add(new SlabStock(Bounce0.class, 8f, 1f));
-		nextSlabs.add(new SlabStock(Jiggle1.class, 1f, 1f));
-		nextSlabs.add(new SlabStock(Air0.class, 1f, 1f));
+		nextSlabs.add(new SlabStock(Blockpoint5.class, 3f, 0f));
+		nextSlabs.add(new SlabStock(Bounce0.class, 6f, 1f));
+		nextSlabs.add(new SlabStock(Jiggle1.class, 3f, 2f));
+		nextSlabs.add(new SlabStock(Air0.class, 1f, 2f));
 		nextSlabs.add(new SlabStock(Wind0.class, 8f, 0f));
 	}
 

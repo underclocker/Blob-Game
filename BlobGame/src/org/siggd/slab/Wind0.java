@@ -10,12 +10,13 @@ public class Wind0 extends Slab {
 
 	public Wind0() {
 		super();
-		nextSlabs.add(new SlabStock(Jiggle3.class, 1f, 1f));
-		nextSlabs.add(new SlabStock(Jiggle2.class, 1f, 3f));
+		nextSlabs.add(new SlabStock(Jiggle3.class, 1f, 6f));
+		nextSlabs.add(new SlabStock(Jiggle2.class, 1f, 5f));
 		nextSlabs.add(new SlabStock(Air0.class, 1f, 1f));
 		nextSlabs.add(new SlabStock(Air2.class, 1f, 4f));
-		nextSlabs.add(new SlabStock(Block2.class, 1f, 1f));
-		nextSlabs.add(new SlabStock(Block4.class, 1f, 4f));
+		nextSlabs.add(new SlabStock(Block2.class, 2f, 0f));
+		nextSlabs.add(new SlabStock(Block4.class, 2f, 4f));
+		nextSlabs.add(new SlabStock(Gear4.class, 2f, 2f));
 	}
 
 	@Override

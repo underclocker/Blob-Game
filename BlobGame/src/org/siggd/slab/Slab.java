@@ -45,7 +45,6 @@ public abstract class Slab {
 		}
 		float rand = (float) Math.random() * total;
 		for (SlabStock s : nextSlabs) {
-			float delta = (s.mDifficulty - LevelGen.Difficulty);
 			rand -= s.getWeight();
 			if (rand <= 0) {
 				return s;
