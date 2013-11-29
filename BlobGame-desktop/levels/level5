@@ -1,6 +1,28 @@
 {
     "actors": [
         {
+            "id": 4419,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 90,
+                "Body": "Outpipe colored",
+                "ID": 4419,
+                "Y": -10.896904,
+                "X": 18.68537
+            }
+        },
+        {
+            "id": 4418,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Angle": 90,
+                "Body": "Outpipe colored",
+                "ID": 4418,
+                "Y": -10.896904,
+                "X": 19.705368
+            }
+        },
+        {
             "id": 4255,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
@@ -198,7 +220,6 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 340,
-                "Target Input": 2285,
                 "Wind Strength": "6",
                 "ID": 2287,
                 "Y": -6.869085,
@@ -210,7 +231,6 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 340,
-                "Target Input": 2284,
                 "Wind Strength": "6",
                 "ID": 2286,
                 "Y": -6.88978,
@@ -222,7 +242,6 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 350.00003,
-                "Target Input": 2283,
                 "Wind Strength": "8",
                 "ID": 2285,
                 "Y": -7.81071,
@@ -234,7 +253,6 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 350.00003,
-                "Target Input": 2282,
                 "Wind Strength": "8",
                 "ID": 2284,
                 "Y": -7.81071,
@@ -245,7 +263,6 @@
             "id": 2283,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Target Input": 2281,
                 "Wind Strength": "8",
                 "ID": 2283,
                 "Y": -8.752336,
@@ -256,7 +273,6 @@
             "id": 2282,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Target Input": 2280,
                 "Wind Strength": "8",
                 "ID": 2282,
                 "Y": -8.762683,
@@ -267,7 +283,6 @@
             "id": 2281,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Target Input": 3040,
                 "Wind Strength": "10",
                 "ID": 2281,
                 "Y": -9.818131,
@@ -278,7 +293,6 @@
             "id": 2280,
             "class": "org.siggd.actor.Wind",
             "props": {
-                "Target Input": 3040,
                 "Wind Strength": "10",
                 "ID": 2280,
                 "Y": -9.818131,
@@ -452,8 +466,8 @@
             "id": 1964,
             "class": "org.siggd.actor.BlobLaser",
             "props": {
-                "Active": 1,
                 "Angle": 180,
+                "Active": 1,
                 "Visible": 1,
                 "ID": 1964,
                 "Y": -7.3255067,
@@ -1617,7 +1631,7 @@
             "class": "org.siggd.actor.Outpipe",
             "props": {
                 "Angle": -90,
-                "Target Input": 3040,
+                "Target Input": 3229,
                 "ID": 3041,
                 "Y": -6.502545,
                 "X": 15.016
@@ -1628,32 +1642,10 @@
             "class": "org.siggd.actor.Outpipe",
             "props": {
                 "Angle": -90,
-                "Target Input": 3040,
+                "Target Input": 3229,
                 "ID": 3043,
                 "Y": -6.514091,
                 "X": 16.043583
-            }
-        },
-        {
-            "id": 3231,
-            "class": "org.siggd.actor.Outpipe",
-            "props": {
-                "Angle": 90,
-                "Target Input": 3040,
-                "ID": 3231,
-                "Y": -10.902545,
-                "X": 18.691
-            }
-        },
-        {
-            "id": 3232,
-            "class": "org.siggd.actor.Outpipe",
-            "props": {
-                "Angle": 90,
-                "Target Input": 3040,
-                "ID": 3232,
-                "Y": -10.890045,
-                "X": 19.678501
             }
         },
         {
