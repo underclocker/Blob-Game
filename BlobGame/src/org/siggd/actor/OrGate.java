@@ -3,6 +3,7 @@ package org.siggd.actor;
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
+import org.siggd.actor.meta.IObservable;
 import org.siggd.view.BodySprite;
 import org.siggd.view.DebugActorLinkDrawable;
 
@@ -12,7 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class OrGate extends Actor {
+public class OrGate extends Actor implements IObservable {
 	private String mTex;
 	private boolean mPropagate;
 	private int mPropagateVal;
@@ -68,6 +69,12 @@ public class OrGate extends Actor {
 			mPropagate = false;
 		}
 		orInput();
+	}
+	
+	@Override
+	public Boolean observe()
+	{
+		return Convert.getInt(getProp("Output")) == 1 ? true : false;
 	}
 
 	@Override

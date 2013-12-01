@@ -28,7 +28,7 @@ public class PressurePlate extends Actor implements IObservable {
 	private Drawable mDefaultDrawable;
 	private PointLight mPointLight;
 	private int mRestTime = 0;
-	private int mDelay = 12;
+	private int mDelay = 30;
 
 	public PressurePlate(Level level, long id) {
 		super(level, id);
@@ -52,6 +52,7 @@ public class PressurePlate extends Actor implements IObservable {
 		// TODO: set light active based on if actor is dummy or not
 		setProp("X", -10000);
 		setProp("Restitution", 0f);
+		setProp("Output", 0);
 		setState(false);
 	}
 
@@ -99,6 +100,8 @@ public class PressurePlate extends Actor implements IObservable {
 			}
 		}
 		setState(active);
+		int s = active ? 1 : 0;
+		setProp("Output", s);
 	}
 
 	@Override
