@@ -206,7 +206,7 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "opening"));
 		mLevel1.put("level7", new SiggdImageButton("data/gfx/lvl7Down.png",
 				"data/gfx/buttonDisabled.png", "level7"));
-		mLevel1.put("level5", new SiggdImageButton("data/gfx/buttonDown.png",
+		mLevel1.put("level5", new SiggdImageButton("data/gfx/lvl5Down.png",
 				"data/gfx/buttonDisabled.png", "level5"));
 		mLevel1.put("level3", new SiggdImageButton("data/gfx/lvl3Down.png",
 				"data/gfx/buttonDisabled.png", "level3"));
@@ -275,7 +275,7 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level1_med"));
 		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/lvl7Down.png",
 				"data/gfx/buttonDisabled.png", "level7_med"));
-		mLevel1.put("level5_med", new SiggdImageButton("data/gfx/buttonDown.png",
+		mLevel1.put("level5_med", new SiggdImageButton("data/gfx/lvl5Down.png",
 				"data/gfx/buttonDisabled.png", "level5_med"));
 		mLevel1.put("level3_med", new SiggdImageButton("data/gfx/lvl3Down.png",
 				"data/gfx/buttonDisabled.png", "level3_med"));
@@ -297,7 +297,7 @@ public class MenuView {
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
-		
+
 		button = mLevel1.get("level5_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
@@ -321,13 +321,12 @@ public class MenuView {
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
-		
+
 		button = mLevel1.get("level8_med");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
-
 
 		mLevelsTable.row();
 
@@ -344,10 +343,12 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level3_hard"));
 		mLevel1.put("level4_hard", new SiggdImageButton("data/gfx/lvl4Down.png",
 				"data/gfx/buttonDisabled.png", "level4_hard"));
-		mLevel1.put("level5_hard", new SiggdImageButton("data/gfx/buttonDown.png",
+		mLevel1.put("level5_hard", new SiggdImageButton("data/gfx/lvl5Down.png",
 				"data/gfx/buttonDisabled.png", "level5_hard"));
 		mLevel1.put("level2_hard", new SiggdImageButton("data/gfx/lvl2Down.png",
 				"data/gfx/buttonDisabled.png", "level2_hard"));
+		mLevel1.put("level8_hard", new SiggdImageButton("data/gfx/lvl8Down.png",
+				"data/gfx/buttonDisabled.png", "level8_hard"));
 
 		button = mLevel1.get("level1_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
@@ -355,15 +356,7 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
-		
-		  button = mLevel1.get("level7_hard");
-		  mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
-		  mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
-		  button.getButton().addListener(mStartLevel);
-		  button.getButton().addListener(mClickListener);
-		 
-
-		button = mLevel1.get("level4_hard");
+		button = mLevel1.get("level7_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -376,17 +369,20 @@ public class MenuView {
 		 * button.getButton().addListener(mStartLevel);
 		 * button.getButton().addListener(mClickListener);
 		 */
-
 		
-		  button = mLevel1.get("level2_hard");
-		  mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
-		  mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
-		  button.getButton().addListener(mStartLevel);
-		  button.getButton().addListener(mClickListener);
-		 
+		
 
-		// TODO: scale if < screen resolution
-		// mLevelsTable.setTransform(true);
+		button = mLevel1.get("level4_hard");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
+
+		button = mLevel1.get("level2_hard");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 	}
 
@@ -849,7 +845,8 @@ public class MenuView {
 			}
 			Game.get().setState(Game.PLAY);
 			String level = Game.get().getLevel().getAssetKey();
-			if ("base".equals(level)) level = "gen";
+			if ("base".equals(level))
+				level = "gen";
 			Game.get().setLevel(level);
 			Game.get().getLevel().killFade();
 		}
@@ -917,7 +914,8 @@ public class MenuView {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
 			mSelectedLevel = "gen";
-			setMenu(CUSTOMIZE);		}
+			setMenu(CUSTOMIZE);
+		}
 	};
 
 	private final ChangeListener mExit = new ChangeListener() {

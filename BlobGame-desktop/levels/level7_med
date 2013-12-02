@@ -1033,14 +1033,13 @@
             "id": 1618,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": -3,
+                "Layer": -5,
                 "Lightness": ".07",
-                "Y Offset": "6",
                 "ID": 1618,
                 "Scale": "8.0",
                 "Y": 15.686008,
                 "X": -2.6287222,
-                "Texture": "level3_1_0.png"
+                "Texture": "level5_0_1.png"
             }
         },
         {

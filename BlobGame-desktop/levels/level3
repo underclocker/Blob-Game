@@ -4,7 +4,7 @@
             "id": 1417,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": -3,
+                "Layer": -5,
                 "Lightness": ".07",
                 "ID": 1417,
                 "Scale": "6",

@@ -471,14 +471,14 @@
             "id": 3436,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": -3,
+                "Layer": -5,
                 "Lightness": "0.07",
                 "Distance": "5.0",
                 "ID": 3436,
                 "Scale": "8",
                 "Y": 14.027933,
                 "X": -0.7970724,
-                "Texture": "level3_1_0.png"
+                "Texture": "level8_0_1.png"
             }
         },
         {

@@ -1607,7 +1607,21 @@
                 "Y": -12.9,
                 "X": 26.65
             }
+        },
+               {
+            "id": 4818,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Layer": -5,
+                "Lightness": ".07",
+                "ID": 1509,
+                "Scale": "6",
+                "Y": -0.5030703,
+                "X": -3.6402712,
+                "Texture": "level2_1_0.png"
+            }
         }
+        
     ],
     "props": {
         "Ambient Light": 0.6,
