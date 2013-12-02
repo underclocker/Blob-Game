@@ -46,57 +46,47 @@
             }
         },
         {
-            "id": 3699,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Body": "Block",
-                "ID": 3699,
-                "Y": 22.238728,
-                "X": 28.219677
-            }
-        },
-        {
             "id": 3439,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "28.5",
+                "Orbit X": "28",
                 "ID": 3439,
                 "Orbit Y": "25.25",
                 "Y": 26.25,
-                "X": 28.5
+                "X": 28
             }
         },
         {
             "id": 3438,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "28.5",
+                "Orbit X": "28",
                 "ID": 3438,
                 "Orbit Y": "25.25",
                 "Y": 25.25,
-                "X": 29.5
+                "X": 29
             }
         },
         {
             "id": 3437,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "28.5",
+                "Orbit X": "28",
                 "ID": 3437,
                 "Orbit Y": "25.25",
                 "Y": 24.25,
-                "X": 28.5
+                "X": 28
             }
         },
         {
             "id": 3434,
             "class": "org.siggd.actor.RotoJiggle",
             "props": {
-                "Orbit X": "28.5",
+                "Orbit X": "28",
                 "ID": 3434,
                 "Orbit Y": "25.25",
                 "Y": 25.25,
-                "X": 27.5
+                "X": 27
             }
         },
         {
@@ -104,11 +94,10 @@
             "class": "org.siggd.actor.BouncePlate",
             "props": {
                 "Layer": 0,
-                "Angle": 315,
                 "ID": 3432,
-                "Stroke Length": "3",
-                "Y": 24.023985,
-                "X": 26.042278
+                "Stroke Length": "5",
+                "Y": 23.158531,
+                "X": 28.036335
             }
         },
         {
@@ -953,8 +942,8 @@
             "id": 140,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 4,
                 "Collision Sound": "barrel.wav",
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -963,7 +952,7 @@
                 "ID": 140,
                 "Grabbable": 1,
                 "Y": 25.25,
-                "X": 28.5,
+                "X": 28,
                 "Collision Pitch": 1.25
             }
         },
@@ -1676,8 +1665,8 @@
             "id": 185,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 4,
                 "Collision Sound": "barrel.wav",
+                "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1767,7 +1756,7 @@
             "props": {
                 "Layer": 0,
                 "Target Input": 374,
-                "Wind Strength": "6",
+                "Wind Strength": "8",
                 "ID": 375,
                 "Y": 31.231232,
                 "X": 31.722914
@@ -1881,7 +1870,7 @@
             "props": {
                 "Layer": 0,
                 "Target Input": 375,
-                "Wind Strength": "6",
+                "Wind Strength": "8",
                 "ID": 721,
                 "Y": 32.29084,
                 "X": 31.660345
@@ -2765,7 +2754,7 @@
                 "Layer": 0,
                 "Angle": 45,
                 "ID": 3423,
-                "Stroke Length": "8",
+                "Stroke Length": "10",
                 "Y": 22.191929,
                 "X": 22.258303
             }
