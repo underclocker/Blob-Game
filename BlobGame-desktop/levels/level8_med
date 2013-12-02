@@ -1,9 +1,121 @@
 {
     "actors": [
         {
+            "id": 3704,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 3704,
+                "Y": 27.548504,
+                "X": 11.503499
+            }
+        },
+        {
+            "id": 3703,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 3703,
+                "Y": 26.908598,
+                "X": 12.515717
+            }
+        },
+        {
+            "id": 3702,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 3702,
+                "Y": 26.257055,
+                "X": 13.644281
+            }
+        },
+        {
+            "id": 3701,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 3701,
+                "Y": 25.617146,
+                "X": 14.807754
+            }
+        },
+        {
+            "id": 3700,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 3700,
+                "Y": 24.977236,
+                "X": 15.901416
+            }
+        },
+        {
+            "id": 3699,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 3699,
+                "Y": 22.238728,
+                "X": 28.219677
+            }
+        },
+        {
+            "id": 3439,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "28.5",
+                "ID": 3439,
+                "Orbit Y": "25.25",
+                "Y": 26.25,
+                "X": 28.5
+            }
+        },
+        {
+            "id": 3438,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "28.5",
+                "ID": 3438,
+                "Orbit Y": "25.25",
+                "Y": 25.25,
+                "X": 29.5
+            }
+        },
+        {
+            "id": 3437,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "28.5",
+                "ID": 3437,
+                "Orbit Y": "25.25",
+                "Y": 24.25,
+                "X": 28.5
+            }
+        },
+        {
+            "id": 3434,
+            "class": "org.siggd.actor.RotoJiggle",
+            "props": {
+                "Orbit X": "28.5",
+                "ID": 3434,
+                "Orbit Y": "25.25",
+                "Y": 25.25,
+                "X": 27.5
+            }
+        },
+        {
+            "id": 3432,
+            "class": "org.siggd.actor.BouncePlate",
+            "props": {
+                "Layer": 0,
+                "Angle": 315,
+                "ID": 3432,
+                "Stroke Length": "3",
+                "Y": 24.023985,
+                "X": 26.042278
+            }
+        },
+        {
             "id": 2846,
             "class": "org.siggd.actor.Parallax",
             "props": {
+                "Layer": -5,
                 "Lightness": ".07",
                 "Spawner": -3,
                 "ID": 2846,
@@ -725,7 +837,8 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 90,
-                "Wind Strength": "10",
+                "Target Input": 425,
+                "Wind Strength": "6",
                 "ID": 426,
                 "Y": 33.204445,
                 "X": 28.075914
@@ -736,7 +849,8 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 90,
-                "Wind Strength": "10",
+                "Target Input": 424,
+                "Wind Strength": "8",
                 "ID": 425,
                 "Y": 33.204445,
                 "X": 29.139013
@@ -747,6 +861,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 90,
+                "Target Input": 423,
                 "Wind Strength": "10",
                 "ID": 424,
                 "Y": 33.204445,
@@ -758,6 +873,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 90,
+                "Target Input": 421,
                 "Wind Strength": "15",
                 "ID": 423,
                 "Y": 33.204445,
@@ -769,6 +885,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Angle": 90,
+                "Target Input": 3706,
                 "Wind Strength": "15",
                 "ID": 421,
                 "Y": 33.204445,
@@ -845,8 +962,8 @@
                 "Density": 0.15,
                 "ID": 140,
                 "Grabbable": 1,
-                "Y": 23.336866,
-                "X": 28.025036,
+                "Y": 25.25,
+                "X": 28.5,
                 "Collision Pitch": 1.25
             }
         },
@@ -1568,20 +1685,9 @@
                 "Density": 0.15,
                 "ID": 185,
                 "Grabbable": 1,
-                "Y": 28.9892,
-                "X": 33.400066,
+                "Y": 29.1594,
+                "X": 33.367657,
                 "Collision Pitch": 1.25
-            }
-        },
-        {
-            "id": 188,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Angle": 180,
-                "Body": "Outpipe colored",
-                "ID": 188,
-                "Y": 33.240974,
-                "X": 33.399616
             }
         },
         {
@@ -1649,7 +1755,7 @@
             "class": "org.siggd.actor.Wind",
             "props": {
                 "Target Input": 373,
-                "Wind Strength": "10",
+                "Wind Strength": "8",
                 "ID": 374,
                 "Y": 30.169458,
                 "X": 31.729984
@@ -1661,7 +1767,7 @@
             "props": {
                 "Layer": 0,
                 "Target Input": 374,
-                "Wind Strength": "7.5",
+                "Wind Strength": "6",
                 "ID": 375,
                 "Y": 31.231232,
                 "X": 31.722914
@@ -1775,7 +1881,7 @@
             "props": {
                 "Layer": 0,
                 "Target Input": 375,
-                "Wind Strength": "8",
+                "Wind Strength": "6",
                 "ID": 721,
                 "Y": 32.29084,
                 "X": 31.660345
@@ -2659,7 +2765,7 @@
                 "Layer": 0,
                 "Angle": 45,
                 "ID": 3423,
-                "Stroke Length": "12",
+                "Stroke Length": "8",
                 "Y": 22.191929,
                 "X": 22.258303
             }
@@ -2740,6 +2846,26 @@
                 "ID": 3430,
                 "Y": 30.316807,
                 "X": 7.227143
+            }
+        },
+        {
+            "id": 3706,
+            "class": "org.siggd.actor.PressurePlate",
+            "props": {
+                "ID": 3706,
+                "Y": 28.481625,
+                "X": 33.378365
+            }
+        },
+        {
+            "id": 3707,
+            "class": "org.siggd.actor.Outpipe",
+            "props": {
+                "Angle": 180,
+                "Target Input": 3706,
+                "ID": 3707,
+                "Y": 33.201263,
+                "X": 33.42519
             }
         }
     ],
