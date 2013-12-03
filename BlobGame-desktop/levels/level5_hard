@@ -363,7 +363,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2117,
-                "Level": "level3_med",
+                "Level": "level3_hard",
                 "Y": -21.40117,
                 "X": 7.602172
             }
@@ -373,7 +373,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2116,
-                "Level": "level3_med",
+                "Level": "level3_hard",
                 "Y": -21.371168,
                 "X": 6.388031
             }
@@ -1410,7 +1410,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2500,
-                "Level": "level3_med",
+                "Level": "level3_hard",
                 "Y": -21.38117,
                 "X": 5.1480308
             }

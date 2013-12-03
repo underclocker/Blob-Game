@@ -121,8 +121,8 @@ public class MenuView {
 		createLevelsMenu();
 		createCustomizeMenu();
 		createControllerMenu();
-		
-		//Starting menu is now set in Game.create()
+
+		// Starting menu is now set in Game.create()
 	}
 
 	private void createMainMenu() {
@@ -361,16 +361,17 @@ public class MenuView {
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
-		/*
-		 * button = mLevel1.get("level5_hard");
-		 * mLevelsTable.add(button.getButton()).space(mVerticalSpacing,
-		 * mHorizontalSpacing, mVerticalSpacing, mHorizontalSpacing);
-		 * button.getButton().addListener(mStartLevel);
-		 * button.getButton().addListener(mClickListener);
-		 */
-		
-		
+		button = mLevel1.get("level5_hard");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
+		button = mLevel1.get("level3_hard");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 		button = mLevel1.get("level4_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
@@ -378,6 +379,12 @@ public class MenuView {
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2_hard");
+		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
+
+		button = mLevel1.get("level8_hard");
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -982,8 +989,8 @@ public class MenuView {
 						tmp.setDisabled(true);
 					}
 				}
-				String firstHardLevel = Level.LEVELS[0]+Level.HARD_SUFFIX;
-				if(Level.HARD_UNLOCKED){
+				String firstHardLevel = Level.LEVELS[0] + Level.HARD_SUFFIX;
+				if (Level.HARD_UNLOCKED) {
 					mLevel1.get(firstHardLevel).getButton().setDisabled(false);
 				}
 			}

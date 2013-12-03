@@ -439,7 +439,7 @@
                 "Teleport_YPos": 0,
                 "Teleport_XPos": 0,
                 "ID": 3612,
-                "Level": "level8_med",
+                "Level": "level8_hard",
                 "CollisionSound": "",
                 "Y": -19.88438,
                 "X": 17.791021
@@ -1157,7 +1157,7 @@
                 "Teleport_YPos": 0,
                 "Teleport_XPos": 0,
                 "ID": 834,
-                "Level": "level8_med",
+                "Level": "level8_hard",
                 "CollisionSound": "",
                 "Y": -19.892859,
                 "X": 16.705936

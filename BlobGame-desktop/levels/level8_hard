@@ -2157,7 +2157,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2072,
-                "Level": "level1_hard",
+                "Level": "level1",
                 "Y": 36.8221,
                 "X": 1.6220629
             }
@@ -2298,7 +2298,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2854,
-                "Level": "level1_hard",
+                "Level": "level1",
                 "Y": 36.8221,
                 "X": 2.747063
             }
@@ -2308,7 +2308,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 2855,
-                "Level": "level1_hard",
+                "Level": "level1",
                 "Y": 36.8221,
                 "X": 0.49706292
             }
