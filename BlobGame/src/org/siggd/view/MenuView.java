@@ -96,7 +96,7 @@ public class MenuView {
 
 		// Generate a 1x1 white texture and store it in the skin named "white".
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-		pixmap.setColor(0, 0, 0, .5f);
+		pixmap.setColor(0, 0, 0, .65f);
 		pixmap.fill();
 		mSkin.add("black", new Texture(pixmap));
 
@@ -217,6 +217,7 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level8"));
 
 		SiggdImageButton button = mLevel1.get("level1");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -224,35 +225,41 @@ public class MenuView {
 		mLevelsTable.invalidate();
 
 		button = mLevel1.get("level7");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level5");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level4");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 
 		button = mLevel1.get("level2");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level8");
+		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -286,42 +293,49 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level8_med"));
 
 		button = mLevel1.get("level1_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level7_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level5_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level4_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level8_med");
+		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
@@ -350,41 +364,48 @@ public class MenuView {
 				"data/gfx/buttonDisabled.png", "level8_hard"));
 
 		button = mLevel1.get("level1_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level7_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level5_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 		button = mLevel1.get("level4_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level8_hard");
+		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
