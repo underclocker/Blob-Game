@@ -1,6 +1,16 @@
 {
     "actors": [
         {
+            "id": 3968,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "Block",
+                "ID": 3968,
+                "Y": 22.310888,
+                "X": 28.016827
+            }
+        },
+        {
             "id": 3704,
             "class": "org.siggd.actor.JiggleBall",
             "props": {
@@ -34,15 +44,6 @@
                 "ID": 3701,
                 "Y": 25.617146,
                 "X": 14.807754
-            }
-        },
-        {
-            "id": 3700,
-            "class": "org.siggd.actor.JiggleBall",
-            "props": {
-                "ID": 3700,
-                "Y": 24.977236,
-                "X": 15.901416
             }
         },
         {
@@ -87,17 +88,6 @@
                 "Orbit Y": "25.25",
                 "Y": 25.25,
                 "X": 27
-            }
-        },
-        {
-            "id": 3432,
-            "class": "org.siggd.actor.BouncePlate",
-            "props": {
-                "Layer": 0,
-                "ID": 3432,
-                "Stroke Length": "5",
-                "Y": 23.158531,
-                "X": 28.036335
             }
         },
         {
@@ -942,8 +932,8 @@
             "id": 140,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 4,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1665,8 +1655,8 @@
             "id": 185,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 4,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -2754,7 +2744,7 @@
                 "Layer": 0,
                 "Angle": 45,
                 "ID": 3423,
-                "Stroke Length": "10",
+                "Stroke Length": "10.25",
                 "Y": 22.191929,
                 "X": 22.258303
             }

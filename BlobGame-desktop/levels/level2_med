@@ -172,8 +172,8 @@
             "id": 5450,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -209,54 +209,6 @@
                 "Y": 10.127518,
                 "X": 10.78047,
                 "Anticlockwise": "0"
-            }
-        },
-        {
-            "id": 4114,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 35.000008,
-                "Wind Strength": "16",
-                "ID": 4114,
-                "CollisionSound": "",
-                "Y": -9.559604,
-                "X": 25.980108
-            }
-        },
-        {
-            "id": 4113,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 35.000008,
-                "Wind Strength": "16",
-                "ID": 4113,
-                "CollisionSound": "",
-                "Y": -10.434602,
-                "X": 26.567608
-            }
-        },
-        {
-            "id": 4112,
-            "class": "org.siggd.actor.Wind",
-            "props": {
-                "Angle": 35.000008,
-                "Wind Strength": "16",
-                "ID": 4112,
-                "CollisionSound": "",
-                "Y": -11.334603,
-                "X": 27.180107
-            }
-        },
-        {
-            "id": 4111,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Angle": 125.00001,
-                "Body": "Outpipe colored",
-                "ID": 4111,
-                "CollisionSound": "",
-                "Y": -12.200787,
-                "X": 27.838066
             }
         },
         {
@@ -1298,8 +1250,8 @@
             "id": 2627,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 1.324796,
                 "Body": "BarrelTopView",
@@ -1562,25 +1514,14 @@
             }
         },
         {
-            "id": 5585,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Layer": 2,
-                "Angle": 240,
-                "Body": "bouncePlateBase",
-                "ID": 5585,
-                "Y": -7.8345737,
-                "X": 25.263475
-            }
-        },
-        {
             "id": 5586,
             "class": "org.siggd.actor.BouncePlate",
             "props": {
-                "Angle": 240,
+                "Angle": 395.00003,
                 "ID": 5586,
-                "Y": -7.8358307,
-                "X": 25.280771
+                "Stroke Length": "7",
+                "Y": -12.154772,
+                "X": 27.664297
             }
         },
         {
