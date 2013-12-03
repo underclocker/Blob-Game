@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -93,7 +94,14 @@ public class MenuController implements InputProcessor, ControllerListener {
 			mY = target.getRow();
 		}
 	}
-
+	public void selectFirstAvailable(){
+		for(int i = 0; i<mTable.getCells().size(); i++){
+			setIndex(i);
+			if(getCell(mX, mY)!=null){
+				break;
+			}
+		}
+	}
 	public void setTable(Table t) {
 		mTable = t;
 		if (t != null) {
@@ -103,7 +111,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 					a.addListener(hoverListener);
 				}
 			}
-			setIndex(0);
+			selectFirstAvailable();
 		}
 	}
 
@@ -248,8 +256,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 			for (Cell c : mTable.getCells()) {
 				if (c.getColumn() == x && c.getRow() == y) {
 					Actor cellActor = (Actor) (c.getWidget());
-					if (cellActor instanceof ImageButton
-							&& (((ImageButton) cellActor).isDisabled() || !((ImageButton) cellActor)
+					if (cellActor instanceof Button
+							&& (((Button) cellActor).isDisabled() || !((Button) cellActor)
 									.isVisible())) {
 						return null;
 					} else {
@@ -272,9 +280,16 @@ public class MenuController implements InputProcessor, ControllerListener {
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
 			if (selected != null && (mX != selected.getColumn() || mY != selected.getRow())) {
-				Game.get().playTickSound();
-				mX = selected.getColumn();
-				mY = selected.getRow();
+				Actor cellActor = (Actor) (selected.getWidget());
+				if (cellActor instanceof Button
+						&& (((Button) cellActor).isDisabled() || !((Button) cellActor)
+								.isVisible())) {
+					//nothing don't navigate
+				}else{
+					Game.get().playTickSound();
+					mX = selected.getColumn();
+					mY = selected.getRow();
+				}
 			}
 		};
 	};

@@ -62,7 +62,6 @@ public class MenuView {
 	private Table mCustomizeTable;
 	private Image mJoinImage;
 	private Image mStartImage;
-	private Image mSpacerImage;
 	private Table mControllerTable;
 	private Table mControllerOverTable;
 	private Image mControllerLeft;
@@ -72,6 +71,7 @@ public class MenuView {
 	private Image mControllerPoof;
 	private Image mControllerSolid;
 	private Image mControllerStart;
+	private TextButton mRaceButton;
 	private int mDelay;
 	private MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
@@ -121,9 +121,8 @@ public class MenuView {
 		createLevelsMenu();
 		createCustomizeMenu();
 		createControllerMenu();
-
-		// Set the starting menu
-		setMenu(MAIN);
+		
+		//Starting menu is now set in Game.create()
 	}
 
 	private void createMainMenu() {
@@ -132,10 +131,10 @@ public class MenuView {
 
 		mStage.addActor(mMainTable);
 
-		final TextButton raceButton = new TextButton(" Race Mode ", mSkin);
-		mMainTable.add(raceButton);
-		raceButton.addListener(mRaceMode);
-		raceButton.addListener(mClickListener);
+		mRaceButton = new TextButton(" Race Mode ", mSkin);
+		mMainTable.add(mRaceButton);
+		mRaceButton.addListener(mRaceMode);
+		mRaceButton.addListener(mClickListener);
 
 		final TextButton campaignButton = new TextButton(" Campaign ", mSkin);
 		mMainTable.add(campaignButton);
@@ -955,6 +954,7 @@ public class MenuView {
 		mControllerOverTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
+			mRaceButton.setDisabled(!Level.RACE_UNLOCKED);
 			mMenuController.setTable(mMainTable);
 			if (Game.RELEASE) {
 				Game.get().deactivatePlayers();
@@ -981,6 +981,10 @@ public class MenuView {
 						// Level or unlocked property not present
 						tmp.setDisabled(true);
 					}
+				}
+				String firstHardLevel = Level.LEVELS[0]+Level.HARD_SUFFIX;
+				if(!levelSave.has(firstHardLevel) && Level.HARD_UNLOCKED){
+					mLevel1.get(firstHardLevel).getButton().setDisabled(false);
 				}
 			}
 			mMenuController.setTable(mLevelsTable);

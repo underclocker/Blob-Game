@@ -56,7 +56,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
+	public final static boolean UNLOCKED = false;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
 	public static float FPSREC = 60;
@@ -220,6 +220,16 @@ public class Game implements ApplicationListener {
 			// load the select/point image
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
+			FileHandle handleSt = Gdx.files.external(Level.SAVE_FILE);
+			String json = handleSt.readString();
+			if (json.length() > 1) {
+				try {
+					JSONObject levels = new JSONObject(json);
+					Level.unlockModes(levels);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
 			if (PRELOAD) {
 				setState(Game.LOAD);
 				setLevel("emptylevel");
@@ -240,6 +250,7 @@ public class Game implements ApplicationListener {
 				setState(Game.MENU);
 				setLevel("earth");
 				mLevelView.resetCamera();
+				mMenuView.setMenu(MenuView.MAIN);
 			}
 		}
 		// END: EDITOR
