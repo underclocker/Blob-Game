@@ -33,6 +33,7 @@ public class Door extends Actor implements IObserver {
 	private int mCamDelay = 0;
 	private String mSoundFile = "data/sfx/blublubluh.wav";
 	private int mSoundDelay = -300;
+	public static boolean PLAYED = false;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -109,7 +110,8 @@ public class Door extends Actor implements IObserver {
 			// reenable this.
 			// Game.get().getLevelView().setCameraPosition(mBody.getPosition());
 		}
-		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick()) {
+		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick() && !PLAYED) {
+			PLAYED = true;
 			if (mSoundDelay >= 0) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
@@ -117,7 +119,7 @@ public class Door extends Actor implements IObserver {
 				if (man.isLoaded(mSoundFile)) {
 					sound = man.get(mSoundFile, Sound.class);
 					soundID = sound.play();
-					sound.setVolume(soundID, .55f);
+					sound.setVolume(soundID, .65f);
 					if (!active) sound.setPitch(soundID, 1.5f);
 				}
 			}

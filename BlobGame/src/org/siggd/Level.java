@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.actor.Actor;
 import org.siggd.actor.Blob;
+import org.siggd.actor.Door;
 import org.siggd.actor.Dot;
 import org.siggd.actor.FadeIn;
 import org.siggd.actor.Spawner;
@@ -219,9 +220,8 @@ public class Level implements Iterable<Actor> {
 			mMusic.setVolume(mCurrentVolume);
 		}
 		if (mMusic != null) {
-			int mill = Math.round(mMusic.getPosition() * 100);
-			int error = ((mill) % 240);
-			if (error == 0)
+			int mill = Math.round(mMusic.getPosition() * 5 * 60 / 3);
+			if (mill % 60 == 0)
 				mMusicTick = 0;
 		}
 	}
@@ -234,10 +234,15 @@ public class Level implements Iterable<Actor> {
 
 	public void update() {
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-			Dot.ATE_DOT = false;
-			Dot.SLURP_DOT = false;
-			Dot.ONTIME_EAT++;
+
 			startMusic();
+			if (!musicTick()) {
+				Dot.ATE_DOT = false;
+				Dot.SLURP_DOT = false;
+			}
+			Dot.ONTIME_EAT++;
+			Door.PLAYED = false;
+
 			while (mBodiesToDestroy.size() > 0) {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
@@ -798,7 +803,7 @@ public class Level implements Iterable<Actor> {
 		}
 	}
 
-	public static void unlockModes(JSONObject save){
+	public static void unlockModes(JSONObject save) {
 		if (!RACE_UNLOCKED) {
 			try {
 				unlockRaceMode(save);
@@ -827,7 +832,7 @@ public class Level implements Iterable<Actor> {
 		// easy mode check
 		for (String s : LEVELS) {
 			if (save.has(s)) {
-					// nothing just note that this is the passing condition
+				// nothing just note that this is the passing condition
 			} else {
 				return false;
 			}

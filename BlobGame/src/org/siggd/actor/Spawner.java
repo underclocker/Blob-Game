@@ -91,9 +91,9 @@ public class Spawner extends Actor implements IObservable {
 			return;
 		mSpawnTimer.update();
 		mTexTimer.update();
-		if (mSpawnees.size() > 0 && Game.get().getLevel().musicTick()) {
+		if (mSpawnees.size() > 0) {
 			setState(true);
-			if (mSpawnTimer.isTriggered()) {
+			if (mSpawnTimer.isTriggered() && Game.get().getLevel().musicTick()) {
 				String curmap = Game.get().getLevel().getAssetKey();
 				if (!"earth".equals(curmap) && !"opening".equals(curmap)) {
 					AssetManager man = Game.get().getAssetManager();
