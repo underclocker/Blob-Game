@@ -983,7 +983,7 @@ public class MenuView {
 					}
 				}
 				String firstHardLevel = Level.LEVELS[0]+Level.HARD_SUFFIX;
-				if(!levelSave.has(firstHardLevel) && Level.HARD_UNLOCKED){
+				if(Level.HARD_UNLOCKED){
 					mLevel1.get(firstHardLevel).getButton().setDisabled(false);
 				}
 			}
