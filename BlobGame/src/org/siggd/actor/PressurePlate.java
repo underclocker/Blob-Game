@@ -28,7 +28,7 @@ public class PressurePlate extends Actor implements IObservable {
 	private Drawable mDefaultDrawable;
 	private PointLight mPointLight;
 	private int mRestTime = 0;
-	private int mDelay = 12;
+	private int mDelay = 20;
 
 	public PressurePlate(Level level, long id) {
 		super(level, id);
@@ -75,11 +75,11 @@ public class PressurePlate extends Actor implements IObservable {
 
 	@Override
 	public void update() {
+		mRestTime--;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		ArrayList<Body> bodies = (ArrayList<Body>) ContactHandler.getBodies(contacts);
 		boolean active = false;
-
 		for (Body b : bodies) {
 			if (b.getUserData() instanceof Dot)
 				continue;
@@ -100,7 +100,7 @@ public class PressurePlate extends Actor implements IObservable {
 			}
 		}
 		setState(active);
-		int s = active ? 1 : 0;
+		int s = getState() ? 1 : 0;
 		setProp("Output", s);
 	}
 
@@ -127,14 +127,14 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	public boolean getState() {
-		return mState && mRestTime <= 0;
+		return mState;
 	}
 
 	private void setState(boolean state) {
+		if (mRestTime > 0) return;
 		if (mPointLight != null)
 			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
 		if (state == mState) {
-			mRestTime--;
 			return;
 		} else {
 			mRestTime = mDelay;
@@ -147,7 +147,6 @@ public class PressurePlate extends Actor implements IObservable {
 			mDrawable.mDrawables.add(mDefaultDrawable);
 		}
 		mState = state;
-
 	}
 
 	private boolean mState = false; // This value MUST only be modified through
