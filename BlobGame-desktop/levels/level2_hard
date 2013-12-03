@@ -1768,7 +1768,7 @@
         }
     ],
     "props": {
-        "Ambient Light": 0.6,
+        "Ambient Light": 0.0,
         "Min Camera Y": "-17.066",
         "Gravity X": 0,
         "Gravity Y": -9.8,
@@ -1777,8 +1777,8 @@
         "Parallax": "",
         "Min Camera X": "0",
         "Max Camera X": "34.132",
-        "SongName": "enchilada.ogg",
-        "Difficulty": 0,
+        "SongName": "wob.ogg",
+        "Difficulty": 2,
         "Use Light": 1,
         "Solidity Enabled": 1
     }
