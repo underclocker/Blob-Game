@@ -101,7 +101,9 @@ public class PressurePlate extends Actor implements IObservable {
 				break;
 			}
 		}
-		setState(active);
+		setState(active);		
+		if (mPointLight != null)
+			mPointLight.setColor(mState ? 0 : .3f, mState ? .3f : 0, 0, .8f);
 		int s = getState() ? 1 : 0;
 		setProp("Output", s);
 	}
@@ -133,6 +135,7 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
+
 		if (mRestTime > 0)
 			return;
 		if (mLag > 0) {
@@ -157,8 +160,6 @@ public class PressurePlate extends Actor implements IObservable {
 			mDrawable.mDrawables.remove(mActiveDrawable);
 			mDrawable.mDrawables.add(mDefaultDrawable);
 		}
-		if (mPointLight != null)
-			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
 
 		mState = state;
 	}
