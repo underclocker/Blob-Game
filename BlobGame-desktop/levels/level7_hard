@@ -82,8 +82,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 3469,
-                "Y": 8.520489,
-                "X": 24.15708
+                "Y": 8.441694,
+                "X": 24.165834
             }
         },
         {
@@ -102,8 +102,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2651,
-                "Y": 10.063512,
-                "X": 6.4587717
+                "Y": 10.243667,
+                "X": 6.7938395
             }
         },
         {
@@ -111,8 +111,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2649,
-                "Y": 10.031012,
-                "X": 8.013772
+                "Y": 11.156645,
+                "X": 8.148842
             }
         },
         {
@@ -146,8 +146,8 @@
                 "Collision Threshold": 3.5,
                 "ID": 2646,
                 "Grabbable": 1,
-                "Y": 10.661011,
-                "X": 7.233777,
+                "Y": 11.05498,
+                "X": 7.1549835,
                 "Collision Pitch": 1.25
             }
         },
@@ -1198,18 +1198,6 @@
             }
         },
         {
-            "id": 3467,
-            "class": "org.siggd.actor.SpotLight",
-            "props": {
-                "Angle": 315,
-                "Distance": "10.0",
-                "ID": 3467,
-                "Y": 11.540798,
-                "X": 2.12398,
-                "Cone Angle": "45"
-            }
-        },
-        {
             "id": 3587,
             "class": "org.siggd.actor.JiggleBall",
             "props": {
@@ -1316,10 +1304,19 @@
                 "Y": 8.635789,
                 "X": 66.43266
             }
+        },
+        {
+            "id": 4923,
+            "class": "org.siggd.actor.JiggleBall",
+            "props": {
+                "ID": 4923,
+                "Y": 11.161754,
+                "X": 6.2678103
+            }
         }
     ],
     "props": {
-        "Ambient Light": 0,
+        "Ambient Light": 0.2,
         "Min Camera Y": "0",
         "Gravity X": 0,
         "Gravity Y": -9.8,
