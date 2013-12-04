@@ -221,13 +221,15 @@ public class Game implements ApplicationListener {
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
 			FileHandle handleSt = Gdx.files.external(Level.SAVE_FILE);
-			String json = handleSt.readString();
-			if (json.length() > 1) {
-				try {
-					JSONObject levels = new JSONObject(json);
-					Level.unlockModes(levels);
-				} catch (JSONException e) {
-					e.printStackTrace();
+			if (handleSt.exists()) {
+				String json = handleSt.readString();
+				if (json.length() > 1) {
+					try {
+						JSONObject levels = new JSONObject(json);
+						Level.unlockModes(levels);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			if (PRELOAD) {
