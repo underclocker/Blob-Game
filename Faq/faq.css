@@ -11,15 +11,15 @@ article header h1 {
 article header{
 	margin-bottom:10px;
 }
-article{
+article
+{
+    padding-left:50px;
+    padding-right:50px;
 }
 article img{
 	display:block;
 	margin: 5px auto;
 	border-radius:2px;
-}
-.box{
-	padding:50px;
 }
 code {
 	outline: 1px solid #ccc;

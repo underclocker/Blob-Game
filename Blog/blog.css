@@ -10,7 +10,8 @@ article header{
 	margin-bottom:10px;
 }
 article{
+	padding-left:50px;
+	padding-right:50px;
 }
 .box{
-	padding:50px;
 }
