@@ -809,7 +809,7 @@ public class Level implements Iterable<Actor> {
 				unlockRaceMode(save);
 			} catch (JSONException e) {
 				System.out.println("Error reading save for race mode unlock");
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 		if (!HARD_UNLOCKED) {
@@ -817,7 +817,7 @@ public class Level implements Iterable<Actor> {
 				unlockHardMode(save);
 			} catch (JSONException e) {
 				System.out.println("Error reading save for hard mode unlock");
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
@@ -825,13 +825,14 @@ public class Level implements Iterable<Actor> {
 	private static void unlockRaceMode(JSONObject save) throws JSONException {
 		if (hasRaceModePermission(save)) {
 			RACE_UNLOCKED = true;
+			System.out.println("RACE UNLOCKED");
 		}
 	}
 
 	private static boolean hasRaceModePermission(JSONObject save) throws JSONException {
 		// easy mode check
 		for (String s : LEVELS) {
-			if (save.has(s)) {
+			if (save.has(s) && ((JSONObject) save.get(s)).getBoolean("completed")) {
 				// nothing just note that this is the passing condition
 			} else {
 				return false;
