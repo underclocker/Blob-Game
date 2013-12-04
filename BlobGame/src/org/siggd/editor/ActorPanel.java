@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
@@ -42,11 +43,11 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 	private JButton rotate;
 	private JButton undo;
 	private JButton redo;
-	private JList actorPanelList;
+	private JList<String> actorPanelList;
 	private JScrollPane model;
 	private ArrayList<String> actorNames;
 	public JTextField mSearchField;
-	private DefaultListModel defaultActorPanelList;
+	private DefaultListModel<String> defaultActorPanelList;
 	JRadioButton addButton;
 	JRadioButton selectMoveButton;
 	JRadioButton removeButton;
@@ -90,7 +91,7 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 		JLabel actorLabel = new JLabel("Actors");
 		actorLabel.setAlignmentX(CENTER_ALIGNMENT);
 		actorPanel.add(actorLabel);
-		defaultActorPanelList = new DefaultListModel();		//not replaced by array because it needs to be resizeable
+		defaultActorPanelList = new DefaultListModel<String>();		//not replaced by array because it needs to be resizeable
 				
 		// Add the lists of bodies (identified with an asterisk)
 		ArrayList<String> bodies = getBodies();
@@ -103,9 +104,10 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 			defaultActorPanelList.addElement(a.getClass().getName());
 			actorNames.add(a.getClass().getName());
 		}
-		Object [] temp = defaultActorPanelList.toArray();
-		Arrays.sort(temp);
-		actorPanelList = new JList(temp);
+		String [] temp = Arrays.copyOf(defaultActorPanelList.toArray(),defaultActorPanelList.size(),String[].class);
+		Arrays.sort(temp, mCaseInsensitiveComparator);
+		actorPanelList = new JList<String>();
+		actorPanelList.setListData(temp);
 		actorPanelList.setSelectedIndex(0);						//so there will be a default actor to add
 		actorPanelList.addListSelectionListener(this);
 		actorPanelList.setFixedCellWidth(200);
@@ -210,7 +212,6 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 	}
 	@Override
 	public void caretUpdate(CaretEvent e) {
-		int loc = e.getDot();
 		String search = mSearchField.getText();
 		defaultActorPanelList.removeAllElements();
 		for(String s: actorNames){
@@ -218,10 +219,19 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 				defaultActorPanelList.addElement(s);
 			}
 		}
-		Object [] temp = defaultActorPanelList.toArray();
-		Arrays.sort(temp);
+		String [] temp = Arrays.copyOf(defaultActorPanelList.toArray(),defaultActorPanelList.size(),String[].class);
+		Arrays.sort(temp, mCaseInsensitiveComparator);
 		actorPanelList.setListData(temp);
 		actorPanelList.setSelectedIndex(0);	
 		
 	}
+	private Comparator<String> mCaseInsensitiveComparator = new Comparator<String>() {
+
+		@Override
+		public int compare(String s1, String s2) {
+			String s11 = s1.toLowerCase();
+			String s22 = s2.toLowerCase();
+			return s11.compareTo(s22);
+		}
+	};
 }
