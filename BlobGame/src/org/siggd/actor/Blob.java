@@ -1194,7 +1194,7 @@ public class Blob extends Actor implements Controllable {
 			float pitch = 1.0f;
 			for (int i = 0; i < mPointCombo; i++) {
 				pitch *= 1.05946 * 1.05946;
-				if (i == 3 || i == 7)
+				if (i == 3 || i == 6)
 					pitch /= 1.05946; // This makes it increase along a Major
 										// scale, the happiest scale in the
 										// universe
