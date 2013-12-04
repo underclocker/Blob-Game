@@ -7,13 +7,19 @@ import org.siggd.Level;
 import org.siggd.actor.meta.IObservable;
 import org.siggd.actor.meta.IObserver;
 import org.siggd.view.BodySprite;
+import org.siggd.view.CompositeDrawable;
 import org.siggd.view.DebugActorLinkDrawable;
+
+
+
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+
 
 /**
  * This class can be used as a convenient shortcut for any of the bodies in bodies.json. Just set the Body property to the appropriate
@@ -23,7 +29,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  */
 public class Gear extends Actor implements IObserver {
 	private String mTex;
+	private String mOtherTex;
 	private int mDelay;
+	private BodySprite mDefaultDrawable;
+	private BodySprite mOffDrawable;
+	
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
 	 * This should contain only properties, and code that MUST run before later init,
@@ -36,10 +46,18 @@ public class Gear extends Actor implements IObserver {
 		mDelay = 0;
 		mName = "Gear";
 		mTex = "data/"+Game.get().getBodyEditorLoader().getImagePath(mName);
+		mOtherTex = mTex.substring(0, mTex.length() - 4) + "un.png";
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 512, BodyType.KinematicBody, origin, false);
-		mDrawable.mDrawables.add(new BodySprite(mBody, origin, mTex));
-		mDrawable.mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED, Color.GREEN));	
+		
+		mDefaultDrawable = (new BodySprite(mBody, origin, mTex));
+		mOffDrawable = (new BodySprite(mBody, origin, mOtherTex));
+		
+		((CompositeDrawable) mDrawable).mDrawables.add(mDefaultDrawable);
+		((CompositeDrawable) mDrawable).mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED, Color.GREEN));
+		
+		
+		
 		setProp("Friction",(Float).4f);
 		setProp("Grabbable",(Integer)1);
 		setProp("Rotation Speed", (Float).5f);
@@ -62,6 +80,7 @@ public class Gear extends Actor implements IObserver {
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
 		man.load(mTex, Texture.class);
+		man.load(mOtherTex, Texture.class);
 	}
 	/**
 	 * Load bodies needed by the actor
@@ -70,6 +89,25 @@ public class Gear extends Actor implements IObserver {
 	public void loadBodies() {
 	}
 
+	@Override
+	public void setProp(String name, Object val)
+	{
+		if (name.equals("Grabbable")) {
+			if (Convert.getInt(val) == 1)
+			{
+				try{
+				mDrawable.mDrawables.remove(mOffDrawable);
+				mDrawable.mDrawables.add(mDefaultDrawable);
+				} catch(Exception e){}
+			}
+			else {
+				mDrawable.mDrawables.remove(mDefaultDrawable);
+				mDrawable.mDrawables.add(mOffDrawable);
+			}
+		}
+		super.setProp(name, val);
+	}
+	
 	@Override
 	public void update() {
 //if there is input, poll it for permission to update
