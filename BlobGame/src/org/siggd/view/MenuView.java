@@ -982,7 +982,11 @@ public class MenuView {
 		mControllerOverTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
-			mRaceButton.setDisabled(!Level.RACE_UNLOCKED);
+			if(Game.UNLOCKED){
+				mRaceButton.setDisabled(false);
+			}else{
+				mRaceButton.setDisabled(!Level.RACE_UNLOCKED);
+			}
 			mMenuController.setTable(mMainTable);
 			if (Game.RELEASE) {
 				Game.get().deactivatePlayers();
