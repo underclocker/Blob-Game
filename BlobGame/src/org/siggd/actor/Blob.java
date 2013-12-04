@@ -1550,6 +1550,7 @@ public class Blob extends Actor implements Controllable {
 			// Collision
 			// Group.
 			setProp("Grabbable", (Integer) 1);
+			mStrain = true;
 		} else if (mState == SOLID_STATE) {
 
 			// Already in solid state, transform to squish state.
@@ -1851,7 +1852,10 @@ public class Blob extends Actor implements Controllable {
 	 * Called to detect if any joints are strained to the breaking point. These
 	 * joints are then removed.
 	 */
+	
+	private boolean mStrain = false;
 	private void breakStrainedJoints() {
+		
 		for (Iterator<Joint> iter = mJoints.iterator(); iter.hasNext();) {
 			Joint j = iter.next();
 
@@ -1860,24 +1864,29 @@ public class Blob extends Actor implements Controllable {
 			if (force.len() < GRAB_BREAK_FORCE) {
 				continue;
 			}
-
+			
 			// Remove joint
-			Actor otherActor;
-			Body body;
-			body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
-			if (j.getBodyA() != null && j.getBodyB() != null) {
-				otherActor = (Actor) body.getUserData();
-				if (otherActor instanceof Blob) {
-					((Blob) otherActor).removeJoint(j);
+			if(!mStrain)
+			{
+				Actor otherActor;
+				Body body;
+				body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
+				if (j.getBodyA() != null && j.getBodyB() != null) {
+					otherActor = (Actor) body.getUserData();
+					if (otherActor instanceof Blob) {
+						((Blob) otherActor).removeJoint(j);
+					}
+					if (otherActor instanceof BattleBall) {
+						((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
+								.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
+					}
+					getLevel().getWorld().destroyJoint(j);
+					Game.get().playTickSound();
+					iter.remove();
 				}
-				if (otherActor instanceof BattleBall) {
-					((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
-							.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
-				}
-				getLevel().getWorld().destroyJoint(j);
-
-				iter.remove();
 			}
+			mStrain = false;
+			
 		}
 	}
 
