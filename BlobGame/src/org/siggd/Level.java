@@ -830,15 +830,12 @@ public class Level implements Iterable<Actor> {
 	}
 
 	private static boolean hasRaceModePermission(JSONObject save) throws JSONException {
-		// easy mode check
-		for (String s : LEVELS) {
-			if (save.has(s) && ((JSONObject) save.get(s)).getBoolean("completed")) {
-				// nothing just note that this is the passing condition
-			} else {
-				return false;
-			}
+		String level = LEVELS[0]+MEDIUM_SUFFIX;
+		if(save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))){
+			return true;
+		}else{
+			return false;
 		}
-		return true;
 	}
 
 	private static void unlockHardMode(JSONObject save) throws JSONException {
