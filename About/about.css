@@ -1,0 +1,42 @@
+article header a {
+	color: black;
+}
+article header a:hover{
+	text-decoration: none;
+	color: #00CB00;
+}
+article header h1 {
+	margin-bottom:0;
+}
+article header{
+	margin-bottom:10px;
+}
+article
+{
+    padding-left:50px;
+    padding-right:50px;
+}
+article img{
+	display:block;
+	margin: 5px 15px 5px 5px;
+}
+
+article h2{
+    text-align:center;
+}
+code {
+	outline: 1px solid #ccc;
+	background: #fff;
+	padding: 15px;
+	margin: 5px auto;
+	display: block;
+}
+code span{
+	display: block;
+	padding-left:15px;
+}
+
+.floated_img
+{
+    float: left;
+}
