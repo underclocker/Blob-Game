@@ -24,7 +24,7 @@ public class Bounce0 extends Slab {
 		Vector2 pos = getOrigin();
 		Background b = makeBackground("Block", l, pos);
 		BouncePlate bp = new BouncePlate(l, 0);
-		bp.setProp("Stroke Length", 5f);
+		bp.setProp("Stroke Length", 5.5f);
 		bp.setX(pos.x);
 		bp.setY(.95f);
 		l.addActor(bp);

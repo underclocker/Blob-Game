@@ -27,12 +27,12 @@ public class Wind0 extends Slab {
 		b = makeBackground("Outpipe colored", l, pos);
 		b.setAngle(90);
 		Wind wind = new Wind(l, 0);
-		wind.setProp("Wind Strength", 11f);
+		wind.setProp("Wind Strength", 12f);
 		wind.setX(pos.x);
 		wind.setY(2f);
 		l.addActor(wind);
 		wind = new Wind(l, 0);
-		wind.setProp("Wind Strength", 11f);
+		wind.setProp("Wind Strength", 12f);
 		wind.setX(pos.x);
 		wind.setY(3f);
 		l.addActor(wind);

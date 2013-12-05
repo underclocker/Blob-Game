@@ -15,6 +15,7 @@ public class Block0 extends Slab {
 		nextSlabs.add(new SlabStock(Jiggle1.class, 3f, 2f));
 		nextSlabs.add(new SlabStock(Air0.class, 1f, 2f));
 		nextSlabs.add(new SlabStock(Wind0.class, 8f, 0f));
+		nextSlabs.add(new SlabStock(Conv2.class, 10f, 2f));
 	}
 
 	@Override
