@@ -41,6 +41,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.controllers.PovDirection;
 
 public class MenuView {
 	public static String MAIN = "Main";
@@ -575,15 +576,22 @@ public class MenuView {
 			}
 		} else {
 			// listen for keys to bind\
+			
 			if (mBindingDelay <= 0) {
 				mControllerOverTable.clear();
 				if (mCustomBinding.LRAXIS == -1) {
-					if (mTwoSecondTimer < 40) {
+					if(testForPov(mBindingController) > 0)
+					{
+						mCustomBinding.LRAXIS = ControllerFilterAPI.AXIS_LEFT_LR;
+					}
+					else {
+						if (mTwoSecondTimer < 40) {
 						mControllerOverTable.add(mControllerLeft);
 					} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
 						mControllerOverTable.add(mControllerRight);
 					}
 					mCustomBinding.LRAXIS = testForAxis(mBindingController);
+					}
 					if (mCustomBinding.LRAXIS != -1) {
 						Game.get().playTickSound();
 						mTwoSecondTimer = 0;
@@ -620,12 +628,18 @@ public class MenuView {
 						mTwoSecondTimer = 0;
 					}
 				} else if (mCustomBinding.UDAXIS == -1) {
-					if (mTwoSecondTimer < 40) {
-						mControllerOverTable.add(mControllerUp);
-					} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
-						mControllerOverTable.add(mControllerDown);
+					if(testForPov(mBindingController) > 0)
+					{
+						mCustomBinding.UDAXIS = ControllerFilterAPI.AXIS_LEFT_UD;
 					}
-					mCustomBinding.UDAXIS = testForAxis(mBindingController);
+					else {
+						if (mTwoSecondTimer < 40) {
+							mControllerOverTable.add(mControllerUp);
+						} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
+							mControllerOverTable.add(mControllerDown);
+						}
+						mCustomBinding.UDAXIS = testForAxis(mBindingController);
+					}
 					if (mCustomBinding.UDAXIS == mCustomBinding.LRAXIS) {
 						mCustomBinding.UDAXIS = -1;
 					}
@@ -685,6 +699,17 @@ public class MenuView {
 		}
 		return -1;
 	}
+	
+	private int testForPov(Controller c) {
+		if (c == null) {
+			System.out.println("NULL CONTROLLER");
+			return -1;
+		}
+		if(c.getPov(0) != PovDirection.center)
+			return 1;
+		//DebugOutput.info(this, c.getPov(0)+ " ");
+		return -1;
+	}
 
 	private Controller testForBindingController() {
 		for (Controller c : Controllers.getControllers()) {
@@ -698,6 +723,8 @@ public class MenuView {
 					return c;
 				}
 			}
+			if(c.getPov(0) != PovDirection.center)
+				return c;
 		}
 		return null;
 	}
