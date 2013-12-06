@@ -74,7 +74,7 @@ public class MenuView {
 	private Image mControllerStart;
 	private TextButton mRaceButton;
 	private int mDelay;
-	private MenuController mMenuController;
+	public MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
 	private HashMap<String, SiggdImageButton> mLevel1;
 	private String mCurrentMenu;
@@ -279,7 +279,7 @@ public class MenuView {
 				mHorizontalSpacing);
 
 		mLevel1.put("level1_med", new SiggdImageButton("data/gfx/lvl1Down.png",
-				"data/gfx/buttonDisabled.png", "level1_med"));
+				"data/gfx/buttonDisabled.png", "opening_med"));
 		mLevel1.put("level7_med", new SiggdImageButton("data/gfx/lvl7Down.png",
 				"data/gfx/buttonDisabled.png", "level7_med"));
 		mLevel1.put("level5_med", new SiggdImageButton("data/gfx/lvl5Down.png",
@@ -350,7 +350,7 @@ public class MenuView {
 				mHorizontalSpacing);
 
 		mLevel1.put("level1_hard", new SiggdImageButton("data/gfx/lvl1Down.png",
-				"data/gfx/buttonDisabled.png", "level1_hard"));
+				"data/gfx/buttonDisabled.png", "opening_hard"));
 		mLevel1.put("level7_hard", new SiggdImageButton("data/gfx/lvl7Down.png",
 				"data/gfx/buttonDisabled.png", "level7_hard"));
 		mLevel1.put("level3_hard", new SiggdImageButton("data/gfx/lvl3Down.png",

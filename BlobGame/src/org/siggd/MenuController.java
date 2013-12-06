@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.siggd.actor.Blob;
+import org.siggd.actor.Teleport;
 import org.siggd.view.MenuView;
 
 import com.badlogic.gdx.Gdx;
@@ -94,14 +95,16 @@ public class MenuController implements InputProcessor, ControllerListener {
 			mY = target.getRow();
 		}
 	}
-	public void selectFirstAvailable(){
-		for(int i = 0; i<mTable.getCells().size(); i++){
+
+	public void selectFirstAvailable() {
+		for (int i = 0; i < mTable.getCells().size(); i++) {
 			setIndex(i);
-			if(getCell(mX, mY)!=null){
+			if (getCell(mX, mY) != null) {
 				break;
 			}
 		}
 	}
+
 	public void setTable(Table t) {
 		mTable = t;
 		if (t != null) {
@@ -282,10 +285,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 			if (selected != null && (mX != selected.getColumn() || mY != selected.getRow())) {
 				Actor cellActor = (Actor) (selected.getWidget());
 				if (cellActor instanceof Button
-						&& (((Button) cellActor).isDisabled() || !((Button) cellActor)
-								.isVisible())) {
-					//nothing don't navigate
-				}else{
+						&& (((Button) cellActor).isDisabled() || !((Button) cellActor).isVisible())) {
+					// nothing don't navigate
+				} else {
 					Game.get().playTickSound();
 					mX = selected.getColumn();
 					mY = selected.getRow();
@@ -296,6 +298,23 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 	private void handleEscape() {
 		if (Game.get().getState() == Game.PLAY) {
+			String[] skips = new String[4];
+			skips[0] = "opening";
+			skips[1] = "opening_med";
+			skips[2] = "opening_hard";
+			skips[3] = "closing";
+			for (int i = 0; i < skips.length; i++) {
+				if (skips[i].equals(Game.get().getLevel().getAssetKey())) {
+					for (org.siggd.actor.Actor a : Game.get().getLevel().getActors()) {
+						if (a instanceof Teleport) {
+							Teleport t = (Teleport) a;
+							t.changeLevel();
+							return;
+						}
+					}
+					return;
+				}
+			}
 			Game.get().setPaused(true);
 			Game.get().setState(Game.MENU);
 			Game.get().getMenuView().setMenu(MenuView.PAUSE);

@@ -63,6 +63,7 @@ public class Spawner extends Actor implements IObservable {
 		this.setProp("Exit Velocity", 2);
 		this.setProp("Initial Delay", 0);
 		this.setFriction(.1f);
+		this.setProp("Mute", 0);
 
 		if (LevelView.mUseLights) {
 			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
@@ -95,7 +96,7 @@ public class Spawner extends Actor implements IObservable {
 			setState(true);
 			if (mSpawnTimer.isTriggered() && Game.get().getLevel().musicTick()) {
 				String curmap = Game.get().getLevel().getAssetKey();
-				if (!"earth".equals(curmap) && !"opening".equals(curmap)) {
+				if (Convert.getInt(getProp("Mute")) == 0) {
 					AssetManager man = Game.get().getAssetManager();
 					Sound sound;
 					long soundID;

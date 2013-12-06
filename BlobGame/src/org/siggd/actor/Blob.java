@@ -1122,8 +1122,8 @@ public class Blob extends Actor implements Controllable {
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()
 					&& !"earth".equals(Game.get().getLevel().getAssetKey())
-					
-					) {
+
+			) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -1426,8 +1426,15 @@ public class Blob extends Actor implements Controllable {
 
 	public void transform() {
 		AssetManager man = Game.get().getAssetManager();
-		if("earth".equals(Game.get().getLevel().getAssetKey())
-		|| "opening".equals(Game.get().getLevel().getAssetKey())) return; //TODO add cutscenes here
+		String[] skips = new String[5];
+		skips[0] = "earth";
+		skips[1] = "opening";
+		skips[2] = "opening_med";
+		skips[3] = "opening_hard";
+		skips[4] = "closing";
+		for (int i = 0; i < skips.length; i++){
+			if (skips[i].equals(Game.get().getLevel().getAssetKey())) return;
+		}
 		
 		Sound sound;
 		long soundID;
@@ -1852,10 +1859,11 @@ public class Blob extends Actor implements Controllable {
 	 * Called to detect if any joints are strained to the breaking point. These
 	 * joints are then removed.
 	 */
-	
+
 	private boolean mStrain = false;
+
 	private void breakStrainedJoints() {
-		
+
 		for (Iterator<Joint> iter = mJoints.iterator(); iter.hasNext();) {
 			Joint j = iter.next();
 
@@ -1864,10 +1872,9 @@ public class Blob extends Actor implements Controllable {
 			if (force.len() < GRAB_BREAK_FORCE) {
 				continue;
 			}
-			
+
 			// Remove joint
-			if(!mStrain)
-			{
+			if (!mStrain) {
 				Actor otherActor;
 				Body body;
 				body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
@@ -1886,7 +1893,7 @@ public class Blob extends Actor implements Controllable {
 				}
 			}
 			mStrain = false;
-			
+
 		}
 	}
 
