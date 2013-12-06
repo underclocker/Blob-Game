@@ -54,7 +54,7 @@ public class Game implements ApplicationListener {
 	public final static int MENU = 2;
 	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = false;
+	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
 	public final static boolean UNLOCKED = true;
 	public static boolean PRELOAD = false; // only preloads in release and reads
@@ -241,6 +241,7 @@ public class Game implements ApplicationListener {
 				mHackishLoader.add("charselect");
 				mHackishLoader.add("level3");
 				mHackishLoader.add("level4");
+				mHackishLoader.add("closing");
 				mHackishLoader.add("level5");
 				mHackishLoader.add("opening");
 				mHackishLoader.add("level7");
