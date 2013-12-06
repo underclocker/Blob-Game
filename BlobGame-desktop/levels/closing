@@ -1,15 +1,31 @@
 {
     "actors": [
         {
-            "id": 3,
-            "class": "org.siggd.actor.Blob",
+            "id": 11,
+            "class": "org.siggd.actor.Teleport",
             "props": {
-                "Active": 0,
-                "Density": 0.35,
-                "ID": 3,
-                "CollisionSound": "",
-                "Y": 15.514525,
-                "X": 18.048384
+                "Timer": "1470",
+                "Level": "levelselect",
+                "Y": 4.8766103,
+                "X": 22.317835
+            }
+        },
+        {
+            "id": 6,
+            "class": "org.siggd.actor.Cutscene",
+            "props": {
+                "End": "1260",
+                "Z Pan": ".00085",
+                "X Pan": "0.00405",
+                "Y Offset": "-5.25",
+                "Start": "60",
+                "ID": 6,
+                "Y Pan": "0.00555",
+                "Scale": "2",
+                "Y": 6.282687,
+                "X": 17.540655,
+                "Texture": "outro.png",
+                "X Offset": "-5.25"
             }
         },
         {
@@ -30,32 +46,15 @@
             }
         },
         {
-            "id": 6,
-            "class": "org.siggd.actor.Cutscene",
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
             "props": {
-                "End": "600",
-                "Z Pan": ".0017",
-                "X Pan": "0.0081",
-                "Y Offset": "-5.25",
-                "Start": "60",
-                "ID": 6,
-                "Y Pan": "0.0111",
-                "Scale": "2",
-                "Y": 6.282687,
-                "X": 17.540655,
-                "Texture": "outro.png",
-                "X Offset": "-5.25"
-            }
-        },
-        {
-            "id": 11,
-            "class": "org.siggd.actor.Teleport",
-            "props": {
-                "ID": 11,
-                "Timer": "810",
-                "Level": "levelselect",
-                "Y": 4.8766103,
-                "X": 22.317835
+                "Active": 0,
+                "Density": 0.35,
+                "ID": 3,
+                "CollisionSound": "",
+                "Y": 15.514525,
+                "X": 18.048384
             }
         }
     ],
@@ -69,7 +68,7 @@
         "Parallax": "",
         "Min Camera X": "-8",
         "Max Camera X": "8",
-        "SongName": "drumdrum.ogg",
+        "SongName": "close.ogg",
         "Difficulty": 0,
         "Use Light": "0",
         "Solidity Enabled": "0"
