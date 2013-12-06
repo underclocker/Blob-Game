@@ -59,7 +59,7 @@ public class Spawner extends Actor implements IObservable {
 		mTexTimer.unpause();
 
 		this.setProp("Blob Spawner", 0);
-		this.setProp("Rate", 60);
+		this.setProp("Rate", 16);
 		this.setProp("Exit Velocity", 2);
 		this.setProp("Initial Delay", 0);
 		this.setFriction(.1f);
