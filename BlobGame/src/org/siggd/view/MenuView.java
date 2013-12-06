@@ -486,9 +486,9 @@ public class MenuView {
 				mShapeRenderer.setColor(Color.BLACK);
 				mShapeRenderer.rect(x, y, width, 10);
 				if (progress < 1) {
-					mShapeRenderer.setColor(Color.RED);
+					mShapeRenderer.setColor(new Color(.7f,progress*.4f,0,1));
 				} else {
-					mShapeRenderer.setColor(Color.GREEN);
+					mShapeRenderer.setColor(new Color(0,.7f,0,1));
 				}
 				mShapeRenderer.rect(x + 2, y + 2, (width - 4) * progress, 6);
 				mShapeRenderer.end();
