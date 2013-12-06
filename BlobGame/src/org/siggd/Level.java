@@ -48,6 +48,7 @@ public class Level implements Iterable<Actor> {
 	public static String HARD_SUFFIX = "_hard";
 	public static boolean HARD_UNLOCKED = false;
 	public static boolean RACE_UNLOCKED = false;
+	public static boolean COMPLETE = false;
 
 	// Array of actors
 	ArrayList<Actor> mActors;
@@ -808,7 +809,7 @@ public class Level implements Iterable<Actor> {
 			try {
 				unlockRaceMode(save);
 			} catch (JSONException e) {
-				System.out.println("Error reading save for race mode unlock");
+				//System.out.println("Error reading save for race mode unlock");
 				// e.printStackTrace();
 			}
 		}
@@ -816,7 +817,15 @@ public class Level implements Iterable<Actor> {
 			try {
 				unlockHardMode(save);
 			} catch (JSONException e) {
-				System.out.println("Error reading save for hard mode unlock");
+				//System.out.println("Error reading save for hard mode unlock");
+				// e.printStackTrace();
+			}
+		}
+		if (!COMPLETE){
+			try {
+				unlockCompletion(save);
+			} catch (JSONException e) {
+				//System.out.println("Error reading save for hard mode unlock");
 				// e.printStackTrace();
 			}
 		}
@@ -844,6 +853,12 @@ public class Level implements Iterable<Actor> {
 		}
 	}
 
+	private static void unlockCompletion(JSONObject save) throws JSONException {
+		if (hasStashBonus(save)) {
+			COMPLETE = true;
+		}
+	}
+
 	private static boolean hasHardModePermission(JSONObject save) throws JSONException {
 		// easy mode check
 		for (String s : LEVELS) {
@@ -860,6 +875,48 @@ public class Level implements Iterable<Actor> {
 		// medium mode check
 		for (String level : LEVELS) {
 			String s = level + MEDIUM_SUFFIX;
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private static boolean hasStashBonus(JSONObject save) throws JSONException {
+		// easy mode check
+		for (String s : LEVELS) {
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		// medium mode check
+		for (String level : LEVELS) {
+			String s = level + MEDIUM_SUFFIX;
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		// hard mode check
+		for (String level : LEVELS) {
+			String s = level + HARD_SUFFIX;
 			if (save.has(s)) {
 				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
 					return false;

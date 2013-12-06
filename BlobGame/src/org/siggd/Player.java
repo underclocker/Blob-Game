@@ -22,6 +22,6 @@ public class Player {
 		mLeader = false;
 		// Players start active
 		active = true;
-		mustache = Math.random() < .001f;
+		mustache = Math.random() < (Level.COMPLETE ? .1f : .001f);
 	}
 }
