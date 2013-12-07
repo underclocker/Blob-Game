@@ -331,8 +331,8 @@
             "id": 5450,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1239,8 +1239,8 @@
             "id": 2627,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Angle": 1.324796,
                 "Body": "BarrelTopView",
@@ -1647,8 +1647,8 @@
                 "Angle": 270,
                 "Speed": "2",
                 "ID": 6201,
-                "Y": 10.178607,
-                "X": 3.1932735,
+                "Y": 9.68,
+                "X": 3.165,
                 "Anticlockwise": "1"
             }
         },
@@ -1707,8 +1707,8 @@
             "id": 6656,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
