@@ -56,7 +56,7 @@ public class Game implements ApplicationListener {
 	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
-	public final static boolean DEBUG = false;
+	public final static boolean DEBUG = true;
 	public final static boolean UNLOCKED = true;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
@@ -153,7 +153,7 @@ public class Game implements ApplicationListener {
 		}
 
 		DebugOutput.enable();
-		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
+		System.out.println("Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
@@ -180,10 +180,10 @@ public class Game implements ApplicationListener {
 				p.active = true;
 				p.controltype = ControlType.Controller;
 				mPlayers.add(p);
-				DebugOutput.info(this, "Controller #" + i++ + ": " + controller.getName());
+				System.out.println("Controller #" + i++ + ": " + controller.getName());
 			}
 			if (Controllers.getControllers().size == 0) {
-				DebugOutput.info(this, "No controllers attached");
+				System.out.println("No controllers attached");
 				Player p = new Player(mPlayers.size());
 				p.active = true;
 				p.controltype = ControlType.Arrows;
