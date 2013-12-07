@@ -834,7 +834,6 @@ public class Level implements Iterable<Actor> {
 	private static void unlockRaceMode(JSONObject save) throws JSONException {
 		if (hasRaceModePermission(save)) {
 			RACE_UNLOCKED = true;
-			System.out.println("RACE UNLOCKED");
 		}
 	}
 
