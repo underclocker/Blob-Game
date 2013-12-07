@@ -1,5 +1,6 @@
 package org.siggd;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
@@ -739,9 +740,16 @@ public class Game implements ApplicationListener {
 		}
 	}
 
-	public void saveScreenshot(FileHandle file) {
-		Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-		PixmapIO.writePNG(file, pixmap);
+	public void saveScreenshot() {
+		File f = new File(Gdx.files.getExternalStoragePath() + ".BlobGame/Screenshots/" + System.currentTimeMillis()+".png");
+		FileHandle handle;
+		if (!f.exists()) {
+			handle = new FileHandle(f);
+			Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
+					true);
+			PixmapIO.writePNG(handle, pixmap);
+		}
+
 	}
 
 	public Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {

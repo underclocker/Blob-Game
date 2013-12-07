@@ -478,7 +478,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 			}
 			mControllerFilter = 1;
 			mRepeats = 0;
-
 			break;
 		case Input.Keys.D:
 		case Input.Keys.RIGHT:
@@ -529,6 +528,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 		case Input.Keys.ESCAPE:
 			handleEscape();
 			Game.get().playNomSound();
+			break;
+		case Input.Keys.F12:
+			Game.get().saveScreenshot();
 			break;
 		}
 		mFilteredKey = keycode;
