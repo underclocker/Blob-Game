@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.ControllerFilterAPI;
-import org.siggd.Convert;
 import org.siggd.DebugOutput;
 import org.siggd.Game;
 import org.siggd.Level;
@@ -20,8 +19,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,10 +39,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.controllers.PovDirection;
 
 public class MenuView {
 	public static String MAIN = "Main";
@@ -58,6 +57,7 @@ public class MenuView {
 	private Table mFakePauseTable;
 	private Controller mFakePauseController;
 	private Table mLevelsTable;
+	private Table mLevelsBG;
 	private Table mTint;
 	private Table mBaseCustomizeTable;
 	private Table mCustomizeTable;
@@ -73,6 +73,10 @@ public class MenuView {
 	private Image mControllerSolid;
 	private Image mControllerStart;
 	private TextButton mRaceButton;
+	private TextButton mCampaignButton;
+	private TextButton mExitButton;
+	private TextButton mControllerButton;
+	private TextButton mClearButton;
 	private int mDelay;
 	public MenuController mMenuController;
 	private ShapeRenderer mShapeRenderer;
@@ -85,6 +89,8 @@ public class MenuView {
 	private int mHintTimer = 0;
 	private int mTwoSecondTimer = 0;
 	private ArrayList<Vector2> mSpawnPos;
+	private float mGlow = 0;
+	private Color mGlowColor = new Color();
 
 	public MenuView() {
 		mStage = new Stage();
@@ -133,31 +139,30 @@ public class MenuView {
 		mStage.addActor(mMainTable);
 
 		mRaceButton = new TextButton(" Race Mode ", mSkin);
-		mMainTable.add(mRaceButton);
 		mRaceButton.addListener(mRaceMode);
 		mRaceButton.addListener(mClickListener);
 
-		final TextButton campaignButton = new TextButton(" Campaign ", mSkin);
-		mMainTable.add(campaignButton);
-		campaignButton.addListener(mStartCampaign);
-		campaignButton.addListener(mClickListener);
+		mCampaignButton = new TextButton(" Campaign ", mSkin);
+		mMainTable.add(mCampaignButton);
+		mCampaignButton.addListener(mStartCampaign);
+		mCampaignButton.addListener(mClickListener);
 
-		final TextButton clearButton = new TextButton(" Clear Save ", mSkin);
-		mMainTable.add(clearButton);
-		clearButton.addListener(mClear);
-		clearButton.addListener(mClickListener);
+		mClearButton = new TextButton(" Clear Save ", mSkin);
+		mMainTable.add(mClearButton);
+		mClearButton.addListener(mClear);
+		mClearButton.addListener(mClickListener);
 
 		if (Controllers.getControllers().size > 0) {
-			final TextButton controllerButton = new TextButton(" Config Controller ", mSkin);
-			mMainTable.add(controllerButton);
-			controllerButton.addListener(mController);
-			controllerButton.addListener(mClickListener);
+			mControllerButton = new TextButton(" Config Controller ", mSkin);
+			mMainTable.add(mControllerButton);
+			mControllerButton.addListener(mController);
+			mControllerButton.addListener(mClickListener);
 		}
 
-		final TextButton exitButton = new TextButton(" Exit ", mSkin);
-		mMainTable.add(exitButton);
-		exitButton.addListener(mExit);
-		exitButton.addListener(mClickListener);
+		mExitButton = new TextButton(" Exit ", mSkin);
+		mMainTable.add(mExitButton);
+		mExitButton.addListener(mExit);
+		mExitButton.addListener(mClickListener);
 	}
 
 	private void createPauseMenu() {
@@ -191,6 +196,8 @@ public class MenuView {
 	}
 
 	private void createLevelsMenu() {
+		mLevelsBG = new Table(mSkin);
+		mLevelsBG.setFillParent(true);
 		mLevelsTable = new Table(mSkin);
 		mLevelsTable.setFillParent(true);
 		ImageButton imageButton;
@@ -221,13 +228,18 @@ public class MenuView {
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 		mLevelsTable.invalidate();
+		mLevelsBG.invalidate();
 
 		button = mLevel1.get("level7");
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -236,12 +248,16 @@ public class MenuView {
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3");
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -250,11 +266,16 @@ public class MenuView {
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
+		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2");
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -262,6 +283,8 @@ public class MenuView {
 		button = mLevel1.get("level8");
 		button.getButton().setColor(0f, 0f, 1f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -272,6 +295,7 @@ public class MenuView {
 				mHorizontalSpacing);
 
 		mLevelsTable.row();
+		mLevelsBG.row();
 
 		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.setVisible(false);
@@ -297,12 +321,16 @@ public class MenuView {
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level7_med");
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -311,12 +339,16 @@ public class MenuView {
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level3_med");
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -325,12 +357,16 @@ public class MenuView {
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level2_med");
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -339,10 +375,13 @@ public class MenuView {
 		button.getButton().setColor(0f, 1f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		mLevelsTable.row();
+		mLevelsBG.row();
 
 		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
 		imageButton.setVisible(false);
@@ -368,12 +407,16 @@ public class MenuView {
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level7_hard");
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -382,6 +425,8 @@ public class MenuView {
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
@@ -389,11 +434,16 @@ public class MenuView {
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
-		button.getButton().addListener(mClickListener);
+		button.getButton().addListener(mClickListener);
+
 		button = mLevel1.get("level4_hard");
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -402,12 +452,16 @@ public class MenuView {
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
 
 		button = mLevel1.get("level8_hard");
 		button.getButton().setColor(1f, 0f, 0f, .65f);
 		mLevelsTable.add(button.getButton()).space(mVerticalSpacing, mHorizontalSpacing,
+				mVerticalSpacing, mHorizontalSpacing);
+		mLevelsBG.add(button.getGlow()).space(mVerticalSpacing, mHorizontalSpacing,
 				mVerticalSpacing, mHorizontalSpacing);
 		button.getButton().addListener(mStartLevel);
 		button.getButton().addListener(mClickListener);
@@ -471,6 +525,7 @@ public class MenuView {
 		if (LEVELS.equals(mCurrentMenu)) {
 			for (String s : mLevel1.keySet()) {
 				ImageButton tmp = mLevel1.get(s).getButton();
+				Image glow = mLevel1.get(s).getGlow();
 				float x = tmp.getX();
 				float y = tmp.getY() - 20;
 				float width = tmp.getWidth();
@@ -486,12 +541,18 @@ public class MenuView {
 				mShapeRenderer.setColor(Color.BLACK);
 				mShapeRenderer.rect(x, y, width, 10);
 				if (progress < 1) {
-					mShapeRenderer.setColor(new Color(.7f,progress*.4f,0,1));
+					mShapeRenderer.setColor(new Color(.7f, progress * .4f, 0, 1));
 				} else {
-					mShapeRenderer.setColor(new Color(0,.7f,0,1));
+					mShapeRenderer.setColor(new Color(0, .7f, 0, 1));
 				}
 				mShapeRenderer.rect(x + 2, y + 2, (width - 4) * progress, 6);
 				mShapeRenderer.end();
+				if (tmp.isTransform() && !tmp.isDisabled()) {
+					glow.setVisible(true);
+					glow.setColor(mGlowColor);
+				} else {
+					glow.setVisible(false);
+				}
 			}
 		} else if (CUSTOMIZE.equals(mCurrentMenu)) {
 			if (Game.get().activePlayersNum() > 0) {
@@ -527,6 +588,9 @@ public class MenuView {
 	}
 
 	public void update() {
+		mGlow += .05f;
+		mGlowColor = mMenuController.getCurColor().cpy();
+		mGlowColor.a = ((float) ((1 - Math.cos(mGlow)) / 3f));
 		mTwoSecondTimer++;
 		if (mTwoSecondTimer > 120)
 			mTwoSecondTimer -= 120;
@@ -576,21 +640,19 @@ public class MenuView {
 			}
 		} else {
 			// listen for keys to bind\
-			
+
 			if (mBindingDelay <= 0) {
 				mControllerOverTable.clear();
 				if (mCustomBinding.LRAXIS == -1) {
-					if(testForPov(mBindingController) > 0)
-					{
+					if (testForPov(mBindingController) > 0) {
 						mCustomBinding.LRAXIS = ControllerFilterAPI.AXIS_LEFT_LR;
-					}
-					else {
+					} else {
 						if (mTwoSecondTimer < 40) {
-						mControllerOverTable.add(mControllerLeft);
-					} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
-						mControllerOverTable.add(mControllerRight);
-					}
-					mCustomBinding.LRAXIS = testForAxis(mBindingController);
+							mControllerOverTable.add(mControllerLeft);
+						} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
+							mControllerOverTable.add(mControllerRight);
+						}
+						mCustomBinding.LRAXIS = testForAxis(mBindingController);
 					}
 					if (mCustomBinding.LRAXIS != -1) {
 						Game.get().playTickSound();
@@ -628,11 +690,9 @@ public class MenuView {
 						mTwoSecondTimer = 0;
 					}
 				} else if (mCustomBinding.UDAXIS == -1) {
-					if(testForPov(mBindingController) > 0)
-					{
+					if (testForPov(mBindingController) > 0) {
 						mCustomBinding.UDAXIS = ControllerFilterAPI.AXIS_LEFT_UD;
-					}
-					else {
+					} else {
 						if (mTwoSecondTimer < 40) {
 							mControllerOverTable.add(mControllerUp);
 						} else if (mTwoSecondTimer >= 60 && mTwoSecondTimer < 100) {
@@ -699,15 +759,15 @@ public class MenuView {
 		}
 		return -1;
 	}
-	
+
 	private int testForPov(Controller c) {
 		if (c == null) {
 			System.out.println("NULL CONTROLLER");
 			return -1;
 		}
-		if(c.getPov(0) != PovDirection.center)
+		if (c.getPov(0) != PovDirection.center)
 			return 1;
-		//DebugOutput.info(this, c.getPov(0)+ " ");
+		// DebugOutput.info(this, c.getPov(0)+ " ");
 		return -1;
 	}
 
@@ -723,7 +783,7 @@ public class MenuView {
 					return c;
 				}
 			}
-			if(c.getPov(0) != PovDirection.center)
+			if (c.getPov(0) != PovDirection.center)
 				return c;
 		}
 		return null;
@@ -1001,6 +1061,7 @@ public class MenuView {
 		mPauseTable.remove();
 		mFakePauseTable.remove();
 		mLevelsTable.remove();
+		mLevelsBG.remove();
 		mBaseCustomizeTable.remove();
 		mCustomizeTable.remove();
 		mStartImage.remove();
@@ -1009,10 +1070,16 @@ public class MenuView {
 		mControllerOverTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
-			if(Game.UNLOCKED){
-				mRaceButton.setDisabled(false);
-			}else{
-				mRaceButton.setDisabled(!Level.RACE_UNLOCKED);
+			if ((Game.UNLOCKED || Level.RACE_UNLOCKED)
+					&& !mMainTable.getChildren().contains(mRaceButton, true)) {
+				mMainTable.clear();
+				mMainTable.add(mCampaignButton);
+				mMainTable.add(mRaceButton);
+				mMainTable.add(mClearButton);
+				if (Controllers.getControllers().size > 0) {
+					mMainTable.add(mControllerButton);
+				}
+				mMainTable.add(mExitButton);
 			}
 			mMenuController.setTable(mMainTable);
 			if (Game.RELEASE) {
@@ -1027,11 +1094,13 @@ public class MenuView {
 			mStage.addActor(mFakePauseTable);
 			mMenuController.setTable(mFakePauseTable);
 		} else if (LEVELS.equals(menu)) {
+			mStage.addActor(mLevelsBG);
 			mStage.addActor(mLevelsTable);
 			if (!Game.UNLOCKED) {
 				JSONObject levelSave = Game.get().getLevel().getLevelSave();
 				for (String s : mLevel1.keySet()) {
 					ImageButton tmp = mLevel1.get(s).getButton();
+					float progress = 0;
 					try {
 						JSONObject level = levelSave.getJSONObject(s);
 						boolean unlocked = level.getBoolean("unlocked");
@@ -1040,14 +1109,26 @@ public class MenuView {
 						// Level or unlocked property not present
 						tmp.setDisabled(true);
 					}
+					try {
+						JSONObject level = levelSave.getJSONObject(s);
+						progress = (float) level.getDouble("progress");
+					} catch (JSONException e) {
+						progress = 0;
+					}
+					tmp.setTransform(progress < 1);
 				}
 				String firstHardLevel = Level.LEVELS[0] + Level.HARD_SUFFIX;
 				if (Level.HARD_UNLOCKED) {
 					mLevel1.get(firstHardLevel).getButton().setDisabled(false);
 				}
 			}
+			mGlow = 0;
 			mMenuController.setTable(mLevelsTable);
-			mMenuController.setIndex(1);
+			if (!Level.COMPLETE) {
+				mMenuController.selectFirstCheckedAvailable();
+			} else {
+				mMenuController.setIndex(1);
+			}
 		} else if (CUSTOMIZE.equals(menu)) {
 			mSpawnPos.clear();
 

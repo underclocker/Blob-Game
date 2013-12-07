@@ -526,7 +526,7 @@ public class Blob extends Actor implements Controllable {
 		}
 	}
 
-	public static final Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
+	public static Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
 			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f), new Color(1f, .5f, 0f, 1f),
 			new Color(1f, 1f, .0f, 1f), new Color(.8f, 0f, .9f, 1f),
 			new Color(.21f, .71f, .9f, 1f), new Color(0f, .4f, 0f, 1f),

@@ -15,6 +15,7 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -100,6 +101,15 @@ public class MenuController implements InputProcessor, ControllerListener {
 		for (int i = 0; i < mTable.getCells().size(); i++) {
 			setIndex(i);
 			if (getCell(mX, mY) != null) {
+				break;
+			}
+		}
+	}
+
+	public void selectFirstCheckedAvailable() {
+		for (int i = 0; i < mTable.getCells().size(); i++) {
+			setIndex(i);
+			if (getTransCell(mX, mY) != null) {
 				break;
 			}
 		}
@@ -254,6 +264,10 @@ public class MenuController implements InputProcessor, ControllerListener {
 		}
 	}
 
+	public Color getCurColor() {
+		return Blob.COLORS[mPlayerId];
+	}
+
 	private Cell getCell(int x, int y) {
 		if (mTable != null) {
 			for (Cell c : mTable.getCells()) {
@@ -269,7 +283,25 @@ public class MenuController implements InputProcessor, ControllerListener {
 				}
 			}
 		}
-		// System.out.println("CELL " + x + "," + y + " not found");
+		return null;
+	}
+
+	private Cell getTransCell(int x, int y) {
+		if (mTable != null) {
+			for (Cell c : mTable.getCells()) {
+				if (c.getColumn() == x && c.getRow() == y) {
+					Actor cellActor = (Actor) (c.getWidget());
+					if (cellActor instanceof Button
+							&& (((Button) cellActor).isDisabled()
+									|| !((Button) cellActor).isVisible() || !((Button) cellActor)
+										.isTransform())) {
+						return null;
+					} else {
+						return c;
+					}
+				}
+			}
+		}
 		return null;
 	}
 

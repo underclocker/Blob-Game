@@ -1,15 +1,17 @@
 package org.siggd.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class SiggdImageButton {
+	private static Texture GLOW;
 	ImageButton mImageButton;
+	Image mGlow;
 
 	public SiggdImageButton(String down, String disabled, String metaData) {
 		Texture texture2 = new Texture(Gdx.files.internal(down));
@@ -23,6 +25,10 @@ public class SiggdImageButton {
 		imageButtonStyle.imageDisabled = drawableDisabled;
 		mImageButton = new ImageButton(imageButtonStyle);
 		mImageButton.setName(metaData);
+
+		if (GLOW == null)
+			GLOW = new Texture("data/gfx/glow.png");
+		mGlow = new Image(GLOW);
 	}
 
 	public SiggdImageButton(String down) {
@@ -31,5 +37,9 @@ public class SiggdImageButton {
 
 	public ImageButton getButton() {
 		return mImageButton;
+	}
+
+	public Image getGlow() {
+		return mGlow;
 	}
 }
