@@ -406,8 +406,8 @@
             "id": 17,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -442,6 +442,7 @@
                 "Layer": 5,
                 "Exit Velocity": "5",
                 "Angle": 180,
+                "ID": 8,
                 "Blob Spawner": "1",
                 "CollisionSound": "",
                 "Y": 16.111012,
@@ -925,8 +926,8 @@
             "id": 474,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
@@ -1133,14 +1134,27 @@
             }
         },
         {
-            "id": 1717,
-            "class": "org.siggd.actor.Background",
+            "id": 1715,
+            "class": "org.siggd.actor.SpotLight",
             "props": {
-                "Layer": 0,
-                "Body": "Block",
-                "ID": 1717,
-                "Y": 1.4955856,
-                "X": 28.117027
+                "Angle": 780.00006,
+                "Distance": "10.0",
+                "Green": "0.1",
+                "ID": 1715,
+                "Y": -1.0014887,
+                "X": 64.73379
+            }
+        },
+        {
+            "id": 1716,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 480,
+                "Distance": "10.0",
+                "Green": "0.1",
+                "ID": 1716,
+                "Y": -1.0514894,
+                "X": 66.64629
             }
         }
     ],

@@ -546,7 +546,7 @@ public class Blob extends Actor implements Controllable {
 			// new Color(0f, 0f, 0f, 1f), // Black
 			// new Color(1f, 1f, 1f, 1f), // White
 			new Color(.8f, .8f, .8f, .5f), // Gray
-			new Color(.4f, 0f, 0f, 1f) // Dark Red
+			//new Color(.4f, 0f, 0f, 1f) // Dark Red
 	};
 
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
