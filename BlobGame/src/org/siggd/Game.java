@@ -57,7 +57,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
+	public final static boolean UNLOCKED = false;
 	public static boolean PRELOAD = false; // only preloads in release and reads
 											// from config file
 	public static float FPSREC = 60;
@@ -148,9 +148,7 @@ public class Game implements ApplicationListener {
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
 
-		if (DEBUG) {
-			DebugOutput.setFile();
-		}
+		
 
 		DebugOutput.enable();
 		System.out.println("Controllers: " + Controllers.getControllers().size);
