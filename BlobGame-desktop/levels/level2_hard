@@ -1,6 +1,42 @@
 {
     "actors": [
         {
+            "id": 6980,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 6980,
+                "Y": 13.916388,
+                "X": 18.781738
+            }
+        },
+        {
+            "id": 6979,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 6979,
+                "Y": -12.359326,
+                "X": 14.072142
+            }
+        },
+        {
+            "id": 6978,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 6978,
+                "Y": -13.14058,
+                "X": 2.663982
+            }
+        },
+        {
+            "id": 6977,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 6977,
+                "Y": -12.697012,
+                "X": 2.6543393
+            }
+        },
+        {
             "id": 6823,
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
