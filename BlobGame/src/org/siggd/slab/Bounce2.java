@@ -15,7 +15,6 @@ public class Bounce2 extends Slab {
 		nextSlabs.add(new SlabStock(Block2.class, 4f, 1f));
 		nextSlabs.add(new SlabStock(Jiggle3.class, 2f, 5f));
 		nextSlabs.add(new SlabStock(Block4.class, 4f, 0f));
-		nextSlabs.add(new SlabStock(Gear4.class, 4f, 3f));
 	}
 
 	@Override
