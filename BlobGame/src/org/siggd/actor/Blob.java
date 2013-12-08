@@ -934,13 +934,15 @@ public class Blob extends Actor implements Controllable {
 			mPointCombo = 0;
 		}
 		if (mLight != null) {
-			mLightColor.set(mBlobDrawable.mSquishColor);
-
+			mLightColor.set(mBlobDrawable.mCurrentColor);
 			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
 			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
-			brightness += .075f * diff;
+			brightness *= 1 + (diff * .25f);
 			if (brightness < 0) {
 				brightness = 0;
+			}
+			if (brightness > 1) {
+				brightness = 1;
 			}
 			mLightColor.mul(brightness, brightness, brightness, 1f);
 			mLight.setColor(mLightColor);
@@ -1426,12 +1428,6 @@ public class Blob extends Actor implements Controllable {
 			squishColor = COLORS[0];
 		}
 
-		if (mLight != null) {
-			mLightColor = new Color();
-			mLightColor.set(squishColor);
-			mLight.setColor(mLightColor);
-			mLight.setDistance(0);
-		}
 		Color solidColor = new Color(squishColor);
 		solidColor.mul(.65f, .65f, .65f, 1f);
 		Drawable bd = null;
@@ -1444,6 +1440,11 @@ public class Blob extends Actor implements Controllable {
 		if (bd != null) {
 			if (force) {
 				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
+				if (mLight != null) {
+					mLightColor = new Color(0,0,0,0);
+					mLightColor.set(mLightColor);
+					mLight.setColor(mLightColor);
+				}
 			}
 			((BlobDrawable) bd).mDestColor = new Color(squishColor);
 			((BlobDrawable) bd).mSolidColor = solidColor;
