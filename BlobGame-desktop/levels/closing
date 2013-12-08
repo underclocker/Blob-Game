@@ -4,7 +4,8 @@
             "id": 11,
             "class": "org.siggd.actor.Teleport",
             "props": {
-                "Timer": "1470",
+                "ID": 11,
+                "Timer": "810",
                 "Level": "levelselect",
                 "Y": 4.8766103,
                 "X": 22.317835
@@ -14,13 +15,13 @@
             "id": 6,
             "class": "org.siggd.actor.Cutscene",
             "props": {
-                "End": "1260",
-                "Z Pan": ".00085",
-                "X Pan": "0.00405",
+                "End": "600",
+                "Z Pan": ".0017",
+                "X Pan": "0.008",
                 "Y Offset": "-5.25",
                 "Start": "60",
                 "ID": 6,
-                "Y Pan": "0.00555",
+                "Y Pan": "0.011",
                 "Scale": "2",
                 "Y": 6.282687,
                 "X": 17.540655,
