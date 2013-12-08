@@ -331,6 +331,9 @@ public class Blob extends Actor implements Controllable {
 
 			// openGL settings
 			mMesh.setVertices(verts);// set the mesh vertices to the vertices
+			if (mSolidColor.a < 1) {
+				Gdx.gl.glEnable(GL10.GL_BLEND);
+			}
 			if (Gdx.graphics.isGL20Available()) {
 				ShaderProgram shader = Game.get().getLevelView().getDefaultShaderProgram();
 				shader.begin();
@@ -346,10 +349,15 @@ public class Blob extends Actor implements Controllable {
 				gl10.glEnable(GL10.GL_BLEND);
 				mMesh.render(GL10.GL_TRIANGLES, 0, numVertices); // render
 			}
+			if (mSolidColor.a < 1) {
+				Gdx.gl.glDisable(GL10.GL_BLEND);
+			}
 
-			// set black outline for blobs
+			// set outline for blobs
 			shapeRender.begin(ShapeType.Line);
-			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
+			Color c = mCurrentColor.cpy().mul(.6f, .6f, .6f, 1);
+			c.a = 1;
+			shapeRender.setColor(c);
 
 			float lineWidth = 3 / (120 * Game.get().getLevelView().getScale());
 
@@ -526,12 +534,21 @@ public class Blob extends Actor implements Controllable {
 		}
 	}
 
-	public static Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
-			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f), new Color(1f, .5f, 0f, 1f),
-			new Color(1f, 1f, .0f, 1f), new Color(.8f, 0f, .9f, 1f),
-			new Color(.21f, .71f, .9f, 1f), new Color(0f, .4f, 0f, 1f),
-			new Color(1f, .5f, .9f, 1f), new Color(0f, 0f, 0f, 1f), new Color(1f, 1f, 1f, 1f),
-			new Color(.5f, .5f, .5f, 1f), new Color(.6f, 0f, 0f, 1f) };
+	public static Color COLORS[] = { new Color(0f, .8f, 0f, 1f), // Green
+			new Color(.2f, .25f, .95f, 1f), // Blue
+			new Color(.9f, 0f, 0f, 1f), // Red
+			new Color(1f, .5f, 0f, 1f), // Orange
+			new Color(1f, 1f, .0f, 1f), // Yellow
+			new Color(.9f, 0f, .9f, 1f), // Purple
+			new Color(.21f, .71f, .9f, 1f), // Cyan
+			new Color(0f, .4f, 0f, 1f), // Dark Green
+			new Color(1f, .5f, .9f, 1f), // Pink
+			// new Color(0f, 0f, 0f, 1f), // Black
+			// new Color(1f, 1f, 1f, 1f), // White
+			new Color(.8f, .8f, .8f, .5f), // Gray
+			new Color(.4f, 0f, 0f, 1f) // Dark Red
+	};
+
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
 	// use
 	private static final int SOLID_STATE = 1; // /< The number of particles to
@@ -597,7 +614,7 @@ public class Blob extends Actor implements Controllable {
 	private int mPointCombo = 0;
 	private int mPoints = 0;
 	private boolean mWasDown;
-	private boolean mWasUp;
+	private boolean mWasUp = true;
 	public boolean mFinishedLevel = false;
 	private int mPoofTimer = 0;
 
@@ -1022,6 +1039,10 @@ public class Blob extends Actor implements Controllable {
 			if (!mWasUp && up && mState == SOLID_STATE) {
 				transform();
 			}
+			if (!mWasUp && up && "charselect".equals(Game.get().getLevel().getAssetKey())) {
+				Game.get().getPlayer(getmPlayerID()).swapColor();
+				resetColor(getmPlayerID(), false);
+			}
 
 			mWasDown = down;
 			mWasUp = up;
@@ -1313,34 +1334,7 @@ public class Blob extends Actor implements Controllable {
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
 			mRightEye.getFixtureList().get(0).setFilterData(filter);
 			mEyeFilter = filter;
-			Color squishColor;
-			if (value >= 0) {
-				squishColor = COLORS[(int) (value % COLORS.length)];
-			} else {
-				squishColor = COLORS[0];
-			}
-
-			if (mLight != null) {
-				mLightColor = new Color();
-				mLightColor.set(squishColor);
-				mLight.setColor(mLightColor);
-				mLight.setDistance(0);
-			}
-			Color solidColor = new Color(squishColor);
-			solidColor.mul(.65f, .65f, .65f, 1f);
-			Drawable bd = null;
-			for (Drawable d : ((CompositeDrawable) mDrawable).mDrawables) {
-				if (d instanceof BlobDrawable) {
-					bd = d;
-					break;
-				}
-			}
-			if (bd != null) {
-				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
-				((BlobDrawable) bd).mDestColor = new Color(squishColor);
-				((BlobDrawable) bd).mSolidColor = solidColor;
-				((BlobDrawable) bd).mSquishColor = squishColor;
-			}
+			resetColor((int) value, true);
 		}
 		if (name.equals("Active")) {
 			if (mLight != null)
@@ -1424,6 +1418,39 @@ public class Blob extends Actor implements Controllable {
 		return ps;
 	}
 
+	private void resetColor(int id, boolean force) {
+		Color squishColor;
+		if (id >= 0) {
+			squishColor = COLORS[(int) (id % COLORS.length)];
+		} else {
+			squishColor = COLORS[0];
+		}
+
+		if (mLight != null) {
+			mLightColor = new Color();
+			mLightColor.set(squishColor);
+			mLight.setColor(mLightColor);
+			mLight.setDistance(0);
+		}
+		Color solidColor = new Color(squishColor);
+		solidColor.mul(.65f, .65f, .65f, 1f);
+		Drawable bd = null;
+		for (Drawable d : ((CompositeDrawable) mDrawable).mDrawables) {
+			if (d instanceof BlobDrawable) {
+				bd = d;
+				break;
+			}
+		}
+		if (bd != null) {
+			if (force) {
+				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
+			}
+			((BlobDrawable) bd).mDestColor = new Color(squishColor);
+			((BlobDrawable) bd).mSolidColor = solidColor;
+			((BlobDrawable) bd).mSquishColor = squishColor;
+		}
+	}
+
 	public void transform() {
 		AssetManager man = Game.get().getAssetManager();
 		String[] skips = new String[5];
@@ -1432,10 +1459,11 @@ public class Blob extends Actor implements Controllable {
 		skips[2] = "opening_med";
 		skips[3] = "opening_hard";
 		skips[4] = "closing";
-		for (int i = 0; i < skips.length; i++){
-			if (skips[i].equals(Game.get().getLevel().getAssetKey())) return;
+		for (int i = 0; i < skips.length; i++) {
+			if (skips[i].equals(Game.get().getLevel().getAssetKey()))
+				return;
 		}
-		
+
 		Sound sound;
 		long soundID;
 		if (mState == SQUISH_STATE) {
