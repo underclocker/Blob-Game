@@ -1,6 +1,75 @@
 {
     "actors": [
         {
+            "id": 5107,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 633,
+                "Distance": "12",
+                "ID": 5107,
+                "Y": -3.4667547,
+                "X": 24.186935,
+                "Cone Angle": "23"
+            }
+        },
+        {
+            "id": 5106,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 210.00002,
+                "Distance": "12",
+                "ID": 5106,
+                "Y": -10.006638,
+                "X": 17.0955,
+                "Cone Angle": "20"
+            }
+        },
+        {
+            "id": 5105,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 315,
+                "Distance": "12",
+                "ID": 5105,
+                "Y": -11.14477,
+                "X": 19.09161,
+                "Cone Angle": "20"
+            }
+        },
+        {
+            "id": 5104,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": -45,
+                "Distance": "12",
+                "ID": 5104,
+                "Y": 3.4408312,
+                "X": 21.376633
+            }
+        },
+        {
+            "id": 5103,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": -45,
+                "Distance": "12",
+                "ID": 5103,
+                "Y": 6.0672903,
+                "X": 4.9437523
+            }
+        },
+        {
+            "id": 5102,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": -60,
+                "Distance": "10",
+                "ID": 5102,
+                "Y": 15.916513,
+                "X": 1.424296
+            }
+        },
+        {
             "id": 4957,
             "class": "org.siggd.actor.Background",
             "props": {
@@ -50,8 +119,8 @@
             "id": 4528,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 4042.6304,
                 "Body": "BarrelTopView",
@@ -587,8 +656,8 @@
             "id": 696,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 4042.6304,
                 "Body": "BarrelTopView",
@@ -1116,8 +1185,8 @@
             "id": 698,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Layer": 3,
                 "Collision Sound": "barrel.wav",
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": 4073.333,
                 "Body": "BarrelTopView",

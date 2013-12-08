@@ -1,6 +1,76 @@
 {
     "actors": [
         {
+            "id": 6659,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 315,
+                "Distance": "12",
+                "ID": 6659,
+                "Y": -12.999004,
+                "X": 22.08003,
+                "Cone Angle": "30"
+            }
+        },
+        {
+            "id": 6658,
+            "class": "org.siggd.actor.BouncePlate",
+            "props": {
+                "Angle": 15,
+                "ID": 6658,
+                "Stroke Length": "5.65",
+                "Y": -16.75775,
+                "X": 25.649076
+            }
+        },
+        {
+            "id": 6657,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 2,
+                "Body": "Block",
+                "ID": 6657,
+                "Y": -17.759539,
+                "X": 25.762886
+            }
+        },
+        {
+            "id": 6653,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 300,
+                "Distance": "12",
+                "ID": 6653,
+                "Y": -5.078612,
+                "X": 4.872032,
+                "Cone Angle": "30"
+            }
+        },
+        {
+            "id": 6652,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "12",
+                "ID": 6652,
+                "Y": 6.479215,
+                "X": 15.758088,
+                "Cone Angle": "30"
+            }
+        },
+        {
+            "id": 6651,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "Distance": "12",
+                "ID": 6651,
+                "Y": 6.4105043,
+                "X": 4.8444715,
+                "Cone Angle": "30"
+            }
+        },
+        {
             "id": 6316,
             "class": "org.siggd.actor.Gear",
             "props": {
@@ -219,7 +289,7 @@
             "class": "org.siggd.actor.ConveyorBelt",
             "props": {
                 "Angle": 270,
-                "Speed": "1.5",
+                "Speed": "1.55",
                 "ID": 4866,
                 "Y": 11.330257,
                 "X": 15.617892
@@ -229,11 +299,11 @@
             "id": 3761,
             "class": "org.siggd.actor.SpotLight",
             "props": {
-                "Angle": 225,
-                "Distance": "8",
+                "Angle": 240,
+                "Distance": "12",
                 "ID": 3761,
-                "Y": 16.103096,
-                "X": 24.185368,
+                "Y": 16.150425,
+                "X": 20.351665,
                 "Cone Angle": "30"
             }
         },
@@ -1046,8 +1116,8 @@
             "class": "org.siggd.actor.Spawner",
             "props": {
                 "Layer": 5,
-                "Angle": 240,
                 "Exit Velocity": "5",
+                "Angle": 240,
                 "ID": 1832,
                 "Y": -7.2636003,
                 "X": 2.1742587,
@@ -1297,8 +1367,8 @@
             "props": {
                 "Target Input": 1964,
                 "ID": 2113,
-                "Y": -15.712927,
-                "X": 25.976692
+                "Y": -15.811435,
+                "X": 28.081182
             }
         },
         {
@@ -1307,8 +1377,8 @@
             "props": {
                 "Target Input": 2113,
                 "ID": 2115,
-                "Y": -15.683111,
-                "X": 20.794054
+                "Y": -14.91476,
+                "X": 18.322397
             }
         },
         {
@@ -1348,8 +1418,8 @@
             "props": {
                 "Target Input": 2115,
                 "ID": 2277,
-                "Y": -15.658836,
-                "X": 15.491587
+                "Y": -15.327491,
+                "X": 15.509498
             }
         },
         {
