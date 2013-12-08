@@ -539,14 +539,16 @@ public class Blob extends Actor implements Controllable {
 			new Color(.9f, 0f, 0f, 1f), // Red
 			new Color(1f, .5f, 0f, 1f), // Orange
 			new Color(1f, 1f, .0f, 1f), // Yellow
-			new Color(.9f, 0f, .9f, 1f), // Purple
+			new Color(.7f, 0f, .95f, 1f), // Purple
 			new Color(.21f, .71f, .9f, 1f), // Cyan
-			new Color(0f, .4f, 0f, 1f), // Dark Green
+			//new Color(.3f, .1f, 0f, 1f), // Dark Red
+			new Color(0f, .3f, 0f, 1f), // Dark Green
 			new Color(1f, .5f, .9f, 1f), // Pink
 			// new Color(0f, 0f, 0f, 1f), // Black
 			// new Color(1f, 1f, 1f, 1f), // White
-			new Color(.8f, .8f, .8f, .5f), // Gray
-			//new Color(.4f, 0f, 0f, 1f) // Dark Red
+			// new Color(1f, 1f, 1f, 1f), // White
+			new Color(.8f, .8f, .8f, .5f) // Gray
+
 	};
 
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
@@ -1441,7 +1443,7 @@ public class Blob extends Actor implements Controllable {
 			if (force) {
 				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
 				if (mLight != null) {
-					mLightColor = new Color(0,0,0,0);
+					mLightColor = new Color(0, 0, 0, 0);
 					mLightColor.set(mLightColor);
 					mLight.setColor(mLightColor);
 				}

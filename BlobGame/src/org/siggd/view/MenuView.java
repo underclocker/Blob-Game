@@ -570,10 +570,10 @@ public class MenuView {
 			mShapeRenderer.setColor(Color.DARK_GRAY);
 			float x = mStage.getWidth() / 2;
 			float y = mStage.getHeight() / 2;
-			mShapeRenderer.rect(x - 52, y - 7, 104, 14);
+			mShapeRenderer.rect(x - 102, y - 7, 204, 14);
 			mShapeRenderer.setColor(new Color(0, .75f, 0, 1));
-			mShapeRenderer.rect(x - 50, y - 5,
-					((100f * (Game.get().mLoaderMax - Game.get().mHackishLoader.size())) / Game
+			mShapeRenderer.rect(x - 100, y - 5,
+					((200f * (Game.get().mLoaderMax - Game.get().mHackishLoader.size())) / Game
 							.get().mLoaderMax), 10);
 			mShapeRenderer.end();
 		}
@@ -590,7 +590,7 @@ public class MenuView {
 	public void update() {
 		mGlow += .05f;
 		mGlowColor = mMenuController.getCurColor().cpy();
-		mGlowColor.a = ((float) ((1 - Math.cos(mGlow)) / 3f));
+		mGlowColor.a = ((float) ((1 - Math.cos(mGlow)) / 2f));
 		mTwoSecondTimer++;
 		if (mTwoSecondTimer > 120)
 			mTwoSecondTimer -= 120;
