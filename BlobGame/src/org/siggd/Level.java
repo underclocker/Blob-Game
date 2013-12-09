@@ -839,6 +839,7 @@ public class Level implements Iterable<Actor> {
 				// e.printStackTrace();
 			}
 		}
+		FIRSTCHECK = false;
 	}
 
 	private static void unlockEasyPass(JSONObject save) throws JSONException {
@@ -881,7 +882,7 @@ public class Level implements Iterable<Actor> {
 		if (fullGameComplete(save)) {
 			COMPLETE = true;
 			if (!FIRSTCHECK) {
-				for (Player p : Game.get().activePlayers()) {
+				for (Player p : Game.get().getPlayers()) {
 					p.mustache = true;
 				}
 			}
