@@ -3,8 +3,8 @@ package org.siggd.slab;
 import java.util.ArrayList;
 
 import org.siggd.Level;
-import org.siggd.LevelGen;
 import org.siggd.actor.Background;
+import org.siggd.actor.Dot;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -33,6 +33,14 @@ public abstract class Slab {
 		l.addActor(b);
 		return b;
 	}
+
+	public Dot makeDot(Level l, Vector2 pos) {
+		Dot d = new Dot(l, 0);
+		d.setProp("X", pos.x);
+		d.setProp("Y", pos.y);
+		l.addActor(d);
+		return d;
+	}
 
 	public Vector2 getOrigin() {
 		return new Vector2(mNumber * 2f, 0);

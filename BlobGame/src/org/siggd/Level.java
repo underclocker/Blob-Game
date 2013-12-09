@@ -46,9 +46,11 @@ public class Level implements Iterable<Actor> {
 			"level8" };
 	public static String MEDIUM_SUFFIX = "_med";
 	public static String HARD_SUFFIX = "_hard";
-	public static boolean HARD_UNLOCKED = false;
-	public static boolean RACE_UNLOCKED = false;
+	public static boolean MEDEASY_COMPLETE = false;
+	public static boolean EASY_PASSED = false;
+	public static boolean HARD_PASSED = false;
 	public static boolean COMPLETE = false;
+	public static boolean FIRSTCHECK = true;
 
 	// Array of actors
 	ArrayList<Actor> mActors;
@@ -211,7 +213,7 @@ public class Level implements Iterable<Actor> {
 				nMusic = null;
 			}
 		} else if (mMusic != null) {
-			//mCurrentVolume = mVolume;
+			// mCurrentVolume = mVolume;
 			mCurrentVolume += mFadeRate;
 			if (mCurrentVolume >= mVolume)
 				mCurrentVolume = mVolume;
@@ -806,59 +808,86 @@ public class Level implements Iterable<Actor> {
 	}
 
 	public static void unlockModes(JSONObject save) {
-		if (!RACE_UNLOCKED) {
+		if (!EASY_PASSED) {
 			try {
-				unlockRaceMode(save);
+				unlockEasyPass(save);
 			} catch (JSONException e) {
-				//System.out.println("Error reading save for race mode unlock");
+				// System.out.println("Error reading save for race mode unlock");
 				// e.printStackTrace();
 			}
 		}
-		if (!HARD_UNLOCKED) {
+		if (!HARD_PASSED) {
+			try {
+				unlockHardPass(save);
+			} catch (JSONException e) {
+
+			}
+		}
+		if (!MEDEASY_COMPLETE) {
 			try {
 				unlockHardMode(save);
 			} catch (JSONException e) {
-				//System.out.println("Error reading save for hard mode unlock");
+				// System.out.println("Error reading save for hard mode unlock");
 				// e.printStackTrace();
 			}
 		}
-		if (!COMPLETE){
+		if (!COMPLETE) {
 			try {
 				unlockCompletion(save);
 			} catch (JSONException e) {
-				//System.out.println("Error reading save for hard mode unlock");
+				// System.out.println("Error reading save for hard mode unlock");
 				// e.printStackTrace();
 			}
 		}
 	}
 
-	private static void unlockRaceMode(JSONObject save) throws JSONException {
-		if (hasRaceModePermission(save)) {
-			RACE_UNLOCKED = true;
+	private static void unlockEasyPass(JSONObject save) throws JSONException {
+		if (passedEasy(save)) {
+			EASY_PASSED = true;
 		}
 	}
 
-	private static boolean hasRaceModePermission(JSONObject save) throws JSONException {
-		String level = LEVELS[0]+MEDIUM_SUFFIX;
-		if(save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))){
+	private static void unlockHardPass(JSONObject save) throws JSONException {
+		if (passedHard(save)) {
+			HARD_PASSED = true;
+		}
+	}
+
+	private static boolean passedEasy(JSONObject save) throws JSONException {
+		String level = LEVELS[0] + MEDIUM_SUFFIX;
+		if (save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))) {
 			return true;
-		}else{
+		} else {
+			return false;
+		}
+	}
+
+	private static boolean passedHard(JSONObject save) throws JSONException {
+		String level = "gen";
+		if (save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))) {
+			return true;
+		} else {
 			return false;
 		}
 	}
 
 	private static void unlockHardMode(JSONObject save) throws JSONException {
 		if (hasHardModePermission(save)) {
-			HARD_UNLOCKED = true;
+			MEDEASY_COMPLETE = true;
 		}
 	}
 
 	private static void unlockCompletion(JSONObject save) throws JSONException {
-		if (hasStashBonus(save)) {
+		if (fullGameComplete(save)) {
 			COMPLETE = true;
+			if (!FIRSTCHECK) {
+				for (Player p : Game.get().activePlayers()) {
+					p.mustache = true;
+				}
+			}
 		}
 	}
-
+
 	private static boolean hasHardModePermission(JSONObject save) throws JSONException {
 		// easy mode check
 		for (String s : LEVELS) {
@@ -888,7 +917,7 @@ public class Level implements Iterable<Actor> {
 		return true;
 	}
 
-	private static boolean hasStashBonus(JSONObject save) throws JSONException {
+	private static boolean fullGameComplete(JSONObject save) throws JSONException {
 		// easy mode check
 		for (String s : LEVELS) {
 			if (save.has(s)) {

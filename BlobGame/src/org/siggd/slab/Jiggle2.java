@@ -23,5 +23,6 @@ public class Jiggle2 extends Slab {
 		jiggle.setProp("X", pos.x);
 		jiggle.setProp("Y", 2f);
 		l.addActor(jiggle);
+		makeDot(l, getOrigin().add(0f, 3f));
 	}
 }

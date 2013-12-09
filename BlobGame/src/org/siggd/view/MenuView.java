@@ -1070,7 +1070,7 @@ public class MenuView {
 		mControllerOverTable.remove();
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
-			if ((Game.UNLOCKED || Level.RACE_UNLOCKED)
+			if ((Game.UNLOCKED || Level.HARD_PASSED)
 					&& !mMainTable.getChildren().contains(mRaceButton, true)) {
 				mMainTable.clear();
 				mMainTable.add(mCampaignButton);
@@ -1118,7 +1118,7 @@ public class MenuView {
 					tmp.setTransform(progress < 1);
 				}
 				String firstHardLevel = Level.LEVELS[0] + Level.HARD_SUFFIX;
-				if (Level.HARD_UNLOCKED) {
+				if (Level.MEDEASY_COMPLETE) {
 					mLevel1.get(firstHardLevel).getButton().setDisabled(false);
 				}
 			}

@@ -21,6 +21,7 @@ public class Blockpoint5 extends Slab {
 		Vector2 pos = getOrigin();
 		pos.y += .5f;
 		Background b = makeBackground("Block", l, pos);
+		makeDot(l, getOrigin().add(-.5f, 2f));
+		makeDot(l, getOrigin().add(.5f, 2f));
 	}
-
 }

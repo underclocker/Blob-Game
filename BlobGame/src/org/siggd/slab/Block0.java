@@ -22,6 +22,8 @@ public class Block0 extends Slab {
 	public void gen(Level l) {
 		Vector2 pos = getOrigin();
 		Background b = makeBackground("Block", l, pos);
+		makeDot(l, getOrigin().add(-.5f, 1.5f));
+		makeDot(l, getOrigin().add(.5f, 1.5f));
 	}
 
 }

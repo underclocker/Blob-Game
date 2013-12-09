@@ -29,6 +29,9 @@ public class Block4 extends Slab {
 		b = makeBackground("Block", l, pos);
 		pos.y += 2;
 		b = makeBackground("Block", l, pos);
+		makeDot(l, getOrigin().add(-.5f, 5.5f));
+		makeDot(l, getOrigin().add(.5f, 5.5f));
+
 	}
 
 }

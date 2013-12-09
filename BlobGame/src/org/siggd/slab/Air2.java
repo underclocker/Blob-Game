@@ -20,5 +20,6 @@ public class Air2 extends Slab {
 	@Override
 	public void gen(Level l) {
 
+		makeDot(l, getOrigin().add(0, 4));
 	}
 }

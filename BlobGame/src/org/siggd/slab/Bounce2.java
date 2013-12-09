@@ -28,6 +28,11 @@ public class Bounce2 extends Slab {
 		bp.setX(pos.x);
 		bp.setY(pos.y + .95f);
 		l.addActor(bp);
+		makeDot(l, getOrigin().add(-.35f, 4.65f));
+		makeDot(l, getOrigin().add(-.35f, 5.35f));
+		makeDot(l, getOrigin().add(.35f, 4.65f));
+		makeDot(l, getOrigin().add(.35f, 5.35f));
+
 	}
 
 }

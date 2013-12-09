@@ -541,7 +541,7 @@ public class Blob extends Actor implements Controllable {
 			new Color(1f, 1f, .0f, 1f), // Yellow
 			new Color(.7f, 0f, .95f, 1f), // Purple
 			new Color(.21f, .71f, .9f, 1f), // Cyan
-			//new Color(.3f, .1f, 0f, 1f), // Dark Red
+			// new Color(.3f, .1f, 0f, 1f), // Dark Red
 			new Color(0f, .3f, 0f, 1f), // Dark Green
 			new Color(1f, .5f, .9f, 1f), // Pink
 			// new Color(0f, 0f, 0f, 1f), // Black
@@ -1207,7 +1207,11 @@ public class Blob extends Actor implements Controllable {
 	}
 
 	public void eatDot() {
-		mExtraGlow += 50f;
+		if ("base".equals(Game.get().getLevel().getAssetKey())) {
+			mExtraGlow += 15f;
+		} else {
+			mExtraGlow += 50f;
+		}
 		mPoints++;
 
 		AssetManager man = Game.get().getAssetManager();
