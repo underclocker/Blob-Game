@@ -61,10 +61,10 @@ public class Level implements Iterable<Actor> {
 	private ArrayList<Body> mBodiesToDestroy;
 	private ContactHandler mContactHandler;
 	private String mAssetKey;
-	private float mVolume = 0.0f;
+	private float mVolume = 0.5f;
 
 	float mCurrentVolume = 0f;
-	private float mFadeRate = 0.03f;
+	private float mFadeRate = 0.02f;
 	private int mMusicTick = 0;
 
 	Music mMusic;
@@ -206,6 +206,7 @@ public class Level implements Iterable<Actor> {
 				mMusic.setVolume(mCurrentVolume);
 			} else {
 				mMusic.stop();
+				nMusic.setVolume(0);
 				mMusic = nMusic;
 				nMusic = null;
 			}
