@@ -1,7 +1,5 @@
 package org.siggd.actor;
 
-import java.util.ArrayList;
-
 import org.box2dLight.PointLight;
 import org.siggd.ContactHandler;
 import org.siggd.Convert;
@@ -16,11 +14,7 @@ import org.siggd.view.LevelView;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 /**
  * I like too copy and paste
@@ -100,6 +94,9 @@ public class Dot extends Actor {
 
 	@Override
 	public void update() {
+		if (mBody.getLinearVelocity().len2() > .01f) {
+			mBody.setGravityScale(1);
+		}
 		if (mTargetBlob == null) {
 			Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 					.getContacts(this);
