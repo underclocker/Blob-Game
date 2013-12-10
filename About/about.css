@@ -40,3 +40,6 @@ code span{
 {
     float: left;
 }
+.floated_img img{
+	border-radius:16px;
+}
