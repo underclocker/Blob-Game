@@ -55,10 +55,11 @@ public class Game implements ApplicationListener {
 	public final static int MENU = 2;
 	public final static int LOAD = 3;
 	public final static int MAX_PLAYERS = 8;
-	public final static boolean RELEASE = true;
+	public final static boolean RELEASE = false;
 	public final static boolean DEBUG = false;
 	public final static boolean UNLOCKED = false;
-	public static boolean PRELOAD = false; // only preloads in release and reads
+	public static boolean CALM = false;	//loaded from config
+	public static boolean PRELOAD = false; // only preloads in release and is loaded
 											// from config file
 	public static float FPSREC = 60;
 

@@ -36,7 +36,7 @@ public class Main {
 			saveToPref("vSyncEnabled", (Integer) 1);
 			saveToPref("useLights", (Integer) 1);
 			saveToPref("usePreload", (Integer) 1);
-
+			saveToPref("useCalmColors", (Integer) 0);
 			// Flush
 			handle.writeString(mPrefs.toString(), false);
 		} else {
@@ -61,6 +61,7 @@ public class Main {
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
 			LevelView.mUseLights = mPrefs.getInt("useLights") != 0;
 			Game.PRELOAD = mPrefs.getInt("usePreload") != 0;
+			Game.CALM = mPrefs.getInt("useCalmColors") != 0;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -235,7 +235,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 			Cell c = getCell(mX, mY);
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
-				shapeRender.setColor(Blob.COLORS[mPlayerId]);
+				shapeRender.setColor(Blob.colors(mPlayerId));
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
 				Vector2 topleft = new Vector2(mTable.getX() + selected.getX(), mTable.getY()
@@ -265,7 +265,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 	}
 
 	public Color getCurColor() {
-		return Blob.COLORS[mPlayerId];
+		return Blob.colors(mPlayerId);
 	}
 
 	private Cell getCell(int x, int y) {

@@ -550,6 +550,31 @@ public class Blob extends Actor implements Controllable {
 			new Color(.8f, .8f, .8f, .5f) // Gray
 
 	};
+	
+	public static Color colors(int i)
+	{
+		if(Game.CALM) return CALM_COLORS[i];
+		return COLORS[i];
+	}
+	
+	public static void setColor(int i, Color x)
+	{
+		if(!Game.CALM)Blob.COLORS[i] = x;
+		else Blob.CALM_COLORS[i] = x;
+	}
+	
+	public static Color CALM_COLORS[] = { new Color(0.1f, .7f, 0.1f, 1f), // Green
+		new Color(.2f, .25f, .8f, 1f), // Blue
+		new Color(.7f, .05f, 0.05f, 1f), // Red
+		new Color(.8f, .4f, .1f, 1f), // Orange
+		new Color(.8f, .8f, .2f, 1f), // Yellow
+		new Color(.5f, .32f, 1f, 1f), // Purple
+		new Color(.21f, .5f, .7f, 1f), // Cyan
+		new Color(0.05f, .3f, 0.05f, 1f), // Dark Green
+		new Color(.8f, .5f, .6f, 1f), // Pink
+		new Color(.8f, .8f, .8f, .5f) // Gray
+
+		};
 
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
 	// use
@@ -1429,9 +1454,9 @@ public class Blob extends Actor implements Controllable {
 	private void resetColor(int id, boolean force) {
 		Color squishColor;
 		if (id >= 0) {
-			squishColor = COLORS[(int) (id % COLORS.length)];
+			squishColor = colors((int) (id % COLORS.length));
 		} else {
-			squishColor = COLORS[0];
+			squishColor = colors(0);
 		}
 
 		Color solidColor = new Color(squishColor);

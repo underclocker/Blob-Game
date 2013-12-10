@@ -24,7 +24,7 @@ public class Player {
 	public boolean mustache;
 	public static ArrayList<Color> AVAILABLE_COLORS;
 	static {
-		AVAILABLE_COLORS = new ArrayList<Color>(Arrays.asList(Blob.COLORS));
+		AVAILABLE_COLORS = Game.CALM ? new ArrayList<Color>(Arrays.asList(Blob.CALM_COLORS)) : new ArrayList<Color>(Arrays.asList(Blob.COLORS));
 	}
 
 	public Player(int i) {
@@ -33,7 +33,7 @@ public class Player {
 		// Players start active
 		active = true;
 		mustache = Math.random() < (Level.COMPLETE ? .1f : .001f);
-		Blob.COLORS[i] = AVAILABLE_COLORS.remove(0);
+		Blob.setColor(i,AVAILABLE_COLORS.remove(0));
 	}
 
 	public void swapColor() {
@@ -41,15 +41,16 @@ public class Player {
 			//System.out.print(Blob.COLORS[i] + " ");
 		}
 		//System.out.println();
-		Color curc = Blob.COLORS[id].cpy();
+		Color curc = Blob.colors(id).cpy();
 		AVAILABLE_COLORS.add(curc);
 		Color nextc = AVAILABLE_COLORS.remove(0);
 		for (int i = 0; i < Blob.COLORS.length; i++) {
-			if (Blob.COLORS[i].equals(nextc)) {
-				Blob.COLORS[i] = curc;
+			if (Blob.colors(i).equals(nextc)) {
+				Blob.setColor(i, curc);
 			}
 		}
-		Blob.COLORS[id] = nextc;
+		//Blob.COLORS[id] = nextc;
+		Blob.setColor(id, nextc);
 		for (int i = 0; i < Blob.COLORS.length; i++) {
 			//System.out.print(Blob.COLORS[i]+ " ");
 		}
