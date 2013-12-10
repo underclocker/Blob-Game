@@ -563,12 +563,13 @@ public class Blob extends Actor implements Controllable {
 		else Blob.CALM_COLORS[i] = x;
 	}
 	
-	public static Color CALM_COLORS[] = { new Color(0.1f, .7f, 0.1f, 1f), // Green
+	public static Color CALM_COLORS[] = { 
+		new Color(0.3f, .7f, 0.3f, 1f), // Green
 		new Color(.2f, .25f, .8f, 1f), // Blue
-		new Color(.7f, .05f, 0.05f, 1f), // Red
+		new Color(.7f, .1f, 0.1f, 1f), // Red
 		new Color(.8f, .4f, .1f, 1f), // Orange
 		new Color(.8f, .8f, .2f, 1f), // Yellow
-		new Color(.5f, .32f, 1f, 1f), // Purple
+		new Color(.6f, .36f, .9f, 1f), // Purple
 		new Color(.21f, .5f, .7f, 1f), // Cyan
 		new Color(0.05f, .3f, 0.05f, 1f), // Dark Green
 		new Color(.8f, .5f, .6f, 1f), // Pink
