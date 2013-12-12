@@ -1,6 +1,24 @@
 {
     "actors": [
         {
+            "id": 7003,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 7003,
+                "Y": -15.3,
+                "X": 30.161108
+            }
+        },
+        {
+            "id": 7002,
+            "class": "org.siggd.actor.Dot",
+            "props": {
+                "ID": 7002,
+                "Y": -15.3,
+                "X": 27.465586
+            }
+        },
+        {
             "id": 6848,
             "class": "org.siggd.actor.Dot",
             "props": {
@@ -233,6 +251,7 @@
             "props": {
                 "Angle": 45,
                 "Target Input": 6420,
+                "Momentum Y": 0,
                 "Wind Strength": "5",
                 "ID": 6422,
                 "Y": -10.365254,
@@ -405,8 +424,8 @@
                 "Layer": 3,
                 "Body": "GearCenter",
                 "ID": 6284,
-                "Y": 10.658233,
-                "X": 14.211592
+                "Y": 10.9,
+                "X": 14.2
             }
         },
         {
@@ -446,8 +465,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4678,
-                "Y": 12.8730755,
-                "X": 14.197008
+                "Y": 13.181611,
+                "X": 14.19015
             }
         },
         {
@@ -455,8 +474,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4677,
-                "Y": 11.910576,
-                "X": 12.409509
+                "Y": 12.05456,
+                "X": 12.183249
             }
         },
         {
@@ -464,8 +483,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4676,
-                "Y": 11.823075,
-                "X": 16.05951
+                "Y": 11.912208,
+                "X": 16.265198
             }
         },
         {
@@ -473,8 +492,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4675,
-                "Y": 9.460575,
-                "X": 16.047009
+                "Y": 9.707403,
+                "X": 16.095003
             }
         },
         {
@@ -482,7 +501,7 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4674,
-                "Y": 8.460575,
+                "Y": 8.707404,
                 "X": 14.209509
             }
         },
@@ -491,8 +510,8 @@
             "class": "org.siggd.actor.Dot",
             "props": {
                 "ID": 4673,
-                "Y": 9.398075,
-                "X": 12.384508
+                "Y": 9.699752,
+                "X": 12.281664
             }
         },
         {
@@ -701,8 +720,8 @@
                 "Collision Threshold": 3.25,
                 "Friction": 0.3,
                 "Density": 0.15,
-                "ID": 47,
                 "Grabbable": 1,
+                "ID": 47,
                 "CollisionSound": "",
                 "Y": 10.679242,
                 "X": 23.44014,
@@ -745,8 +764,8 @@
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
                 "Friction": 0.2,
-                "ID": 52,
                 "Grabbable": 1,
+                "ID": 52,
                 "CollisionSound": "",
                 "Y": -2.1424434,
                 "X": 29.156557,
@@ -764,8 +783,8 @@
                 "Collision Threshold": 3.5,
                 "Friction": 0.2,
                 "Density": 0.12,
-                "ID": 53,
                 "Grabbable": 1,
+                "ID": 53,
                 "CollisionSound": "",
                 "Y": -9.8,
                 "X": 0.7425003,
@@ -783,8 +802,8 @@
                 "Collision Threshold": 3.5,
                 "Friction": 0.2,
                 "Density": 0.12,
-                "ID": 54,
                 "Grabbable": 1,
+                "ID": 54,
                 "CollisionSound": "",
                 "Y": -9.862499,
                 "X": 1.9325,
@@ -1237,8 +1256,8 @@
             "props": {
                 "Rotation Speed": "-0.5",
                 "Safety": "0",
-                "ID": 1876,
                 "Grabbable": 0,
+                "ID": 1876,
                 "Y": -10.608712,
                 "X": 22.16994
             }
@@ -1564,8 +1583,8 @@
             "props": {
                 "Rotation Speed": "4",
                 "ID": 4671,
-                "Y": 10.660575,
-                "X": 14.197008
+                "Y": 10.9,
+                "X": 14.2
             }
         },
         {
