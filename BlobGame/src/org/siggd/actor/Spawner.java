@@ -32,7 +32,7 @@ public class Spawner extends Actor implements IObservable {
 	private int maxBlobs;
 	private int texChangeTime = 60;
 	private PointLight mPointLight;
-	private String mSoundFile = "data/sfx/blep.wav";
+	private String mSoundFile = "data/sfx/spawn.wav";
 	// For Spawning Offset
 	// private Vector2 spawnOffset = new Vector2(0, 1.5f);
 	// private Vector2 rotatedOffset;
@@ -59,10 +59,11 @@ public class Spawner extends Actor implements IObservable {
 		mTexTimer.unpause();
 
 		this.setProp("Blob Spawner", 0);
-		this.setProp("Rate", 60);
+		this.setProp("Rate", 16);
 		this.setProp("Exit Velocity", 2);
 		this.setProp("Initial Delay", 0);
 		this.setFriction(.1f);
+		this.setProp("Mute", 0);
 
 		if (LevelView.mUseLights) {
 			mPointLight = new PointLight(Game.get().getLevelView().getRayHandler(), 16);
@@ -91,16 +92,20 @@ public class Spawner extends Actor implements IObservable {
 			return;
 		mSpawnTimer.update();
 		mTexTimer.update();
-		if (mSpawnees.size() > 0 && Game.get().getLevel().musicTick()) {
+		if (mSpawnees.size() > 0) {
 			setState(true);
-			if (mSpawnTimer.isTriggered()) {
-				AssetManager man = Game.get().getAssetManager();
-				Sound sound;
-				long soundID;
-				if (man.isLoaded(mSoundFile) && !"earth".equals(Game.get().getLevel().getAssetKey())) {
-					sound = man.get(mSoundFile, Sound.class);
-					soundID = sound.play();
-					sound.setVolume(soundID, .75f);
+			if (mSpawnTimer.isTriggered() && Game.get().getLevel().musicTick()) {
+				String curmap = Game.get().getLevel().getAssetKey();
+				if (Convert.getInt(getProp("Mute")) == 0) {
+					AssetManager man = Game.get().getAssetManager();
+					Sound sound;
+					long soundID;
+					if (man.isLoaded(mSoundFile)
+							&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
+						sound = man.get(mSoundFile, Sound.class);
+						soundID = sound.play();
+						sound.setVolume(soundID, .45f);
+					}
 				}
 				spawnActor();
 				mSpawnTimer.reset();

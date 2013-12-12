@@ -45,6 +45,8 @@ public class Cutscene extends Actor {
 		private float alpha = 0;
 		private float frame = 0;
 		private float xpan = 0;
+		private float ypan = 0;
+		private float zpan = 1;
 
 		@Override
 		public void drawSprite(SpriteBatch batch) {
@@ -64,26 +66,35 @@ public class Cutscene extends Actor {
 			Vector2 pos = lv.getCameraPosition();
 			Vector2 offset = center.cpy().sub(pos);
 
-			if (frame > Convert.getFloat(getProp("Start"))
-					&& frame < Convert.getFloat(getProp("End"))) {
-				alpha += .015f;
-				if (alpha > 1) {
-					alpha = 1;
+			
+			if(Game.get().getState() == Game.PLAY)
+			{
+				if (frame > Convert.getFloat(getProp("Start"))
+						&& frame < Convert.getFloat(getProp("End"))) {
+					alpha += .0075f;
+					if (alpha > 1) {
+						alpha = 1;
+					}
+				} else {
+					alpha -= .0075f;
+					if (alpha < 0) {
+						alpha = 0;
+					}
 				}
-			} else {
-				alpha -= .015f;
-				if (alpha < 0) {
-					alpha = 0;
+				if (frame > Convert.getFloat(getProp("Start"))) {
+					xpan += Convert.getFloat(getProp("X Pan"));
+					ypan += Convert.getFloat(getProp("Y Pan"));
+					zpan += Convert.getFloat(getProp("Z Pan"));
 				}
-			}
-			if (frame > Convert.getFloat(getProp("Start"))) {
-				xpan += Convert.getFloat(getProp("X Pan"));
+				
 			}
 			pos.x += xpan;
-			float distFromMainLayer = lv.getVScale() / lv.getScale();
+			pos.y += ypan;
+			float distFromMainLayer = lv.getScale() * 100.0f;
 
 			float scale = distFromMainLayer
 					/ (distFromMainLayer + Convert.getFloat(getProp("Distance")));
+			scale /= zpan;
 			offset.scl(scale);
 			scale *= Convert.getFloat(getProp("Scale"));
 			float halfwidth = tex.getWidth() / 2f / lv.getVScale() * scale;
@@ -123,6 +134,8 @@ public class Cutscene extends Actor {
 		setProp("Start", 60);
 		setProp("End", 120);
 		setProp("X Pan", .000f);
+		setProp("Y Pan", .000f);
+		setProp("Z Pan", .000f);
 	}
 
 	/**

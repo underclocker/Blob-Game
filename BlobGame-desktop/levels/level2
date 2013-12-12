@@ -496,7 +496,7 @@
                 "CollisionSound": "",
                 "Y": -10.269335,
                 "X": 30.25502,
-                "Rate": "18"
+                "Rate": "16"
             }
         },
         {
@@ -536,6 +536,7 @@
             "id": 746,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": -1.6819335,
                 "Body": "Hexamag",
@@ -913,6 +914,7 @@
             "props": {
                 "Hold Time": "300",
                 "Angle": 180,
+                "ID": 27,
                 "CollisionSound": "",
                 "Y": 15.186581,
                 "X": 19.492296
@@ -978,7 +980,7 @@
                 "CollisionSound": "",
                 "Y": 16.189169,
                 "X": 1.8432734,
-                "Rate": "18"
+                "Rate": "16"
             }
         },
         {
@@ -1138,6 +1140,7 @@
             "id": 754,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": -0.89366984,
                 "Body": "Hexamag",
@@ -1153,6 +1156,7 @@
             "id": 755,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Layer": 3,
                 "BodyType": 2,
                 "Angle": -0.9602548,
                 "Body": "Hexamag",
@@ -1445,8 +1449,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2470,
-                "Y": 9.984012,
-                "X": 8.662408
+                "Y": 10.214009,
+                "X": 8.342407
             }
         },
         {
@@ -1454,8 +1458,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2471,
-                "Y": 9.557292,
-                "X": 7.5236177
+                "Y": 9.927293,
+                "X": 6.983618
             }
         },
         {
@@ -1463,8 +1467,8 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2472,
-                "Y": 9.971509,
-                "X": 5.173191
+                "Y": 10.191509,
+                "X": 5.573191
             }
         },
         {
@@ -1472,7 +1476,7 @@
             "class": "org.siggd.actor.JiggleBall",
             "props": {
                 "ID": 2473,
-                "Y": 10.861583,
+                "Y": 10.761582,
                 "X": 4.315428
             }
         },
@@ -1546,15 +1550,6 @@
                 "ID": 2623,
                 "Y": -9.713416,
                 "X": 11.452924
-            }
-        },
-        {
-            "id": 2768,
-            "class": "org.siggd.actor.JiggleBall",
-            "props": {
-                "ID": 2768,
-                "Y": 9.552118,
-                "X": 6.3369813
             }
         },
         {
@@ -1767,14 +1762,14 @@
             "id": 3436,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": -3,
+                "Layer": -5,
                 "Lightness": "0.07",
                 "Distance": "5.0",
                 "ID": 3436,
-                "Scale": "7.0",
+                "Scale": "8.0",
                 "Y": 14.027933,
                 "X": -0.7970724,
-                "Texture": "level3_1_0.png"
+                "Texture": "level8_0_1.png"
             }
         },
         {

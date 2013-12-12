@@ -49,7 +49,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 					if (mDetectedBlobs.contains((Blob) p.mActor)) {
 						shapeRender.setColor(Color.GRAY);
 					} else {
-						shapeRender.setColor(Blob.COLORS[p.id]);
+						shapeRender.setColor(Blob.colors(p.id));
 					}
 					start = mLaserStarts.get(i);
 					end = mLaserEnds.get(i);
@@ -61,7 +61,7 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 				for (int i = 0; i < mLaserStarts.size(); i++) {
 					p = players.get(i);
 					if (mDetectedBlobs.contains((Blob) p.mActor)) {
-						shapeRender.setColor(Blob.COLORS[p.id]);
+						shapeRender.setColor(Blob.colors(p.id));
 					} else {
 						shapeRender.setColor(Color.BLACK);
 					}
@@ -118,21 +118,8 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 			if (intersect instanceof Blob) {
 				if (intersect.equals(mCurrentBlob)) {
 					mLaserEnd = point.cpy();
-					if (!mDetectedBlobs.contains(mCurrentBlob)) {
-						mDetectedBlobs.add(mCurrentBlob);
-						AssetManager man = Game.get().getAssetManager();
-						long soundID;
-						Sound sound;
-						if (man.isLoaded(mString)) {
-							sound = man.get(mString, Sound.class);
-							soundID = sound.play();
-							float pitch = 2;
-							for (int i = 0; i < mDetectedBlobs.size(); i++)
-								pitch *= .8795;
-							sound.setPitch(soundID, pitch);
-							sound.setVolume(soundID, .25f);
-						}
-					}
+					addBlob(mCurrentBlob);
+
 					return fraction;
 				} else {
 					return -1;
@@ -167,6 +154,9 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 			mLaserStart.add(slider);
 			mLaserEnd = end.cpy().add(mLaserStart);
 			mCurrentBlob = (Blob) players.get(i).mActor;
+			if (mCurrentBlob.mFinishedLevel) {
+				addBlob(mCurrentBlob);
+			}
 			mLevel.getWorld().rayCast(this, mLaserStart.cpy(), mLaserEnd.cpy());
 			mLaserStarts.add(mLaserStart.cpy());
 			mLaserEnds.add(mLaserEnd.cpy());
@@ -208,6 +198,31 @@ public class BlobLaser extends Actor implements RayCastCallback, IObservable {
 	public Object observe() {
 		return mDetectedBlobs.size() == Game.get().activePlayersNum()
 				|| (Game.get().activePlayersNum() == 1 && Convert.getFloat(getProp("ForceUse")) == 0);
+	}
+
+	public void addBlob(Blob blob) {
+		if (!mDetectedBlobs.contains(mCurrentBlob)) {
+			mDetectedBlobs.add(mCurrentBlob);
+			AssetManager man = Game.get().getAssetManager();
+			long soundID;
+			Sound sound;
+			if (man.isLoaded(mString)) {
+				sound = man.get(mString, Sound.class);
+				soundID = sound.play();
+				float pitch = 2;
+				for (int i = 0; i < mDetectedBlobs.size(); i++)
+				{
+					pitch /= 1.05946 * 1.05946;
+					if (i == 3 || i == 6)
+						pitch *= 1.05946; // This makes it increase along a Major
+											// scale, the happiest scale in the
+											// universe
+					
+				}
+				sound.setPitch(soundID, pitch);
+				sound.setVolume(soundID, .25f);
+			}
+		}
 	}
 
 	public boolean getState() {

@@ -1,13 +1,67 @@
 {
     "actors": [
         {
+            "id": 3164,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 270,
+                "ID": 3164,
+                "Y": 26.816555,
+                "X": 28.08759
+            }
+        },
+        {
+            "id": 3163,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 255,
+                "Distance": "13",
+                "ID": 3163,
+                "Y": 28.795656,
+                "X": 16.961294
+            }
+        },
+        {
+            "id": 3162,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Distance": "13",
+                "ID": 3162,
+                "Y": 11.548473,
+                "X": 21.906725
+            }
+        },
+        {
+            "id": 3161,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": -45,
+                "Distance": "13",
+                "ID": 3161,
+                "Y": 9.533211,
+                "X": 21.919088
+            }
+        },
+        {
+            "id": 3160,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 45,
+                "Distance": "13",
+                "ID": 3160,
+                "Y": 13.131011,
+                "X": 21.832544
+            }
+        },
+        {
             "id": 2846,
             "class": "org.siggd.actor.Parallax",
             "props": {
+                "Layer": -5,
                 "Lightness": ".07",
                 "Spawner": -3,
                 "ID": 2846,
-                "Scale": "5.0",
+                "Scale": "6.0",
                 "Y": 12.618393,
                 "X": -0.74317026,
                 "Texture": "Level1_0_0.png"
@@ -1024,15 +1078,18 @@
             "id": 140,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Collision Sound": "barrel.wav",
                 "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
+                "Collision Threshold": 3.5,
                 "Friction": 0.15,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 140,
+                "Grabbable": 1,
                 "Y": 23.336866,
-                "X": 28.025036
+                "X": 28.025036,
+                "Collision Pitch": 1.25
             }
         },
         {
@@ -1229,6 +1286,7 @@
                 "Layer": 2,
                 "Body": "Level8_0_0",
                 "Friction": 0.05,
+                "ID": 0,
                 "Y": 17.066
             }
         },
@@ -1270,13 +1328,13 @@
             "class": "org.siggd.actor.Spawner",
             "props": {
                 "Layer": 4,
-                "Angle": 240,
                 "Exit Velocity": "15",
+                "Angle": 240,
                 "ID": 4,
                 "Blob Spawner": "1",
                 "Y": 6.030893,
                 "X": 2.1068296,
-                "Rate": "18"
+                "Rate": "16"
             }
         },
         {
@@ -1748,7 +1806,8 @@
                 "ID": 104,
                 "Stroke Length": "10",
                 "Y": 16.698677,
-                "X": 14.003687
+                "X": 14.003687,
+                "Restitution": 0.1
             }
         },
         {
@@ -1767,15 +1826,18 @@
             "id": 185,
             "class": "org.siggd.actor.Background",
             "props": {
+                "Collision Sound": "barrel.wav",
                 "Layer": 4,
                 "BodyType": 2,
                 "Body": "BarrelTopView",
+                "Collision Threshold": 3.5,
                 "Friction": 0.15,
                 "Density": 0.15,
-                "Grabbable": 1,
                 "ID": 185,
-                "Y": 28.904877,
-                "X": 33.257534
+                "Grabbable": 1,
+                "Y": 28.917242,
+                "X": 33.381172,
+                "Collision Pitch": 1.25
             }
         },
         {
@@ -1803,8 +1865,8 @@
             "class": "org.siggd.actor.PressurePlate",
             "props": {
                 "ID": 191,
-                "Y": 28.99316,
-                "X": 27.729252
+                "Y": 29.000107,
+                "X": 27.427046
             }
         },
         {
@@ -2051,7 +2113,8 @@
                 "ID": 1505,
                 "Stroke Length": "10",
                 "Y": 17.671558,
-                "X": 12.31885
+                "X": 12.31885,
+                "Restitution": 0.1
             }
         },
         {
@@ -2266,8 +2329,9 @@
             "id": 2072,
             "class": "org.siggd.actor.Teleport",
             "props": {
+                "Extra Level": "level1_med",
                 "ID": 2072,
-                "Level": "level1_med",
+                "Level": "closing",
                 "Y": 36.8221,
                 "X": 1.6220629
             }
@@ -2431,8 +2495,9 @@
             "id": 2854,
             "class": "org.siggd.actor.Teleport",
             "props": {
+                "Extra Level": "level1_med",
                 "ID": 2854,
-                "Level": "level1_med",
+                "Level": "closing",
                 "Y": 36.8221,
                 "X": 2.747063
             }
@@ -2441,8 +2506,9 @@
             "id": 2855,
             "class": "org.siggd.actor.Teleport",
             "props": {
+                "Extra Level": "level1_med",
                 "ID": 2855,
-                "Level": "level1_med",
+                "Level": "closing",
                 "Y": 36.8221,
                 "X": 0.49706292
             }

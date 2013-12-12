@@ -27,6 +27,9 @@ public class PressurePlate extends Actor implements IObservable {
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private PointLight mPointLight;
+	private int mRestTime = 0;
+	private int mDelay = 20;
+	private int mLag = 0;
 
 	public PressurePlate(Level level, long id) {
 		super(level, id);
@@ -50,6 +53,8 @@ public class PressurePlate extends Actor implements IObservable {
 		// TODO: set light active based on if actor is dummy or not
 		setProp("X", -10000);
 		setProp("Restitution", 0f);
+		setProp("Output", 0);
+		setProp("Lag", 0);
 		setState(false);
 	}
 
@@ -72,11 +77,11 @@ public class PressurePlate extends Actor implements IObservable {
 
 	@Override
 	public void update() {
+		mRestTime--;
 		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
 				.getContacts(this);
 		ArrayList<Body> bodies = (ArrayList<Body>) ContactHandler.getBodies(contacts);
 		boolean active = false;
-
 		for (Body b : bodies) {
 			if (b.getUserData() instanceof Dot)
 				continue;
@@ -96,8 +101,11 @@ public class PressurePlate extends Actor implements IObservable {
 				break;
 			}
 		}
-
-		setState(active);
+		setState(active);		
+		if (mPointLight != null)
+			mPointLight.setColor(mState ? 0 : .3f, mState ? .3f : 0, 0, .8f);
+		int s = getState() ? 1 : 0;
+		setProp("Output", s);
 	}
 
 	@Override
@@ -127,10 +135,24 @@ public class PressurePlate extends Actor implements IObservable {
 	}
 
 	private void setState(boolean state) {
-		if (mPointLight != null)
-			mPointLight.setColor(state ? 0 : .3f, state ? .3f : 0, 0, .8f);
-		if (state == mState)
+
+		if (mRestTime > 0)
 			return;
+		if (mLag > 0) {
+			if (state != mState) {
+				mLag--;
+				return;
+			} else {
+				mLag = Convert.getInt(getProp("Lag"));
+			}
+		}
+
+		if (state == mState) {
+			return;
+		} else {
+			mRestTime = mDelay;
+			mLag = Convert.getInt(getProp("Lag"));
+		}
 		if (state) {
 			mDrawable.mDrawables.remove(mDefaultDrawable);
 			mDrawable.mDrawables.add(mActiveDrawable);
@@ -138,6 +160,7 @@ public class PressurePlate extends Actor implements IObservable {
 			mDrawable.mDrawables.remove(mActiveDrawable);
 			mDrawable.mDrawables.add(mDefaultDrawable);
 		}
+
 		mState = state;
 	}
 

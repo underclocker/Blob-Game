@@ -38,6 +38,7 @@ public class DebugOutput {
 	private static boolean useFile = false;
 	private static int outCounter = 0;
 	public static void info(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();
@@ -66,6 +67,7 @@ public class DebugOutput {
 	}
 
 	public static void severe(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();
@@ -94,6 +96,7 @@ public class DebugOutput {
 	}
 
 	public static void warning(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();
@@ -122,6 +125,7 @@ public class DebugOutput {
 	}
 
 	public static void fine(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();
@@ -150,6 +154,7 @@ public class DebugOutput {
 	}
 
 	public static void finer(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();
@@ -178,6 +183,7 @@ public class DebugOutput {
 	}
 
 	public static void finest(Object o, String s) {
+		if(pw == null && Game.DEBUG)setFile();;
 		Logger logger = Logger.getLogger(o.getClass().getSimpleName());
 		logger.setUseParentHandlers(false);
 		Handler[] handlers = Logger.getLogger(o.getClass().getSimpleName()).getHandlers();

@@ -64,6 +64,12 @@ public class AndGate extends Actor implements IObservable {
 	@Override
 	public void update() {
 		andInput();
+		if (mPropagate) {
+			// creates a propagation delay
+			setProp("Output", (Integer) mPropagateVal);
+			mPropagate = false;
+		}
+		andInput();
 	}
 
 	@Override

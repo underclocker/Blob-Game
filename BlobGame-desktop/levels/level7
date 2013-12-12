@@ -1,6 +1,32 @@
 {
     "actors": [
         {
+            "id": 1716,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 480,
+                "Distance": "10.0",
+                "Green": "0.1",
+                "ID": 1716,
+                "Y": -1.4661306,
+                "X": 66.66382,
+                "Cone Angle": "20"
+            }
+        },
+        {
+            "id": 1715,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 780.00006,
+                "Distance": "10.0",
+                "Green": "0.1",
+                "ID": 1715,
+                "Y": -1.3930833,
+                "X": 64.59516,
+                "Cone Angle": "20"
+            }
+        },
+        {
             "id": 1521,
             "class": "org.siggd.actor.SpotLight",
             "props": {
@@ -603,7 +629,6 @@
             "props": {
                 "Angle": 90,
                 "Speed": "1",
-                "ID": 39,
                 "CollisionSound": "",
                 "Y": 7.133832,
                 "X": 25.183777,
@@ -695,7 +720,7 @@
                 "CollisionSound": "",
                 "Y": 16.111012,
                 "X": 3.2212772,
-                "Rate": "18"
+                "Rate": "16"
             }
         },
         {
@@ -735,7 +760,6 @@
             "id": 30,
             "class": "org.siggd.actor.PressurePlate",
             "props": {
-                "ID": 30,
                 "CollisionSound": "",
                 "Y": 2.9085577,
                 "X": 19.004116
@@ -1046,10 +1070,11 @@
             "class": "org.siggd.actor.SpotLight",
             "props": {
                 "Angle": 240,
-                "Distance": "10.0",
+                "Distance": "15",
                 "ID": 1416,
-                "Y": 11.42351,
-                "X": 11.446279
+                "Y": 11.658557,
+                "X": 11.483393,
+                "Cone Angle": "25"
             }
         },
         {
@@ -1057,10 +1082,11 @@
             "class": "org.siggd.actor.SpotLight",
             "props": {
                 "Angle": 300,
-                "Distance": "10.0",
+                "Distance": "15",
                 "ID": 1417,
-                "Y": 11.461011,
-                "X": 5.4587784
+                "Y": 11.658946,
+                "X": 5.5082626,
+                "Cone Angle": "25"
             }
         },
         {
@@ -1111,14 +1137,13 @@
             "id": 1618,
             "class": "org.siggd.actor.Parallax",
             "props": {
-                "Layer": -3,
+                "Layer": -5,
                 "Lightness": ".07",
-                "Y Offset": "6",
                 "ID": 1618,
                 "Scale": "8.0",
                 "Y": 15.686008,
                 "X": -2.6287222,
-                "Texture": "level3_1_0.png"
+                "Texture": "level5_0_1.png"
             }
         },
         {
@@ -1132,6 +1157,17 @@
                 "CollisionSound": "",
                 "Y": -2.858551,
                 "X": 66.32775
+            }
+        },
+        {
+            "id": 1810,
+            "class": "org.siggd.actor.SpotLight",
+            "props": {
+                "Angle": 669.99994,
+                "Distance": "20.0",
+                "ID": 1810,
+                "Y": 13.9987955,
+                "X": 32.644093
             }
         }
     ],

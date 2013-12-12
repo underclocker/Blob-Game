@@ -1,5 +1,6 @@
 package org.siggd;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
@@ -56,8 +57,10 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = true;
-	public static boolean PRELOAD = false; // only preloads in release and reads
+	public final static boolean UNLOCKED = false;
+
+	public static boolean CALM = false;	//loaded from config
+	public static boolean PRELOAD = false; // only preloads in release and is loaded
 											// from config file
 	public static float FPSREC = 60;
 
@@ -93,7 +96,7 @@ public class Game implements ApplicationListener {
 	public int mLoaderMax;
 	private boolean mFlipper = true;
 	// Framerate profiler
-	private int mInitDelay = 15;
+	private int mInitDelay = 30;
 	private long mStartTime;
 	private long mEndTime;
 	private ArrayList<Long> mRenderTimeHistory;
@@ -147,12 +150,10 @@ public class Game implements ApplicationListener {
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
 
-		if (DEBUG) {
-			DebugOutput.setFile();
-		}
+		
 
 		DebugOutput.enable();
-		DebugOutput.info(this, "Controllers: " + Controllers.getControllers().size);
+		System.out.println("Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
@@ -179,10 +180,10 @@ public class Game implements ApplicationListener {
 				p.active = true;
 				p.controltype = ControlType.Controller;
 				mPlayers.add(p);
-				DebugOutput.info(this, "Controller #" + i++ + ": " + controller.getName());
+				System.out.println("Controller #" + i++ + ": " + controller.getName());
 			}
 			if (Controllers.getControllers().size == 0) {
-				DebugOutput.info(this, "No controllers attached");
+				System.out.println("No controllers attached");
 				Player p = new Player(mPlayers.size());
 				p.active = true;
 				p.controltype = ControlType.Arrows;
@@ -220,18 +221,32 @@ public class Game implements ApplicationListener {
 			// load the select/point image
 			mAssetManager.load(mEditor.selectPoint, Texture.class);
 		} else {
+			FileHandle handleSt = Gdx.files.external(Level.SAVE_FILE);
+			if (handleSt.exists()) {
+				String json = handleSt.readString();
+				if (json.length() > 1) {
+					try {
+						JSONObject levels = new JSONObject(json);
+						Level.unlockModes(levels);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			if (PRELOAD) {
 				setState(Game.LOAD);
 				setLevel("emptylevel");
 				mMenuView.setMenu(MenuView.LOADING);
 				mHackishLoader.add("level1");
 				mHackishLoader.add("level2");
+				mHackishLoader.add("charselect");
 				mHackishLoader.add("level3");
 				mHackishLoader.add("level4");
+				mHackishLoader.add("closing");
 				mHackishLoader.add("level5");
+				mHackishLoader.add("opening");
 				mHackishLoader.add("level7");
 				mHackishLoader.add("level8");
-				mHackishLoader.add("charselect");
 				mHackishLoader.add("earth");
 
 				mLoaderMax = mHackishLoader.size();
@@ -239,6 +254,7 @@ public class Game implements ApplicationListener {
 				setState(Game.MENU);
 				setLevel("earth");
 				mLevelView.resetCamera();
+				mMenuView.setMenu(MenuView.MAIN);
 			}
 		}
 		// END: EDITOR
@@ -375,10 +391,12 @@ public class Game implements ApplicationListener {
 		for (long i : mRenderTimeHistory) {
 			total += i;
 		}
-		float avg = total / (mRenderTimeHistory.size() * 1000.0f);
-		avg /= 1000000.0f;
-		System.out.println(1 / avg);
-		FPSREC = 1 / avg;
+		if (mRenderTimeHistory.size() > 0) {
+			float avg = total / (mRenderTimeHistory.size() * 1000.0f);
+			avg /= 1000000.0f;
+			System.out.println("fps: " + (1.0f / avg));
+			FPSREC = 1 / avg;
+		}
 		mProfileFinished = true;
 	}
 
@@ -504,6 +522,9 @@ public class Game implements ApplicationListener {
 		if ("earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
 			assessFramerate();
 		}
+		boolean genMap = "gen".equals(fileName);
+		if (genMap)
+			fileName = "base";
 		Music music = null;
 		String song = null;
 		float vol = mLevel.mCurrentVolume;
@@ -513,7 +534,6 @@ public class Game implements ApplicationListener {
 			music = mLevel.mMusic;
 			song = (String) mLevel.mProps.get("SongName");
 		}
-
 		if (mLevel != null && mLevel.getAssetKey() != null) {
 			mAssetManager.unload(mLevel.getAssetKey());
 		}
@@ -521,6 +541,7 @@ public class Game implements ApplicationListener {
 		mAssetManager.load(fileName, Level.class);
 		mAssetManager.finishLoading();
 		mLevel = mAssetManager.get(fileName, Level.class);
+
 		if (Game.get().getEditor() != null) {
 			getEditor().updateWorldProperties();
 		}
@@ -541,6 +562,11 @@ public class Game implements ApplicationListener {
 
 		// Finish loading the level resources
 		mAssetManager.finishLoading();
+		if (genMap) {
+			mAssetManager.finishLoading();
+			new LevelGen();
+		}
+
 	}
 
 	/**
@@ -714,9 +740,16 @@ public class Game implements ApplicationListener {
 		}
 	}
 
-	public void saveScreenshot(FileHandle file) {
-		Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-		PixmapIO.writePNG(file, pixmap);
+	public void saveScreenshot() {
+		File f = new File(Gdx.files.getExternalStoragePath() + ".BlobGame/Screenshots/" + System.currentTimeMillis()+".png");
+		FileHandle handle;
+		if (!f.exists()) {
+			handle = new FileHandle(f);
+			Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
+					true);
+			PixmapIO.writePNG(handle, pixmap);
+		}
+
 	}
 
 	public Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {

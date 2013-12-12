@@ -49,7 +49,8 @@
 			"Buttons": {
 				"BUTTON_A": 1,
 				"BUTTON_B": 2,
-				"BUTTON_START": 9
+				"BUTTON_START": 9,
+				"BUTTON_RB": 7,
 			},
 			"Axes": {
 				"AXIS_LEFT_UD": 1,
@@ -68,6 +69,24 @@
 		}
 	},
 	"Windows 7": {
+	"Controller (XBOX 360 For Windows)": {
+			"Buttons": {
+			},
+			"Axes": {
+			}
+		},
+		"USB GamePad": {
+			"Buttons": {
+				"BUTTON_A": 1,
+				"BUTTON_B": 2,
+				"BUTTON_START": 9,
+				"BUTTON_RB": 7,
+			},
+			"Axes": {
+				"AXIS_LEFT_UD": 2,
+				"AXIS_LEFT_LR": 3,
+			}
+		},
 		"Twin USB Joystick": {
 			"Buttons": {
 				"BUTTON_A": 2,

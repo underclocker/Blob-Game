@@ -5,7 +5,7 @@
             "class": "org.siggd.actor.Teleport",
             "props": {
                 "ID": 11,
-                "Timer": "360",
+                "Timer": "810",
                 "Level": "level1",
                 "Y": 4.8766103,
                 "X": 22.317835
@@ -15,13 +15,18 @@
             "id": 6,
             "class": "org.siggd.actor.Cutscene",
             "props": {
-                "End": "240",
-                "X Pan": "0.001",
+                "End": "600",
+                "Z Pan": ".0017",
+                "X Pan": "-0.008",
+                "Y Offset": "5.25",
+                "Start": "60",
                 "ID": 6,
+                "Y Pan": "-0.011",
+                "Scale": "2",
                 "Y": 6.282687,
                 "X": 17.540655,
-                "Texture": "intro.png",
-                "X Offset": "-2"
+                "Texture": "intro1.png",
+                "X Offset": "5.25"
             }
         },
         {
@@ -29,30 +34,16 @@
             "class": "org.siggd.actor.Spawner",
             "props": {
                 "Layer": 4,
-                "Angle": 180,
                 "Exit Velocity": "10",
+                "Angle": 180,
                 "Friction": 0.2,
                 "ID": 2,
-                "CollisionSound": "",
                 "Blob Spawner": "1",
+                "CollisionSound": "",
                 "Y": 6.7330284,
                 "X": 19.470474,
-                "Rate": 30
-            }
-        },
-        {
-            "id": 0,
-            "class": "org.siggd.actor.Parallax",
-            "props": {
-                "Layer": 0,
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "ID": 0,
-                "Scale": 4,
-                "CollisionSound": "",
-                "Y": 14.254868,
-                "X": 18.028416
+                "Rate": 30,
+                "Mute": 1
             }
         },
         {
@@ -78,7 +69,8 @@
         "Parallax": "",
         "Min Camera X": "-8",
         "Max Camera X": "8",
-        "SongName": "",
+        "SongName": "drumdrum.ogg",
+        "Difficulty": 0,
         "Use Light": "0",
         "Solidity Enabled": "0"
     }

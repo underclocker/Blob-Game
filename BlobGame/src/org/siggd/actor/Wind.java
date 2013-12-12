@@ -28,7 +28,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  * @author mysterymath
  * 
  */
-public class Wind extends Actor implements IObserver, IObservable{
+public class Wind extends Actor implements IObserver, IObservable {
 	private String mTex;
 	private float mWaveyness = 100f;
 	private float mInverseWaveyness = 1f / mWaveyness;
@@ -36,7 +36,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 	private Drawable frame;
 	private int mInputDelay = 4;
 	private int mDelay = 0;
-	private boolean mState = false; 
+	private boolean mState = false;
 
 	/**
 	 * Constructor. No non-optional parameters may be added to this constructor.
@@ -54,9 +54,8 @@ public class Wind extends Actor implements IObserver, IObservable{
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
 		mBody = makeBody(mName, 128, BodyType.StaticBody, origin, true);
-		mDrawable.mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED, Color.GREEN));
-		frame = new BodySprite(mBody, origin, mTex);
-		((CompositeDrawable) mDrawable).mDrawables.add(frame);
+		mDrawable.mDrawables.add(new DebugActorLinkDrawable(this, null, null, Color.RED,
+				Color.GREEN));
 		setProp("Wind Strength", (Float) 0.5f);
 		mAnimation = new Animation(mBody, origin);
 		mAnimation.mTicksPerFrame = 3;
@@ -68,6 +67,12 @@ public class Wind extends Actor implements IObserver, IObservable{
 		mAnimation.addFrame("data/gfx/wind6.png");
 		mAnimation.addFrame("data/gfx/wind7.png");
 		mAnimation.setCurFrame(((Double) (Math.random() * 7)).intValue());
+		if (Game.get().getState() == Game.EDIT) {
+			frame = new BodySprite(mBody, origin, mTex);
+		} else {
+			frame = mAnimation.getCurFrame();
+		}
+		((CompositeDrawable) mDrawable).mDrawables.add(frame);
 	}
 
 	/**
@@ -95,9 +100,9 @@ public class Wind extends Actor implements IObserver, IObservable{
 
 	@Override
 	public void update() {
-		if(inputActive() || Convert.getInt(getProp("Target Input")) == -1) {
-			
-			if (mDelay < mInputDelay){
+		if (inputActive() || Convert.getInt(getProp("Target Input")) == -1) {
+
+			if (mDelay < mInputDelay) {
 				mDelay++;
 			} else {
 				setState(true);
@@ -137,7 +142,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 							subBody.applyForceToCenter(tempforce, true);
 						}
 					}
-	
+
 					tempforce = new Vector2(force);
 					Vector2 posDiff = new Vector2(b.getPosition());
 					posDiff.sub(this.mBody.getPosition());
@@ -150,13 +155,12 @@ public class Wind extends Actor implements IObserver, IObservable{
 						tempforce.scl((Math.max(1f - posDiff.len(), 0f)));
 					}
 					tempforce.scl(b.getMass() / density);
-	
+
 					b.applyForceToCenter(tempforce, true);
 				}
 			}
-		}
-		else {
-			if (mDelay > 0){
+		} else {
+			if (mDelay > 0) {
 				mDelay--;
 			} else {
 				setState(false);
@@ -171,7 +175,7 @@ public class Wind extends Actor implements IObserver, IObservable{
 	@Override
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
-		if(man.containsAsset(mTex)) {
+		if (man.containsAsset(mTex)) {
 			man.unload(mTex);
 		}
 	}
@@ -180,26 +184,27 @@ public class Wind extends Actor implements IObserver, IObservable{
 	public void postLoad() {
 	}
 
-	public boolean inputActive(){
-		if(mInputSrc == null) {
+	public boolean inputActive() {
+		if (mInputSrc == null) {
 			return false;
 		}
 
 		Object input = mInputSrc.observe();
-		return (input instanceof Boolean) && (Boolean)input;
+		return (input instanceof Boolean) && (Boolean) input;
 	}
+
 	private IObservable mInputSrc;
+
 	@Override
 	public Actor inputSrc() {
-		return (Actor)mInputSrc;
+		return (Actor) mInputSrc;
 	}
 
 	@Override
 	public void inputSrc(Actor inputSrc) {
-		mInputSrc =(inputSrc instanceof IObservable) ? (IObservable)inputSrc : null;
+		mInputSrc = (inputSrc instanceof IObservable) ? (IObservable) inputSrc : null;
 	}
-	
-	
+
 	@Override
 	public Object observe() {
 		return getState();

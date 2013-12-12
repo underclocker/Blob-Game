@@ -1,0 +1,78 @@
+{
+    "actors": [
+        {
+            "id": 11,
+            "class": "org.siggd.actor.Teleport",
+            "props": {
+                "Extra Level": "gen",
+                "ID": 11,
+                "Timer": "940",
+                "Level": "levelselect",
+                "Y": 4.8766103,
+                "X": 22.317835
+            }
+        },
+        {
+            "id": 6,
+            "class": "org.siggd.actor.Cutscene",
+            "props": {
+                "End": "810",
+                "Z Pan": ".0011",
+                "X Pan": "0.007",
+                "Y Offset": "-5.25",
+                "Start": "60",
+                "ID": 6,
+                "Y Pan": "0.009625",
+                "Scale": "2",
+                "Y": 6.282687,
+                "X": 17.540655,
+                "Texture": "outro.png",
+                "X Offset": "-5.25"
+            }
+        },
+        {
+            "id": 2,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": 4,
+                "Exit Velocity": "10",
+                "Angle": 180,
+                "Friction": 0.2,
+                "ID": 2,
+                "Mute": 1,
+                "Blob Spawner": "1",
+                "CollisionSound": "",
+                "Y": 6.7330284,
+                "X": 19.470474,
+                "Rate": 30
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "Active": 0,
+                "Density": 0.35,
+                "ID": 3,
+                "CollisionSound": "",
+                "Y": 15.514525,
+                "X": 18.048384
+            }
+        }
+    ],
+    "props": {
+        "Ambient Light": 0.3,
+        "Min Camera Y": "0",
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": "0",
+        "Max Camera Y": "9",
+        "Parallax": "",
+        "Min Camera X": "-8",
+        "Max Camera X": "8",
+        "SongName": "close.ogg",
+        "Difficulty": 0,
+        "Use Light": "0",
+        "Solidity Enabled": "0"
+    }
+}

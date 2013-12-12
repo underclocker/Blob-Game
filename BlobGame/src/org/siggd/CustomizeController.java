@@ -36,7 +36,7 @@ public class CustomizeController {
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
 				if (selected != null) {
-					shapeRender.setColor(Blob.COLORS[mPlayer.id%Blob.COLORS.length]);
+					shapeRender.setColor(Blob.colors(mPlayer.id%Blob.COLORS.length));
 					GLCommon gl = Gdx.graphics.getGLCommon();
 					shapeRender.begin(ShapeType.Line);
 					shapeRender.box(mTable.getX()+selected.getX(), mTable.getY()+selected.getY(), 0, selected.getWidth(),

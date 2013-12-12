@@ -6,7 +6,9 @@ import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
 import org.siggd.view.Drawable;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -55,7 +57,10 @@ public class Background extends Actor {
 	@Override
 	public void loadResources() {
 		AssetManager man = Game.get().getAssetManager();
-		man.load(mTex, Texture.class);
+		FileHandle fh = Gdx.files.internal(mTex);
+		if (fh.exists()) {
+			man.load(mTex, Texture.class);
+		}
 	}
 
 	/**
@@ -63,6 +68,10 @@ public class Background extends Actor {
 	 */
 	@Override
 	public void loadBodies() {
+		FileHandle fh = Gdx.files.internal(mTex);
+		if (!fh.exists()) {
+			return;
+		}
 		AssetManager man = Game.get().getAssetManager();
 		Vector2 origin = new Vector2();
 		Texture tex = man.get(mTex, Texture.class);
@@ -138,7 +147,10 @@ public class Background extends Actor {
 			// BEGIN: EDITOR
 			if (mIsInEditor) {
 				loadResources();
-				Game.get().getAssetManager().finishLoading();
+				FileHandle fh = Gdx.files.internal(mTex);
+				if (fh.exists()) {
+					Game.get().getAssetManager().finishLoading();
+				}
 				loadBodies();
 			}
 			// END: EDITOR

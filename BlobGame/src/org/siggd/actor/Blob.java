@@ -331,6 +331,9 @@ public class Blob extends Actor implements Controllable {
 
 			// openGL settings
 			mMesh.setVertices(verts);// set the mesh vertices to the vertices
+			if (mSolidColor.a < 1) {
+				Gdx.gl.glEnable(GL10.GL_BLEND);
+			}
 			if (Gdx.graphics.isGL20Available()) {
 				ShaderProgram shader = Game.get().getLevelView().getDefaultShaderProgram();
 				shader.begin();
@@ -346,12 +349,20 @@ public class Blob extends Actor implements Controllable {
 				gl10.glEnable(GL10.GL_BLEND);
 				mMesh.render(GL10.GL_TRIANGLES, 0, numVertices); // render
 			}
+			if (mSolidColor.a < 1) {
+				Gdx.gl.glDisable(GL10.GL_BLEND);
+			}
 
-			// set black outline for blobs
+			// set outline for blobs
 			shapeRender.begin(ShapeType.Line);
-			shapeRender.setColor(mCurrentColor.cpy().mul(.6f, .6f, .6f, 1));
-			float lineWidth = 3 * Game.get().getLevelView().getScale()
-					/ Game.get().getLevelView().getVScale();
+			Color c = mCurrentColor.cpy().mul(.6f, .6f, .6f, 1);
+			c.a = 1;
+			shapeRender.setColor(c);
+
+			float lineWidth = 3 / (120 * Game.get().getLevelView().getScale());
+
+			lineWidth *= Math.min(Gdx.graphics.getWidth() / LevelView.vWIDTH,
+					Gdx.graphics.getHeight() / LevelView.vHEIGHT);
 
 			for (int i = 0; i < vertices.size(); i++) {
 				Vector2 v1;
@@ -432,7 +443,9 @@ public class Blob extends Actor implements Controllable {
 				} else {
 					mAccessoryMouth.mAngle = rotation;
 				}
-				// mAccessoryMouth.drawSprite(mBatch);
+				Player p = Game.get().getPlayer(getmPlayerID());
+				if (p != null && p.mustache)
+					mAccessoryMouth.drawSprite(mBatch);
 			}
 		}
 
@@ -521,12 +534,49 @@ public class Blob extends Actor implements Controllable {
 		}
 	}
 
-	public static final Color COLORS[] = { new Color(0f, .8f, 0f, 1f),
-			new Color(.2f, .25f, .95f, 1f), new Color(.9f, 0f, 0f, 1f), new Color(1f, .5f, 0f, 1f),
-			new Color(1f, 1f, .0f, 1f), new Color(.8f, 0f, .9f, 1f),
-			new Color(.21f, .71f, .9f, 1f), new Color(0f, .4f, 0f, 1f),
-			new Color(1f, .5f, .9f, 1f), new Color(0f, 0f, 0f, 1f), new Color(1f, 1f, 1f, 1f),
-			new Color(.5f, .5f, .5f, 1f), new Color(.6f, 0f, 0f, 1f) };
+	public static Color COLORS[] = { new Color(0f, .8f, 0f, 1f), // Green
+			new Color(.2f, .25f, .95f, 1f), // Blue
+			new Color(.9f, 0f, 0f, 1f), // Red
+			new Color(1f, .5f, 0f, 1f), // Orange
+			new Color(1f, 1f, .0f, 1f), // Yellow
+			new Color(.5f, .12f, 1f, 1f), // Purple
+			new Color(.21f, .71f, .9f, 1f), // Cyan
+			// new Color(.3f, .1f, 0f, 1f), // Dark Red
+			new Color(0f, .3f, 0f, 1f), // Dark Green
+			new Color(1f, .5f, .9f, 1f), // Pink
+			// new Color(0f, 0f, 0f, 1f), // Black
+			// new Color(1f, 1f, 1f, 1f), // White
+			// new Color(1f, 1f, 1f, 1f), // White
+			new Color(.8f, .8f, .8f, .5f) // Gray
+
+	};
+	
+	public static Color colors(int i)
+	{
+		if(Game.CALM) return CALM_COLORS[i];
+		return COLORS[i];
+	}
+	
+	public static void setColor(int i, Color x)
+	{
+		if(!Game.CALM)Blob.COLORS[i] = x;
+		else Blob.CALM_COLORS[i] = x;
+	}
+	
+	public static Color CALM_COLORS[] = { 
+		new Color(0.3f, .7f, 0.3f, 1f), // Green
+		new Color(.2f, .25f, .8f, 1f), // Blue
+		new Color(.7f, .1f, 0.1f, 1f), // Red
+		new Color(.8f, .4f, .1f, 1f), // Orange
+		new Color(.8f, .8f, .2f, 1f), // Yellow
+		new Color(.6f, .36f, .9f, 1f), // Purple
+		new Color(.21f, .5f, .7f, 1f), // Cyan
+		new Color(0.05f, .3f, 0.05f, 1f), // Dark Green
+		new Color(.8f, .5f, .6f, 1f), // Pink
+		new Color(.8f, .8f, .8f, .5f) // Gray
+
+		};
+
 	private static final int SQUISH_STATE = 0; // /< The number of particles to
 	// use
 	private static final int SOLID_STATE = 1; // /< The number of particles to
@@ -586,13 +636,13 @@ public class Blob extends Actor implements Controllable {
 	// density
 	private float mAccAprox = 0; // < approximates acceleration of squishy blob
 	private PointLight mLight;
-	private float mExtraGlow = -100;
+	float mExtraGlow = -100;
 	private Color mLightColor;
 	private BlobDrawable mBlobDrawable;
 	private int mPointCombo = 0;
 	private int mPoints = 0;
 	private boolean mWasDown;
-	private boolean mWasUp;
+	private boolean mWasUp = true;
 	public boolean mFinishedLevel = false;
 	private int mPoofTimer = 0;
 
@@ -912,14 +962,20 @@ public class Blob extends Actor implements Controllable {
 			mPointCombo = 0;
 		}
 		if (mLight != null) {
-			mLightColor.set(mBlobDrawable.mSquishColor);
-
+			//Gray is the only color with alpha=0.5
+			//So light alpha is 1.0 To be brighter
+			mLightColor.set(mBlobDrawable.mCurrentColor);
+			if(mLightColor.a != 1.0f){
+				mLightColor.a = 1.0f;
+			}
 			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
 			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
-			diff *= diff;
-			brightness += .075f * diff;
+			brightness *= 1 + (diff * .25f);
 			if (brightness < 0) {
 				brightness = 0;
+			}
+			if (brightness > 1) {
+				brightness = 1;
 			}
 			mLightColor.mul(brightness, brightness, brightness, 1f);
 			mLight.setColor(mLightColor);
@@ -1017,6 +1073,10 @@ public class Blob extends Actor implements Controllable {
 			}
 			if (!mWasUp && up && mState == SOLID_STATE) {
 				transform();
+			}
+			if (!mWasUp && up && "charselect".equals(Game.get().getLevel().getAssetKey())) {
+				Game.get().getPlayer(getmPlayerID()).swapColor();
+				resetColor(getmPlayerID(), false);
 			}
 
 			mWasDown = down;
@@ -1117,7 +1177,9 @@ public class Blob extends Actor implements Controllable {
 			mAccAprox += velLength / 10f;
 			mAccAprox *= .9f;
 			if (velLength > threshold && mSoundTimer.isTriggered()
-					&& !"earth".equals(Game.get().getLevel().getAssetKey())) {
+					&& !"earth".equals(Game.get().getLevel().getAssetKey())
+
+			) {
 				AssetManager man = Game.get().getAssetManager();
 				Sound sound;
 				long soundID;
@@ -1176,22 +1238,29 @@ public class Blob extends Actor implements Controllable {
 	}
 
 	public void eatDot() {
-		mExtraGlow += 50f;
+		if ("base".equals(Game.get().getLevel().getAssetKey())) {
+			mExtraGlow += 15f;
+		} else {
+			mExtraGlow += 50f;
+		}
 		mPoints++;
 
 		AssetManager man = Game.get().getAssetManager();
 		if (man.isLoaded(mNom)) {
 			Sound sound = man.get(mNom, Sound.class);
 			long soundID = sound.play();
-			sound.setVolume(soundID, .5f);
-			
-			float pitch = 0.5f;
-			for (int i = 0; i < mPointCombo; i++)
-			{
-				pitch *= 1.05946*1.05946;
-				if(i == 3 || i == 7) pitch /= 1.05946; //This makes it increase along a Major scale, the happiest scale in the universe
+			sound.setVolume(soundID, .6f);
+
+			float pitch = 1.0f;
+			for (int i = 0; i < mPointCombo; i++) {
+				pitch *= 1.05946 * 1.05946;
+				if (i == 3 || i == 6)
+					pitch /= 1.05946; // This makes it increase along a Major
+										// scale, the happiest scale in the
+										// universe
 			}
-			if (pitch > 1) pitch = 1;
+			if (pitch > 2)
+				pitch = 2;
 			sound.setPitch(soundID, pitch);
 			mSoundTimer.reset();
 		}
@@ -1304,34 +1373,7 @@ public class Blob extends Actor implements Controllable {
 			mLeftEye.getFixtureList().get(0).setFilterData(filter);
 			mRightEye.getFixtureList().get(0).setFilterData(filter);
 			mEyeFilter = filter;
-			Color squishColor;
-			if (value >= 0) {
-				squishColor = COLORS[(int) (value % COLORS.length)];
-			} else {
-				squishColor = COLORS[0];
-			}
-
-			if (mLight != null) {
-				mLightColor = new Color();
-				mLightColor.set(squishColor);
-				mLight.setColor(mLightColor);
-				mLight.setDistance(0);
-			}
-			Color solidColor = new Color(squishColor);
-			solidColor.mul(.65f, .65f, .65f, 1f);
-			Drawable bd = null;
-			for (Drawable d : ((CompositeDrawable) mDrawable).mDrawables) {
-				if (d instanceof BlobDrawable) {
-					bd = d;
-					break;
-				}
-			}
-			if (bd != null) {
-				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
-				((BlobDrawable) bd).mDestColor = new Color(squishColor);
-				((BlobDrawable) bd).mSolidColor = solidColor;
-				((BlobDrawable) bd).mSquishColor = squishColor;
-			}
+			resetColor((int) value, true);
 		}
 		if (name.equals("Active")) {
 			if (mLight != null)
@@ -1415,8 +1457,51 @@ public class Blob extends Actor implements Controllable {
 		return ps;
 	}
 
+	private void resetColor(int id, boolean force) {
+		Color squishColor;
+		if (id >= 0) {
+			squishColor = colors((int) (id % COLORS.length));
+		} else {
+			squishColor = colors(0);
+		}
+
+		Color solidColor = new Color(squishColor);
+		solidColor.mul(.65f, .65f, .65f, 1f);
+		Drawable bd = null;
+		for (Drawable d : ((CompositeDrawable) mDrawable).mDrawables) {
+			if (d instanceof BlobDrawable) {
+				bd = d;
+				break;
+			}
+		}
+		if (bd != null) {
+			if (force) {
+				((BlobDrawable) bd).mCurrentColor = new Color(squishColor);
+				if (mLight != null) {
+					mLightColor = new Color(0, 0, 0, 0);
+					mLightColor.set(mLightColor);
+					mLight.setColor(mLightColor);
+				}
+			}
+			((BlobDrawable) bd).mDestColor = new Color(squishColor);
+			((BlobDrawable) bd).mSolidColor = solidColor;
+			((BlobDrawable) bd).mSquishColor = squishColor;
+		}
+	}
+
 	public void transform() {
 		AssetManager man = Game.get().getAssetManager();
+		String[] skips = new String[5];
+		skips[0] = "earth";
+		skips[1] = "opening";
+		skips[2] = "opening_med";
+		skips[3] = "opening_hard";
+		skips[4] = "closing";
+		for (int i = 0; i < skips.length; i++) {
+			if (skips[i].equals(Game.get().getLevel().getAssetKey()))
+				return;
+		}
+
 		Sound sound;
 		long soundID;
 		if (mState == SQUISH_STATE) {
@@ -1538,6 +1623,7 @@ public class Blob extends Actor implements Controllable {
 			// Collision
 			// Group.
 			setProp("Grabbable", (Integer) 1);
+			mStrain = true;
 		} else if (mState == SOLID_STATE) {
 
 			// Already in solid state, transform to squish state.
@@ -1839,7 +1925,11 @@ public class Blob extends Actor implements Controllable {
 	 * Called to detect if any joints are strained to the breaking point. These
 	 * joints are then removed.
 	 */
+
+	private boolean mStrain = false;
+
 	private void breakStrainedJoints() {
+
 		for (Iterator<Joint> iter = mJoints.iterator(); iter.hasNext();) {
 			Joint j = iter.next();
 
@@ -1850,22 +1940,26 @@ public class Blob extends Actor implements Controllable {
 			}
 
 			// Remove joint
-			Actor otherActor;
-			Body body;
-			body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
-			if (j.getBodyA() != null && j.getBodyB() != null) {
-				otherActor = (Actor) body.getUserData();
-				if (otherActor instanceof Blob) {
-					((Blob) otherActor).removeJoint(j);
+			if (!mStrain) {
+				Actor otherActor;
+				Body body;
+				body = (j.getBodyA().equals(mBody) ? j.getBodyB() : j.getBodyA());
+				if (j.getBodyA() != null && j.getBodyB() != null) {
+					otherActor = (Actor) body.getUserData();
+					if (otherActor instanceof Blob) {
+						((Blob) otherActor).removeJoint(j);
+					}
+					if (otherActor instanceof BattleBall) {
+						((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
+								.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
+					}
+					getLevel().getWorld().destroyJoint(j);
+					Game.get().playTickSound();
+					iter.remove();
 				}
-				if (otherActor instanceof BattleBall) {
-					((BattleBall) otherActor).setProp("Grabbers", (Integer) (Convert
-							.getInt(((BattleBall) otherActor).getProp("Grabbers")) - 1));
-				}
-				getLevel().getWorld().destroyJoint(j);
-
-				iter.remove();
 			}
+			mStrain = false;
+
 		}
 	}
 

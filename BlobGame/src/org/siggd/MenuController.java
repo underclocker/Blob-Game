@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.siggd.actor.Blob;
+import org.siggd.actor.Teleport;
 import org.siggd.view.MenuView;
 
 import com.badlogic.gdx.Gdx;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -22,6 +24,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -42,8 +45,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 	private int mControllerFilter;
 	private int mFilteredKey;
 	private int mRepeats = 0;
-	
-	public boolean ignore; //> Flag whether to ignore any further inputs;
+
+	public boolean ignore; // > Flag whether to ignore any further inputs;
 
 	private static float sLineWidth = 3;
 
@@ -94,6 +97,24 @@ public class MenuController implements InputProcessor, ControllerListener {
 		}
 	}
 
+	public void selectFirstAvailable() {
+		for (int i = 0; i < mTable.getCells().size(); i++) {
+			setIndex(i);
+			if (getCell(mX, mY) != null) {
+				break;
+			}
+		}
+	}
+
+	public void selectFirstCheckedAvailable() {
+		for (int i = 0; i < mTable.getCells().size(); i++) {
+			setIndex(i);
+			if (getTransCell(mX, mY) != null) {
+				break;
+			}
+		}
+	}
+
 	public void setTable(Table t) {
 		mTable = t;
 		if (t != null) {
@@ -103,7 +124,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 					a.addListener(hoverListener);
 				}
 			}
-			setIndex(0);
+			selectFirstAvailable();
 		}
 	}
 
@@ -145,14 +166,17 @@ public class MenuController implements InputProcessor, ControllerListener {
 					down = down || upDown > 0.5;
 					r = r || leftRight > 0.5;
 					l = l || leftRight < -0.5;
-					
-					if(mController.getPov(0) == PovDirection.east) r = true;
-					if(mController.getPov(0) == PovDirection.west) l = true;
-					if(mController.getPov(0) == PovDirection.north) up = true;
-					if(mController.getPov(0) == PovDirection.south) down = true;
+
+					if (mController.getPov(0) == PovDirection.east)
+						r = true;
+					if (mController.getPov(0) == PovDirection.west)
+						l = true;
+					if (mController.getPov(0) == PovDirection.north)
+						up = true;
+					if (mController.getPov(0) == PovDirection.south)
+						down = true;
 				}
-				
-				
+
 				if (NAV_KEYS.contains(mFilteredKey)) {
 					if (Gdx.input.isKeyPressed(mFilteredKey)) {
 						switch (mFilteredKey) {
@@ -211,7 +235,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 			Cell c = getCell(mX, mY);
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
-				shapeRender.setColor(Blob.COLORS[mPlayerId]);
+				shapeRender.setColor(Blob.colors(mPlayerId));
 				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
 				Vector2 topleft = new Vector2(mTable.getX() + selected.getX(), mTable.getY()
@@ -240,13 +264,17 @@ public class MenuController implements InputProcessor, ControllerListener {
 		}
 	}
 
+	public Color getCurColor() {
+		return Blob.colors(mPlayerId);
+	}
+
 	private Cell getCell(int x, int y) {
 		if (mTable != null) {
 			for (Cell c : mTable.getCells()) {
 				if (c.getColumn() == x && c.getRow() == y) {
 					Actor cellActor = (Actor) (c.getWidget());
-					if (cellActor instanceof ImageButton
-							&& (((ImageButton) cellActor).isDisabled() || !((ImageButton) cellActor)
+					if (cellActor instanceof Button
+							&& (((Button) cellActor).isDisabled() || !((Button) cellActor)
 									.isVisible())) {
 						return null;
 					} else {
@@ -255,7 +283,25 @@ public class MenuController implements InputProcessor, ControllerListener {
 				}
 			}
 		}
-		// System.out.println("CELL " + x + "," + y + " not found");
+		return null;
+	}
+
+	private Cell getTransCell(int x, int y) {
+		if (mTable != null) {
+			for (Cell c : mTable.getCells()) {
+				if (c.getColumn() == x && c.getRow() == y) {
+					Actor cellActor = (Actor) (c.getWidget());
+					if (cellActor instanceof Button
+							&& (((Button) cellActor).isDisabled()
+									|| !((Button) cellActor).isVisible() || !((Button) cellActor)
+										.isTransform())) {
+						return null;
+					} else {
+						return c;
+					}
+				}
+			}
+		}
 		return null;
 	}
 
@@ -269,15 +315,38 @@ public class MenuController implements InputProcessor, ControllerListener {
 			}
 			Cell selected = mTable.getCell(event.getListenerActor());
 			if (selected != null && (mX != selected.getColumn() || mY != selected.getRow())) {
-				Game.get().playTickSound();
-				mX = selected.getColumn();
-				mY = selected.getRow();
+				Actor cellActor = (Actor) (selected.getWidget());
+				if (cellActor instanceof Button
+						&& (((Button) cellActor).isDisabled() || !((Button) cellActor).isVisible())) {
+					// nothing don't navigate
+				} else {
+					Game.get().playTickSound();
+					mX = selected.getColumn();
+					mY = selected.getRow();
+				}
 			}
 		};
 	};
 
 	private void handleEscape() {
 		if (Game.get().getState() == Game.PLAY) {
+			String[] skips = new String[4];
+			skips[0] = "opening";
+			skips[1] = "opening_med";
+			skips[2] = "opening_hard";
+			skips[3] = "closing";
+			for (int i = 0; i < skips.length; i++) {
+				if (skips[i].equals(Game.get().getLevel().getAssetKey())) {
+					for (org.siggd.actor.Actor a : Game.get().getLevel().getActors()) {
+						if (a instanceof Teleport) {
+							Teleport t = (Teleport) a;
+							t.changeLevel();
+							return;
+						}
+					}
+					return;
+				}
+			}
 			Game.get().setPaused(true);
 			Game.get().setState(Game.MENU);
 			Game.get().getMenuView().setMenu(MenuView.PAUSE);
@@ -291,12 +360,13 @@ public class MenuController implements InputProcessor, ControllerListener {
 			} else if (MenuView.CONTROLLER.equals(Game.get().getMenuView().getCurrentMenu())) {
 				Game.get().getMenuView().setMenu(MenuView.MAIN);
 			} else if (MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu())) {
+				boolean inRace = Game.get().getMenuView().mSelectedLevel.equals("gen");
 				// Customize Menu
 				// deactivate any players that may have joined
 				Game.get().deactivatePlayers();
 				Game.get().setLevel("earth");
 				Game.get().getLevel().killFade();
-				Game.get().getMenuView().setMenu(MenuView.LEVELS);
+				Game.get().getMenuView().setMenu(inRace ? MenuView.MAIN : MenuView.LEVELS);
 				mControllerFilter = 0;
 			}
 		}
@@ -318,7 +388,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 	}
 
 	private boolean controllerPermission(Controller c, int button) {
-		if(ignore){
+		if (ignore) {
 			return false;
 		}
 		int gameState = Game.get().getState();
@@ -408,7 +478,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 			}
 			mControllerFilter = 1;
 			mRepeats = 0;
-
 			break;
 		case Input.Keys.D:
 		case Input.Keys.RIGHT:
@@ -459,6 +528,9 @@ public class MenuController implements InputProcessor, ControllerListener {
 		case Input.Keys.ESCAPE:
 			handleEscape();
 			Game.get().playNomSound();
+			break;
+		case Input.Keys.F12:
+			Game.get().saveScreenshot();
 			break;
 		}
 		mFilteredKey = keycode;

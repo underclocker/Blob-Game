@@ -1,23 +1,24 @@
 package org.siggd.actor;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.ContactHandler;
+import org.siggd.ControllerFilterAPI;
 import org.siggd.Convert;
 import org.siggd.Game;
 import org.siggd.Level;
+import org.siggd.LevelGen;
+import org.siggd.Player;
 import org.siggd.StableContact;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
+import org.siggd.view.MenuView;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -79,6 +80,7 @@ public class Teleport extends Actor {
 	public void update() {
 		mTimer++;
 		int timer = Convert.getInt(getProp("Timer"));
+
 		if (timer != -1 && mTimer > timer) {
 			changeLevel();
 		}
@@ -113,7 +115,7 @@ public class Teleport extends Actor {
 		return false;
 	}
 
-	private void changeLevel() {
+	public void changeLevel() {
 		if (this.getProp("Level").equals("")) {
 			System.out.println("Invalid Level!");
 			return;
@@ -121,38 +123,50 @@ public class Teleport extends Actor {
 		String nextLevel = (String) this.getProp("Level");
 		String extraLevel = (String) this.getProp("Extra Level");
 		JSONObject levelSave = Game.get().getLevel().getLevelSave();
-		if (nextLevel != null && !"".equals(nextLevel)){
+		if (nextLevel != null && "levelselect".equals(nextLevel)) {
+			Game.get().setState(Game.MENU);
+			Game.get().setNextLevel("earth");
+			Game.get().setPaused(false);
+			Game.get().getLevelView().resetCamera();
+			Game.get().deactivatePlayers();
+			Game.get().getMenuView().mMenuController.ignore = false;
+			Game.get().getMenuView().setMenu(MenuView.LEVELS);
+			return;
+		}
+		if (nextLevel != null && !"".equals(nextLevel)) {
 			JSONObject level;
 			try {
 				level = levelSave.getJSONObject(nextLevel);
 			} catch (JSONException e) {
-				//level does not exist yet
+				// level does not exist yet
 				level = new JSONObject();
 			}
 			try {
-				level.put("unlocked",true);
+				level.put("unlocked", true);
 			} catch (JSONException e) {
-				//Should Never Happen
+				// Should Never Happen
 				System.out.println("Congrats! You have achieved the Impossible!");
 			}
 			Game.get().getLevel().saveToLevelSave(nextLevel, level);
 		}
-		if (extraLevel != null && !"".equals(extraLevel)){
+		if (extraLevel != null && !"".equals(extraLevel)) {
 			JSONObject level;
 			try {
 				level = levelSave.getJSONObject(extraLevel);
 			} catch (JSONException e) {
-				//level does not exist yet
+				// level does not exist yet
 				level = new JSONObject();
 			}
 			try {
-				level.put("unlocked",true);
+				level.put("unlocked", true);
 			} catch (JSONException e) {
-				//Should Never Happen
+				// Should Never Happen
 				System.out.println("Congrats! You have achieved the Impossible!");
 			}
 			Game.get().getLevel().saveToLevelSave(extraLevel, level);
 		}
+		if ("gen".equals(nextLevel))
+			LevelGen.Difficulty += 1.0f;
 		Game.get().setNextLevel(nextLevel);
 	}
 

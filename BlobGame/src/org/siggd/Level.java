@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.siggd.actor.Actor;
 import org.siggd.actor.Blob;
+import org.siggd.actor.Door;
 import org.siggd.actor.Dot;
 import org.siggd.actor.FadeIn;
 import org.siggd.actor.Spawner;
@@ -20,7 +21,6 @@ import org.siggd.actor.meta.ActorEnum;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -40,6 +40,17 @@ import com.badlogic.gdx.physics.box2d.World;
  * 
  */
 public class Level implements Iterable<Actor> {
+	public static final String SAVE_FILE = ".BlobGame/BlobSave.json";
+	// Static array of level names for locking levels
+	public static String[] LEVELS = { "level1", "level7", "level5", "level3", "level4", "level2",
+			"level8" };
+	public static String MEDIUM_SUFFIX = "_med";
+	public static String HARD_SUFFIX = "_hard";
+	public static boolean MEDEASY_COMPLETE = false;
+	public static boolean EASY_PASSED = false;
+	public static boolean HARD_PASSED = false;
+	public static boolean COMPLETE = false;
+	public static boolean FIRSTCHECK = true;
 
 	// Array of actors
 	ArrayList<Actor> mActors;
@@ -55,7 +66,7 @@ public class Level implements Iterable<Actor> {
 	private float mVolume = 0.5f;
 
 	float mCurrentVolume = 0f;
-	private float mFadeRate = 0.03f;
+	private float mFadeRate = 0.02f;
 	private int mMusicTick = 0;
 
 	Music mMusic;
@@ -64,7 +75,6 @@ public class Level implements Iterable<Actor> {
 	public Blob mFirstBlobFinished = null;
 	private float mAmbientLight;
 	private JSONObject mLevelSave;
-	private final String mSaveFileName = ".BlobGame/BlobSave.json";
 	private static final Logger mLog = Logger.getLogger(Level.class.getName());
 
 	/**
@@ -141,7 +151,6 @@ public class Level implements Iterable<Actor> {
 		// Inherited a song
 		if (mMusic != null) {
 			AssetManager man = Game.get().getAssetManager();
-
 			String musicPath = "data/mus/" + (String) getProp("SongName");
 			try {
 				if (nMusic == null) {
@@ -199,21 +208,26 @@ public class Level implements Iterable<Actor> {
 				mMusic.setVolume(mCurrentVolume);
 			} else {
 				mMusic.stop();
+				nMusic.setVolume(0);
 				mMusic = nMusic;
 				nMusic = null;
 			}
 		} else if (mMusic != null) {
-			mCurrentVolume = mVolume;
+			// mCurrentVolume = mVolume;
+			mCurrentVolume += mFadeRate;
+			if (mCurrentVolume >= mVolume)
+				mCurrentVolume = mVolume;
 			if (!mMusic.isPlaying()) {
 				mMusic.play();
 				mMusicTick = 0;
 			}
 			mMusic.setVolume(mCurrentVolume);
 		}
-		int mill = Math.round(mMusic.getPosition() * 100);
-		int error = ((mill) % 240);
-		if (error == 0)
-			mMusicTick = 0;
+		if (mMusic != null) {
+			int mill = Math.round(mMusic.getPosition() * 5 * 60 / 3);
+			if (mill % 60 == 0)
+				mMusicTick = 0;
+		}
 	}
 
 	public void stopMusic() {
@@ -224,10 +238,15 @@ public class Level implements Iterable<Actor> {
 
 	public void update() {
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
-			Dot.ATE_DOT = false;
-			Dot.SLURP_DOT = false;
-			Dot.ONTIME_EAT++;
+
 			startMusic();
+			if (!musicTick()) {
+				Dot.ATE_DOT = false;
+				Dot.SLURP_DOT = false;
+			}
+			Dot.ONTIME_EAT++;
+			Door.PLAYED = false;
+
 			while (mBodiesToDestroy.size() > 0) {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
@@ -420,13 +439,13 @@ public class Level implements Iterable<Actor> {
 
 	public void loadFromLevelSave() {
 		try {
-			File f = new File(Gdx.files.getExternalStoragePath() + mSaveFileName);
+			File f = new File(Gdx.files.getExternalStoragePath() + SAVE_FILE);
 			FileHandle handle;
 			if (!f.exists()) {
 				mLevelSave = new JSONObject();
 				handle = new FileHandle(f);
 			} else {
-				handle = Gdx.files.external(mSaveFileName);
+				handle = Gdx.files.external(SAVE_FILE);
 				String json = handle.readString();
 				if ("".equals(json)) {
 					mLevelSave = new JSONObject();
@@ -473,7 +492,7 @@ public class Level implements Iterable<Actor> {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		FileHandle handle = Gdx.files.external(mSaveFileName);
+		FileHandle handle = Gdx.files.external(SAVE_FILE);
 		handle.writeString(mLevelSave.toString(), false);
 	}
 
@@ -744,7 +763,7 @@ public class Level implements Iterable<Actor> {
 		if (mAssetKey == null)
 			return;
 		try {
-			FileHandle handleSt = Gdx.files.external(mSaveFileName);
+			FileHandle handleSt = Gdx.files.external(SAVE_FILE);
 			String json = handleSt.readString();
 			JSONObject levels;
 			if (json.length() < 1) {
@@ -779,12 +798,166 @@ public class Level implements Iterable<Actor> {
 			currentLevel.put("dots", dotIds);
 			currentLevel.put("unlocked", unlocked);
 			levels.put(mAssetKey, currentLevel);
-			FileHandle handle = Gdx.files.external(mSaveFileName);
+			FileHandle handle = Gdx.files.external(SAVE_FILE);
 			handle.writeString(levels.toString(), false);
+			unlockModes(levels);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void unlockModes(JSONObject save) {
+		if (!EASY_PASSED) {
+			try {
+				unlockEasyPass(save);
+			} catch (JSONException e) {
+				// System.out.println("Error reading save for race mode unlock");
+				// e.printStackTrace();
+			}
+		}
+		if (!HARD_PASSED) {
+			try {
+				unlockHardPass(save);
+			} catch (JSONException e) {
+
+			}
+		}
+		if (!MEDEASY_COMPLETE) {
+			try {
+				unlockHardMode(save);
+			} catch (JSONException e) {
+				// System.out.println("Error reading save for hard mode unlock");
+				// e.printStackTrace();
+			}
+		}
+		if (!COMPLETE) {
+			try {
+				unlockCompletion(save);
+			} catch (JSONException e) {
+				// System.out.println("Error reading save for hard mode unlock");
+				// e.printStackTrace();
+			}
+		}
+		FIRSTCHECK = false;
+	}
+
+	private static void unlockEasyPass(JSONObject save) throws JSONException {
+		if (passedEasy(save)) {
+			EASY_PASSED = true;
+		}
+	}
+
+	private static void unlockHardPass(JSONObject save) throws JSONException {
+		if (passedHard(save)) {
+			HARD_PASSED = true;
+		}
+	}
+
+	private static boolean passedEasy(JSONObject save) throws JSONException {
+		String level = LEVELS[0] + MEDIUM_SUFFIX;
+		if (save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static boolean passedHard(JSONObject save) throws JSONException {
+		String level = "gen";
+		if (save.has(level) && (save.getJSONObject(level).getBoolean("unlocked"))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static void unlockHardMode(JSONObject save) throws JSONException {
+		if (hasHardModePermission(save)) {
+			MEDEASY_COMPLETE = true;
+		}
+	}
+
+	private static void unlockCompletion(JSONObject save) throws JSONException {
+		if (fullGameComplete(save)) {
+			COMPLETE = true;
+			if (!FIRSTCHECK) {
+				for (Player p : Game.get().getPlayers()) {
+					p.mustache = true;
+				}
+			}
+		}
+	}
+
+	private static boolean hasHardModePermission(JSONObject save) throws JSONException {
+		// easy mode check
+		for (String s : LEVELS) {
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		// medium mode check
+		for (String level : LEVELS) {
+			String s = level + MEDIUM_SUFFIX;
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private static boolean fullGameComplete(JSONObject save) throws JSONException {
+		// easy mode check
+		for (String s : LEVELS) {
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		// medium mode check
+		for (String level : LEVELS) {
+			String s = level + MEDIUM_SUFFIX;
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		// hard mode check
+		for (String level : LEVELS) {
+			String s = level + HARD_SUFFIX;
+			if (save.has(s)) {
+				if (((JSONObject) (save.get(s))).getDouble("progress") != 1) {
+					return false;
+				} else {
+					// nothing just note that this is the passing condition
+				}
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean musicTick() {

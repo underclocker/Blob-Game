@@ -12,8 +12,8 @@ public class RotoJiggle extends JiggleBall {
 	public RotoJiggle(Level level, long id) {
 		super(level, id);
 		mRotatePosition = new Vector2();
-		setProp("centerX", 0);
-		setProp("centerY", 0);
+		setProp("Orbit X", 0);
+		setProp("Orbit Y", 0);
 		setProp("Rotation Speed (deg)", 1.0f);
 	}
 	
@@ -32,10 +32,10 @@ public class RotoJiggle extends JiggleBall {
 	
 	@Override
 	public void setProp(String name, Object val) {
-		if (name.equals("centerX")) {
+		if (name.equals("Orbit X")) {
 			mRotatePosition.x = Convert.getFloat(val);
 		}
-		if (name.equals("centerY")) {
+		if (name.equals("Orbit Y")) {
 			mRotatePosition.y = Convert.getFloat(val);
 		}
 		if (name.equals("Rotation Speed (deg)")) {
