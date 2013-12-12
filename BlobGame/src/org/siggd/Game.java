@@ -59,9 +59,10 @@ public class Game implements ApplicationListener {
 	public final static boolean DEBUG = false;
 	public final static boolean UNLOCKED = false;
 
-	public static boolean CALM = false;	//loaded from config
-	public static boolean PRELOAD = false; // only preloads in release and is loaded
-											// from config file
+	// loaded from config!!!
+	public static boolean CALM = false; // setting does nothing
+	public static boolean PRELOAD = false; // setting does nothing
+
 	public static float FPSREC = 60;
 
 	public final String mStartingLevel = "level1";
@@ -149,8 +150,6 @@ public class Game implements ApplicationListener {
 		// Setup input
 		mInput = new InputMultiplexer();
 		mPlayers = new ArrayList<Player>();
-
-		
 
 		DebugOutput.enable();
 		System.out.println("Controllers: " + Controllers.getControllers().size);
@@ -741,38 +740,36 @@ public class Game implements ApplicationListener {
 	}
 
 	public void saveScreenshot() {
-		File f = new File(Gdx.files.getExternalStoragePath() + ".BlobGame/Screenshots/" + System.currentTimeMillis()+".png");
+		File f = new File(Gdx.files.getExternalStoragePath() + ".BlobGame/Screenshots/"
+				+ System.currentTimeMillis() + ".png");
 		FileHandle handle;
 		if (!f.exists()) {
 			handle = new FileHandle(f);
-			Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
-					true);
+			Pixmap pixmap = getScreenshot(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			PixmapIO.writePNG(handle, pixmap);
 		}
 
 	}
 
-	public Pixmap getScreenshot(int x, int y, int w, int h, boolean flipY) {
+	public Pixmap getScreenshot(int x, int y, int w, int h) {
 		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
 
 		final Pixmap pixmap = new Pixmap(w, h, Format.RGBA8888);
 		ByteBuffer pixels = pixmap.getPixels();
 		Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
-
 		final int numBytes = w * h * 4;
 		byte[] lines = new byte[numBytes];
-		if (flipY) {
-			final int numBytesPerLine = w * 4;
-			for (int i = 0; i < h; i++) {
-				pixels.position((h - i - 1) * numBytesPerLine);
-				pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
-			}
-			pixels.clear();
-			pixels.put(lines);
-		} else {
-			pixels.clear();
-			pixels.get(lines);
+
+		final int numBytesPerLine = w * 4;
+		for (int i = 0; i < h; i++) {
+			pixels.position((h - i - 1) * numBytesPerLine);
+			pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
 		}
+		pixels.clear();
+		for (int i = 0; i < w * h; i++) {
+			lines[i * 4 + 3] = (byte) 255;
+		}
+		pixels.put(lines);
 
 		return pixmap;
 	}
