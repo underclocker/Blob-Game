@@ -964,11 +964,9 @@ public class Blob extends Actor implements Controllable {
 		if (mLight != null) {
 			//Gray is the only color with alpha=0.5
 			//So light alpha is 1.0 To be brighter
-			if(mBlobDrawable.mCurrentColor.a == 0.5f) {
-				mLightColor.set(new Color(0.8f,0.8f,0.8f,1.0f));
-			}
-			else{
-				mLightColor.set(mBlobDrawable.mCurrentColor);
+			mLightColor.set(mBlobDrawable.mCurrentColor);
+			if(mLightColor.a != 1.0f){
+				mLightColor.a = 1.0f;
 			}
 			float brightness = .12f + (mExtraGlow / (2 * (400 + mExtraGlow)));
 			float diff = Convert.getFloat(Game.get().getLevel().getProp("Difficulty"));
