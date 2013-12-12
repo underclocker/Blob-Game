@@ -1089,6 +1089,7 @@ public class MenuView {
 			mStage.addActor(mTint);
 			mStage.addActor(mPauseTable);
 			mMenuController.setTable(mPauseTable);
+			mMenuController.setIndex(2);
 		} else if (FAKE_PAUSE.equals(menu)) {
 			mStage.addActor(mTint);
 			mStage.addActor(mFakePauseTable);
