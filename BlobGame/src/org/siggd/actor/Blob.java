@@ -85,8 +85,11 @@ public class Blob extends Actor implements Controllable {
 
 		public final String mCrown = "data/gfx/crown.png";
 		public final String mCatHat = "data/gfx/cat_hat.png";
-		public final String mMagicHat = "data/gfx/magichat.png";
+		public final String mTopHat = "data/gfx/tophat.png";
 		public final String mHandlebarMustache = "data/gfx/handlebarmustache.png";
+		public final String mMiniHat = "data/gfx/minihat.png";
+		public final String mMagicHat = "data/gfx/magichat.png";
+		public final String mReinDeerHat = "data/gfx/reindeerhat.png";
 
 		public ArrayList<Sprite> mHats;
 
@@ -98,8 +101,11 @@ public class Blob extends Actor implements Controllable {
 			float scale = Game.get().getLevelView().getVScale();
 			mHats = new ArrayList<Sprite>();
 			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCrown));
-			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mMagicHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mTopHat));
 			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 6 / scale), mCatHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mMiniHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mMagicHat));
+			mHats.add(new Sprite(new Vector2(), new Vector2(16 / scale, 2 / scale), mReinDeerHat));
 			mAccessoryHat = mHats.get(0);
 			mAccessoryMouth = new Sprite(new Vector2(), new Vector2(16 / scale, 16 / scale),
 					mHandlebarMustache);
@@ -716,7 +722,10 @@ public class Blob extends Actor implements Controllable {
 		if (getLevel().getAssetKey() != null) {
 			man.load(mBlobDrawable.mCrown, Texture.class);
 			man.load(mBlobDrawable.mCatHat, Texture.class);
+			man.load(mBlobDrawable.mTopHat, Texture.class);
+			man.load(mBlobDrawable.mMiniHat, Texture.class);
 			man.load(mBlobDrawable.mMagicHat, Texture.class);
+			man.load(mBlobDrawable.mReinDeerHat, Texture.class);
 			man.load(mBlobDrawable.mHandlebarMustache, Texture.class);
 			// man.load(mBlobDrawable.mMouth, Texture.class);
 		}
@@ -1912,12 +1921,13 @@ public class Blob extends Actor implements Controllable {
 		if (getLevel().getAssetKey() == null)
 			return;
 		int difficulty = Convert.getInt(Game.get().getLevel().getProp("Difficulty"));
+		int alt = Math.random()<.01?3:0;
 		if (difficulty == 0) {
-			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(0);
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(0+alt);
 		} else if (difficulty == 1) {
-			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(1);
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(1+alt);
 		} else if (difficulty == 2) {
-			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(2);
+			mBlobDrawable.mAccessoryHat = mBlobDrawable.mHats.get(2+alt);
 		}
 	}
 
