@@ -23,6 +23,7 @@ import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -531,6 +532,7 @@ public class MenuView {
 
 		// Table.drawDebug(mStage);
 		mShapeRenderer.setProjectionMatrix(mStage.getCamera().combined);
+
 		JSONObject levelSave = Game.get().getLevel().getLevelSave();
 		if (LEVELS.equals(mCurrentMenu)) {
 			for (String s : mLevel1.keySet()) {
