@@ -19,8 +19,8 @@
                 "Angle": 1035,
                 "Distance": "15",
                 "ID": 6667,
-                "Y": 30.718403,
-                "X": 9.994325,
+                "Y": 30.767962,
+                "X": 9.938158,
                 "Cone Angle": "30"
             }
         },
@@ -31,8 +31,8 @@
                 "Angle": 215,
                 "Distance": "8.0",
                 "ID": 6666,
-                "Y": 26.68101,
-                "X": 33.557552,
+                "Y": 26.6975,
+                "X": 33.592365,
                 "Cone Angle": "20"
             }
         },
@@ -43,8 +43,8 @@
                 "Angle": 935,
                 "Distance": "8.0",
                 "ID": 6665,
-                "Y": 20.568396,
-                "X": 18.606823,
+                "Y": 20.624968,
+                "X": 18.665966,
                 "Cone Angle": "20.0"
             }
         },
@@ -55,8 +55,8 @@
                 "Angle": 630,
                 "Distance": "8.0",
                 "ID": 6664,
-                "Y": 14.468394,
-                "X": 30.731821
+                "Y": 14.491364,
+                "X": 30.774477
             }
         },
         {
@@ -1314,8 +1314,8 @@
             "props": {
                 "Angle": 270,
                 "ID": 547,
-                "Y": 33.764885,
-                "X": 26.369051
+                "Y": 33.88021,
+                "X": 26.357222
             }
         },
         {
@@ -2247,19 +2247,6 @@
             }
         },
         {
-            "id": 4393,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Collision Sound": "barrel.wav",
-                "Body": "BigBarrelTopView",
-                "Collision Threshold": 3.25,
-                "ID": 4393,
-                "Y": 9,
-                "X": 25,
-                "Collision Pitch": 1.15
-            }
-        },
-        {
             "id": 4609,
             "class": "org.siggd.actor.BouncePlate",
             "props": {
@@ -2593,9 +2580,19 @@
                 "Distance": "30",
                 "Green": "0.1",
                 "ID": 7133,
-                "Y": 20.353954,
-                "X": 19.667532,
+                "Y": 20.369383,
+                "X": 19.66239,
                 "Cone Angle": "12"
+            }
+        },
+        {
+            "id": 7375,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "BigCircleThing",
+                "ID": 7375,
+                "Y": 9,
+                "X": 25
             }
         }
     ],
