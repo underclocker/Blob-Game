@@ -1011,7 +1011,7 @@ public class MenuView {
 
 				handleSt.writeString("", false);
 			} catch (Exception e) {
-				DebugOutput.info(this, e.getStackTrace().toString());
+				//DebugOutput.info(this, e.getStackTrace().toString());
 			}
 			Game.get().getLevel().loadFromLevelSave();
 		}

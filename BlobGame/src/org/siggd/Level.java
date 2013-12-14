@@ -192,7 +192,7 @@ public class Level implements Iterable<Actor> {
 				} catch (Exception e) {
 					mMusic = null;
 					// e.printStackTrace();
-					DebugOutput.info(new Object(), (String) getProp("SongName"));
+					//DebugOutput.info(new Object(), (String) getProp("SongName"));
 				}
 			}
 		}
