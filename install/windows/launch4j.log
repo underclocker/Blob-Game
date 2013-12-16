@@ -1,0 +1,60 @@
+
+
+CmdLine:	C:\Users\mysterymath\Documents\Blob-Game\install\windows\BlobGame.exe --l4j-debug
+WOW64:		yes
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_25
+Using 64-bit runtime.
+Check launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe
+Launcher args:	-jar "C:\Users\mysterymath\Documents\Blob-Game\install\windows\..\..\BlobGame.jar"
+Args length:	82/32768 chars
+Exit code:	259
+
+
+CmdLine:	C:\Users\mysterymath\Documents\Blob-Game\install\windows\BlobGame.exe --l4j-debug
+WOW64:		yes
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_25
+Using 64-bit runtime.
+Check launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe
+Launcher args:	-jar "C:\Users\mysterymath\Documents\Blob-Game\install\windows\..\..\BlobGame.jar"
+Args length:	82/32768 chars
+Exit code:	259
+
+
+CmdLine:	C:\Users\mysterymath\Documents\Blob-Game\install\windows\BlobGame.exe --l4j-debug
+WOW64:		yes
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_25
+Using 64-bit runtime.
+Check launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe
+Launcher args:	-jar "C:\Users\mysterymath\Documents\Blob-Game\install\windows\..\..\BlobGame.jar"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+CmdLine:	C:\Users\mysterymath\Documents\Blob-Game\install\windows\BlobGame.exe --l4j-debug
+WOW64:		yes
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Match:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_25
+Using 64-bit runtime.
+Check launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jdk1.7.0_25\jre\bin\javaw.exe
+Launcher args:	-jar "C:\Users\mysterymath\Documents\Blob-Game\install\windows\BlobGame.exe"
+Args length:	76/32768 chars
+Exit code:	259
