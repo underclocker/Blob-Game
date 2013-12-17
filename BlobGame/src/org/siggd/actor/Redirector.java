@@ -82,9 +82,7 @@ public class Redirector extends Actor implements Knocked {
 	@Override
 	public void knocked(Actor a) {
 		if (a instanceof Platform) {
-			if (Convert.getInt(a.getProp("Hold Time")) <= 0) {
-				a.setProp("Hold Time", Convert.getInt(getProp("Hold Time")));
-			}
+			a.setProp("Hold Time", Convert.getInt(getProp("Hold Time")));
 			Vector2 v = new Vector2(1, 0);
 			v.rotate(Convert.getFloat(getProp("Angle")));
 			v.scl(new Vector2(Convert.getFloat(a.getProp("DirectionX")), Convert.getFloat(a

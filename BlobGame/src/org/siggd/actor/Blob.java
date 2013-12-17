@@ -597,7 +597,7 @@ public class Blob extends Actor implements Controllable {
 	private static float LATERAL_FORCE = .15f;
 	private static float ROTATION_FORCE = .18f;
 	private static float ROTATION_MULT_IF_GRABBING = 1f;
-	private static float DAMPENING_COEFF = 0.1f;
+	private static float DAMPENING_COEFF = 0.09f;
 	private static float POOF_COEFF = 8f;
 	private static float SOLID_MASS_MULT = 2f;
 	private static float GRAB_BREAK_FORCE = 300;

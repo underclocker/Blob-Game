@@ -54,7 +54,7 @@ public class PressurePlate extends Actor implements IObservable {
 		setProp("X", -10000);
 		setProp("Restitution", 0f);
 		setProp("Output", 0);
-		setProp("Lag", 0);
+		setProp("Lag", 5);
 		setState(false);
 	}
 
