@@ -26,6 +26,13 @@ public class ContactHandler implements ContactListener {
 	@Override
 	public void beginContact(Contact contact) {
 		mContacts.add(new StableContact(contact));
+		Actor aa = (Actor) contact.getFixtureA().getBody().getUserData();
+		Actor ab = (Actor) contact.getFixtureB().getBody().getUserData();
+		if (aa instanceof Knocked) {
+			((Knocked) aa).knocked(ab);
+		} else if (ab instanceof Knocked) {
+			((Knocked) ab).knocked(aa);
+		}
 		for (ContactListener l : mListeners) {
 			l.beginContact(contact);
 		}

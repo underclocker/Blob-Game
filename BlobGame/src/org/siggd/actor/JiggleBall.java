@@ -77,7 +77,8 @@ public class JiggleBall extends Actor implements IObserver, IObservable {
 			offset.nor().scl(15);
 		}
 		if (delay > -600 && delay < 0)
-			offset.scl((-delay) / 600f);;
+			offset.scl((-delay) / 600f);
+		offset.scl(Level.PHYSICS_SCALE);
 		mBody.applyForceToCenter(offset, true);
 		if (mInputSrc != null) {
 			Object input = mInputSrc.observe();
@@ -87,7 +88,7 @@ public class JiggleBall extends Actor implements IObserver, IObservable {
 				delay = DELAY;
 			}
 			if (delay > 0)
-				mBody.applyForceToCenter(new Vector2(0, -16f), true);
+				mBody.applyForceToCenter(new Vector2(0, -16f*Level.PHYSICS_SCALE), true);
 		} else {
 			delay = DELAY;
 		}

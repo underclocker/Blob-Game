@@ -931,7 +931,9 @@ public class Blob extends Actor implements Controllable {
 			// Apply Hooke's law
 			float diff = (len - s.restLength) * k;
 
+			diff *= Level.PHYSICS_SCALE;
 			forceDir.scl(diff);
+			
 
 			// Apply spring forces
 			a.applyForceToCenter(forceDir.x, forceDir.y, true);
@@ -939,6 +941,7 @@ public class Blob extends Actor implements Controllable {
 
 			// Determine coefficient of critical damping (from Wikipedia)
 			float damp = 2 * DAMPENING_COEFF * (float) Math.sqrt(a.getMass() * k);
+			damp*= Level.PHYSICS_SCALE;
 
 			// Project velocity vectors onto force dir (formula from Wikipedia:
 			// Vector Projection)
@@ -958,11 +961,11 @@ public class Blob extends Actor implements Controllable {
 
 		Vector2 eyeDelta = new Vector2(mLeftEyeDest);
 		eyeDelta.sub(mLeftEye.getPosition());
-		mLeftEye.applyForceToCenter(eyeDelta.scl(20f), true);
+		mLeftEye.applyForceToCenter(eyeDelta.scl(12f*Level.PHYSICS_SCALE), true);
 
 		eyeDelta = new Vector2(mRightEyeDest);
 		eyeDelta.sub(mRightEye.getPosition());
-		mRightEye.applyForceToCenter(eyeDelta.scl(20f), true);
+		mRightEye.applyForceToCenter(eyeDelta.scl(12f*Level.PHYSICS_SCALE), true);
 		if (mExtraGlow > 0) {
 			mExtraGlow -= .5f;
 		} else {
@@ -1112,11 +1115,11 @@ public class Blob extends Actor implements Controllable {
 						v.nor();
 						// Directional Vector * Rotate Force constant + Right
 						// Directional Force * Magical Force constant
-						v = v.scl(ROTATION_FORCE);
+						v = v.scl(ROTATION_FORCE*Level.PHYSICS_SCALE);
 						if (curB.getLinearVelocity().len() > 3) {
 							v = new Vector2(0, 0);
 						}
-						v.add(new Vector2(1, 0).scl(LATERAL_FORCE));
+						v.add(new Vector2(1, 0).scl(LATERAL_FORCE*Level.PHYSICS_SCALE));
 						curB.applyForceToCenter(v, true);
 						mLastKnownDir = true;
 					}
@@ -1134,11 +1137,11 @@ public class Blob extends Actor implements Controllable {
 						v.nor();
 						// Directional Vector * Rotate Force constant + Right
 						// Directional Force * Magical Force constant
-						v = v.scl(ROTATION_FORCE);
+						v = v.scl(ROTATION_FORCE*Level.PHYSICS_SCALE);
 						if (curB.getLinearVelocity().len() > 3) {
 							v = new Vector2(0, 0);
 						}
-						v.add(new Vector2(-1, 0).scl(LATERAL_FORCE));
+						v.add(new Vector2(-1, 0).scl(LATERAL_FORCE*Level.PHYSICS_SCALE));
 						mParticles.get(i).applyForceToCenter(v, true);
 						mLastKnownDir = false;
 					}
@@ -1146,17 +1149,17 @@ public class Blob extends Actor implements Controllable {
 			} else {
 				float mult = mGrabbing ? ROTATION_MULT_IF_GRABBING : 1;
 				if (right) {
-					mBody.applyAngularImpulse(-.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
+					mBody.applyAngularImpulse(-.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE 
 							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
 					mBody.applyForceToCenter(
-							new Vector2(10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
+							new Vector2(10 * SOLID_MASS_MULT * Level.PHYSICS_SCALE, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = true;
 				}
 				if (left) {
-					mBody.applyAngularImpulse(.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE
+					mBody.applyAngularImpulse(.2f * SOLID_MASS_MULT * mult * ROTATION_FORCE 
 							/ (1 + Math.abs(mBody.getAngularVelocity())), true);
 					mBody.applyForceToCenter(
-							new Vector2(-10 * SOLID_MASS_MULT, 0).scl(LATERAL_FORCE), true);
+							new Vector2(-10 * SOLID_MASS_MULT * Level.PHYSICS_SCALE, 0).scl(LATERAL_FORCE), true);
 					mLastKnownDir = false;
 				}
 			}
