@@ -42,7 +42,7 @@ public class Parallax extends Actor {
 
 		@Override
 		public void drawSprite(SpriteBatch batch) {
-			if (Game.FPSREC < 55 && !"earth".equals(Game.get().getLevel().getAssetKey())) {
+			if (Game.FPSREC < 52 && !"earth".equals(Game.get().getLevel().getAssetKey())) {
 				if (mTex.equals("clouds.png")) {
 					return;
 				}
