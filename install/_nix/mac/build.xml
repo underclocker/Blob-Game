@@ -10,7 +10,7 @@
             name="Blob Game"
             displayname="Blob Game"
             identifier="org.siggd.Main"
-            icon="./icon128.icns"
+            icon="./blob.icns"
             mainclassname="org.siggd.Main">
             <classpath file="../../../Blob Game.jar" />
         </bundleapp>

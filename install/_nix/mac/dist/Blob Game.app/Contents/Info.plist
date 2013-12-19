@@ -7,7 +7,7 @@
 <key>CFBundleExecutable</key>
 <string>JavaAppLauncher</string>
 <key>CFBundleIconFile</key>
-<string>icon128.icns</string>
+<string>blob.icns</string>
 <key>CFBundleIdentifier</key>
 <string>org.siggd.Main</string>
 <key>CFBundleDisplayName</key>
