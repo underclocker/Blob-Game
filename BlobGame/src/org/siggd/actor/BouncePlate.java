@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
+import org.siggd.Knocked;
 import org.siggd.Level;
 import org.siggd.StableContact;
 import org.siggd.view.BodySprite;
@@ -18,13 +19,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class BouncePlate extends Actor {
+public class BouncePlate extends Actor implements Knocked {
 	private String mTex;
 	private String mActiveTex;
 	private Drawable mActiveDrawable;
 	private Drawable mDefaultDrawable;
 	private int mTimer = 0;
 	private String mBouncePlateFile = "data/sfx/duwuwuh.wav";
+	private boolean forceKick = false;
 
 	public BouncePlate(Level level, long id) {
 		super(level, id);
@@ -77,7 +79,7 @@ public class BouncePlate extends Actor {
 		for (Body b : bodies)
 			if (b.isActive())
 				bods++;
-		if (bods > 0 && output == -1 && mTimer <= -rate) {
+		if ((bods > 0 || forceKick) && output == -1 && mTimer <= -rate) {
 			setProp("Output", (Integer) 1);
 			((CompositeDrawable) mDrawable).mDrawables.remove(mDefaultDrawable);
 			((CompositeDrawable) mDrawable).mDrawables.add(mActiveDrawable);
@@ -102,9 +104,15 @@ public class BouncePlate extends Actor {
 					.getAngle())));
 			mTimer = rate;
 		}
+		forceKick = false;
 	}
 
 	@Override
 	public void postLoad() {
+	}
+
+	@Override
+	public void knocked(Actor a) {
+		forceKick = true;
 	}
 }

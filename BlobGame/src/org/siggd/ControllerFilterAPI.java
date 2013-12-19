@@ -11,6 +11,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.controllers.PovDirection;
+
 public class ControllerFilterAPI {
 
 	public final static int BUTTON_A = 0;
@@ -24,12 +25,12 @@ public class ControllerFilterAPI {
 	public final static int BUTTON_LS = 8;
 	public final static int BUTTON_RS = 9;
 	public final static int NOBUTTON = -1;
-	
+
 	public final static PovDirection EAST = PovDirection.east;
 	public final static PovDirection WEST = PovDirection.west;
 	public final static PovDirection NORTH = PovDirection.north;
 	public final static PovDirection SOUTH = PovDirection.south;
-	
+
 	public final static int AXIS_LEFT_UD = 0;
 	public final static int AXIS_RIGHT_LR = 3;
 	public final static int AXIS_RIGHT_UD = 2;
@@ -47,13 +48,15 @@ public class ControllerFilterAPI {
 		json = new JSONObject(jsonstr);
 		// DebugOutput.info(new Object(), "This is the JSON " + jsonstr);
 		loadCustomBindings();
-		
+
 	}
+
 	/**
 	 * Loads custom bindings from ".BlobGame/BlobBindings.json"
+	 * 
 	 * @throws JSONException
 	 */
-	public static  void loadCustomBindings() throws JSONException{
+	public static void loadCustomBindings() throws JSONException {
 		File f = new File(Gdx.files.getExternalStoragePath() + CUSTOM_BINDINGS);
 		FileHandle bindingsFile;
 		if (f.exists()) {
@@ -61,10 +64,10 @@ public class ControllerFilterAPI {
 			JSONObject osSpecificBindings = json.getJSONObject(osName);
 			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
 			String bindingsJson = bindingsFile.readString();
-			if(!bindingsJson.isEmpty()){
+			if (!bindingsJson.isEmpty()) {
 				JSONObject customBindings = new JSONObject(bindingsJson);
 				Iterator<String> t = customBindings.keys();
-				while(t.hasNext()){
+				while (t.hasNext()) {
 					String controller = t.next();
 					JSONObject controllerBindings = customBindings.getJSONObject(controller);
 					osSpecificBindings.put(controller, controllerBindings);
@@ -72,33 +75,37 @@ public class ControllerFilterAPI {
 			}
 		}
 	}
-	public static void saveCustomBinding(String controllerName, JSONObject bindings) throws JSONException{
+
+	public static void saveCustomBinding(String controllerName, JSONObject bindings)
+			throws JSONException {
 		File f = new File(Gdx.files.getExternalStoragePath() + CUSTOM_BINDINGS);
 		FileHandle bindingsFile;
 		JSONObject customBindings;
 		if (f.exists()) {
 			bindingsFile = Gdx.files.external(CUSTOM_BINDINGS);
 			String bindingsJson = bindingsFile.readString();
-			if(!bindingsJson.isEmpty()){
+			if (!bindingsJson.isEmpty()) {
 				customBindings = new JSONObject(bindingsJson);
-			}else{
+			} else {
 				customBindings = new JSONObject();
 			}
-		}else{
+		} else {
 			bindingsFile = new FileHandle(f);
 			customBindings = new JSONObject();
 		}
 		customBindings.put(controllerName, bindings);
-		System.out.println("SAVING: "+bindings.toString());
+		System.out.println("SAVING: " + bindings.toString());
 		bindingsFile.writeString(customBindings.toString(), false);
 		loadCustomBindings();
 	}
-/**
- * use this to take a real button ID to the XBOX equivelant
- * @param c
- * @param id
- * @return
- */
+
+	/**
+	 * use this to take a real button ID to the XBOX equivelant
+	 * 
+	 * @param c
+	 * @param id
+	 * @return
+	 */
 	public static int getFilteredId(Controller c, int id) {
 		String osName = System.getProperty("os.name");
 		String ctrlName = c.getName();
@@ -138,8 +145,8 @@ public class ControllerFilterAPI {
 				}
 			}
 		} catch (Exception e) {
-			DebugOutput.fine(new Object(),
-					"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
+			//DebugOutput.fine(new Object(),
+			//		"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
 		}
 
 		return id;
@@ -200,8 +207,8 @@ public class ControllerFilterAPI {
 				return buttons.getInt("BUTTON_RS");
 		} catch (Exception e) {
 
-			DebugOutput.fine(new Object(),
-					"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
+			//DebugOutput.fine(new Object(),
+			//		"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
 
 		}
 		return id;
@@ -238,8 +245,8 @@ public class ControllerFilterAPI {
 			}
 		} catch (Exception e) {
 
-			DebugOutput.fine(new Object(),
-					"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
+			//DebugOutput.fine(new Object(),
+			//		"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
 
 		}
 		return id;
@@ -269,8 +276,8 @@ public class ControllerFilterAPI {
 				return axes.getInt("AXIS_TRIGGER");
 		} catch (Exception e) {
 
-			DebugOutput.fine(new Object(),
-					"WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
+			// DebugOutput.fine(new Object(),
+			// "WARNING! CONTROLLER NOT RECOGNIZED. NAME: " + c.getName());
 
 		}
 		return id;

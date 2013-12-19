@@ -248,14 +248,14 @@
             "id": 1502,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
                 "Friction": 0.6,
-                "Grabbable": 1,
                 "ID": 1502,
+                "Grabbable": 1,
                 "Y": 4.533734,
                 "X": 30.080652,
                 "Collision Pitch": 1.25
@@ -292,8 +292,8 @@
                 "Distance": "20.0",
                 "Green": "0.2",
                 "ID": 1090,
-                "Y": 17.102919,
-                "X": 39.146965,
+                "Y": 17.244234,
+                "X": 39.09397,
                 "Cone Angle": "25.0"
             }
         },
@@ -357,8 +357,8 @@
                 "Distance": "14.0",
                 "Green": "0.2",
                 "ID": 599,
-                "Y": 17.195719,
-                "X": 17.877514,
+                "Y": 17.390028,
+                "X": 17.886345,
                 "Cone Angle": "25.0"
             }
         },
@@ -511,6 +511,7 @@
                 "Layer": 2,
                 "Body": "Level1_3_0",
                 "Friction": 0.15,
+                "ID": 4,
                 "CollisionSound": "",
                 "X": 51.198006
             }
@@ -706,8 +707,8 @@
                 "Distance": "20.0",
                 "Green": "0.2",
                 "ID": 786,
-                "Y": 16.959372,
-                "X": 28.222898,
+                "Y": 17.180176,
+                "X": 28.240562,
                 "Cone Angle": "25.0"
             }
         },
@@ -721,8 +722,8 @@
                 "Distance": "20.0",
                 "Green": "0.2",
                 "ID": 787,
-                "Y": 17.269686,
-                "X": 54.140324,
+                "Y": 17.384504,
+                "X": 53.92835,
                 "Cone Angle": "25.0"
             }
         },
@@ -1040,9 +1041,10 @@
             "class": "org.siggd.actor.SpotLight",
             "props": {
                 "Angle": 210,
+                "Distance": "5",
                 "ID": 3601,
-                "Y": 8.735992,
-                "X": 32.976357,
+                "Y": 8.769816,
+                "X": 32.998905,
                 "Cone Angle": "25"
             }
         }

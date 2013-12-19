@@ -24,9 +24,9 @@ public class SpotLight extends Actor implements IObserver {
 		mName = "lightbulb";
 		mTex = "data/" + Game.get().getBodyEditorLoader().getImagePath(mName);
 		Vector2 origin = new Vector2();
-		mBody = makeBody(mName, 32, BodyType.StaticBody, origin, true);
+		mBody = makeBody(mName, 64, BodyType.StaticBody, origin, true);
 		mDrawable.mDrawables.add(new BodySprite(mBody, origin, mTex));
-		setProp("Visible", (Integer) 0);
+		//setProp("Visible", (Integer) 0);
 		if (LevelView.mUseLights) {
 			mLight = new ConeLight(Game.get().getLevelView().getRayHandler(), 128, new Color(.1f,
 					.1f, .1f, 1), 5f, mBody.getPosition().x, mBody.getPosition().y,
@@ -42,6 +42,7 @@ public class SpotLight extends Actor implements IObserver {
 			setProp("Softness", mLight.getSoftShadowLenght());
 			setProp("Cone Angle", mLight.getConeDegree());
 			setProp("Static", 0);
+			setProp("Layer", 3);
 			mLight.setActive(false);
 			setProp("Active", 1);
 			// TODO: set light active based on if actor is dummy or not

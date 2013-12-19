@@ -90,6 +90,22 @@ public class Platform extends Actor implements IObserver {
 	public void update() {
 		mSoundDelay++;
 		// if there is input, poll it for permission to update
+
+		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
+				.getContacts(this);
+		Iterable<Actor> actors = ContactHandler.getActors(contacts);
+		Redirector mOldRedir = mRedirector;
+		mRedirector = null;
+		for (Actor a : actors) {
+			if (a instanceof Redirector) {
+				mRedirector = (Redirector) a;
+				break;
+			}
+		}
+		if (mRedirector != null && mRedirector != mOldRedir) {
+			mHold = 0;
+		}
+
 		if ((mInputSrc == null || inputActive()) && mHold >= Convert.getInt(getProp("Hold Time"))) {
 			super.update();
 			float xDir;
@@ -133,21 +149,7 @@ public class Platform extends Actor implements IObserver {
 			}
 		}
 		mUncrushDelay--;
-		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
-				.getContacts(this);
-		Iterable<Actor> actors = ContactHandler.getActors(contacts);
-		Redirector mOldRedir = mRedirector;
-		mRedirector = null;
-		for (Actor a : actors) {
-			if (a instanceof Redirector) {
-				mRedirector = (Redirector) a;
-				break;
-			}
-		}
-		if (mRedirector != null && mRedirector != mOldRedir) {
-			mHold = 0;
-			setProp("Hold Time", (Integer) 0);
-		}
+
 		if (mBody.getLinearVelocity().len2() > 0 && Game.get().getLevel().musicTick()) {
 			if (mSoundDelay >= 0) {
 				AssetManager man = Game.get().getAssetManager();

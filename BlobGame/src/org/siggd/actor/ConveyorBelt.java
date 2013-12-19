@@ -143,6 +143,7 @@ public class ConveyorBelt extends Actor {
 			} else {
 				tempRot.scl(mult * speed);
 			}
+			tempRot.scl(Level.PHYSICS_SCALE);
 			body.applyForceToCenter(tempRot, true);
 		}
 
@@ -157,6 +158,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
 			deltaPos.scl(speed);
+			deltaPos.scl(Level.PHYSICS_SCALE);
 			body.applyForceToCenter(deltaPos, true);
 		}
 
@@ -171,6 +173,7 @@ public class ConveyorBelt extends Actor {
 			deltaPos.nor();
 			deltaPos.rotate(90 * mult);
 			deltaPos.scl(speed);
+			deltaPos.scl(Level.PHYSICS_SCALE);
 			body.applyForceToCenter(deltaPos, true);
 		}
 	}
@@ -193,6 +196,8 @@ public class ConveyorBelt extends Actor {
 			}
 		} else if ("Speed".equals(name)) {
 			mAnimation.mTicksPerFrame = (int) Math.round(3 / Convert.getFloat(val));
+			if (mAnimation.mTicksPerFrame < 1)
+				mAnimation.mTicksPerFrame = 1;
 		}
 		super.setProp(name, val);
 	}

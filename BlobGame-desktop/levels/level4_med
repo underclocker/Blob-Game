@@ -684,7 +684,6 @@
                 "Rotation Speed": "-0.5",
                 "Safety": "0",
                 "ID": 1876,
-                "Grabbable": 0,
                 "Y": -10.608712,
                 "X": 22.16994
             }
@@ -940,8 +939,8 @@
             "id": 54,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -959,8 +958,8 @@
             "id": 53,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -978,8 +977,8 @@
             "id": 52,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -1614,8 +1613,8 @@
                 "Angle": 285,
                 "Distance": "10",
                 "ID": 5402,
-                "Y": 15.242819,
-                "X": 11.79166
+                "Y": 15.279237,
+                "X": 11.752207
             }
         },
         {
@@ -1637,8 +1636,8 @@
                 "Angle": 630,
                 "Distance": "10",
                 "ID": 5404,
-                "Y": 10.087508,
-                "X": 31.484869
+                "Y": 10.151259,
+                "X": 31.50362
             }
         },
         {
@@ -1648,8 +1647,8 @@
                 "Angle": 630,
                 "Distance": "10",
                 "ID": 5405,
-                "Y": -6.733502,
-                "X": 12.373228
+                "Y": -6.6964555,
+                "X": 12.385577
             }
         },
         {
@@ -1659,8 +1658,8 @@
                 "Angle": 630,
                 "Distance": "10",
                 "ID": 5406,
-                "Y": -10.27088,
-                "X": 17.92257
+                "Y": -10.231982,
+                "X": 17.939241
             }
         },
         {
@@ -1670,8 +1669,8 @@
                 "Angle": 630,
                 "Distance": "10",
                 "ID": 5407,
-                "Y": -4.419083,
-                "X": 18.040922
+                "Y": -4.3449907,
+                "X": 18.057388
             }
         },
         {
@@ -1681,8 +1680,8 @@
                 "Angle": 630,
                 "Distance": "10",
                 "ID": 5408,
-                "Y": -7.3647065,
-                "X": 0.7748356
+                "Y": -7.339287,
+                "X": 0.7907228
             }
         }
     ],

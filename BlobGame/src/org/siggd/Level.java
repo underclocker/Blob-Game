@@ -52,6 +52,8 @@ public class Level implements Iterable<Actor> {
 	public static boolean COMPLETE = false;
 	public static boolean FIRSTCHECK = true;
 
+	public static final float PHYSICS_SCALE = 3f;
+
 	// Array of actors
 	ArrayList<Actor> mActors;
 	// Level Properties
@@ -192,7 +194,8 @@ public class Level implements Iterable<Actor> {
 				} catch (Exception e) {
 					mMusic = null;
 					// e.printStackTrace();
-					DebugOutput.info(new Object(), (String) getProp("SongName"));
+					// DebugOutput.info(new Object(), (String)
+					// getProp("SongName"));
 				}
 			}
 		}
@@ -251,7 +254,10 @@ public class Level implements Iterable<Actor> {
 				getWorld().destroyBody(mBodiesToDestroy.remove(0));
 			}
 			// Begin the step.
-			mWorld.step(1 / 60f, 12, 6);
+
+			for (int i = 0; i < PHYSICS_SCALE; i++) {
+				mWorld.step(1 / (60f * PHYSICS_SCALE), 8, 3);
+			}
 			Actor a;
 			for (Iterator<Actor> actor = mActors.iterator(); actor.hasNext();) {
 				a = actor.next();

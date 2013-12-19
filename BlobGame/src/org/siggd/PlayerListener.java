@@ -28,7 +28,7 @@ public class PlayerListener implements ControllerListener {
 			// filter out small moves
 			return false;
 		}
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", axis " + id + ": " + value);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", axis " + id + ": " + value);
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
@@ -46,8 +46,8 @@ public class PlayerListener implements ControllerListener {
 	@Override
 	public boolean buttonDown(Controller c, int id) {
 		int realId = ControllerFilterAPI.getFilteredId(c, id);
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", button " + id + " down"
-				+ ", masked to " + realId);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", button " + id + " down"
+		//		+ ", masked to " + realId);
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
@@ -58,8 +58,8 @@ public class PlayerListener implements ControllerListener {
 	@Override
 	public boolean buttonUp(Controller c, int id) {
 		int realId = ControllerFilterAPI.getFilteredId(c, id);
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", button " + id + " up"
-				+ ", masked to " + realId);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", button " + id + " up"
+		//		+ ", masked to " + realId);
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
@@ -80,7 +80,7 @@ public class PlayerListener implements ControllerListener {
 	@Override
 	public boolean povMoved(Controller c, int id, PovDirection value) {
 
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", pov " + id + ": " + value);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", pov " + id + ": " + value);
 		// TODO:DPAD
 
 		Player p = getPlayer(c);
@@ -93,14 +93,14 @@ public class PlayerListener implements ControllerListener {
 
 	@Override
 	public boolean xSliderMoved(Controller c, int id, boolean value) {
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", x slider " + id + ": " + value);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", x slider " + id + ": " + value);
 		// TODO: what is this?
 		return false;
 	}
 
 	@Override
 	public boolean ySliderMoved(Controller c, int id, boolean value) {
-		DebugOutput.finest(this, "Controller #" + indexOf(c) + ", y slider " + id + ": " + value);
+		//DebugOutput.finest(this, "Controller #" + indexOf(c) + ", y slider " + id + ": " + value);
 		// TODO: what is this?
 		return false;
 	}

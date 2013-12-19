@@ -1,11 +1,10 @@
 package org.siggd.actor;
 
 import org.box2dLight.PointLight;
-import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
+import org.siggd.Knocked;
 import org.siggd.Level;
-import org.siggd.StableContact;
 import org.siggd.actor.meta.Prop;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
@@ -22,7 +21,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  * @author underclocker
  * 
  */
-public class Dot extends Actor {
+public class Dot extends Actor implements Knocked {
 	private static String HOLLOW_GFX = "HollowDot.png";
 	private static String STANDARD_GFX = "Dot.png";
 	private final Vector2 mOrigin;
@@ -92,31 +91,31 @@ public class Dot extends Actor {
 	public void loadBodies() {
 	}
 
+	public void knocked(Actor a) {
+		if (mTargetBlob != null)
+			return;
+		if (a instanceof Blob) {
+			mTargetBlob = (Blob) a;
+		} else {
+			if (a instanceof Dot && ((Dot) a).mTargetBlob != null) {
+				mTargetBlob = ((Dot) a).mTargetBlob;
+			}
+			mBody.setGravityScale(1);
+		}
+	}
+
 	@Override
 	public void update() {
 		if (mBody.getLinearVelocity().len2() > .01f) {
 			mBody.setGravityScale(1);
 		}
-		if (mTargetBlob == null) {
-			Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
-					.getContacts(this);
-			Iterable<Actor> actors = ContactHandler.getActors(contacts);
-			for (Actor a : actors) {
-				if (a instanceof Blob) {
-					mTargetBlob = (Blob) a;
-					break;
-				} else {
-					if (a instanceof Dot && ((Dot) a).mTargetBlob != null) {
-						mTargetBlob = ((Dot) a).mTargetBlob;
-					}
-					mBody.setGravityScale(1);
-				}
-			}
-		} else {
+		if (mTargetBlob != null) {
 			Vector2 offset = new Vector2(mTargetBlob.getX(), mTargetBlob.getY());
 			offset.sub(mBody.getPosition());
 			float delay = (10 - mEatTimer) / 20f;
 			offset.scl(4.5f + delay);
+			offset.scl(1.5f);
+			offset.scl(Level.PHYSICS_SCALE);
 			mBody.applyForceToCenter(offset, true);
 			mTargetBlob.applyForce(offset.scl(-1));
 			mEatTimer--;

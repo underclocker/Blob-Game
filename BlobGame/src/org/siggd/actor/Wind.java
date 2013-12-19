@@ -117,7 +117,7 @@ public class Wind extends Actor implements IObserver, IObservable {
 			Iterable<Body> bodies = ContactHandler.getBodies(contacts);
 			Vector2 force = new Vector2(0, Convert.getFloat(getProp("Wind Strength")))
 					.rotate((float) (Convert.getFloat(getProp("Angle"))));
-			force.scl(.2f);
+			force.scl(.2f * Level.PHYSICS_SCALE);
 			Vector2 forceHat = new Vector2(force);
 			forceHat.nor();
 			Vector2 tempforce;

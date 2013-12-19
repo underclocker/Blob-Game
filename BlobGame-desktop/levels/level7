@@ -33,8 +33,8 @@
                 "Angle": 610,
                 "Distance": "20.0",
                 "ID": 1521,
-                "Y": 16.594193,
-                "X": 45.751186
+                "Y": 16.794203,
+                "X": 45.74684
             }
         },
         {
@@ -222,8 +222,8 @@
             "id": 474,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
@@ -629,6 +629,7 @@
             "props": {
                 "Angle": 90,
                 "Speed": "1",
+                "ID": 39,
                 "CollisionSound": "",
                 "Y": 7.133832,
                 "X": 25.183777,
@@ -741,8 +742,8 @@
             "id": 17,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
@@ -760,6 +761,7 @@
             "id": 30,
             "class": "org.siggd.actor.PressurePlate",
             "props": {
+                "ID": 30,
                 "CollisionSound": "",
                 "Y": 2.9085577,
                 "X": 19.004116
@@ -1072,8 +1074,8 @@
                 "Angle": 240,
                 "Distance": "15",
                 "ID": 1416,
-                "Y": 11.658557,
-                "X": 11.483393,
+                "Y": 11.677885,
+                "X": 11.507553,
                 "Cone Angle": "25"
             }
         },
@@ -1084,8 +1086,8 @@
                 "Angle": 300,
                 "Distance": "15",
                 "ID": 1417,
-                "Y": 11.658946,
-                "X": 5.5082626,
+                "Y": 11.673443,
+                "X": 5.5034304,
                 "Cone Angle": "25"
             }
         },
@@ -1096,8 +1098,8 @@
                 "Angle": 270,
                 "Distance": "10.0",
                 "ID": 1418,
-                "Y": 5.911011,
-                "X": 35.696278
+                "Y": 6.0638747,
+                "X": 35.709232
             }
         },
         {
@@ -1107,8 +1109,8 @@
                 "Angle": 610,
                 "Distance": "20.0",
                 "ID": 1419,
-                "Y": 16.642765,
-                "X": 39.60421
+                "Y": 16.799294,
+                "X": 39.6216
             }
         },
         {
@@ -1168,6 +1170,17 @@
                 "ID": 1810,
                 "Y": 13.9987955,
                 "X": 32.644093
+            }
+        },
+        {
+            "id": 1908,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": 0,
+                "Body": "Block",
+                "ID": 1908,
+                "Y": 1.4610114,
+                "X": 28.083778
             }
         }
     ],

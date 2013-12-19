@@ -7,8 +7,8 @@
                 "Angle": 633,
                 "Distance": "12",
                 "ID": 5107,
-                "Y": -3.4667547,
-                "X": 24.186935,
+                "Y": -3.476579,
+                "X": 24.19676,
                 "Cone Angle": "23"
             }
         },
@@ -19,8 +19,8 @@
                 "Angle": 210.00002,
                 "Distance": "12",
                 "ID": 5106,
-                "Y": -10.006638,
-                "X": 17.0955,
+                "Y": -9.989429,
+                "X": 17.143993,
                 "Cone Angle": "20"
             }
         },
@@ -32,7 +32,7 @@
                 "Distance": "12",
                 "ID": 5105,
                 "Y": -11.14477,
-                "X": 19.09161,
+                "X": 19.090046,
                 "Cone Angle": "20"
             }
         },
@@ -43,8 +43,8 @@
                 "Angle": -45,
                 "Distance": "12",
                 "ID": 5104,
-                "Y": 3.4408312,
-                "X": 21.376633
+                "Y": 3.3673444,
+                "X": 21.37204
             }
         },
         {
@@ -65,8 +65,8 @@
                 "Angle": -60,
                 "Distance": "10",
                 "ID": 5102,
-                "Y": 15.835368,
-                "X": 1.1673347,
+                "Y": 15.759064,
+                "X": 1.1846764,
                 "Cone Angle": "15"
             }
         },
@@ -109,8 +109,8 @@
                 "BodyType": 2,
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
-                "Grabbable": 1,
                 "ID": 4808,
+                "Grabbable": 1,
                 "Y": -8.698563,
                 "X": 24.533003,
                 "Collision Pitch": 1.15
@@ -120,15 +120,15 @@
             "id": 4528,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Angle": 4042.6304,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 4528,
+                "Grabbable": 1,
                 "Y": -4.4159694,
                 "X": 28.81079,
                 "Collision Pitch": 1.25
@@ -626,8 +626,8 @@
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 894,
+                "Grabbable": 1,
                 "Y": -13.630345,
                 "X": 12.438757,
                 "Collision Pitch": 1.15
@@ -657,15 +657,15 @@
             "id": 696,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Angle": 4042.6304,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 696,
+                "Grabbable": 1,
                 "Y": -8.942234,
                 "X": 25.84289,
                 "Collision Pitch": 1.25
@@ -1186,15 +1186,15 @@
             "id": 698,
             "class": "org.siggd.actor.Background",
             "props": {
-                "Collision Sound": "barrel.wav",
                 "Layer": 3,
+                "Collision Sound": "barrel.wav",
                 "BodyType": 2,
                 "Angle": 4073.333,
                 "Body": "BarrelTopView",
                 "Collision Threshold": 3.5,
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 698,
+                "Grabbable": 1,
                 "Y": -8.923989,
                 "X": 23.142729,
                 "Collision Pitch": 1.25
@@ -1426,10 +1426,10 @@
             "class": "org.siggd.actor.Background",
             "props": {
                 "Body": "Block",
-                "Friction": 0.4,
+                "Friction": 0.8,
                 "ID": 3463,
-                "Y": 3.6870644,
-                "X": 14.25482
+                "Y": 3.6589978,
+                "X": 14.293287
             }
         },
         {
@@ -1463,7 +1463,7 @@
             "props": {
                 "Angle": 0.30000004,
                 "Body": "Thin Block",
-                "Friction": 0.4,
+                "Friction": 0.8,
                 "ID": 3761,
                 "Y": 3.785557,
                 "X": 16.523151
@@ -1636,8 +1636,8 @@
                 "Body": "BigBarrelTopView",
                 "Collision Threshold": 3.25,
                 "Friction": 0.3,
-                "Grabbable": 1,
                 "ID": 5100,
+                "Grabbable": 1,
                 "Y": -9.901403,
                 "X": 7.3407583,
                 "Collision Pitch": 1.15
@@ -1651,8 +1651,8 @@
                 "Alpha": "1.0",
                 "Distance": "6",
                 "ID": 5251,
-                "Y": 10.122755,
-                "X": 25.421783
+                "Y": 10.178176,
+                "X": 25.4297
             }
         }
     ],

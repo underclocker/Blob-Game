@@ -16,6 +16,7 @@ import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -48,7 +49,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 	public boolean ignore; // > Flag whether to ignore any further inputs;
 
-	private static float sLineWidth = 3;
+	private static float sLineWidth = 6f;
 
 	/**
 	 * Constructs a new MenuController, defaults selected index to 0
@@ -236,7 +237,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 			if (c != null) {
 				Actor selected = (Actor) (c.getWidget());
 				shapeRender.setColor(Blob.colors(mPlayerId));
-				GLCommon gl = Gdx.graphics.getGLCommon();
 				shapeRender.begin(ShapeType.Line);
 				Vector2 topleft = new Vector2(mTable.getX() + selected.getX(), mTable.getY()
 						+ selected.getY());
@@ -247,19 +247,68 @@ public class MenuController implements InputProcessor, ControllerListener {
 				Vector2 bottomright = new Vector2(mTable.getX() + selected.getX()
 						+ selected.getWidth(), mTable.getY() + selected.getY()
 						+ selected.getHeight());
-				float half = sLineWidth / 2 + .01f;
-				shapeRender.line(topleft.cpy().sub(new Vector2(half, 0)),
-						topright.cpy().add(new Vector2(half, 0)));
-				shapeRender.line(bottomleft.cpy().sub(new Vector2(half, 0)),
-						bottomright.cpy().add(new Vector2(half, 0)));
-				shapeRender.line(topleft.cpy().sub(new Vector2(0, half)),
-						bottomleft.cpy().add(new Vector2(0, half)));
-				shapeRender.line(topright.cpy().sub(new Vector2(0, half)),
-						bottomright.cpy().add(new Vector2(0, half)));
 
-				gl.glLineWidth(sLineWidth);
-				shapeRender.end();
-				gl.glLineWidth(1);
+				float arcsize = selected.getWidth() / 7f;
+				Vector2 lt = topleft.cpy().add(0, arcsize);
+				Vector2 lb = bottomleft.cpy().add(0, -arcsize);
+				Vector2 rt = bottomright.cpy().add(0, -arcsize);
+				Vector2 rb = topright.cpy().add(0, arcsize);
+				Vector2 tl = topleft.cpy().add(arcsize, 0);
+				Vector2 tr = topright.cpy().add(-arcsize, 0);
+				Vector2 bl = bottomleft.cpy().add(arcsize, 0);
+				Vector2 br = bottomright.cpy().add(-arcsize, 0);
+
+				shapeRender.line(tl, tr); // top
+				shapeRender.line(bl, br); // bottom
+				shapeRender.line(lt, lb); // left
+				shapeRender.line(rt, rb); // right
+
+				Vector2 start = lb.cpy();
+				Vector2 trav = new Vector2(0, arcsize * 1.74f);
+				int iter = 16;
+				for (int i = 0; i < iter; i++) {
+					start.sub(trav.cpy().scl(.045f / iter));
+					trav.rotate(-90f / iter);
+					shapeRender.line(start.cpy(), start.add(trav.cpy().scl(1f / iter))); // right
+				}
+
+				start = br.cpy();
+				trav = new Vector2(arcsize * 1.74f, 0);
+				for (int i = 0; i < iter; i++) {
+					start.sub(trav.cpy().scl(.045f / iter));
+					trav.rotate(-90f / iter);
+					shapeRender.line(start.cpy(), start.add(trav.cpy().scl(1f / iter))); // right
+				}
+
+				start = rb.cpy();
+				trav = new Vector2(0, -arcsize * 1.74f);
+				for (int i = 0; i < iter; i++) {
+					start.sub(trav.cpy().scl(.045f / iter));
+					trav.rotate(-90f / iter);
+					shapeRender.line(start.cpy(), start.add(trav.cpy().scl(1f / iter))); // right
+				}
+
+				start = tl.cpy();
+				trav = new Vector2(-arcsize * 1.74f, 0);
+				for (int i = 0; i < iter; i++) {
+					start.sub(trav.cpy().scl(.045f / iter));
+					trav.rotate(-90f / iter);
+					shapeRender.line(start.cpy(), start.add(trav.cpy().scl(1f / iter))); // right
+				}
+
+				GLCommon gl10 = Gdx.graphics.getGLCommon();
+				gl10.glEnable(GL10.GL_BLEND);
+				if (!Gdx.graphics.isGL20Available()) {
+					gl10.glLineWidth(sLineWidth);
+					shapeRender.end();
+					gl10.glLineWidth(1);
+				} else {
+					Gdx.gl20.glLineWidth(sLineWidth);
+					shapeRender.end();
+					Gdx.gl20.glLineWidth(1);
+				}
+
+				gl10.glDisable(GL10.GL_BLEND);
 			}
 		}
 	}

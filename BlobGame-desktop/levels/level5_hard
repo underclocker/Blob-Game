@@ -166,19 +166,6 @@
             }
         },
         {
-            "id": 5009,
-            "class": "org.siggd.actor.Background",
-            "props": {
-                "Collision Sound": "barrel.wav",
-                "Body": "BigBarrelTopView",
-                "Collision Threshold": 3.25,
-                "ID": 5009,
-                "Y": 10.305598,
-                "X": 18.127869,
-                "Collision Pitch": 1.15
-            }
-        },
-        {
             "id": 4718,
             "class": "org.siggd.actor.BouncePlate",
             "props": {
@@ -1483,8 +1470,8 @@
                 "Angle": -45,
                 "Distance": "8",
                 "ID": 3759,
-                "Y": 17.423098,
-                "X": 5.095369,
+                "Y": 17.484924,
+                "X": 5.0865364,
                 "Cone Angle": "30"
             }
         },
@@ -1495,8 +1482,8 @@
                 "Angle": 225,
                 "Distance": "8",
                 "ID": 3760,
-                "Y": 17.263098,
-                "X": 12.655369,
+                "Y": 17.51923,
+                "X": 12.858509,
                 "Cone Angle": "30"
             }
         },
@@ -1744,8 +1731,8 @@
                 "Angle": 270,
                 "Distance": "12",
                 "ID": 6651,
-                "Y": 6.4105043,
-                "X": 4.8444715,
+                "Y": 6.505111,
+                "X": 4.853932,
                 "Cone Angle": "30"
             }
         },
@@ -1768,8 +1755,8 @@
                 "Angle": 300,
                 "Distance": "12",
                 "ID": 6653,
-                "Y": -5.078612,
-                "X": 4.872032,
+                "Y": -4.9712853,
+                "X": 4.842761,
                 "Cone Angle": "20"
             }
         },
@@ -1793,6 +1780,16 @@
                 "Stroke Length": "5.65",
                 "Y": -16.75775,
                 "X": 25.649076
+            }
+        },
+        {
+            "id": 6823,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "BigCircleThing",
+                "ID": 6823,
+                "Y": 10.305,
+                "X": 18.127869
             }
         }
     ],

@@ -1,17 +1,15 @@
 package org.siggd.actor;
 
-import org.siggd.ContactHandler;
 import org.siggd.Convert;
 import org.siggd.Game;
+import org.siggd.Knocked;
 import org.siggd.Level;
-import org.siggd.StableContact;
 import org.siggd.view.BodySprite;
 import org.siggd.view.CompositeDrawable;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 /**
@@ -20,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  * @author underclocker
  * 
  */
-public class Redirector extends Actor {
+public class Redirector extends Actor implements Knocked {
 	private String mTex;
 
 	/**
@@ -63,28 +61,7 @@ public class Redirector extends Actor {
 
 	@Override
 	public void update() {
-		Iterable<StableContact> contacts = Game.get().getLevel().getContactHandler()
-				.getContacts(this);
-		Iterable<Body> bodies = ContactHandler.getBodies(contacts);
-		Actor actor;
-		for (Body b : bodies) {
-			actor = (Actor) b.getUserData();
-			if (actor instanceof Platform) {
-				if (Convert.getInt(actor.getProp("Hold Time")) <= 0) {
-					actor.setProp("Hold Time", Convert.getInt(getProp("Hold Time")));
-				}
-				Vector2 v = new Vector2(1, 0);
-				v.rotate(Convert.getFloat(getProp("Angle")));
-				v.scl(new Vector2(Convert.getFloat(actor.getProp("DirectionX")), Convert
-						.getFloat(actor.getProp("DirectionY"))).len());
-				Vector2 oldDir = new Vector2(Convert.getFloat(actor.getProp("DirectionX")),
-						Convert.getFloat(actor.getProp("DirectionY")));
-				if (!oldDir.equals(v)) {
-					actor.setProp("DirectionX", (Float) v.x);
-					actor.setProp("DirectionY", (Float) v.y);
-				}
-			}
-		}
+
 	}
 
 	/**
@@ -93,12 +70,29 @@ public class Redirector extends Actor {
 	@Override
 	public void dispose() {
 		AssetManager man = Game.get().getAssetManager();
-		if(man.containsAsset(mTex)) {
+		if (man.containsAsset(mTex)) {
 			man.unload(mTex);
 		}
 	}
 
 	@Override
 	public void postLoad() {
+	}
+
+	@Override
+	public void knocked(Actor a) {
+		if (a instanceof Platform) {
+			a.setProp("Hold Time", Convert.getInt(getProp("Hold Time")));
+			Vector2 v = new Vector2(1, 0);
+			v.rotate(Convert.getFloat(getProp("Angle")));
+			v.scl(new Vector2(Convert.getFloat(a.getProp("DirectionX")), Convert.getFloat(a
+					.getProp("DirectionY"))).len());
+			Vector2 oldDir = new Vector2(Convert.getFloat(a.getProp("DirectionX")),
+					Convert.getFloat(a.getProp("DirectionY")));
+			if (!oldDir.equals(v)) {
+				a.setProp("DirectionX", (Float) v.x);
+				a.setProp("DirectionY", (Float) v.y);
+			}
+		}
 	}
 }

@@ -32,7 +32,6 @@ public class Main {
 			saveToPref("width", (Integer) 1280);
 			saveToPref("height", (Integer) 720);
 			saveToPref("fullscreen", (Integer) 1);
-			saveToPref("useGL20", (Integer) 1);
 			saveToPref("vSyncEnabled", (Integer) 1);
 			saveToPref("useLights", (Integer) 1);
 			saveToPref("usePreload", (Integer) 1);
@@ -56,8 +55,8 @@ public class Main {
 		try {
 			cfg.width = mPrefs.getInt("width");
 			cfg.height = mPrefs.getInt("height");
+			cfg.useGL20 = true;
 			cfg.fullscreen = mPrefs.getInt("fullscreen") != 0;
-			cfg.useGL20 = mPrefs.getInt("useGL20") != 0;
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
 			LevelView.mUseLights = mPrefs.getInt("useLights") != 0;
 			Game.PRELOAD = mPrefs.getInt("usePreload") != 0;

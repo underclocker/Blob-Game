@@ -1,8 +1,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>.\BlobGame.jar</jar>
-  <outfile>.\BlobGame.exe</outfile>
+  <jar>..\..\Blob Game.jar</jar>
+  <outfile>.\Blob Game.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
@@ -13,11 +13,11 @@
   <manifest></manifest>
   <icon>..\blob.ico</icon>
   <jre>
-    <path>lib\jre</path>
+    <path></path>
     <bundledJre64Bit>false</bundledJre64Bit>
-    <minVersion></minVersion>
+    <minVersion>1.6.0_18</minVersion>
     <maxVersion></maxVersion>
-    <jdkPreference>preferJdk</jdkPreference>
+    <jdkPreference>preferJre</jdkPreference>
   </jre>
   <splash>
     <file>..\blob.bmp</file>

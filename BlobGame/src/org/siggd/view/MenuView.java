@@ -23,6 +23,7 @@ import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -72,10 +73,10 @@ public class MenuView {
 	private Image mControllerPoof;
 	private Image mControllerSolid;
 	private Image mControllerStart;
-	private TextButton mRaceButton;
-	private TextButton mCampaignButton;
-	private TextButton mExitButton;
-	private TextButton mControllerButton;
+	private SiggdImageButton mRaceButton;
+	private SiggdImageButton mCampaignButton;
+	private SiggdImageButton mExitButton;
+	private SiggdImageButton mControllerButton;
 	private TextButton mClearButton;
 	private int mDelay;
 	public MenuController mMenuController;
@@ -138,61 +139,69 @@ public class MenuView {
 
 		mStage.addActor(mMainTable);
 
-		mRaceButton = new TextButton(" Race Mode ", mSkin);
-		mRaceButton.addListener(mRaceMode);
-		mRaceButton.addListener(mClickListener);
+		mRaceButton = new SiggdImageButton("data/gfx/racebtn.png");
+		mRaceButton.getButton().setColor(1f, 1f, 1f, .65f);
+		mRaceButton.getButton().addListener(mRaceMode);
+		mRaceButton.getButton().addListener(mClickListener);
 
-		mCampaignButton = new TextButton(" Campaign ", mSkin);
-		mMainTable.add(mCampaignButton);
-		mCampaignButton.addListener(mStartCampaign);
-		mCampaignButton.addListener(mClickListener);
+		mCampaignButton = new SiggdImageButton("data/gfx/campaignbtn.png");
+		mCampaignButton.getButton().setColor(1f, 1f, 1f, .65f);
+		mMainTable.add(mCampaignButton.getButton());
+		mCampaignButton.getButton().addListener(mStartCampaign);
+		mCampaignButton.getButton().addListener(mClickListener);
 
-		mClearButton = new TextButton(" Clear Save ", mSkin);
-		mMainTable.add(mClearButton);
-		mClearButton.addListener(mClear);
-		mClearButton.addListener(mClickListener);
-
+		/*
+		 * mClearButton = new TextButton(" Clear Save ", mSkin);
+		 * mMainTable.add(mClearButton); mClearButton.addListener(mClear);
+		 * mClearButton.addListener(mClickListener);
+		 */
 		if (Controllers.getControllers().size > 0) {
-			mControllerButton = new TextButton(" Config Controller ", mSkin);
-			mMainTable.add(mControllerButton);
-			mControllerButton.addListener(mController);
-			mControllerButton.addListener(mClickListener);
+			mControllerButton = new SiggdImageButton("data/gfx/configbtn.png");
+			mControllerButton.getButton().setColor(1f, 1f, 1f, .65f);
+			mMainTable.add(mControllerButton.getButton());
+			mControllerButton.getButton().addListener(mController);
+			mControllerButton.getButton().addListener(mClickListener);
 		}
 
-		mExitButton = new TextButton(" Exit ", mSkin);
-		mMainTable.add(mExitButton);
-		mExitButton.addListener(mExit);
-		mExitButton.addListener(mClickListener);
+		mExitButton = new SiggdImageButton("data/gfx/exitbtn.png");
+		mExitButton.getButton().setColor(1f, 1f, 1f, .65f);
+		mMainTable.add(mExitButton.getButton());
+		mExitButton.getButton().addListener(mExit);
+		mExitButton.getButton().addListener(mClickListener);
 	}
 
 	private void createPauseMenu() {
 		mPauseTable = new Table(mSkin);
 		mPauseTable.setFillParent(true);
 
-		final TextButton mainMenuButton = new TextButton(" Main ", mSkin);
-		mPauseTable.add(mainMenuButton);
-		mainMenuButton.addListener(mMainMenu);
-		mainMenuButton.addListener(mClickListener);
+		final SiggdImageButton mainMenuButton = new SiggdImageButton("data/gfx/stopbtn.png");
+		mainMenuButton.getButton().setColor(1f, 1f, 1f, .85f);
+		mPauseTable.add(mainMenuButton.getButton());
+		mainMenuButton.getButton().addListener(mMainMenu);
+		mainMenuButton.getButton().addListener(mClickListener);
 
-		final TextButton resetButton = new TextButton(" Reset ", mSkin);
-		mPauseTable.add(resetButton);
-		resetButton.addListener(mReset);
-		resetButton.addListener(mClickListener);
+		final SiggdImageButton resetButton = new SiggdImageButton("data/gfx/resetbtn.png");
+		resetButton.getButton().setColor(1f, 1f, 1f, .85f);
+		mPauseTable.add(resetButton.getButton());
+		resetButton.getButton().addListener(mReset);
+		resetButton.getButton().addListener(mClickListener);
 
-		final TextButton continueButton = new TextButton(" Continue ", mSkin);
-		mPauseTable.add(continueButton);
-		continueButton.addListener(mContinue);
-		continueButton.addListener(mClickListener);
+		final SiggdImageButton resumeButton = new SiggdImageButton("data/gfx/resumebtn.png");
+		resumeButton.getButton().setColor(1f, 1f, 1f, .85f);
+		mPauseTable.add(resumeButton.getButton());
+		resumeButton.getButton().addListener(mContinue);
+		resumeButton.getButton().addListener(mClickListener);
 	}
 
 	private void createFakePauseMenu() {
 		mFakePauseTable = new Table(mSkin);
 		mFakePauseTable.setFillParent(true);
 
-		final TextButton resumeButton = new TextButton(" Continue ", mSkin);
-		mFakePauseTable.add(resumeButton);
-		resumeButton.addListener(mContinue);
-		resumeButton.addListener(mClickListener);
+		final SiggdImageButton resumeButton = new SiggdImageButton("data/gfx/resumebtn.png");
+		resumeButton.getButton().setColor(1f, 1f, 1f, .85f);
+		mFakePauseTable.add(resumeButton.getButton());
+		resumeButton.getButton().addListener(mContinue);
+		resumeButton.getButton().addListener(mClickListener);
 	}
 
 	private void createLevelsMenu() {
@@ -203,6 +212,7 @@ public class MenuView {
 		ImageButton imageButton;
 
 		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
+		imageButton.setColor(1f, 1f, 1f, .65f);
 		imageButton.addListener(mMainMenu);
 		imageButton.addListener(mClickListener);
 		mLevelsTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing, mVerticalSpacing,
@@ -490,6 +500,7 @@ public class MenuView {
 		mControllerOverTable.setFillParent(true);
 		ImageButton imageButton;
 		imageButton = new SiggdImageButton("data/gfx/backButton.png").getButton();
+		imageButton.setColor(1, 1, 1, .75f);
 		imageButton.addListener(mMainMenu);
 		imageButton.addListener(mClickListener);
 		mControllerTable.add(imageButton).space(mVerticalSpacing, mHorizontalSpacing,
@@ -521,6 +532,7 @@ public class MenuView {
 
 		// Table.drawDebug(mStage);
 		mShapeRenderer.setProjectionMatrix(mStage.getCamera().combined);
+
 		JSONObject levelSave = Game.get().getLevel().getLevelSave();
 		if (LEVELS.equals(mCurrentMenu)) {
 			for (String s : mLevel1.keySet()) {
@@ -944,8 +956,6 @@ public class MenuView {
 	private final ChangeListener mStartCampaign = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
-			TextButton textButton = (TextButton) actor;
-			textButton.setChecked(false);
 			setMenu(LEVELS);
 		}
 	};
@@ -953,10 +963,6 @@ public class MenuView {
 	private final ChangeListener mReset = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
-			if (actor instanceof TextButton) {
-				TextButton textButton = (TextButton) actor;
-				textButton.setChecked(false);
-			}
 			Game.get().setState(Game.PLAY);
 			String level = Game.get().getLevel().getAssetKey();
 			if ("base".equals(level))
@@ -978,8 +984,6 @@ public class MenuView {
 	private final ChangeListener mContinue = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
-			TextButton textButton = (TextButton) actor;
-			textButton.setChecked(false);
 			Game.get().setPaused(false);
 			Game.get().setState(Game.PLAY);
 		}
@@ -988,10 +992,6 @@ public class MenuView {
 	private final ChangeListener mMainMenu = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
-			if (actor instanceof TextButton) {
-				TextButton textButton = (TextButton) actor;
-				textButton.setChecked(false);
-			}
 			if (!"earth".equals(Game.get().getLevel().getAssetKey())) {
 				Game.get().setNextLevel("earth");
 				Game.get().setPaused(false);
@@ -1011,7 +1011,7 @@ public class MenuView {
 
 				handleSt.writeString("", false);
 			} catch (Exception e) {
-				DebugOutput.info(this, e.getStackTrace().toString());
+				//DebugOutput.info(this, e.getStackTrace().toString());
 			}
 			Game.get().getLevel().loadFromLevelSave();
 		}
@@ -1035,8 +1035,6 @@ public class MenuView {
 	private final ChangeListener mExit = new ChangeListener() {
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
-			TextButton textButton = (TextButton) actor;
-			textButton.setChecked(false);
 			Game.get().exit();
 		}
 	};
@@ -1071,15 +1069,15 @@ public class MenuView {
 		if (MAIN.equals(menu)) {
 			mStage.addActor(mMainTable);
 			if ((Game.UNLOCKED || Level.HARD_PASSED)
-					&& !mMainTable.getChildren().contains(mRaceButton, true)) {
+					&& !mMainTable.getChildren().contains(mRaceButton.getButton(), true)) {
 				mMainTable.clear();
-				mMainTable.add(mCampaignButton);
-				mMainTable.add(mRaceButton);
-				mMainTable.add(mClearButton);
+				mMainTable.add(mCampaignButton.getButton());
+				mMainTable.add(mRaceButton.getButton());
+				// mMainTable.add(mClearButton);
 				if (Controllers.getControllers().size > 0) {
-					mMainTable.add(mControllerButton);
+					mMainTable.add(mControllerButton.getButton());
 				}
-				mMainTable.add(mExitButton);
+				mMainTable.add(mExitButton.getButton());
 			}
 			mMenuController.setTable(mMainTable);
 			if (Game.RELEASE) {
