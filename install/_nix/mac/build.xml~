@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BlobGame" default="default" basedir=".">        
 
+    <property environment="env" />
+
     <taskdef name="bundleapp"
         classname="com.oracle.appbundler.AppBundlerTask"   
         classpath="appbundler-1.0.jar" />
@@ -10,8 +12,9 @@
             name="Blob Game"
             displayname="Blob Game"
             identifier="org.siggd.Main"
-            icon="./icon128.icns"
+            icon="./blob.icns"
             mainclassname="org.siggd.Main">
+            <runtime dir="${env.JAVA_HOME}" />
             <classpath file="../../../Blob Game.jar" />
         </bundleapp>
     </target>

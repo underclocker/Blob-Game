@@ -26,6 +26,8 @@
 <string>1</string>
 <key>NSHumanReadableCopyright</key>
 <string></string>
+<key>JVMRuntime</key>
+<string>jdk1.7.0_21.jdk</string>
 <key>JVMMainClassName</key>
 <string>org.siggd.Main</string>
 <key>JVMOptions</key>
