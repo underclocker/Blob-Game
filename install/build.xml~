@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BlobGame" default="default" basedir=".">        
+
+    <property environment="env" />
+
+    <taskdef name="bundleapp"
+        classname="com.oracle.appbundler.AppBundlerTask"   
+        classpath="appbundler-1.0.jar" />
+
+    <target name="bundle">
+        <bundleapp outputdirectory="dist"
+            name="Blob Game"
+            displayname="Blob Game"
+            identifier="org.siggd.Main"
+            mainclassname="org.siggd.Main">
+            <runtime dir="${env.JAVA_HOME}" />
+            <classpath file="../../Blob Game.jar" />
+        </bundleapp>
+    </target>
+</project>

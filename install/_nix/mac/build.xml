@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BlobGame" default="default" basedir=".">        
+
+    <taskdef name="bundleapp"
+        classname="com.oracle.appbundler.AppBundlerTask"   
+        classpath="appbundler-1.0.jar" />
+
+    <target name="bundle">
+        <bundleapp outputdirectory="dist"
+            name="Blob Game"
+            displayname="Blob Game"
+            identifier="org.siggd.Main"
+            icon="./icon128.icns"
+            mainclassname="org.siggd.Main">
+            <classpath file="../../../Blob Game.jar" />
+        </bundleapp>
+    </target>
+</project>
