@@ -396,6 +396,9 @@ public class Game implements ApplicationListener {
 			System.out.println("fps: " + (1.0f / avg));
 			FPSREC = 1 / avg;
 		}
+		if (FPSREC < 55f){
+			Level.PHYSICS_SCALE = 2.0f;
+		}
 		mProfileFinished = true;
 	}
 

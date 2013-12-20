@@ -52,7 +52,7 @@ public class Level implements Iterable<Actor> {
 	public static boolean COMPLETE = false;
 	public static boolean FIRSTCHECK = true;
 
-	public static final float PHYSICS_SCALE = 3f;
+	public static float PHYSICS_SCALE = 3f;
 
 	// Array of actors
 	ArrayList<Actor> mActors;
