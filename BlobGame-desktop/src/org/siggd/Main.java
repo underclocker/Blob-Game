@@ -55,7 +55,7 @@ public class Main {
 		try {
 			cfg.width = mPrefs.getInt("width");
 			cfg.height = mPrefs.getInt("height");
-			cfg.useGL20 = true;
+			cfg.useGL20 = false;
 			cfg.fullscreen = mPrefs.getInt("fullscreen") != 0;
 			cfg.vSyncEnabled = mPrefs.getInt("vSyncEnabled") != 0;
 			LevelView.mUseLights = mPrefs.getInt("useLights") != 0;
