@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="/BlobGame/libs/reflections-0.9.8.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BlobGame"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
@@ -10,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/BlobGame/libs/bodyeditor-loader.jar" sourcepath="/BlobGame/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/BlobGame/libs/gdx.jar" sourcepath="/BlobGame/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="/BlobGame/libs/reflections-0.9.8.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
