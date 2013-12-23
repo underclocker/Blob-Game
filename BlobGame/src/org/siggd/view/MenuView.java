@@ -96,7 +96,7 @@ public class MenuView {
 	public MenuView() {
 		mStage = new Stage();
 		mSkin = new Skin();
-		mMenuController = new MenuController();
+		//mMenuController = new MenuController();
 		mShapeRenderer = new ShapeRenderer();
 		mDelay = 0;
 		mBindingController = null;
@@ -155,13 +155,6 @@ public class MenuView {
 		 * mMainTable.add(mClearButton); mClearButton.addListener(mClear);
 		 * mClearButton.addListener(mClickListener);
 		 */
-		if (Controllers.getControllers().size > 0) {
-			mControllerButton = new SiggdImageButton("data/gfx/configbtn.png");
-			mControllerButton.getButton().setColor(1f, 1f, 1f, .65f);
-			mMainTable.add(mControllerButton.getButton());
-			mControllerButton.getButton().addListener(mController);
-			mControllerButton.getButton().addListener(mClickListener);
-		}
 
 		mExitButton = new SiggdImageButton("data/gfx/exitbtn.png");
 		mExitButton.getButton().setColor(1f, 1f, 1f, .65f);

@@ -71,15 +71,17 @@ public class MenuController implements InputProcessor, ControllerListener {
 	 *            element index that starts selected
 	 */
 	public MenuController(int index) {
+		return;
+		/*
 		mX = 0;
 		mY = 0;
 		mPlayerId = 0;
-		Array<Controller> controllers = Controllers.getControllers();
-		mController = controllers.size > 0 ? controllers.get(0) : null;
+		//Array<Controller> controllers = Controllers.getControllers();
+		//mController = controllers.size > 0 ? controllers.get(0) : null;
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
-		ignore = false;
+		ignore = false;*/
 	}
 
 	public void setIndex(int i) {

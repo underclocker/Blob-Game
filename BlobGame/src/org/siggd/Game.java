@@ -152,12 +152,12 @@ public class Game implements ApplicationListener {
 		mPlayers = new ArrayList<Player>();
 
 		DebugOutput.enable();
-		System.out.println("Controllers: " + Controllers.getControllers().size);
+		/*System.out.println("Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		// Create the level view
 		mLevelView = new LevelView();

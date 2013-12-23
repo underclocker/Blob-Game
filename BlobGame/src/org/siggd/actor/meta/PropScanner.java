@@ -17,11 +17,11 @@ public class PropScanner {
 
 	/**
 	 * Holder for property getters and setters for an actor
+	 * 
 	 * @author mysterymath
-	 *
+	 * 
 	 */
-	public class Props
-	{
+	public class Props {
 		private HashMap<String, Method> mGetters;
 		private HashMap<String, Method> mSetters;
 
@@ -37,16 +37,14 @@ public class PropScanner {
 		public boolean hasSetter(String name) {
 			return mSetters.containsKey(name);
 		}
-		
 
 		public Set<String> getGetterNames() {
 			return mGetters.keySet();
 		}
-		
+
 		public Set<String> getSetterNames() {
 			return mSetters.keySet();
 		}
-
 
 		public Object get(Actor a, String name) {
 			Method m = mGetters.get(name);
@@ -68,18 +66,18 @@ public class PropScanner {
 			// Actor id conversion
 			if (m.getReturnType() == Actor.class) {
 				if (val != null) {
-					val = ((Actor)val).getId();
+					val = ((Actor) val).getId();
 				} else {
-					val = (long)-1;
+					val = (long) -1;
 				}
 			}
-			
+
 			return val;
 		}
 
 		public void set(Actor a, String name, Object val) {
 			Method m = mSetters.get(name);
-			
+
 			// Actor id conversion
 			Class<?> paramType = m.getParameterTypes()[0];
 			if (paramType == Actor.class) {
@@ -88,7 +86,7 @@ public class PropScanner {
 				// General type conversion
 				val = Convert.convertTo(val, paramType);
 			}
-			
+
 			try {
 				m.invoke(a, val);
 			} catch (IllegalAccessException e) {
@@ -103,7 +101,7 @@ public class PropScanner {
 			}
 		}
 	}
-	
+
 	private HashMap<Class<? extends Actor>, Props> mProps;
 
 	public PropScanner(String namespace) {
@@ -111,39 +109,46 @@ public class PropScanner {
 
 		mProps = new HashMap<Class<? extends Actor>, Props>();
 
-		Reflections r = new Reflections(namespace);
-		Set<Class<? extends Actor>> s = r.getSubTypesOf(Actor.class);
+		try {
+			Reflections r = new Reflections(namespace);
+			Set<Class<? extends Actor>> s = r.getSubTypesOf(Actor.class);
 
-		for (Class c : s) {
-			Props propMethods = new Props();
-			ArrayList<Method> methods = new ArrayList<Method>();
-			searchForMethods(methods, c);
-			for (Method m : methods) {
-				Prop propInfo = m.getAnnotation(Prop.class);
-				if (propInfo == null) {
-					continue;
+			for (Class c : s) {
+				Props propMethods = new Props();
+				ArrayList<Method> methods = new ArrayList<Method>();
+				searchForMethods(methods, c);
+				for (Method m : methods) {
+					Prop propInfo = m.getAnnotation(Prop.class);
+					if (propInfo == null) {
+						continue;
+					}
+
+					Class<?>[] paramTypes = m.getParameterTypes();
+					Class<?> returnType = m.getReturnType();
+					if (paramTypes.length == 1 && returnType == void.class) {
+						// Setter
+						propMethods.mSetters.put(propInfo.name(), m);
+					} else if (paramTypes.length == 0 && returnType != void.class) {
+						// Getter
+						propMethods.mGetters.put(propInfo.name(), m);
+					} else {
+						LOGGER.warning("Detected property that is neither setter nor getter: " + m);
+					}
 				}
-				
-				Class<?>[] paramTypes = m.getParameterTypes();
-				Class<?> returnType = m.getReturnType();
-				if (paramTypes.length == 1 && returnType == void.class) {
-					// Setter
-					propMethods.mSetters.put(propInfo.name(), m);
-				} else if (paramTypes.length == 0 && returnType != void.class) {
-					// Getter
-					propMethods.mGetters.put(propInfo.name(), m);
-				} else {
-					LOGGER.warning("Detected property that is neither setter nor getter: " + m);
-				}
+
+				mProps.put(c, propMethods);
 			}
-			
-			mProps.put(c, propMethods);
+		} catch (NoClassDefFoundError e) {
+			System.out.println(e);
 		}
-		LOGGER.info("Actor property enumeration took " + (System.nanoTime() - time) / 1000.0  / 1000 + "ms.");
+
+		LOGGER.info("Actor property enumeration took " + (System.nanoTime() - time) / 1000.0 / 1000
+				+ "ms.");
 	}
 
 	/**
-	 * Recursively collect all the methods 
+	 * Recursively collect all the methods
+	 * 
 	 * @param ret
 	 * @param c
 	 */
@@ -151,19 +156,21 @@ public class PropScanner {
 		if (c == null) {
 			return;
 		}
-		
+
 		searchForMethods(ret, c.getSuperclass());
-		
+
 		for (Class iface : c.getInterfaces()) {
 			searchForMethods(ret, iface);
 		}
-		
+
 		ret.addAll(Arrays.asList(c.getMethods()));
 	}
-	
+
 	/**
 	 * Returns the property accessor and mutator methods for a class c
-	 * @param c The class to get methods for
+	 * 
+	 * @param c
+	 *            The class to get methods for
 	 * @return The methods, or null if none
 	 */
 	public Props getProps(Class c) {
