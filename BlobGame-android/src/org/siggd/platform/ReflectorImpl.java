@@ -32,7 +32,7 @@ public class ReflectorImpl implements Reflector {
 				try {
 					Class<?> cls = Class.forName(str);
 					
-					if (Actor.class.isAssignableFrom(cls)) {
+					if (Actor.class.isAssignableFrom(cls) && Actor.class != cls) {
 						ret.add(cls.asSubclass(Actor.class));
 					}
 
