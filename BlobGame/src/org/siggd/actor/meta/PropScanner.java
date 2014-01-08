@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.reflections.Reflections;
 import org.siggd.Convert;
+import org.siggd.Game;
 import org.siggd.actor.Actor;
 
 public class PropScanner {
@@ -111,8 +111,7 @@ public class PropScanner {
 
 		mProps = new HashMap<Class<? extends Actor>, Props>();
 
-		Reflections r = new Reflections(namespace);
-		Set<Class<? extends Actor>> s = r.getSubTypesOf(Actor.class);
+		Set<Class<? extends Actor>> s = Game.get().getReflector().getActorSubTypes();
 
 		for (Class c : s) {
 			Props propMethods = new Props();

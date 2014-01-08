@@ -10,6 +10,7 @@ import org.siggd.Player.ControlType;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.actor.meta.PropScanner;
 import org.siggd.editor.Editor;
+import org.siggd.platform.Reflector;
 import org.siggd.view.LevelView;
 import org.siggd.view.MenuView;
 
@@ -103,11 +104,19 @@ public class Game implements ApplicationListener {
 	private ArrayList<Long> mRenderTimeHistory;
 	private static int SAMPLE_SIZE = 600;
 	private boolean mProfileFinished = false;
+	private Reflector mReflector;
 
 	/**
 	 * Constructor (private)
 	 */
-	private void Game() {
+	public Game(Reflector reflector) {
+		if (theGame == null) {
+			theGame = this;
+		} else {
+			throw new RuntimeException("Cannot have multiple instances of Game.");
+		}
+		
+		mReflector = reflector;
 	}
 
 	/**
@@ -121,10 +130,6 @@ public class Game implements ApplicationListener {
 	 * @return
 	 */
 	public static Game get() {
-		if (theGame == null) {
-			theGame = new Game();
-		}
-
 		return theGame;
 	}
 
@@ -508,6 +513,14 @@ public class Game implements ApplicationListener {
 	 */
 	public Level getLevel() {
 		return mLevel;
+	}
+	
+	/**
+	 * Returns a platform-specific reflection object
+	 * @return A platform-specific reflection object
+	 */
+	public Reflector getReflector() {
+		return mReflector;
 	}
 
 	/**

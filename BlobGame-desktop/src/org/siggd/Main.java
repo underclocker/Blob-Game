@@ -6,6 +6,8 @@ import java.io.File;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.siggd.platform.Reflector;
+import org.siggd.platform.ReflectorImpl;
 import org.siggd.view.LevelView;
 
 import com.badlogic.gdx.Files.FileType;
@@ -75,7 +77,7 @@ public class Main {
 		cfg.addIcon("data/gfx/icon16.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon32.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon128.png", FileType.Internal);
-		new LwjglApplication(Game.get(), cfg);
+		new LwjglApplication(new Game(new ReflectorImpl()), cfg);
 	}
 
 	private static void saveToPref(String key, Object value) {

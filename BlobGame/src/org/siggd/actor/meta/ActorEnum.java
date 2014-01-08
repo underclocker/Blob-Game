@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.reflections.Reflections;
+import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.actor.Actor;
 
@@ -27,8 +27,7 @@ public class ActorEnum {
 		mFakeLevel = new Level(null);
 
 		// Enumerate actors
-		Reflections r = new Reflections("org.siggd.actor");
-		Set<Class<? extends Actor>> s = r.getSubTypesOf(Actor.class);
+		Set<Class<? extends Actor>> s = Game.get().getReflector().getActorSubTypes();
 
 		// Create one of each type of actor
 		for (Class c : s) {

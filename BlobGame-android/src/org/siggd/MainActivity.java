@@ -1,5 +1,7 @@
 package org.siggd;
 
+import org.siggd.platform.ReflectorImpl;
+
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -15,6 +17,6 @@ public class MainActivity extends AndroidApplication {
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.useGL20 = false;
         
-        initialize(new Game(), cfg);
+        initialize(new Game(new ReflectorImpl(getApplicationContext())), cfg);
     }
 }
