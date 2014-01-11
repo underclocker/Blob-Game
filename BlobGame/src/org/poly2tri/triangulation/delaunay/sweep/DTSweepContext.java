@@ -40,8 +40,6 @@ import org.poly2tri.triangulation.TriangulationContext;
 import org.poly2tri.triangulation.TriangulationPoint;
 import org.poly2tri.triangulation.delaunay.DelaunayTriangle;
 import org.poly2tri.triangulation.point.TPoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -50,7 +48,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DTSweepContext extends TriangulationContext<DTSweepDebugContext>
 {
-    private final static Logger logger = LoggerFactory.getLogger( DTSweepContext.class );
+    //private final static Logger logger = LoggerFactory.getLogger( DTSweepContext.class );
 
     // Inital triangle factor, seed triangle will extend 30% of 
     // PointSet width to both left and right.

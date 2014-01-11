@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TriangulationProcess implements Runnable
 {
-    private final static Logger logger = LoggerFactory.getLogger( TriangulationProcess.class );
+//    private final static Logger logger = LoggerFactory.getLogger( TriangulationProcess.class );
 
     private final TriangulationAlgorithm _algorithm;
     
@@ -236,7 +236,7 @@ public class TriangulationProcess implements Runnable
                 Poly2Tri.triangulate( _tcx );
             }
             _triangulationTime = ( System.nanoTime() - time ) / 1e6;
-            logger.info( "Triangulation of {} points [{}ms]", _pointCount, _triangulationTime );
+            //logger.info( "Triangulation of {} points [{}ms]", _pointCount, _triangulationTime );
             sendEvent( TriangulationProcessEvent.Done );
         }
         catch( RuntimeException e )
@@ -244,7 +244,7 @@ public class TriangulationProcess implements Runnable
             if( _awaitingTermination )
             {
                 _awaitingTermination = false;
-                logger.info( "Thread[{}] : {}", _thread.getName(), e.getMessage() );
+             //   logger.info( "Thread[{}] : {}", _thread.getName(), e.getMessage() );
                 sendEvent( TriangulationProcessEvent.Aborted );
             }
             else
@@ -256,7 +256,7 @@ public class TriangulationProcess implements Runnable
         catch( Exception e )
         {
             e.printStackTrace();
-            logger.info( "Triangulation exception {}", e.getMessage() );
+            //logger.info( "Triangulation exception {}", e.getMessage() );
             sendEvent( TriangulationProcessEvent.Failed );
         }
         finally
