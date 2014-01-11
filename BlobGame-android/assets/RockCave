@@ -1,0 +1,40 @@
+{
+    "actors": [
+        {
+            "id": 0,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "RockCave",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 0,
+                "Y": 17.8377,
+                "X": 1.5235415
+            }
+        },
+        {
+            "id": 1,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 50,
+                "ID": 1,
+                "Y": 24.2252,
+                "X": 8.311041
+            }
+        }
+    ],
+    "props": {
+        "Min Camera Y": -2.14748365E9,
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": 1,
+        "Max Camera Y": 2.14748365E9,
+        "Parallax": "",
+        "Min Camera X": -2.14748365E9,
+        "Max Camera X": 2.14748365E9,
+        "SongName": "",
+        "Solidity Enabled": 1
+    }
+}

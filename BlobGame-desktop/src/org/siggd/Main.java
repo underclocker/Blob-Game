@@ -74,7 +74,6 @@ public class Main {
 			cfg.width = (int) screenSize.getWidth();
 			cfg.height = (int) screenSize.getHeight();
 		}
-		LevelView.mUseLights = false;
 		cfg.addIcon("data/gfx/icon16.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon32.png", FileType.Internal);
 		cfg.addIcon("data/gfx/icon128.png", FileType.Internal);

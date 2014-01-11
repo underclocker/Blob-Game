@@ -1,6 +1,7 @@
 package org.siggd;
 
 import org.siggd.platform.ReflectorImpl;
+import org.siggd.view.LevelView;
 
 import android.os.Bundle;
 
@@ -15,8 +16,10 @@ public class MainActivity extends AndroidApplication {
         //GdxNativesLoader.load(); 
         
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
-        cfg.useGL20 = false;
         
+        cfg.useGL20 = true;
+        LevelView.mUseLights = false;
+
         initialize(new Game(new ReflectorImpl(getApplicationContext())), cfg);
     }
 }

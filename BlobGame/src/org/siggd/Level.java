@@ -749,7 +749,7 @@ public class Level implements Iterable<Actor> {
 	 * Dispose of the actor's resources
 	 */
 	public void dispose() {
-		saveProgress();
+		//saveProgress();
 		if (LevelView.mUseLights)
 			Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {

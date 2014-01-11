@@ -860,6 +860,7 @@ public class MenuView {
 	 */
 	private Player testForNewPlayer() {
 		Player p = null;
+		/*
 		for (Controller c : Controllers.getControllers()) {
 			if (Game.get().getNumberOfPlayers() < Game.MAX_PLAYERS && p == null) {
 				for (int i = 0; i < 10; i++) {
@@ -896,6 +897,7 @@ public class MenuView {
 				break;
 			}
 		}
+		*/
 		if (p == null) {
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)
 					|| Gdx.input.isKeyPressed(Input.Keys.DOWN)

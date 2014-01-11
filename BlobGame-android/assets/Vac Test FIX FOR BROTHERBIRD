@@ -1,0 +1,269 @@
+{
+    "actors": [
+        {
+            "id": 66,
+            "class": "org.siggd.actor.Respawner",
+            "props": {
+                "Target Spawner": "2",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 66,
+                "Y": 16.030586,
+                "X": 14.8538885
+            }
+        },
+        {
+            "id": 45,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Layer": "3",
+                "Angle": 315,
+                "Body": "CannonBase",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 45,
+                "Y": 2.7855814,
+                "X": 1.0742723
+            }
+        },
+        {
+            "id": 44,
+            "class": "org.siggd.actor.Cannon",
+            "props": {
+                "Layer": "2",
+                "BodyType": 1,
+                "Angle": 45,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 44,
+                "Y": 3.0755863,
+                "X": 1.4240816,
+                "Rate": "120"
+            }
+        },
+        {
+            "id": 25,
+            "class": "org.siggd.actor.RecyclingCenter",
+            "props": {
+                "Angle": 90,
+                "Target Spawner": "2",
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 25,
+                "Y": 15.316514,
+                "X": 14.93873
+            }
+        },
+        {
+            "id": 8,
+            "class": "org.siggd.actor.VacuumBot",
+            "props": {
+                "Layer": "2",
+                "BodyType": 1,
+                "Density": 0.1,
+                "ID": 8,
+                "Target Recycling Center": "25",
+                "Y": 3.8875003,
+                "X": 14.8875
+            }
+        },
+        {
+            "id": 3,
+            "class": "org.siggd.actor.Blob",
+            "props": {
+                "BodyType": 2,
+                "Active": 0,
+                "Friction": 0.2,
+                "Density": 0.35,
+                "ID": 3,
+                "Y": 8.093256,
+                "X": -0.9796982,
+                "Restitution": 0
+            }
+        },
+        {
+            "id": 0,
+            "class": "org.siggd.actor.Parallax",
+            "props": {
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 0,
+                "Y": 0.24483585,
+                "X": -0.9102311
+            }
+        },
+        {
+            "id": 1,
+            "class": "org.siggd.actor.Background",
+            "props": {
+                "Body": "VacTest",
+                "Friction": 0.2,
+                "Density": 0.1,
+                "ID": 1
+            }
+        },
+        {
+            "id": 2,
+            "class": "org.siggd.actor.Spawner",
+            "props": {
+                "Layer": "2",
+                "Exit Velocity": "10",
+                "Angle": 270,
+                "Friction": 0.2,
+                "Density": 0.1,
+                "ID": 2,
+                "Blob Spawner": "1",
+                "Y": 6.3055844,
+                "X": -0.49611318
+            }
+        },
+        {
+            "id": 10,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 10,
+                "Y": 2.8930843,
+                "X": 8.903884
+            }
+        },
+        {
+            "id": 11,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 11,
+                "Y": 2.9180841,
+                "X": 9.666386
+            }
+        },
+        {
+            "id": 12,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Angle": 45,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 12,
+                "Y": 2.6305842,
+                "X": 7.678887
+            }
+        },
+        {
+            "id": 13,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 13,
+                "Y": 1.6930839,
+                "X": 6.478885
+            }
+        },
+        {
+            "id": 14,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 14,
+                "Y": 1.6930842,
+                "X": 4.3538857
+            }
+        },
+        {
+            "id": 15,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Angle": 315,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 15,
+                "Y": 2.130584,
+                "X": 2.7163858
+            }
+        },
+        {
+            "id": 16,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 16,
+                "Y": 2.2805843,
+                "X": 1.6538858
+            }
+        },
+        {
+            "id": 17,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Angle": 330,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 17,
+                "Y": 2.4305844,
+                "X": 11.453885
+            }
+        },
+        {
+            "id": 18,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Angle": 330,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 18,
+                "Y": 1.3680837,
+                "X": 13.291386
+            }
+        },
+        {
+            "id": 19,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 19,
+                "Y": 1.3305842,
+                "X": 14.478887
+            }
+        },
+        {
+            "id": 20,
+            "class": "org.siggd.actor.VacBotBoundry",
+            "props": {
+                "BodyType": 2,
+                "Friction": 1,
+                "Density": 0.1,
+                "ID": 20,
+                "Y": 1.3180838,
+                "X": 16.603888
+            }
+        }
+    ],
+    "props": {
+        "Min Camera Y": "0",
+        "Gravity X": 0,
+        "Gravity Y": -9.8,
+        "Puff Enabled": 1,
+        "Max Camera Y": "17.066",
+        "Parallax": "",
+        "Min Camera X": "0",
+        "Max Camera X": "17.066",
+        "SongName": "wobhappy.ogg",
+        "Solidity Enabled": 1
+    }
+}
