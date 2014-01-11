@@ -155,6 +155,8 @@ public class MenuView {
 		 * mMainTable.add(mClearButton); mClearButton.addListener(mClear);
 		 * mClearButton.addListener(mClickListener);
 		 */
+
+		/*
 		if (Controllers.getControllers().size > 0) {
 			mControllerButton = new SiggdImageButton("data/gfx/configbtn.png");
 			mControllerButton.getButton().setColor(1f, 1f, 1f, .65f);
@@ -162,6 +164,7 @@ public class MenuView {
 			mControllerButton.getButton().addListener(mController);
 			mControllerButton.getButton().addListener(mClickListener);
 		}
+		*/
 
 		mExitButton = new SiggdImageButton("data/gfx/exitbtn.png");
 		mExitButton.getButton().setColor(1f, 1f, 1f, .65f);
@@ -1074,9 +1077,9 @@ public class MenuView {
 				mMainTable.add(mCampaignButton.getButton());
 				mMainTable.add(mRaceButton.getButton());
 				// mMainTable.add(mClearButton);
-				if (Controllers.getControllers().size > 0) {
-					mMainTable.add(mControllerButton.getButton());
-				}
+				//if (Controllers.getControllers().size > 0) {
+				//	mMainTable.add(mControllerButton.getButton());
+				//}
 				mMainTable.add(mExitButton.getButton());
 			}
 			mMenuController.setTable(mMainTable);

@@ -132,27 +132,6 @@
             }
         },
         {
-            "id": 315,
-            "class": "org.siggd.actor.Parallax",
-            "props": {
-                "Lightness": ".1",
-                "Y Offset": "-3",
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "Texture": "level4_1_0.png",
-                "Angle": 30,
-                "Rotation Speed": ".03",
-                "Friction": 0,
-                "ID": 315,
-                "CollisionSound": "",
-                "Scale": "6",
-                "Y": -1.8073734,
-                "Rotation": -17.209936,
-                "X": -0.030850202
-            }
-        },
-        {
             "id": 245,
             "class": "org.siggd.actor.Respawner",
             "props": {
@@ -399,27 +378,6 @@
                 "ID": 313,
                 "CollisionSound": "",
                 "Y": -15.800007
-            }
-        },
-        {
-            "id": 354,
-            "class": "org.siggd.actor.Parallax",
-            "props": {
-                "Lightness": ".2",
-                "Y Offset": "-3",
-                "Y Wave Angle": 0,
-                "Distance": 3,
-                "X Wave Angle": 0,
-                "Texture": "Level1_1_0.png",
-                "Layer": 0,
-                "Rotation Speed": ".05",
-                "Friction": 0,
-                "ID": 354,
-                "CollisionSound": "",
-                "Scale": "6",
-                "Y": -1.9129425,
-                "Rotation": 194.65028,
-                "X": -2.2225864
             }
         }
     ],

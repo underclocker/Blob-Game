@@ -58,7 +58,7 @@ public class Game implements ApplicationListener {
 	public final static int MAX_PLAYERS = 8;
 	public final static boolean RELEASE = true;
 	public final static boolean DEBUG = false;
-	public final static boolean UNLOCKED = false;
+	public final static boolean UNLOCKED = true;
 
 	// loaded from config!!!
 	public static boolean CALM = false; // setting does nothing
@@ -196,8 +196,8 @@ public class Game implements ApplicationListener {
 		}
 
 		// setup the listener that prints events to the console
-		mPlayerListener = new PlayerListener();
-		Controllers.addListener(mPlayerListener);
+		//mPlayerListener = new PlayerListener();
+		//Controllers.addListener(mPlayerListener);
 		//Controllers.addListener(mMenuView.getMenuController());
 
 		// Load physics bodies

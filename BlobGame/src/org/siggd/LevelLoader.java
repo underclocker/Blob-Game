@@ -3,6 +3,8 @@ package org.siggd;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
@@ -21,6 +23,8 @@ public class LevelLoader extends AsynchronousAssetLoader<Level, LevelLoader.Leve
 	@Override
 	public void loadAsync(AssetManager manager, String fileName, FileHandle handle, LevelParameter parameter) {
 		level = null;
+		if (Gdx.app.getType() == ApplicationType.Android){
+		}
 		String json = handle.readString();
 		level = new Level(fileName);
 		try {
