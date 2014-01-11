@@ -32,14 +32,6 @@ public class PlayerListener implements ControllerListener {
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
-
-		if (id == 4) {
-			if (value > 0) {
-				p.mActor.triggerLeft();
-			} else {
-				p.mActor.triggerRight();
-			}
-		}
 		return false;
 	}
 
@@ -51,7 +43,6 @@ public class PlayerListener implements ControllerListener {
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
-		p.mActor.downAction(realId);
 		return false;
 	}
 
@@ -63,7 +54,6 @@ public class PlayerListener implements ControllerListener {
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
-		p.mActor.upAction(realId);
 		return false;
 	}
 
@@ -86,7 +76,6 @@ public class PlayerListener implements ControllerListener {
 		Player p = getPlayer(c);
 		if (p == null || p.mActor == null)
 			return false;
-		p.mActor.dpad(id, value);
 
 		return false;
 	}

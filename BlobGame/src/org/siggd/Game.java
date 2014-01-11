@@ -157,13 +157,13 @@ public class Game implements ApplicationListener {
 		mPlayers = new ArrayList<Player>();
 
 		DebugOutput.enable();
-		System.out.println("Controllers: " + Controllers.getControllers().size);
+/*		System.out.println("Controllers: " + Controllers.getControllers().size);
 		try {
 			ControllerFilterAPI.load();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
+*/
 		// Create the level view
 		mLevelView = new LevelView();
 		mMenuView = new MenuView();
@@ -198,7 +198,7 @@ public class Game implements ApplicationListener {
 		// setup the listener that prints events to the console
 		mPlayerListener = new PlayerListener();
 		Controllers.addListener(mPlayerListener);
-		Controllers.addListener(mMenuView.getMenuController());
+		//Controllers.addListener(mMenuView.getMenuController());
 
 		// Load physics bodies
 

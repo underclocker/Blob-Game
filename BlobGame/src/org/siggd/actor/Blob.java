@@ -58,7 +58,7 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.badlogic.gdx.utils.Array;
 
-public class Blob extends Actor implements Controllable {
+public class Blob extends Actor {
 	private class Spring {
 		public int a; // First body
 		public int b; // Second body
@@ -1027,23 +1027,11 @@ public class Blob extends Actor implements Controllable {
 				// FIX THE AXES LATER
 				Controller c = p.controller;
 				right = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c, 1)) > 0.5;
-				right |= c.getPov(0) == PovDirection.east;
-				right |= c.getPov(0) == PovDirection.northEast;
-				right |= c.getPov(0) == PovDirection.southEast;
 				left = c.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(c, 1)) < -0.5;
-				left |= c.getPov(0) == PovDirection.west;
-				left |= c.getPov(0) == PovDirection.northWest;
-				left |= c.getPov(0) == PovDirection.southWest;
 				up = c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
 						ControllerFilterAPI.BUTTON_A));
-				up |= c.getPov(0) == PovDirection.north;
-				up |= c.getPov(0) == PovDirection.northEast;
-				up |= c.getPov(0) == PovDirection.northWest;
 				down = c.getButton(ControllerFilterAPI.getButtonFromFilteredId(c,
 						ControllerFilterAPI.BUTTON_B));
-				down |= c.getPov(0) == PovDirection.south;
-				down |= c.getPov(0) == PovDirection.southEast;
-				down |= c.getPov(0) == PovDirection.southWest;
 			} else if (p != null && p.active) {
 				if (p.controltype == ControlType.Arrows) {
 					right = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
@@ -1860,66 +1848,6 @@ public class Blob extends Actor implements Controllable {
 	}
 
 	@Override
-	public void left() {
-
-	}
-
-	@Override
-	public void right() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void up() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void down() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void triggerLeft() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void triggerRight() {
-		// TODO TRIGGER TO TRANSFORM FLICKERS
-	}
-
-	@Override
-	public void downAction(int id) {
-		/*
-		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
-		 * Game.PLAY || Game.get().getState() == Game.MENU) { if (id ==
-		 * ControllerFilterAPI.BUTTON_A && mState == SOLID_STATE) { transform();
-		 * } else if (id == ControllerFilterAPI.BUTTON_B) { transform(); } } }
-		 */
-	}
-
-	@Override
-	public void upAction(int id) {
-
-	}
-
-	@Override
-	public void dpad(int id, PovDirection dir) {
-		/*
-		 * if (getLevel().getAssetKey() != null) { if (Game.get().getState() ==
-		 * Game.PLAY || Game.get().getState() == Game.MENU) { boolean up = dir
-		 * == PovDirection.north; boolean down = dir == PovDirection.south; if
-		 * (up && mState == SOLID_STATE) { transform(); } else if (down) {
-		 * transform(); } } }
-		 */
-	}
-
-	@Override
 	public void postLoad() {
 		if (getLevel().getAssetKey() == null)
 			return;
@@ -2085,4 +2013,6 @@ public class Blob extends Actor implements Controllable {
 		}
 		super.setVelocityY(m);
 	}
+
+
 }

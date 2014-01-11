@@ -839,7 +839,7 @@ public class MenuView {
 		if (start) {
 			for (Player pl : Game.get().getPlayers()) {
 				if (pl.active && pl.controltype == ControlType.Controller && pl.controller != null) {
-					mMenuController.setController(pl.controller);
+					//mMenuController.setController(pl.controller);
 					mMenuController.setPlayerId(pl.id);
 					break;
 				}

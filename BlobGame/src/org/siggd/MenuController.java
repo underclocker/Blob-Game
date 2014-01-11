@@ -32,7 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 
-public class MenuController implements InputProcessor, ControllerListener {
+public class MenuController implements InputProcessor {
 	private static final int FILTER_AMOUNT = 10;
 	private static final int REPEATS = 10;
 	private static final Set<Integer> NAV_KEYS = new HashSet<Integer>(Arrays.asList(new Integer[] {
@@ -40,7 +40,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 			Input.Keys.UP, Input.Keys.S, Input.Keys.DOWN }));
 
 	private Table mTable;
-	private Controller mController;
+	//private Controller mController;
 	private int mPlayerId;
 	private int mX, mY;
 	private int mControllerFilter;
@@ -74,8 +74,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 		mX = 0;
 		mY = 0;
 		mPlayerId = 0;
-		Array<Controller> controllers = Controllers.getControllers();
-		mController = controllers.size > 0 ? controllers.get(0) : null;
+		//Array<Controller> controllers = Controllers.getControllers();
+		//mController = controllers.size > 0 ? controllers.get(0) : null;
 		mControllerFilter = 0;
 		mFilteredKey = -42;
 		mTable = null;
@@ -129,9 +129,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 		}
 	}
 
-	public void setController(Controller c) {
-		mController = c;
-	}
 
 	public void setPlayerId(int id) {
 		mPlayerId = id;
@@ -149,14 +146,8 @@ public class MenuController implements InputProcessor, ControllerListener {
 				boolean down = false;
 				boolean r = false;
 				boolean l = false;
+				/*
 				if (mController != null) {
-					/*
-					 * if (mController.getButton(ControllerFilterAPI
-					 * .getButtonFromFilteredId(mController,
-					 * ControllerFilterAPI.BUTTON_A))) { enterDown = true; if
-					 * (!mEnterDown) { ((Actor) getCell(mX, mY).getWidget())
-					 * .fire(new ChangeEvent()); mControllerFilter = 0; } }
-					 */
 
 					float leftRight = mController
 							.getAxis(ControllerFilterAPI.getAxisFromFilteredAxis(mController,
@@ -176,7 +167,7 @@ public class MenuController implements InputProcessor, ControllerListener {
 						up = true;
 					if (mController.getPov(0) == PovDirection.south)
 						down = true;
-				}
+				}*/
 
 				if (NAV_KEYS.contains(mFilteredKey)) {
 					if (Gdx.input.isKeyPressed(mFilteredKey)) {
@@ -422,98 +413,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 	}
 
-	private void fakePause(Controller c) {
-		if (Game.get().getState() == Game.PLAY) {
-			Game.get().setPaused(true);
-			Game.get().setState(Game.MENU);
-			Game.get().getMenuView().setMenu(MenuView.FAKE_PAUSE);
-			Game.get().getMenuView().setFakePauseController(c);
-			mPlayerId = Game.get().getPlayer(c).id;
-		} else if (Game.get().getState() == Game.MENU
-				&& MenuView.FAKE_PAUSE.equals(Game.get().getMenuView().getCurrentMenu())) {
-			Game.get().setState(Game.PLAY);
-			mPlayerId = Game.get().getPlayer(mController).id;
-		}
-	}
-
-	private boolean controllerPermission(Controller c, int button) {
-		if (ignore) {
-			return false;
-		}
-		int gameState = Game.get().getState();
-		MenuView menuView = Game.get().getMenuView();
-		if (gameState == Game.MENU && MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
-				&& c == menuView.getFakePauseController()) {
-			return true;
-		}
-		if (button == ControllerFilterAPI.BUTTON_START) {
-			if (gameState == Game.PLAY
-					|| (gameState == Game.MENU && MenuView.PAUSE.equals(menuView.getCurrentMenu()))) {
-				return true;
-			}
-		} else if (c == mController) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean buttonDown(Controller c, int button) {
-		int realButton = ControllerFilterAPI.getFilteredId(c, button);
-		MenuView menuView = Game.get().getMenuView();
-		if (controllerPermission(c, realButton)) {
-			switch (realButton) {
-			case ControllerFilterAPI.BUTTON_B:
-				if (Game.get().getState() == Game.MENU && c == mController) {
-					if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
-						Game.get().playNomSound();
-					handleEscape();
-				} else if (MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
-						&& menuView.getFakePauseController() == c) {
-					Game.get().playNomSound();
-					Player p = Game.get().getPlayer(c);
-					if (p != null && p.active) {
-						fakePause(c);
-					}
-				}
-				break;
-			case ControllerFilterAPI.BUTTON_START:
-				Game.get().playNomSound();
-				if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu())
-						&& c == mController) {
-					handleEscape();
-				} else if (c != mController) {
-					Player p = Game.get().getPlayer(c);
-					if (p != null && p.active) {
-						fakePause(c);
-					}
-				}
-				break;
-			case ControllerFilterAPI.BUTTON_A:
-				if (Game.get().getState() == Game.MENU) {
-					if (!MenuView.CUSTOMIZE.equals(Game.get().getMenuView().getCurrentMenu()))
-						Game.get().playNomSound();
-
-					if (MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())
-							&& menuView.getFakePauseController() == c) {
-						Player p = Game.get().getPlayer(c);
-						if (p != null && p.active) {
-							fakePause(c);
-						}
-					} else if (!MenuView.FAKE_PAUSE.equals(menuView.getCurrentMenu())) {
-						Cell cell = getCell(mX, mY);
-						if (cell != null && cell.getWidget() != null) {
-							((Actor) cell.getWidget()).fire(new ChangeEvent());
-							mControllerFilter = 0;
-						}
-					}
-				}
-				break;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
@@ -618,44 +517,6 @@ public class MenuController implements InputProcessor, ControllerListener {
 
 	@Override
 	public boolean scrolled(int amount) {
-		return false;
-	}
-
-	@Override
-	public boolean accelerometerMoved(Controller arg0, int arg1, Vector3 arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean axisMoved(Controller c, int arg1, float arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean buttonUp(Controller c, int arg1) {
-		return false;
-	}
-
-	@Override
-	public void connected(Controller c) {
-	}
-
-	@Override
-	public void disconnected(Controller c) {
-	}
-
-	@Override
-	public boolean povMoved(Controller c, int arg1, PovDirection arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean xSliderMoved(Controller c, int arg1, boolean arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean ySliderMoved(Controller c, int arg1, boolean arg2) {
 		return false;
 	}
 }

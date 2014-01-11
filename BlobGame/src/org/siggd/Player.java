@@ -15,7 +15,7 @@ public class Player {
 		Controller, WASD, Arrows
 	}
 
-	public Controllable mActor;
+	public Blob mActor;
 	public int id;
 	public ControlType controltype;
 	public Controller controller;

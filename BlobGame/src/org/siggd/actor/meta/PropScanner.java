@@ -114,6 +114,7 @@ public class PropScanner {
 		Set<Class<? extends Actor>> s = Game.get().getReflector().getActorSubTypes();
 
 		for (Class c : s) {
+			System.out.println(c.toString());
 			Props propMethods = new Props();
 			ArrayList<Method> methods = new ArrayList<Method>();
 			searchForMethods(methods, c);
