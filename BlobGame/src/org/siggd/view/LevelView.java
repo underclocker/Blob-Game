@@ -84,6 +84,7 @@ public class LevelView {
 	private boolean mFullScreenEnabled;
 	private int mOldWidth;
 	private int mOldHeight;
+	private Integer[] mLayers;
 
 	// Store min and max extents, for zoom calculation
 	private float mMinX = Float.MAX_VALUE, mMaxX = -Float.MAX_VALUE, mMinY = Float.MAX_VALUE,
@@ -183,8 +184,15 @@ public class LevelView {
 
 		// mShapeRenderer.begin(ShapeType.Line);
 		// Collect a sorted list of the layer numbers
-		Integer[] layers = auditLayers();
-		for (Integer lNum : layers) {
+		if (Level.REAUDIT) {
+			mLayers = auditLayers();
+			Level.REAUDIT = false;
+		}
+
+		Vector2 mOrigin = new Vector2();
+		ArrayList<Actor> actors = level.getActors();
+		int actorsLength = actors.size();
+		for (Integer lNum : mLayers) {
 			if (Game.get().getEditor() != null && state == Game.EDIT
 					&& Game.get().getEditor().mLayerPanel.noShow.contains(lNum)) {
 				// don't draw actors if the layer isn't checked
@@ -192,9 +200,9 @@ public class LevelView {
 			}
 			// Begin layer of sprites
 			mBatch.begin();
-
-			for (Actor a : level) {
-				int aLayNum = Convert.getInt(a.getProp("Layer"));
+			for (int i = 0; i < actorsLength; i++) {
+				Actor a = actors.get(i);
+				int aLayNum = a.getLayer();
 				if (aLayNum != lNum) {
 					continue;
 				}
@@ -214,10 +222,10 @@ public class LevelView {
 						}
 					}
 				}
+
 				if (a.isActive() || state == Game.EDIT) {
 					Drawable draw = a.getDrawable();
-					if (draw != null
-							&& (Convert.getInt(a.getProp("Visible")) == 1 || state == Game.EDIT)) {
+					if (draw != null && (a.getVisible() == 1 || state == Game.EDIT)) {
 						// Draw the sprite component of the actor
 						try {
 							draw.drawSprite(mBatch);
@@ -236,8 +244,11 @@ public class LevelView {
 					float angle = a.getMainBody().getAngle();
 					Texture tex = Game.get().getAssetManager()
 							.get(Game.get().getEditor().selectPoint, Texture.class);
-					Vector2 mOrigin = new Vector2(tex.getWidth() / 4 / mVScale, tex.getHeight() / 4
-							/ mVScale); // 4 is half of half
+					mOrigin.set(tex.getWidth() / 4 / mVScale, tex.getHeight() / 4 / mVScale); // 4
+																								// is
+																								// half
+																								// of
+																								// half
 					mBatch.draw(tex, x - mOrigin.x, y - mOrigin.y, tex.getWidth() / 2 / mVScale,
 							tex.getHeight() / 2 / mVScale); // scale image down
 															// by 2
@@ -250,8 +261,9 @@ public class LevelView {
 			mBatch.end();
 
 			// Begin layer of non-sprites
-			for (Actor a : level) {
-				int aLayNum = Convert.getInt(a.getProp("Layer"));
+			for (int i = 0; i < actorsLength; i++) {
+				Actor a = actors.get(i);
+				int aLayNum = a.getLayer();
 				if (aLayNum != lNum) {
 					continue;
 				}
@@ -267,7 +279,6 @@ public class LevelView {
 				}
 			}
 			// End layer of non-sprites
-
 		}
 
 		if (state == Game.EDIT && Game.get().getEditor() != null) {
@@ -314,7 +325,7 @@ public class LevelView {
 		if (mDoDebugRender) {
 			mDebug.render(Game.get().getLevel().getWorld(), mCamera.combined);
 
-			for (Actor a : level) {
+			for (Actor a : level.getActors()) {
 				Drawable draw = a.getDrawable();
 				if (draw != null) {
 					// Draw the debug component of the actor
@@ -378,7 +389,7 @@ public class LevelView {
 		mCamera.viewportHeight = mOldCamera.viewportHeight + deltay;
 		mCamera.viewportWidth = mOldCamera.viewportWidth + deltax;
 
-		//mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
+		// mScale = mOldScale + (mScale - mOldScale) * CAM_SMOOTH;
 		mOldScale = mScale;
 
 	}
@@ -463,13 +474,12 @@ public class LevelView {
 	public Integer[] auditLayers() {
 		HashSet<Integer> layerSet = new HashSet<Integer>();
 		Level level = Game.get().getLevel();
-		for (Actor a : level) {
+		for (Actor a : level.getActors()) {
 			Integer lNum = Convert.getInt(a.getProp("Layer"));
 			if (lNum != null) {
 				layerSet.add(lNum);
 			}
 		}
-
 		Integer[] ret = layerSet.toArray(new Integer[layerSet.size()]);
 		Arrays.sort(ret);
 		return ret;

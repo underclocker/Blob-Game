@@ -16,6 +16,7 @@ import org.siggd.actor.Blob;
 import org.siggd.actor.Door;
 import org.siggd.actor.Dot;
 import org.siggd.actor.FadeIn;
+import org.siggd.actor.Respawner;
 import org.siggd.actor.Spawner;
 import org.siggd.actor.meta.ActorEnum;
 import org.siggd.view.LevelView;
@@ -39,7 +40,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author mysterymath
  * 
  */
-public class Level implements Iterable<Actor> {
+public class Level {
 	public static final String SAVE_FILE = ".BlobGame/BlobSave.json";
 	// Static array of level names for locking levels
 	public static String[] LEVELS = { "level1", "level7", "level5", "level3", "level4", "level2",
@@ -51,6 +52,7 @@ public class Level implements Iterable<Actor> {
 	public static boolean HARD_PASSED = false;
 	public static boolean COMPLETE = false;
 	public static boolean FIRSTCHECK = true;
+	public static boolean REAUDIT = true;
 
 	public static final float PHYSICS_SCALE = 3f;
 
@@ -242,7 +244,7 @@ public class Level implements Iterable<Actor> {
 	public void update() {
 		if (Game.get().getState() == Game.PLAY || Game.get().getState() == Game.MENU) {
 
-			startMusic();
+			// startMusic();
 			if (!musicTick()) {
 				Dot.ATE_DOT = false;
 				Dot.SLURP_DOT = false;
@@ -263,7 +265,10 @@ public class Level implements Iterable<Actor> {
 				a = actor.next();
 				if (a.isActive()) {
 					try {
-						a.update();
+						if (a instanceof Spawner || a instanceof Blob || a instanceof Respawner)
+							a.update();
+						// long time = System.nanoTime();
+						// System.out.println(a.toString()+": "+(System.nanoTime()-time)/1000000f);
 					} catch (Exception e) {
 						mLog.severe("Exception when updating actor no " + a.getId() + ": "
 								+ e.toString());
@@ -359,6 +364,7 @@ public class Level implements Iterable<Actor> {
 			Actor a = mActors.get(index);
 			a.destroy();
 			mActors.remove(index);
+			REAUDIT = true;
 		}
 	}
 
@@ -559,6 +565,7 @@ public class Level implements Iterable<Actor> {
 				throw new IllegalArgumentException("Cannot add actor to world.");
 			}
 			mActors.add(a);
+			REAUDIT = true;
 		}
 	}
 
@@ -749,7 +756,7 @@ public class Level implements Iterable<Actor> {
 	 * Dispose of the actor's resources
 	 */
 	public void dispose() {
-		//saveProgress();
+		// saveProgress();
 		if (LevelView.mUseLights)
 			Game.get().getLevelView().getRayHandler().removeAll();
 		for (Actor a : mActors) {
@@ -976,18 +983,6 @@ public class Level implements Iterable<Actor> {
 
 	public int musicTime() {
 		return (mMusicTick % 18);
-	}
-
-	// ITERABLE INTERFACE
-
-	/**
-	 * Returns an iterator over the level's actors
-	 * 
-	 * @return Iterator
-	 */
-	@Override
-	public Iterator<Actor> iterator() {
-		return mActors.iterator();
 	}
 
 	public float getAmbientLight() {

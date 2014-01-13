@@ -355,7 +355,7 @@ public class Game implements ApplicationListener {
 			mNextLevel = null;
 		}
 		if (mState == PLAY || mState == MENU) {
-			mMenuView.update();
+			//mMenuView.update();
 			if (!mPaused) {
 				mLevel.update();
 			}
@@ -366,12 +366,12 @@ public class Game implements ApplicationListener {
 		}
 
 		if (mState != LOAD && mNextLevel == null) {
-			mLevelView.update();
+			//mLevelView.update();
 			mLevelView.render();
 		}
 
 		if (mState == MENU || mState == LOAD) {
-			mMenuView.render();
+			//mMenuView.render();
 		}
 		if (mState != LOAD && "earth".equals(mLevel.getAssetKey()) && !mProfileFinished) {
 			if (mInitDelay <= 0) {
@@ -387,6 +387,7 @@ public class Game implements ApplicationListener {
 				mStartTime = System.nanoTime();
 			}
 		}
+		//System.gc();
 	}
 
 	private void assessFramerate() {

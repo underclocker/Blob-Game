@@ -31,7 +31,9 @@ public class CompositeDrawable implements Drawable {
 	 */
 	@Override
 	public void drawSprite(SpriteBatch batch) {
-		for (Drawable d : mDrawables) {
+		int drawablesLength = mDrawables.size();
+		for (int i = 0; i < drawablesLength; i++) {
+			Drawable d = mDrawables.get(i);
 			d.drawSprite(batch);
 		}
 	}
@@ -41,7 +43,9 @@ public class CompositeDrawable implements Drawable {
 	 */
 	@Override
 	public void drawElse(ShapeRenderer shapeRender) {
-		for (Drawable d : mDrawables) {
+		int drawablesLength = mDrawables.size();
+		for (int i = 0; i < drawablesLength; i++) {
+			Drawable d = mDrawables.get(i);
 			d.drawElse(shapeRender);
 		}
 	}
@@ -51,7 +55,9 @@ public class CompositeDrawable implements Drawable {
 	 */
 	@Override
 	public void drawDebug(Camera camera) {
-		for (Drawable d : mDrawables) {
+		int drawablesLength = mDrawables.size();
+		for (int i = 0; i < drawablesLength; i++) {
+			Drawable d = mDrawables.get(i);
 			d.drawDebug(camera);
 		}
 	}

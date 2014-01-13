@@ -124,10 +124,10 @@ public class Spawner extends Actor implements IObservable {
 	public void postLoad() {
 		mInitDelay = Convert.getInt(getProp("Initial Delay"));
 		if ("earth".equals(Game.get().getLevel().getAssetKey())) {
-			maxBlobs = 8;
+			maxBlobs = 1;
 		}
 		// find all actors that are pointing to this spawner
-		for (Actor a : this.getLevel()) {
+		for (Actor a : this.getLevel().getActors()) {
 			if (this.getId() == Convert.getInt(a.getProp("Spawner"))) {
 				mSpawnees.add(a);
 				a.setActive(false);

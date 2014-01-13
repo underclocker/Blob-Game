@@ -17,7 +17,7 @@ public class MainActivity extends AndroidApplication {
         
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         
-        cfg.useGL20 = true;
+        cfg.useGL20 = false;
         LevelView.mUseLights = false;
 
         initialize(new Game(new ReflectorImpl(getApplicationContext())), cfg);

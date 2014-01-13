@@ -68,7 +68,7 @@ public class ActorEnum {
 	 * @return Actor of the requested type in the fakeLevel
 	 */
 	public Actor getActor(Class c) {
-		for (Actor a : mFakeLevel) {
+		for (Actor a : mFakeLevel.getActors()) {
 			if (a.getClass().equals(c)) {
 				return a;
 			}
