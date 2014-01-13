@@ -91,6 +91,8 @@ public class LevelView {
 			mMaxY = -Float.MAX_VALUE;
 
 	private static final Logger mLog = Logger.getLogger(LevelView.class.getName());
+	private Matrix4 scissorMat;
+	private Vector2 mOrigin = new Vector2();
 
 	/**
 	 * Constructor
@@ -104,6 +106,7 @@ public class LevelView {
 		mVScale = vHEIGHT / MIN_HEIGHT;
 		mOldWidth = w;
 		mOldHeight = h;
+		scissorMat = new Matrix4();
 
 		// Create Camera and SpriteBatch
 		mCamera = new OrthographicCamera();
@@ -175,8 +178,9 @@ public class LevelView {
 			float maxX = Convert.getFloat(level.getProp("Max Camera X"));
 			float maxY = Convert.getFloat(level.getProp("Max Camera Y"));
 			Rectangle worldClip = new Rectangle(minX, minY, maxX - minX, maxY - minY);
+			scissorMat.idt();
 			ScissorStack.calculateScissors(mCamera, 0, 0, Gdx.graphics.getWidth(),
-					Gdx.graphics.getHeight(), new Matrix4(), worldClip, mClip);
+					Gdx.graphics.getHeight(), scissorMat, worldClip, mClip);
 
 			// Apply clipping
 			ScissorStack.pushScissors(mClip);
@@ -189,7 +193,7 @@ public class LevelView {
 			Level.REAUDIT = false;
 		}
 
-		Vector2 mOrigin = new Vector2();
+		mOrigin.set(0,0);
 		ArrayList<Actor> actors = level.getActors();
 		int actorsLength = actors.size();
 		for (Integer lNum : mLayers) {

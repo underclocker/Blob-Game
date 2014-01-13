@@ -100,7 +100,7 @@ public class ActorPanel extends JPanel implements ActionListener, ListSelectionL
 			actorNames.add("*"+s);
 		}
 		
-		for(Actor a: Game.get().getActorEnum().getFakeLevel()){					//to start
+		for(Actor a: Game.get().getActorEnum().getFakeLevel().getActors()){					//to start
 			defaultActorPanelList.addElement(a.getClass().getName());
 			actorNames.add(a.getClass().getName());
 		}

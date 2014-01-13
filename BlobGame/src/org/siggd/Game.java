@@ -387,7 +387,7 @@ public class Game implements ApplicationListener {
 				mStartTime = System.nanoTime();
 			}
 		}
-		//System.gc();
+		System.gc();
 	}
 
 	private void assessFramerate() {

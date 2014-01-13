@@ -26,6 +26,7 @@ public class BlobDetangler implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
+		if (true) return;
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		Body bodyA = fixtureA.getBody();

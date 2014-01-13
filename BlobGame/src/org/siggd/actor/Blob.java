@@ -220,8 +220,8 @@ public class Blob extends Actor {
 		 */
 		public float[] polygonize(Vector2 pos) {
 			int vertexIndex = 0;
-			Vector2 start = new Vector2();
-			Vector2 end = new Vector2();
+			Vector2 start = vector2Pool.obtain();
+			Vector2 end = vector2Pool.obtain();
 			for (int i = 0; i < BEZIERSIZE; i++) {
 				start.set(mBezierVerts[i * 2], mBezierVerts[i * 2 + 1]);
 				end.set(mBezierVerts[((i + 1) % BEZIERSIZE) * 2],
@@ -244,8 +244,8 @@ public class Blob extends Actor {
 		@Override
 		public void drawElse(ShapeRenderer shapeRender) {
 			Vector2 pos;
-			Vector2 tempPos = new Vector2();
-			Vector2 offset = new Vector2();
+			Vector2 tempPos = vector2Pool.obtain();
+			Vector2 offset = vector2Pool.obtain();
 			if (mState == SQUISH_STATE) {
 				mDestColor = new Color(mSquishColor);
 				calcCenters();
@@ -269,12 +269,15 @@ public class Blob extends Actor {
 					// the relative vector from center to the particle
 					tempPos.sub(mCenterOfMass);
 					float angle = mBody.getAngle();
-					tempPos.add(new Vector2(0, -mExtraRadius).rotate(b.getAngle() * 180f
-							/ (float) Math.PI));
+					offset.set(0, -mExtraRadius);
+					offset.rotate(b.getAngle() * 180f / (float) Math.PI);
+					tempPos.add(offset);
 					// rotate it based on mBody's rotation
 					tempPos.rotate((float) (angle * 180 / Math.PI));
 					// add the center of blob to the relative vector
 					tempPos.add(pos);
+					mRawVerts[2 * i] = tempPos.x;
+					mRawVerts[2 * i + 1] = tempPos.y;
 				}
 			}
 
@@ -367,8 +370,8 @@ public class Blob extends Actor {
 			lineWidth *= Math.min(Gdx.graphics.getWidth() / LevelView.vWIDTH,
 					Gdx.graphics.getHeight() / LevelView.vHEIGHT);
 
-			Vector2 v1 = new Vector2();
-			Vector2 v2 = new Vector2();
+			Vector2 v1 = vector2Pool.obtain(); 
+			Vector2 v2 = vector2Pool.obtain(); 
 			for (int i = 0; i < BEZIERSIZE; i++) {
 				v1.set(mBezierVerts[i * 2], mBezierVerts[i * 2 + 1]);
 				v2.set(mBezierVerts[((i + 1) % BEZIERSIZE) * 2],
@@ -395,10 +398,10 @@ public class Blob extends Actor {
 			gl10.glDisable(GL10.GL_BLEND);
 			if (mBatch == null)
 				return;
-			//mBatch.begin();
-			//drawAccessories();
-			//drawEyes();
-			//mBatch.end();
+			// mBatch.begin();
+			// drawAccessories();
+			// drawEyes();
+			// mBatch.end();
 		}
 
 		private void drawAccessories() {
@@ -791,7 +794,7 @@ public class Blob extends Actor {
 		Vector2 vi;
 		Vector2 vj;
 		if (mCachedEdge.size() == 0) {
-			Vector2 buffer = new Vector2();
+			Vector2 buffer = vector2Pool.obtain();
 			if (mState == SOLID_STATE) {
 				Vector2 pos = mBody.getPosition(); // center of the blob
 				for (i = 0; i < NUM_PARTICLES; i++) {
@@ -925,9 +928,9 @@ public class Blob extends Actor {
 		mCachedOuterEdge.clear();
 		calcCenters();
 		// Do all string constraints
-		Vector2 forceDir = new Vector2();
-		Vector2 dampForce = new Vector2();
-		Vector2 vel = new Vector2();
+		Vector2 forceDir = vector2Pool.obtain();
+		Vector2 dampForce = vector2Pool.obtain();
+		Vector2 vel = vector2Pool.obtain();
 
 		for (Spring s : mSprings) {
 			Body a = mParticles[s.a];
@@ -972,12 +975,15 @@ public class Blob extends Actor {
 			a.applyForceToCenter(dampForce, true);
 			b.applyForceToCenter(dampForce.scl(-1), true);
 		}
+		vector2Pool.free(dampForce);
+		vector2Pool.free(forceDir);
 
-		Vector2 eyeDelta = new Vector2(mLeftEyeDest);
+		Vector2 eyeDelta = vector2Pool.obtain();
+		eyeDelta.set(mLeftEyeDest);
 		eyeDelta.sub(mLeftEye.getPosition());
 		mLeftEye.applyForceToCenter(eyeDelta.scl(12f * Level.PHYSICS_SCALE), true);
 
-		eyeDelta = new Vector2(mRightEyeDest);
+		eyeDelta.set(mRightEyeDest);
 		eyeDelta.sub(mRightEye.getPosition());
 		mRightEye.applyForceToCenter(eyeDelta.scl(12f * Level.PHYSICS_SCALE), true);
 		if (mExtraGlow > 0) {
@@ -1007,14 +1013,14 @@ public class Blob extends Actor {
 			mLight.setColor(mLightColor);
 			mLight.setDistance(3f + 10f * brightness);
 		}
-		Vector2 center;
+		Vector2 center = vector2Pool.obtain();
 		float rotation;
 		if (mState == SQUISH_STATE) {
-			center = new Vector2(mCenterOfMass);
+			center.set(mCenterOfMass);
 			center.add(mVCenter.scl(.04f));
 			rotation = 0;
 		} else {
-			center = new Vector2(mBody.getPosition());
+			center.set(mBody.getPosition());
 			center.add(mBody.getLinearVelocity().scl(.04f));
 			rotation = (float) (mBody.getAngle() * 180.0f / Math.PI);
 		}
@@ -1104,7 +1110,7 @@ public class Blob extends Actor {
 			}
 
 			if (mState == SQUISH_STATE) {
-				Vector2 v = new Vector2();
+				Vector2 v = vector2Pool.obtain();
 				if (right) {
 					for (int i = 0; i < NUM_PARTICLES; i++) {
 						Body curB = mParticles[i]; // Current Body Position
@@ -1433,7 +1439,7 @@ public class Blob extends Actor {
 	private FixtureDef makeEyeFixtureDef() {
 		// Create a circle shape
 		CircleShape circle = new CircleShape();
-		circle.setPosition(new Vector2(0, 0));
+		circle.setPosition(vector2Pool.obtain());
 		circle.setRadius(0.125f);
 		// Create a fixtureDef
 		FixtureDef fd = new FixtureDef();

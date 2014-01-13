@@ -47,7 +47,7 @@ public class FadeIn extends Actor {
 
 		@Override
 		public void drawSprite(SpriteBatch batch) {
-			if (Convert.getInt(getProp("Visible")) == 0)
+			if (getVisible() == 0)
 				return;
 			if (alpha >= Convert.getFloat(getProp("Stop")))
 				alpha -= .05f;

@@ -265,7 +265,7 @@ public class Level {
 				a = actor.next();
 				if (a.isActive()) {
 					try {
-						if (a instanceof Spawner || a instanceof Blob || a instanceof Respawner)
+						if (a instanceof Spawner || a instanceof Blob)
 							a.update();
 						// long time = System.nanoTime();
 						// System.out.println(a.toString()+": "+(System.nanoTime()-time)/1000000f);

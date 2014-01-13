@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.siggd.Convert;
-import org.siggd.DebugOutput;
 import org.siggd.Game;
 import org.siggd.Level;
 import org.siggd.Timer;
@@ -28,6 +27,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 
 /**
  * This class represents an object in the world.
@@ -59,6 +59,13 @@ public abstract class Actor {
 	private String mCollisionSound;
 	private float mCollisionThreshold;
 	private float mCollisionPitch;
+	
+    protected final Pool<Vector2> vector2Pool = new Pool<Vector2>() {
+        @Override
+        protected Vector2 newObject() {
+                return new Vector2();
+        }
+    };
 
 	public boolean isActive() {
 		return mActive;
